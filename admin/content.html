@@ -209,6 +209,7 @@ function renderProducts(){
 
 function openProductDrawer(){
   ['prId','prName','prPrice','prSKU','prDesc','prImg'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('prCat').value='Bags';
   document.getElementById('prStatus').value='Active';
   document.getElementById('productDrawer').classList.add('open');document.getElementById('productDrawerBg').classList.add('open');
 }

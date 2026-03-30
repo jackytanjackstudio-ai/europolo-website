@@ -178,7 +178,7 @@ Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
 document.getElementById('newItemBtn').addEventListener('click',()=>document.querySelector('.tab-btn.active[data-group="mkt"]').textContent.includes('Campaign')?openCampaignDrawer():document.querySelector('.tab-btn.active[data-group="mkt"]').textContent.includes('Promo')?openPromoDrawer():openPostDrawer());
 
 function closeDrawer(id,bgId){document.getElementById(id).classList.remove('open');document.getElementById(bgId).classList.remove('open');}
-document.querySelectorAll('.drawer-close').forEach(b=>b.addEventListener('click',()=>b.closest('.drawer').classList.remove('open')||document.querySelectorAll('.drawer-bg').forEach(bg=>bg.classList.remove('open'))));
+document.querySelectorAll('.drawer-close').forEach(b=>b.addEventListener('click',()=>{b.closest('.drawer').classList.remove('open');document.querySelectorAll('.drawer-bg').forEach(bg=>bg.classList.remove('open'));}));
 document.querySelectorAll('.drawer-bg').forEach(bg=>bg.addEventListener('click',()=>{bg.classList.remove('open');document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));}));
 
 // ── Stats
@@ -265,7 +265,7 @@ function renderPromos(){
     `<tr><td colspan="8"><div class="empty-state"><div class="empty-state-icon">◇</div><p>No promo codes yet.</p></div></td></tr>`;
 }
 function genCode(){const pfx=['POLO','EURO','EP','STYLE','VIP'];document.getElementById('pdCode').value=pfx[Math.floor(Math.random()*pfx.length)]+(Math.random()*9000+1000|0);}
-function openPromoDrawer(){document.getElementById('pdId').value='';document.getElementById('pdCode').value='';document.getElementById('pdValue').value='';document.getElementById('pdMin').value='';document.getElementById('pdExpiry').value='';document.getElementById('pdActive').checked=true;document.getElementById('promoDrawer').classList.add('open');document.getElementById('promoDrawerBg').classList.add('open');}
+function openPromoDrawer(){document.getElementById('pdId').value='';document.getElementById('pdCode').value='';document.getElementById('pdType').value='Percent';document.getElementById('pdValue').value='';document.getElementById('pdMin').value='';document.getElementById('pdExpiry').value='';document.getElementById('pdActive').checked=true;document.getElementById('promoDrawer').classList.add('open');document.getElementById('promoDrawerBg').classList.add('open');}
 function savePromo(){
   const code=document.getElementById('pdCode').value.trim().toUpperCase();
   const val=document.getElementById('pdValue').value;
@@ -297,7 +297,7 @@ function renderSocial(){
     </td></tr>`).join(''):
     `<tr><td colspan="5"><div class="empty-state"><div class="empty-state-icon">◉</div><p>No posts scheduled yet.</p></div></td></tr>`;
 }
-function openPostDrawer(){selectedPlatforms=[];document.querySelectorAll('.platform-btn').forEach(b=>{b.classList.remove('btn--primary');b.classList.add('btn--outline');});document.getElementById('spId').value='';document.getElementById('spCaption').value='';document.getElementById('spTags').value='';document.getElementById('spDate').value='';document.getElementById('spTime').value='';document.getElementById('postDrawer').classList.add('open');document.getElementById('postDrawerBg').classList.add('open');}
+function openPostDrawer(){selectedPlatforms=[];document.querySelectorAll('.platform-btn').forEach(b=>{b.classList.remove('btn--primary');b.classList.add('btn--outline');});document.getElementById('spId').value='';document.getElementById('spCaption').value='';document.getElementById('spTags').value='';document.getElementById('spDate').value='';document.getElementById('spTime').value='';document.getElementById('spImg').value='';document.getElementById('postDrawer').classList.add('open');document.getElementById('postDrawerBg').classList.add('open');}
 function savePost(){
   const cap=document.getElementById('spCaption').value.trim();
   if(!cap){UI.toast('Caption required','error');return;}
