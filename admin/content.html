@@ -16,6 +16,7 @@
       <p class="sb-section-label">Content</p>
       <a href="content.html" id="navProducts"><span class="nav-icon">◇</span> Products</a>
       <a href="content.html" id="navAnnounce"><span class="nav-icon">◆</span> Announcements</a>
+      <a href="content.html" id="navMedia"><span class="nav-icon">🖼</span> Media Library</a>
       <a href="content.html" id="navSEO"><span class="nav-icon">◉</span> SEO & Meta</a>
       <p class="sb-section-label">Site</p>
       <a href="../index.html" target="_blank"><span class="nav-icon">↗</span> View Website</a>
@@ -37,6 +38,7 @@
       <div class="tabs" id="contentTabs">
         <button class="tab-btn active" data-group="cnt" data-target="tabProducts">Products</button>
         <button class="tab-btn" data-group="cnt" data-target="tabAnnounce">Announcements</button>
+        <button class="tab-btn" data-group="cnt" data-target="tabMedia">Media Library</button>
         <button class="tab-btn" data-group="cnt" data-target="tabSEO">SEO & Meta</button>
       </div>
 
@@ -70,6 +72,24 @@
           <div class="table-wrap">
             <table><thead><tr><th>Message</th><th>Type</th><th>Start</th><th>End</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody id="announceTbody"></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEDIA LIBRARY -->
+      <div class="tab-panel" data-group="cnt" id="tabMedia">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Media Library</span>
+            <div class="flex gap-1 items-center">
+              <span id="mediaCount" style="font-size:.75rem;color:var(--muted)"></span>
+              <button class="btn btn--primary btn--sm" onclick="document.getElementById('bulkUploadInput').click()">+ Upload Photos</button>
+              <input type="file" id="bulkUploadInput" accept="image/*" multiple style="display:none" onchange="bulkUpload(this)"/>
+            </div>
+          </div>
+          <div id="mediaGrid" class="media-grid"></div>
+          <div class="card-footer" style="font-size:.72rem;color:var(--muted)">
+            Images are stored in your browser. Max ~60 photos. To use on the website, copy the image URL from a product or paste a direct link.
           </div>
         </div>
       </div>
@@ -113,7 +133,22 @@
       <div class="form-group"><label class="form-label">SKU</label><input class="form-input" id="prSKU" placeholder="e.g. EP-BAG-001"/></div>
     </div>
     <div class="form-group mb-2"><label class="form-label">Description</label><textarea class="form-textarea" id="prDesc" rows="3" placeholder="Short product description..."></textarea></div>
-    <div class="form-group mb-2"><label class="form-label">Image URL</label><input class="form-input" id="prImg" placeholder="https://..."/></div>
+    <div class="form-group mb-2">
+      <label class="form-label">Product Photo</label>
+      <div class="upload-zone" id="prImgZone" onclick="document.getElementById('prImgFile').click()"
+        ondragover="event.preventDefault();this.classList.add('drag-over')"
+        ondragleave="this.classList.remove('drag-over')"
+        ondrop="event.preventDefault();this.classList.remove('drag-over');handleProductImgDrop(event.dataTransfer.files)">
+        <img id="prImgPreview" style="display:none;max-height:140px;max-width:100%;border-radius:4px;margin:0 auto"/>
+        <div class="upload-zone-inner" id="prImgPlaceholder">
+          <div style="font-size:1.6rem;margin-bottom:.3rem">📷</div>
+          <div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.2rem">Upload Product Photo</div>
+          <div style="font-size:.72rem;color:var(--muted)">Click or drag &amp; drop · JPG, PNG, WebP · max 15MB</div>
+        </div>
+        <input type="file" id="prImgFile" accept="image/*" style="display:none"/>
+      </div>
+      <input class="form-input mt-1" id="prImg" placeholder="Or paste image URL (https://...)" style="font-size:.78rem"/>
+    </div>
     <div class="form-group"><label class="form-label">Status</label>
       <select class="form-select" id="prStatus"><option>Active</option><option>Hidden</option><option>Out of Stock</option></select>
     </div>
@@ -153,8 +188,30 @@
 <script>
 Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
 
-['navAnnounce','navSEO'].forEach((id,i)=>{
-  document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();document.querySelectorAll('.tab-btn[data-group="cnt"]')[i+1].click();});
+// Sidebar nav quick links (index matches tab order: 0=Products,1=Announce,2=Media,3=SEO)
+[['navAnnounce',1],['navMedia',2],['navSEO',3]].forEach(([id,i])=>{
+  document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();document.querySelectorAll('.tab-btn[data-group="cnt"]')[i].click();});
+});
+
+// Product image upload
+Media.bindUploadBtn('prImgFile','prImgPreview','prImg');
+document.getElementById('prImgFile').addEventListener('change',()=>{
+  const preview=document.getElementById('prImgPreview');
+  if(preview.src)preview.style.display='block';
+  document.getElementById('prImgPlaceholder').style.display='none';
+});
+function handleProductImgDrop(files){
+  const dt=new DataTransfer();
+  if(files[0])dt.items.add(files[0]);
+  document.getElementById('prImgFile').files=dt.files;
+  document.getElementById('prImgFile').dispatchEvent(new Event('change'));
+}
+// Sync URL paste → preview
+document.getElementById('prImg').addEventListener('input',function(){
+  const preview=document.getElementById('prImgPreview');
+  const placeholder=document.getElementById('prImgPlaceholder');
+  if(this.value.trim()){preview.src=this.value.trim();preview.style.display='block';placeholder.style.display='none';}
+  else{preview.style.display='none';placeholder.style.display='block';}
 });
 
 function closeDrawer(id,bgId){document.getElementById(id).classList.remove('open');document.getElementById(bgId).classList.remove('open');}
@@ -207,10 +264,17 @@ function renderProducts(){
     `<tr><td colspan="5"><div class="empty-state"><p>No products found.</p></div></td></tr>`;
 }
 
+function resetImgPreview(val){
+  const preview=document.getElementById('prImgPreview');
+  const placeholder=document.getElementById('prImgPlaceholder');
+  if(val){preview.src=val;preview.style.display='block';placeholder.style.display='none';}
+  else{preview.src='';preview.style.display='none';placeholder.style.display='block';}
+}
 function openProductDrawer(){
   ['prId','prName','prPrice','prSKU','prDesc','prImg'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('prCat').value='Bags';
   document.getElementById('prStatus').value='Active';
+  resetImgPreview('');
   document.getElementById('productDrawer').classList.add('open');document.getElementById('productDrawerBg').classList.add('open');
 }
 function editProduct(id){
@@ -223,6 +287,7 @@ function editProduct(id){
   document.getElementById('prDesc').value=p.desc||'';
   document.getElementById('prImg').value=p.img||'';
   document.getElementById('prStatus').value=p.status;
+  resetImgPreview(p.img||'');
   document.getElementById('productDrawer').classList.add('open');document.getElementById('productDrawerBg').classList.add('open');
 }
 function saveProduct(){
@@ -301,8 +366,46 @@ function saveSEO(){
   UI.toast('SEO titles saved','success');
 }
 
+// ── Media Library
+function renderMediaLibrary(){
+  const lib=Store.get('media_library',[]);
+  const grid=document.getElementById('mediaGrid');
+  const countEl=document.getElementById('mediaCount');
+  if(countEl)countEl.textContent=lib.length+' photos';
+  if(!grid)return;
+  grid.innerHTML=lib.length?lib.map(m=>`
+    <div class="media-thumb" title="${m.name}">
+      <img src="${m.url}" alt="${m.name}" loading="lazy"/>
+      <div class="media-thumb-name">${m.name}</div>
+      <button class="media-thumb-del" onclick="event.stopPropagation();deleteMedia('${m.id}')" title="Delete">✕</button>
+    </div>`).join(''):
+    `<div style="grid-column:1/-1;padding:2rem"><div class="empty-state"><div class="empty-state-icon">📷</div><p>No photos yet. Click "Upload Photos" to add images.</p></div></div>`;
+}
+async function bulkUpload(input){
+  const files=[...input.files];
+  if(!files.length)return;
+  let done=0;
+  UI.toast(`Uploading ${files.length} photo${files.length>1?'s':''}…`,'info');
+  for(const file of files){
+    try{
+      const dataUrl=await Media.compress(file);
+      Media.saveToLibrary(dataUrl,file.name);
+      done++;
+    }catch(e){UI.toast('Skipped: '+file.name+' — '+e.message,'error');}
+  }
+  renderMediaLibrary();
+  UI.toast(`${done} photo${done>1?'s':''} uploaded`,'success');
+  input.value='';
+}
+async function deleteMedia(id){
+  if(!await UI.confirm('Delete this photo?'))return;
+  const lib=Store.get('media_library',[]).filter(m=>m.id!==id);
+  Store.set('media_library',lib);
+  renderMediaLibrary();UI.toast('Photo deleted');
+}
+
 // Init
-renderProducts();renderAnnouncements();renderSEO();
+renderProducts();renderAnnouncements();renderMediaLibrary();renderSEO();
 </script>
 </body>
 </html>

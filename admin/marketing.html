@@ -160,7 +160,25 @@
       <div class="form-group"><label class="form-label">Date</label><input class="form-input" type="date" id="spDate"/></div>
       <div class="form-group"><label class="form-label">Time</label><input class="form-input" type="time" id="spTime"/></div>
     </div>
-    <div class="form-group"><label class="form-label">Image URL (optional)</label><input class="form-input" id="spImg" placeholder="https://..."/></div>
+    <div class="form-group mb-2">
+      <label class="form-label">Photo / Video</label>
+      <div class="upload-zone" onclick="document.getElementById('spImgFile').click()"
+        ondragover="event.preventDefault();this.classList.add('drag-over')"
+        ondragleave="this.classList.remove('drag-over')"
+        ondrop="event.preventDefault();this.classList.remove('drag-over');handlePostMediaDrop(event.dataTransfer.files)">
+        <img id="spImgPreview" style="display:none;max-height:130px;max-width:100%;border-radius:4px;margin:0 auto"/>
+        <div class="upload-zone-inner" id="spImgPlaceholder">
+          <div style="font-size:1.6rem;margin-bottom:.3rem">📸</div>
+          <div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.2rem">Upload Photo</div>
+          <div style="font-size:.72rem;color:var(--muted)">Click or drag &amp; drop · JPG, PNG, WebP · max 15MB</div>
+        </div>
+        <input type="file" id="spImgFile" accept="image/*" style="display:none"/>
+      </div>
+      <input class="form-input mt-1" id="spImg" placeholder="Or paste YouTube / TikTok / image URL..." style="font-size:.78rem"/>
+      <div id="spVideoPreviewWrap" style="display:none;margin-top:.5rem">
+        <iframe id="spVideoPreview" class="video-preview" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
   </div>
   <div class="drawer-footer"><button class="btn btn--outline" onclick="closeDrawer('postDrawer','postDrawerBg')">Cancel</button><button class="btn btn--gold" onclick="savePost()">Schedule Post</button></div>
 </div>
@@ -174,6 +192,36 @@ Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
 ['navPromos','navSocial','navNL'].forEach((id,i)=>{
   const targets=['tabPromos','tabSocial','tabNewsletter'];
   document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();document.querySelectorAll('.tab-btn[data-group="mkt"]')[i+1].click();});
+});
+
+// Social post image/video upload
+Media.bindUploadBtn('spImgFile','spImgPreview','spImg',()=>{
+  document.getElementById('spImgPlaceholder').style.display='none';
+  document.getElementById('spImgPreview').style.display='block';
+  document.getElementById('spVideoPreviewWrap').style.display='none';
+});
+function handlePostMediaDrop(files){
+  const dt=new DataTransfer();
+  if(files[0])dt.items.add(files[0]);
+  document.getElementById('spImgFile').files=dt.files;
+  document.getElementById('spImgFile').dispatchEvent(new Event('change'));
+}
+// Handle URL paste → show image or video embed
+document.getElementById('spImg').addEventListener('input',function(){
+  const v=this.value.trim();
+  const imgPreview=document.getElementById('spImgPreview');
+  const placeholder=document.getElementById('spImgPlaceholder');
+  const videoWrap=document.getElementById('spVideoPreviewWrap');
+  const videoFrame=document.getElementById('spVideoPreview');
+  if(!v){imgPreview.style.display='none';placeholder.style.display='block';videoWrap.style.display='none';return;}
+  const ytEmbed=Media.youtubeEmbed(v);
+  if(ytEmbed){
+    videoFrame.src=ytEmbed;videoWrap.style.display='block';
+    imgPreview.style.display='none';placeholder.style.display='none';
+  } else {
+    imgPreview.src=v;imgPreview.style.display='block';
+    placeholder.style.display='none';videoWrap.style.display='none';
+  }
 });
 document.getElementById('newItemBtn').addEventListener('click',()=>document.querySelector('.tab-btn.active[data-group="mkt"]').textContent.includes('Campaign')?openCampaignDrawer():document.querySelector('.tab-btn.active[data-group="mkt"]').textContent.includes('Promo')?openPromoDrawer():openPostDrawer());
 
@@ -297,7 +345,17 @@ function renderSocial(){
     </td></tr>`).join(''):
     `<tr><td colspan="5"><div class="empty-state"><div class="empty-state-icon">◉</div><p>No posts scheduled yet.</p></div></td></tr>`;
 }
-function openPostDrawer(){selectedPlatforms=[];document.querySelectorAll('.platform-btn').forEach(b=>{b.classList.remove('btn--primary');b.classList.add('btn--outline');});document.getElementById('spId').value='';document.getElementById('spCaption').value='';document.getElementById('spTags').value='';document.getElementById('spDate').value='';document.getElementById('spTime').value='';document.getElementById('spImg').value='';document.getElementById('postDrawer').classList.add('open');document.getElementById('postDrawerBg').classList.add('open');}
+function openPostDrawer(){
+  selectedPlatforms=[];
+  document.querySelectorAll('.platform-btn').forEach(b=>{b.classList.remove('btn--primary');b.classList.add('btn--outline');});
+  ['spId','spCaption','spTags','spDate','spTime','spImg'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('spImgPreview').style.display='none';
+  document.getElementById('spImgPlaceholder').style.display='block';
+  document.getElementById('spVideoPreviewWrap').style.display='none';
+  document.getElementById('spVideoPreview').src='';
+  document.getElementById('postDrawer').classList.add('open');
+  document.getElementById('postDrawerBg').classList.add('open');
+}
 function savePost(){
   const cap=document.getElementById('spCaption').value.trim();
   if(!cap){UI.toast('Caption required','error');return;}

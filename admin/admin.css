@@ -522,6 +522,65 @@ tbody tr:last-child td{border-bottom:none}
 .login-hint td{padding:2px 6px;font-size:0.7rem}
 .login-hint td:first-child{font-weight:600;color:var(--text)}
 
+/* ════════════════════════════════════
+   UPLOAD ZONE
+════════════════════════════════════ */
+.upload-zone{
+  border:2px dashed var(--border);border-radius:var(--radius);
+  background:var(--surface2);cursor:pointer;
+  transition:border-color .2s,background .2s;
+  overflow:hidden;min-height:90px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.upload-zone:hover,.upload-zone.drag-over{
+  border-color:var(--gold);background:var(--gold-pale);
+}
+.upload-zone-inner{
+  text-align:center;padding:1rem;pointer-events:none;
+}
+.upload-zone img{
+  display:none;max-height:140px;max-width:100%;
+  border-radius:4px;object-fit:cover;
+}
+.upload-zone img.visible{display:block;margin:0 auto}
+
+/* Media Library Grid */
+.media-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+  gap:.75rem;padding:1rem;
+}
+.media-thumb{
+  position:relative;border-radius:var(--radius);
+  overflow:hidden;background:var(--surface2);
+  border:1px solid var(--border);aspect-ratio:1;
+  cursor:pointer;transition:box-shadow .2s;
+}
+.media-thumb:hover{box-shadow:var(--shadow-md)}
+.media-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.media-thumb-del{
+  position:absolute;top:4px;right:4px;
+  background:rgba(0,0,0,.6);color:#fff;
+  border:none;border-radius:3px;
+  width:20px;height:20px;font-size:.7rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .15s;
+}
+.media-thumb:hover .media-thumb-del{opacity:1}
+.media-thumb-name{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(0,0,0,.55);color:#fff;
+  font-size:.6rem;padding:3px 5px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+/* Video preview embed */
+.video-preview{
+  width:100%;aspect-ratio:16/9;border-radius:var(--radius);
+  border:1px solid var(--border);background:#000;margin-top:.5rem;
+}
+
 @media(max-width:768px){
   .two-panel{grid-template-columns:1fr;grid-template-rows:280px 1fr}
   .form-grid--2,.form-grid--3{grid-template-columns:1fr}

@@ -152,6 +152,113 @@ const UI = {
   }
 };
 
+/* ── Media Upload Helper ── */
+const Media = {
+  // Compress image via Canvas → base64 JPEG
+  compress(file, maxW = 900, quality = 0.82) {
+    return new Promise((resolve, reject) => {
+      if (!file.type.startsWith('image/')) { reject(new Error('Please select an image file (JPG, PNG, WebP)')); return; }
+      if (file.size > 15 * 1024 * 1024) { reject(new Error('File too large. Max 15MB.')); return; }
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('Failed to read file'));
+      reader.onload = e => {
+        const img = new Image();
+        img.onerror = () => reject(new Error('Invalid image'));
+        img.onload = () => {
+          const scale = Math.min(1, maxW / img.width);
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  },
+
+  // Save image to media library store
+  saveToLibrary(dataUrl, name) {
+    const lib = Store.get('media_library', []);
+    const item = { id: Date.now().toString(36), name: name || 'Image', url: dataUrl, date: new Date().toISOString().slice(0,10) };
+    lib.unshift(item);
+    // Keep max 60 items to avoid localStorage overflow
+    Store.set('media_library', lib.slice(0, 60));
+    return item;
+  },
+
+  // Bind a file input → compress → preview → populate url field
+  bindUploadBtn(fileInputId, previewId, urlFieldId, onDone) {
+    const fileInput = document.getElementById(fileInputId);
+    if (!fileInput) return;
+    fileInput.addEventListener('change', async e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      UI.toast('Uploading…', 'info');
+      try {
+        const dataUrl = await Media.compress(file);
+        const preview = document.getElementById(previewId);
+        if (preview) { preview.src = dataUrl; preview.style.display = 'block'; }
+        const urlField = document.getElementById(urlFieldId);
+        if (urlField) urlField.value = dataUrl;
+        Media.saveToLibrary(dataUrl, file.name);
+        UI.toast('Image uploaded ✓', 'success');
+        if (onDone) onDone(dataUrl);
+      } catch (err) {
+        UI.toast(err.message, 'error');
+      }
+      fileInput.value = '';
+    });
+    // Also sync URL field to preview
+    const urlField = document.getElementById(urlFieldId);
+    const preview = document.getElementById(previewId);
+    if (urlField && preview) {
+      urlField.addEventListener('input', () => {
+        const v = urlField.value.trim();
+        if (v) { preview.src = v; preview.style.display = 'block'; }
+        else preview.style.display = 'none';
+      });
+    }
+  },
+
+  // Render upload zone HTML (call before bindUploadBtn)
+  zone(fileInputId, previewId, urlFieldId, opts = {}) {
+    const accept = opts.accept || 'image/*';
+    const label = opts.label || 'Photo / Image';
+    const hint = opts.hint || 'Click or drag & drop · JPG, PNG, WebP · max 15MB';
+    return `
+      <div class="form-group mb-2">
+        <label class="form-label">${label}</label>
+        <div class="upload-zone" id="${fileInputId}Zone" onclick="document.getElementById('${fileInputId}').click()"
+          ondragover="event.preventDefault();this.classList.add('drag-over')"
+          ondragleave="this.classList.remove('drag-over')"
+          ondrop="event.preventDefault();this.classList.remove('drag-over');document.getElementById('${fileInputId}').files=event.dataTransfer.files;document.getElementById('${fileInputId}').dispatchEvent(new Event('change'))">
+          <img id="${previewId}" style="display:none;max-height:140px;max-width:100%;border-radius:4px;margin:0 auto;display:none"/>
+          <div class="upload-zone-inner" id="${fileInputId}Placeholder">
+            <div style="font-size:1.6rem;margin-bottom:.35rem">📷</div>
+            <div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.2rem">Upload ${label}</div>
+            <div style="font-size:.72rem;color:var(--muted)">${hint}</div>
+          </div>
+          <input type="file" id="${fileInputId}" accept="${accept}" style="display:none"/>
+        </div>
+        <input class="form-input mt-1" id="${urlFieldId}" placeholder="Or paste image URL (https://...)" style="font-size:.78rem"/>
+      </div>`;
+  },
+
+  // Get YouTube embed URL from various YT link formats
+  youtubeEmbed(url) {
+    const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
+    return m ? `https://www.youtube.com/embed/${m[1]}` : null;
+  },
+
+  // Get TikTok video ID
+  tiktokId(url) {
+    const m = url.match(/tiktok\.com\/@[^/]+\/video\/(\d+)/);
+    return m ? m[1] : null;
+  }
+};
+
 /* ── Seed demo data if empty ── */
 function seedIfEmpty() {
   if (!Store.get('seeded')) {
