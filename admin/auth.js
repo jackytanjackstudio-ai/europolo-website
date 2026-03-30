@@ -178,9 +178,9 @@ function seedIfEmpty() {
     ]);
     Store.set('checklist', {});
     Store.set('site_config', {
-      whatsapp:'60123456789',
+      whatsapp:'601160601277',
       wa_msg:'Hello Euro Polo, I\'m interested in your products',
-      email:'hello@europolo.com.my',
+      email:'hello@europolo.my',
       instagram:'europolomy',
       facebook:'europolomy',
       tiktok:'europolomy',
