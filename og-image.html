@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  ═══════════════════════════════════════════════
+  EURO POLO · OG Image Template
+  Size: 1200 × 630px
+
+  HOW TO USE:
+  1. Open this file in Chrome browser
+  2. Right-click → Inspect → Toggle device toolbar
+  3. Set custom size: 1200 × 630
+  4. Right-click on page → Save as image
+     OR use browser screenshot tool
+  5. Save as "og-image.jpg" in this folder
+  ═══════════════════════════════════════════════
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1200" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+    }
+    body {
+      background: #0C1C0F;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 70px 90px;
+      position: relative;
+      font-family: 'Inter', sans-serif;
+    }
+    /* Background diagonal pattern */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image:
+        repeating-linear-gradient(45deg, #fff 0px, #fff 1px, transparent 1px, transparent 60px),
+        repeating-linear-gradient(-45deg, #fff 0px, #fff 1px, transparent 1px, transparent 60px);
+    }
+    /* Large EP watermark */
+    body::after {
+      content: 'EP';
+      position: absolute;
+      right: -40px;
+      bottom: -60px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 400px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.025);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+    }
+    .left {
+      flex: 1;
+      position: relative;
+      z-index: 2;
+    }
+    .eyebrow {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #C09A42;
+      margin-bottom: 28px;
+    }
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+    .diamond {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+    }
+    .wordmark h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 64px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: #FAFAF7;
+      line-height: 1;
+    }
+    .wordmark span {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      color: #C09A42;
+      text-transform: uppercase;
+    }
+    .tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 26px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.5;
+      max-width: 520px;
+      margin-bottom: 48px;
+    }
+    .tagline em { color: #D9B96A; font-style: italic; }
+    .products {
+      display: flex;
+      gap: 10px;
+    }
+    .product-pill {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #C09A42;
+      border: 1px solid rgba(192,154,66,0.35);
+      padding: 7px 16px;
+    }
+    .right {
+      position: relative;
+      z-index: 2;
+      text-align: right;
+    }
+    .url {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+    .gold-line {
+      width: 60px;
+      height: 1px;
+      background: #C09A42;
+      margin-left: auto;
+      margin-bottom: 20px;
+    }
+    .right-tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.35);
+      text-align: right;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="left">
+    <p class="eyebrow">European Men's Lifestyle · Malaysia</p>
+    <div class="logo-mark">
+      <svg class="diamond" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="26,3 49,26 26,26" fill="#C09A42"/>
+        <polygon points="26,26 49,26 26,49" fill="#D9B96A" opacity="0.85"/>
+        <polygon points="26,26 26,49 3,26" fill="#1F4229"/>
+        <polygon points="26,3 26,26 3,26" fill="#163320"/>
+        <circle cx="26" cy="26" r="4" fill="#C09A42"/>
+      </svg>
+      <div class="wordmark">
+        <h1>EURO POLO</h1>
+        <span>.COM.MY</span>
+      </div>
+    </div>
+    <p class="tagline">Refined by <em>European Taste.</em><br />Built for <em>Modern Life.</em></p>
+    <div class="products">
+      <span class="product-pill">Bags</span>
+      <span class="product-pill">Wallets</span>
+      <span class="product-pill">Belts</span>
+      <span class="product-pill">Luggage</span>
+    </div>
+  </div>
+  <div class="right">
+    <div class="gold-line"></div>
+    <p class="right-tagline">Premium accessories<br />for the modern<br />Malaysian gentleman.</p>
+    <br /><br />
+    <p class="url">europolo.com.my</p>
+  </div>
+</body>
+</html>
