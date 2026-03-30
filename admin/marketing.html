@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Marketing — Euro Polo Admin</title><meta name="robots" content="noindex,nofollow"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body>
+<div class="admin-shell">
+  <nav class="sidebar">
+    <div class="sb-logo"><a href="dashboard.html"><span class="sb-logo-main">EURO POLO</span><span class="sb-logo-sub">.COM.MY</span><span class="sb-logo-badge">Admin</span></a></div>
+    <div class="sb-nav">
+      <p class="sb-section-label">Overview</p>
+      <a href="dashboard.html"><span class="nav-icon">◈</span> Dashboard</a>
+      <p class="sb-section-label">Marketing</p>
+      <a href="marketing.html"><span class="nav-icon">◆</span> Campaigns</a>
+      <a href="marketing.html" id="navPromos"><span class="nav-icon">◇</span> Promo Codes</a>
+      <a href="marketing.html" id="navSocial"><span class="nav-icon">◉</span> Social Planner</a>
+      <a href="marketing.html" id="navNL"><span class="nav-icon">✉</span> Newsletter</a>
+      <p class="sb-section-label">Site</p>
+      <a href="../index.html" target="_blank"><span class="nav-icon">↗</span> View Website</a>
+    </div>
+    <div class="sb-footer"><div class="sb-user"><div class="sb-avatar"></div><div class="sb-user-info"><div class="sb-user-name"></div><div class="sb-user-role"></div></div><button class="sb-logout" title="Logout">⏻</button></div></div>
+  </nav>
+  <div class="sb-overlay" id="sbOverlay"></div>
+  <div class="main-area">
+    <header class="admin-header">
+      <div class="header-left">
+        <button class="sb-toggle" id="sbToggle">☰</button>
+        <div><div class="header-title">Marketing</div><div class="header-breadcrumb">Campaigns · Promos · Social · Newsletter</div></div>
+      </div>
+      <div class="header-right">
+        <button class="btn btn--gold" id="newItemBtn">+ New</button>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="stats-row" id="mktStats"></div>
+      <div class="tabs" id="mktTabs">
+        <button class="tab-btn active" data-group="mkt" data-target="tabCampaigns">Campaigns</button>
+        <button class="tab-btn" data-group="mkt" data-target="tabPromos">Promo Codes</button>
+        <button class="tab-btn" data-group="mkt" data-target="tabSocial">Social Planner</button>
+        <button class="tab-btn" data-group="mkt" data-target="tabNewsletter">Newsletter</button>
+      </div>
+
+      <!-- CAMPAIGNS -->
+      <div class="tab-panel active" data-group="mkt" id="tabCampaigns">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">All Campaigns</span>
+            <button class="btn btn--primary btn--sm" onclick="openCampaignDrawer()">+ Add Campaign</button>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>Campaign</th><th>Type</th><th>Start</th><th>End</th><th>Budget</th><th>Status</th><th>Actions</th></tr></thead><tbody id="campaignTbody"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- PROMOS -->
+      <div class="tab-panel" data-group="mkt" id="tabPromos">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Promo Codes</span>
+            <button class="btn btn--primary btn--sm" onclick="openPromoDrawer()">+ Generate Code</button>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>Code</th><th>Type</th><th>Value</th><th>Min Purchase</th><th>Expiry</th><th>Uses</th><th>Status</th><th>Actions</th></tr></thead><tbody id="promoTbody"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- SOCIAL -->
+      <div class="tab-panel" data-group="mkt" id="tabSocial">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Social Media Planner</span>
+            <button class="btn btn--primary btn--sm" onclick="openPostDrawer()">+ Schedule Post</button>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>Platform</th><th>Caption</th><th>Scheduled</th><th>Status</th><th>Actions</th></tr></thead><tbody id="socialTbody"></tbody></table></div>
+          <div class="card-footer"><p class="text-muted text-sm">Tip: After scheduling, copy the caption and publish directly on each platform.</p></div>
+        </div>
+      </div>
+
+      <!-- NEWSLETTER -->
+      <div class="tab-panel" data-group="mkt" id="tabNewsletter">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="card">
+            <div class="card-header"><span class="card-title">Subscribers</span><button class="btn btn--outline btn--sm" onclick="importSubs()">Import Emails</button></div>
+            <div class="card-body">
+              <div class="search-bar mb-2"><span>🔍</span><input type="text" placeholder="Search subscribers..." id="subSearch" oninput="renderSubs()"/></div>
+              <div id="subsList"></div>
+              <div class="card-footer mt-2"><button class="btn btn--primary btn--sm" onclick="addSubModal()">+ Add Subscriber</button></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">Compose Draft</span></div>
+            <div class="card-body">
+              <div class="form-group mb-2"><label class="form-label">Subject Line</label><input class="form-input" id="nlSubject" placeholder="e.g. New Arrivals · Euro Polo April"/></div>
+              <div class="form-group mb-2"><label class="form-label">Message Body</label><textarea class="form-textarea" id="nlBody" rows="7" placeholder="Write your newsletter content here..."></textarea></div>
+              <button class="btn btn--gold w-full" onclick="saveNLDraft()" style="justify-content:center">Save Draft</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign Drawer -->
+<div class="drawer-bg" id="campaignDrawerBg"></div>
+<div class="drawer" id="campaignDrawer">
+  <div class="drawer-header"><span class="drawer-title">Campaign</span><button class="drawer-close">✕</button></div>
+  <div class="drawer-body">
+    <input type="hidden" id="cdId"/>
+    <div class="form-grid mb-2">
+      <div class="form-group"><label class="form-label">Campaign Name <span>*</span></label><input class="form-input" id="cdName" placeholder="e.g. Raya 2026 Campaign"/></div>
+      <div class="form-group"><label class="form-label">Type</label><select class="form-select" id="cdType"><option>Social</option><option>Email</option><option>Banner</option><option>Influencer</option></select></div>
+      <div class="form-group"><label class="form-label">Start Date</label><input class="form-input" type="date" id="cdStart"/></div>
+      <div class="form-group"><label class="form-label">End Date</label><input class="form-input" type="date" id="cdEnd"/></div>
+      <div class="form-group"><label class="form-label">Budget</label><input class="form-input" id="cdBudget" placeholder="e.g. RM 3,000"/></div>
+      <div class="form-group"><label class="form-label">Target Audience</label><input class="form-input" id="cdAudience" placeholder="e.g. Men 25-45, Malaysia"/></div>
+    </div>
+    <div class="form-group"><label class="form-label">Notes</label><textarea class="form-textarea" id="cdNotes" placeholder="Campaign objectives, notes..."></textarea></div>
+  </div>
+  <div class="drawer-footer"><button class="btn btn--outline" onclick="closeDrawer('campaignDrawer','campaignDrawerBg')">Cancel</button><button class="btn btn--gold" onclick="saveCampaign()">Save Campaign</button></div>
+</div>
+
+<!-- Promo Drawer -->
+<div class="drawer-bg" id="promoDrawerBg"></div>
+<div class="drawer" id="promoDrawer">
+  <div class="drawer-header"><span class="drawer-title">Promo Code</span><button class="drawer-close">✕</button></div>
+  <div class="drawer-body">
+    <input type="hidden" id="pdId"/>
+    <div class="form-group mb-2"><label class="form-label">Code <span>*</span></label>
+      <div class="flex gap-1"><input class="form-input" id="pdCode" placeholder="e.g. RAYA2026"/><button class="btn btn--outline btn--sm" onclick="genCode()" style="white-space:nowrap">Generate</button></div>
+    </div>
+    <div class="form-grid form-grid--2 mb-2">
+      <div class="form-group"><label class="form-label">Discount Type</label><select class="form-select" id="pdType"><option value="Percent">Percentage (%)</option><option value="Flat">Flat (RM)</option></select></div>
+      <div class="form-group"><label class="form-label">Value <span>*</span></label><input class="form-input" id="pdValue" type="number" placeholder="e.g. 10"/></div>
+      <div class="form-group"><label class="form-label">Min Purchase (RM)</label><input class="form-input" id="pdMin" type="number" placeholder="e.g. 200"/></div>
+      <div class="form-group"><label class="form-label">Expiry Date</label><input class="form-input" type="date" id="pdExpiry"/></div>
+    </div>
+    <div class="toggle-wrap"><label class="toggle"><input type="checkbox" id="pdActive" checked/><span class="toggle-slider"></span></label><span class="toggle-label">Active</span></div>
+  </div>
+  <div class="drawer-footer"><button class="btn btn--outline" onclick="closeDrawer('promoDrawer','promoDrawerBg')">Cancel</button><button class="btn btn--gold" onclick="savePromo()">Save Code</button></div>
+</div>
+
+<!-- Social Post Drawer -->
+<div class="drawer-bg" id="postDrawerBg"></div>
+<div class="drawer" id="postDrawer">
+  <div class="drawer-header"><span class="drawer-title">Schedule Post</span><button class="drawer-close">✕</button></div>
+  <div class="drawer-body">
+    <input type="hidden" id="spId"/>
+    <div class="form-group mb-2"><label class="form-label">Platform</label>
+      <div class="flex gap-1" style="flex-wrap:wrap" id="platformBtns">
+        <button type="button" class="btn btn--outline btn--sm platform-btn" data-p="Instagram" onclick="togglePlatform(this)">Instagram</button>
+        <button type="button" class="btn btn--outline btn--sm platform-btn" data-p="Facebook" onclick="togglePlatform(this)">Facebook</button>
+        <button type="button" class="btn btn--outline btn--sm platform-btn" data-p="TikTok" onclick="togglePlatform(this)">TikTok</button>
+      </div>
+    </div>
+    <div class="form-group mb-2"><label class="form-label">Caption <span>*</span></label><textarea class="form-textarea" id="spCaption" rows="5" placeholder="Write your caption..."></textarea></div>
+    <div class="form-group mb-2"><label class="form-label">Hashtags</label><input class="form-input" id="spTags" placeholder="#EuroPolo #EuroPoloMY #TheGentlemanCode"/></div>
+    <div class="form-grid form-grid--2 mb-2">
+      <div class="form-group"><label class="form-label">Date</label><input class="form-input" type="date" id="spDate"/></div>
+      <div class="form-group"><label class="form-label">Time</label><input class="form-input" type="time" id="spTime"/></div>
+    </div>
+    <div class="form-group"><label class="form-label">Image URL (optional)</label><input class="form-input" id="spImg" placeholder="https://..."/></div>
+  </div>
+  <div class="drawer-footer"><button class="btn btn--outline" onclick="closeDrawer('postDrawer','postDrawerBg')">Cancel</button><button class="btn btn--gold" onclick="savePost()">Schedule Post</button></div>
+</div>
+
+<div id="toast-container"></div>
+<script src="auth.js"></script>
+<script>
+Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
+
+// Sidebar tab quick links
+['navPromos','navSocial','navNL'].forEach((id,i)=>{
+  const targets=['tabPromos','tabSocial','tabNewsletter'];
+  document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();document.querySelectorAll('.tab-btn[data-group="mkt"]')[i+1].click();});
+});
+document.getElementById('newItemBtn').addEventListener('click',()=>document.querySelector('.tab-btn.active[data-group="mkt"]').textContent.includes('Campaign')?openCampaignDrawer():document.querySelector('.tab-btn.active[data-group="mkt"]').textContent.includes('Promo')?openPromoDrawer():openPostDrawer());
+
+function closeDrawer(id,bgId){document.getElementById(id).classList.remove('open');document.getElementById(bgId).classList.remove('open');}
+document.querySelectorAll('.drawer-close').forEach(b=>b.addEventListener('click',()=>b.closest('.drawer').classList.remove('open')||document.querySelectorAll('.drawer-bg').forEach(bg=>bg.classList.remove('open'))));
+document.querySelectorAll('.drawer-bg').forEach(bg=>bg.addEventListener('click',()=>{bg.classList.remove('open');document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));}));
+
+// ── Stats
+function renderStats(){
+  const c=Store.get('campaigns',[]),p=Store.get('promos',[]),po=Store.get('posts',[]),s=Store.get('subscribers',[]);
+  document.getElementById('mktStats').innerHTML=`
+    <div class="stat-card"><span class="stat-num">${c.filter(x=>x.status==='Active').length}</span><span class="stat-label">Active Campaigns</span></div>
+    <div class="stat-card stat-card--green"><span class="stat-num">${p.filter(x=>x.active).length}</span><span class="stat-label">Active Promos</span></div>
+    <div class="stat-card stat-card--blue"><span class="stat-num">${po.filter(x=>x.status==='Scheduled').length}</span><span class="stat-label">Scheduled Posts</span></div>
+    <div class="stat-card stat-card--amber"><span class="stat-num">${s.length}</span><span class="stat-label">Subscribers</span></div>`;
+}
+
+// ── Campaigns
+function renderCampaigns(){
+  const data=Store.get('campaigns',[]);
+  const bMap={Active:'badge--green',Scheduled:'badge--blue',Ended:'badge--grey'};
+  document.getElementById('campaignTbody').innerHTML=data.length?data.map(c=>`
+    <tr><td><strong>${c.name}</strong></td><td><span class="badge badge--gold">${c.type}</span></td>
+    <td>${c.start||'—'}</td><td>${c.end||'—'}</td><td>${c.budget||'—'}</td>
+    <td><span class="badge ${bMap[c.status]||'badge--grey'}">${c.status}</span></td>
+    <td class="td-actions">
+      <button class="btn btn--outline btn--icon" onclick="editCampaign('${c.id}')" title="Edit">✎</button>
+      <button class="btn btn--danger btn--icon" onclick="deleteCampaign('${c.id}')" title="Delete">✕</button>
+    </td></tr>`).join(''):
+    `<tr><td colspan="7"><div class="empty-state"><div class="empty-state-icon">◇</div><p>No campaigns yet.</p></div></td></tr>`;
+}
+function openCampaignDrawer(id){
+  const item=id?Store.get('campaigns',[]).find(x=>x.id===id):{};
+  ['cdId','cdName','cdType','cdStart','cdEnd','cdBudget','cdAudience','cdNotes'].forEach(f=>{
+    const el=document.getElementById(f);if(el)el.value=item?.[f.slice(2).toLowerCase()]||'';
+  });
+  if(id)document.getElementById('cdId').value=id;
+  document.getElementById('campaignDrawer').classList.add('open');
+  document.getElementById('campaignDrawerBg').classList.add('open');
+}
+function editCampaign(id){
+  const c=Store.get('campaigns',[]).find(x=>x.id===id);
+  if(!c)return;
+  document.getElementById('cdId').value=c.id;
+  document.getElementById('cdName').value=c.name;
+  document.getElementById('cdType').value=c.type;
+  document.getElementById('cdStart').value=c.start;
+  document.getElementById('cdEnd').value=c.end;
+  document.getElementById('cdBudget').value=c.budget;
+  document.getElementById('cdAudience').value=c.audience;
+  document.getElementById('cdNotes').value=c.notes||'';
+  document.getElementById('campaignDrawer').classList.add('open');
+  document.getElementById('campaignDrawerBg').classList.add('open');
+}
+function saveCampaign(){
+  const name=document.getElementById('cdName').value.trim();
+  if(!name){UI.toast('Campaign name required','error');return;}
+  const now=new Date();
+  const start=document.getElementById('cdStart').value;
+  const end=document.getElementById('cdEnd').value;
+  let status='Scheduled';
+  if(start&&end){const s=new Date(start),e=new Date(end);if(now>=s&&now<=e)status='Active';else if(now>e)status='Ended';}
+  const item={name,type:document.getElementById('cdType').value,start,end,budget:document.getElementById('cdBudget').value,audience:document.getElementById('cdAudience').value,notes:document.getElementById('cdNotes').value,status};
+  const id=document.getElementById('cdId').value;
+  if(id)Store.update('campaigns',id,item);else Store.push('campaigns',item);
+  Store.log(`${id?'Updated':'Created'} campaign: ${name}`);
+  closeDrawer('campaignDrawer','campaignDrawerBg');
+  renderCampaigns();renderStats();UI.toast(id?'Campaign updated':'Campaign created','success');
+}
+async function deleteCampaign(id){
+  if(!await UI.confirm('Delete this campaign?'))return;
+  Store.remove('campaigns',id);renderCampaigns();renderStats();UI.toast('Campaign deleted');
+}
+
+// ── Promos
+function renderPromos(){
+  const data=Store.get('promos',[]);
+  document.getElementById('promoTbody').innerHTML=data.length?data.map(p=>`
+    <tr><td><strong style="font-family:monospace;letter-spacing:.1em">${p.code}</strong>
+      <button class="btn btn--outline btn--icon" onclick="copyCode('${p.code}')" style="margin-left:.4rem" title="Copy">⎘</button></td>
+    <td>${p.type==='Percent'?'%':'RM'}</td>
+    <td><strong>${p.value}${p.type==='Percent'?'%':' RM'}</strong></td>
+    <td>RM ${p.min}</td><td>${p.expiry||'—'}</td><td>${p.uses||0}</td>
+    <td><span class="badge ${p.active?'badge--green':'badge--grey'}">${p.active?'Active':'Inactive'}</span></td>
+    <td class="td-actions">
+      <button class="btn btn--outline btn--icon" onclick="togglePromo('${p.id}')">${p.active?'⏸':'▶'}</button>
+      <button class="btn btn--danger btn--icon" onclick="deletePromo('${p.id}')">✕</button>
+    </td></tr>`).join(''):
+    `<tr><td colspan="8"><div class="empty-state"><div class="empty-state-icon">◇</div><p>No promo codes yet.</p></div></td></tr>`;
+}
+function genCode(){const pfx=['POLO','EURO','EP','STYLE','VIP'];document.getElementById('pdCode').value=pfx[Math.floor(Math.random()*pfx.length)]+(Math.random()*9000+1000|0);}
+function openPromoDrawer(){document.getElementById('pdId').value='';document.getElementById('pdCode').value='';document.getElementById('pdValue').value='';document.getElementById('pdMin').value='';document.getElementById('pdExpiry').value='';document.getElementById('pdActive').checked=true;document.getElementById('promoDrawer').classList.add('open');document.getElementById('promoDrawerBg').classList.add('open');}
+function savePromo(){
+  const code=document.getElementById('pdCode').value.trim().toUpperCase();
+  const val=document.getElementById('pdValue').value;
+  if(!code||!val){UI.toast('Code and value required','error');return;}
+  const item={code,type:document.getElementById('pdType').value,value:val,min:document.getElementById('pdMin').value||'0',expiry:document.getElementById('pdExpiry').value,uses:0,active:document.getElementById('pdActive').checked};
+  const id=document.getElementById('pdId').value;
+  if(id)Store.update('promos',id,item);else Store.push('promos',item);
+  Store.log(`Created promo code: ${code}`);
+  closeDrawer('promoDrawer','promoDrawerBg');renderPromos();renderStats();UI.toast('Promo code saved','success');
+}
+function togglePromo(id){const p=Store.get('promos',[]).find(x=>x.id===id);if(p)Store.update('promos',id,{active:!p.active});renderPromos();}
+async function deletePromo(id){if(!await UI.confirm('Delete this promo code?'))return;Store.remove('promos',id);renderPromos();renderStats();UI.toast('Promo code deleted');}
+function copyCode(code){navigator.clipboard?.writeText(code);UI.toast('Code copied: '+code,'success');}
+
+// ── Social Posts
+let selectedPlatforms=[];
+function togglePlatform(btn){btn.classList.toggle('btn--primary');btn.classList.toggle('btn--outline');const p=btn.dataset.p;selectedPlatforms=selectedPlatforms.includes(p)?selectedPlatforms.filter(x=>x!==p):[...selectedPlatforms,p];}
+function renderSocial(){
+  const data=Store.get('posts',[]);
+  const bMap={Scheduled:'badge--blue',Published:'badge--green',Draft:'badge--grey'};
+  document.getElementById('socialTbody').innerHTML=data.length?data.map(p=>`
+    <tr><td><span class="badge badge--gold">${p.platform}</span></td>
+    <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.caption}</td>
+    <td>${p.date||'—'} ${p.time||''}</td>
+    <td><span class="badge ${bMap[p.status]||'badge--grey'}">${p.status}</span></td>
+    <td class="td-actions">
+      <button class="btn btn--outline btn--icon" onclick="markPublished('${p.id}')">✓</button>
+      <button class="btn btn--danger btn--icon" onclick="deletePost('${p.id}')">✕</button>
+    </td></tr>`).join(''):
+    `<tr><td colspan="5"><div class="empty-state"><div class="empty-state-icon">◉</div><p>No posts scheduled yet.</p></div></td></tr>`;
+}
+function openPostDrawer(){selectedPlatforms=[];document.querySelectorAll('.platform-btn').forEach(b=>{b.classList.remove('btn--primary');b.classList.add('btn--outline');});document.getElementById('spId').value='';document.getElementById('spCaption').value='';document.getElementById('spTags').value='';document.getElementById('spDate').value='';document.getElementById('spTime').value='';document.getElementById('postDrawer').classList.add('open');document.getElementById('postDrawerBg').classList.add('open');}
+function savePost(){
+  const cap=document.getElementById('spCaption').value.trim();
+  if(!cap){UI.toast('Caption required','error');return;}
+  const item={platform:selectedPlatforms.join(', ')||'Unspecified',caption:cap,tags:document.getElementById('spTags').value,date:document.getElementById('spDate').value,time:document.getElementById('spTime').value,img:document.getElementById('spImg').value,status:'Scheduled'};
+  Store.push('posts',item);Store.log('Scheduled social post for: '+item.platform);
+  closeDrawer('postDrawer','postDrawerBg');renderSocial();renderStats();UI.toast('Post scheduled','success');
+}
+function markPublished(id){Store.update('posts',id,{status:'Published'});renderSocial();UI.toast('Post marked as published','success');}
+async function deletePost(id){if(!await UI.confirm('Delete this post?'))return;Store.remove('posts',id);renderSocial();}
+
+// ── Newsletter subs
+function renderSubs(){
+  const q=(document.getElementById('subSearch')?.value||'').toLowerCase();
+  const data=Store.get('subscribers',[]).filter(s=>!q||s.email.toLowerCase().includes(q)||s.name?.toLowerCase().includes(q));
+  const el=document.getElementById('subsList');
+  if(!el)return;
+  el.innerHTML=data.length?data.slice(0,50).map(s=>`
+    <div class="flex items-center justify-between" style="padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.78rem">
+      <span><strong>${s.name||'—'}</strong> <span class="text-muted">${s.email}</span></span>
+      <span class="badge ${s.active!==false?'badge--green':'badge--grey'}">${s.active!==false?'Active':'Unsub'}</span>
+    </div>`).join(''):
+    `<div class="empty-state"><p>No subscribers yet. Import or add emails.</p></div>`;
+}
+function addSubModal(){
+  const bg=document.createElement('div');bg.className='modal-bg open';
+  bg.innerHTML=`<div class="modal"><div class="modal-header"><span class="modal-title">Add Subscriber</span><button class="modal-close" onclick="this.closest('.modal-bg').remove()">✕</button></div><div class="modal-body"><div class="form-group mb-2"><label class="form-label">Email *</label><input class="form-input" id="newSubEmail" placeholder="email@example.com"/></div><div class="form-group"><label class="form-label">Name</label><input class="form-input" id="newSubName" placeholder="Full name"/></div></div><div class="modal-footer"><button class="btn btn--outline" onclick="this.closest('.modal-bg').remove()">Cancel</button><button class="btn btn--gold" onclick="saveNewSub(this)">Add</button></div></div>`;
+  document.body.appendChild(bg);
+}
+function saveNewSub(btn){
+  const email=btn.closest('.modal-bg').querySelector('#newSubEmail').value.trim();
+  if(!email){UI.toast('Email required','error');return;}
+  Store.push('subscribers',{email,name:btn.closest('.modal-bg').querySelector('#newSubName').value.trim(),active:true,date:new Date().toISOString().slice(0,10)});
+  btn.closest('.modal-bg').remove();renderSubs();renderStats();UI.toast('Subscriber added','success');
+}
+function importSubs(){
+  const bg=document.createElement('div');bg.className='modal-bg open';
+  bg.innerHTML=`<div class="modal"><div class="modal-header"><span class="modal-title">Import Subscribers</span><button class="modal-close" onclick="this.closest('.modal-bg').remove()">✕</button></div><div class="modal-body"><p class="text-muted text-sm mb-2">Paste one email per line.</p><textarea class="form-textarea" id="importEmails" rows="8" placeholder="email1@example.com\nemail2@example.com"></textarea></div><div class="modal-footer"><button class="btn btn--outline" onclick="this.closest('.modal-bg').remove()">Cancel</button><button class="btn btn--gold" onclick="doImport(this)">Import</button></div></div>`;
+  document.body.appendChild(bg);
+}
+function doImport(btn){
+  const lines=btn.closest('.modal-bg').querySelector('#importEmails').value.split('\n').map(e=>e.trim()).filter(e=>e.includes('@'));
+  lines.forEach(email=>Store.push('subscribers',{email,active:true,date:new Date().toISOString().slice(0,10)}));
+  btn.closest('.modal-bg').remove();renderSubs();renderStats();UI.toast(`Imported ${lines.length} subscribers`,'success');
+}
+function saveNLDraft(){
+  const sub=document.getElementById('nlSubject').value.trim();
+  if(!sub){UI.toast('Subject required','error');return;}
+  Store.set('nl_draft',{subject:sub,body:document.getElementById('nlBody').value,saved:new Date().toISOString()});
+  UI.toast('Draft saved','success');
+}
+
+// Init
+renderStats();renderCampaigns();renderPromos();renderSocial();renderSubs();
+// Load NL draft
+const d=Store.get('nl_draft');if(d){document.getElementById('nlSubject').value=d.subject||'';document.getElementById('nlBody').value=d.body||'';}
+</script>
+</body>
+</html>
