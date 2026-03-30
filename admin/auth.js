@@ -12,7 +12,7 @@ const EP_USERS = {
 };
 
 const ROLE_ACCESS = {
-  admin:     ['dashboard.html','marketing.html','content.html','customer-service.html','live-host.html'],
+  admin:     ['dashboard.html','marketing.html','content.html','customer-service.html','live-host.html','page-editor.html'],
   marketing: ['marketing.html'],
   content:   ['content.html'],
   cs:        ['customer-service.html'],

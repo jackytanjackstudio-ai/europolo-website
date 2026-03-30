@@ -115,9 +115,9 @@
     <div class="page-hero__bg"></div>
     <div class="page-hero__watermark">WALLETS</div>
     <div class="page-hero__content">
-      <p class="section-eyebrow" style="animation:fadeUp 0.8s var(--ease-out) 0.1s both;opacity:0">Core Collection</p>
-      <h1 class="page-hero__title">Wallets &amp;<br /><em>Belts.</em></h1>
-      <p class="page-hero__desc">The details that define a gentleman — slim-profile wallets and hand-finished leather belts for every occasion.</p>
+      <p class="section-eyebrow" style="animation:fadeUp 0.8s var(--ease-out) 0.1s both;opacity:0" data-ep="wallets_eyebrow">Core Collection</p>
+      <h1 class="page-hero__title" data-ep-html="wallets_title">Wallets &amp;<br /><em>Belts.</em></h1>
+      <p class="page-hero__desc" data-ep="wallets_desc">The details that define a gentleman — slim-profile wallets and hand-finished leather belts for every occasion.</p>
     </div>
   </section>
 
@@ -356,7 +356,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <p>© 2026 Euro Polo · europolo.my · All rights reserved.</p>
+        <p data-ep="shared_footer">© 2026 Euro Polo · europolo.my · All rights reserved.</p>
         <p>Crafted with precision for the modern Malaysian gentleman.</p>
       </div>
     </div>
@@ -372,6 +372,7 @@
   </a>
 
   <script src="script.js"></script>
+  <script src="content-injector.js"></script>
   <script src="products.js"></script>
 </body>
 </html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Page Editor — Euro Polo Admin</title><meta name="robots" content="noindex,nofollow"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="admin.css"/>
+  <style>
+    .field-group{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem;margin-bottom:.85rem}
+    .field-label{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
+    .field-label span{font-size:.65rem;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-style:italic}
+    .field-default{font-size:.7rem;color:var(--muted);margin-top:.3rem;font-style:italic;line-height:1.4}
+    .page-preview-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--gold);text-decoration:none;font-weight:500}
+    .page-preview-btn:hover{text-decoration:underline}
+    .section-divider{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:1.5rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid var(--gold-pale)}
+    .reset-btn{font-size:.7rem;color:var(--muted);background:none;border:1px solid var(--border);border-radius:3px;padding:2px 8px;cursor:pointer}
+    .reset-btn:hover{color:var(--red);border-color:var(--red)}
+    .html-hint{font-size:.68rem;color:var(--muted);margin-top:.25rem}
+    .html-hint code{background:var(--surface2);padding:1px 4px;border-radius:2px;font-size:.65rem}
+  </style>
+</head>
+<body>
+<div class="admin-shell">
+  <nav class="sidebar">
+    <div class="sb-logo"><a href="dashboard.html"><span class="sb-logo-main">EURO POLO</span><span class="sb-logo-sub">.MY</span><span class="sb-logo-badge">Admin</span></a></div>
+    <div class="sb-nav">
+      <p class="sb-section-label">Overview</p>
+      <a href="dashboard.html"><span class="nav-icon">◈</span> Dashboard</a>
+      <p class="sb-section-label">Page Editor</p>
+      <a href="page-editor.html" id="navHome"><span class="nav-icon">◇</span> Homepage</a>
+      <a href="page-editor.html" id="navBags"><span class="nav-icon">◆</span> Bags Page</a>
+      <a href="page-editor.html" id="navWallets"><span class="nav-icon">◉</span> Wallets & Belts</a>
+      <a href="page-editor.html" id="navLuggage"><span class="nav-icon">⊕</span> Luggage Page</a>
+      <a href="page-editor.html" id="navShared"><span class="nav-icon">✉</span> Shared / Footer</a>
+      <p class="sb-section-label">Site</p>
+      <a href="../index.html" target="_blank"><span class="nav-icon">↗</span> View Website</a>
+    </div>
+    <div class="sb-footer"><div class="sb-user"><div class="sb-avatar"></div><div class="sb-user-info"><div class="sb-user-name"></div><div class="sb-user-role"></div></div><button class="sb-logout" title="Logout">⏻</button></div></div>
+  </nav>
+  <div class="sb-overlay" id="sbOverlay"></div>
+
+  <div class="main-area">
+    <header class="admin-header">
+      <div class="header-left">
+        <button class="sb-toggle" id="sbToggle">☰</button>
+        <div><div class="header-title">Page Editor</div><div class="header-breadcrumb">Edit website content without touching code</div></div>
+      </div>
+      <div class="header-right">
+        <button class="btn btn--outline btn--sm" onclick="resetAllContent()">Reset All</button>
+        <button class="btn btn--gold" id="saveAllBtn" onclick="saveAll()">Save & Publish</button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <!-- Info banner -->
+      <div style="background:var(--gold-pale);border:1px solid var(--gold);border-radius:var(--radius);padding:.85rem 1rem;margin-bottom:1.25rem;font-size:.8rem;display:flex;align-items:center;gap:.75rem">
+        <span style="font-size:1.2rem">✏️</span>
+        <div><strong>How it works:</strong> Edit any field below and click <strong>Save &amp; Publish</strong>. Changes appear on the website instantly — no code needed. Leave a field blank to keep the original text.</div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-group="pe" data-target="tabHome">Homepage</button>
+        <button class="tab-btn" data-group="pe" data-target="tabBags">Bags</button>
+        <button class="tab-btn" data-group="pe" data-target="tabWallets">Wallets & Belts</button>
+        <button class="tab-btn" data-group="pe" data-target="tabLuggage">Luggage</button>
+        <button class="tab-btn" data-group="pe" data-target="tabShared">Shared</button>
+      </div>
+
+      <!-- ── HOMEPAGE ── -->
+      <div class="tab-panel active" data-group="pe" id="tabHome">
+        <div class="flex items-center justify-between mb-2">
+          <a href="../index.html" target="_blank" class="page-preview-btn">↗ Preview Homepage</a>
+          <button class="reset-btn" onclick="resetPage('home')">Reset Homepage</button>
+        </div>
+
+        <div class="section-divider">Hero Section</div>
+        <div class="field-group">
+          <div class="field-label">Eyebrow Text <span>Small text above the main title</span></div>
+          <input class="form-input" data-key="home_hero_eyebrow" placeholder="European Craftsmanship · Modern Gentleman"/>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Hero Title <span>Main headline — supports formatting</span></div>
+          <textarea class="form-textarea" data-key="home_hero_title" rows="4" placeholder="Refined by&#10;<em>European Taste.</em>&#10;Built for&#10;<em>Modern Life.</em>"></textarea>
+          <div class="html-hint">Use <code>&lt;em&gt;text&lt;/em&gt;</code> for italic · <code>&lt;br/&gt;</code> for line break</div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Hero Description <span>Paragraph below the title</span></div>
+          <textarea class="form-textarea" data-key="home_hero_desc" rows="2" placeholder="Premium accessories for the man who moves with purpose..."></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Button 1 Text</div>
+          <input class="form-input" data-key="home_hero_btn1" placeholder="Explore Collections"/>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Button 2 Text</div>
+          <input class="form-input" data-key="home_hero_btn2" placeholder="Our Story"/>
+        </div>
+
+        <div class="section-divider">Collections Section</div>
+        <div class="field-group">
+          <div class="field-label">Eyebrow <span>Small text above heading</span></div>
+          <input class="form-input" data-key="home_coll_eyebrow" placeholder="Our Collections"/>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Section Heading</div>
+          <input class="form-input" data-key="home_coll_title" placeholder="Crafted for Every Chapter"/>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Section Description</div>
+          <textarea class="form-textarea" data-key="home_coll_desc" rows="2" placeholder="Four product lines. One philosophy..."></textarea>
+        </div>
+
+        <div class="section-divider">Featured Products Section</div>
+        <div class="field-group">
+          <div class="field-label">Eyebrow</div>
+          <input class="form-input" data-key="home_feat_eyebrow" placeholder="Signature Pieces"/>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Section Heading</div>
+          <input class="form-input" data-key="home_feat_title" placeholder="Editor's Selection"/>
+        </div>
+      </div>
+
+      <!-- ── BAGS ── -->
+      <div class="tab-panel" data-group="pe" id="tabBags">
+        <div class="flex items-center justify-between mb-2">
+          <a href="../bags.html" target="_blank" class="page-preview-btn">↗ Preview Bags Page</a>
+          <button class="reset-btn" onclick="resetPage('bags')">Reset Bags Page</button>
+        </div>
+        <div class="section-divider">Page Hero</div>
+        <div class="field-group">
+          <div class="field-label">Eyebrow Text</div>
+          <input class="form-input" data-key="bags_eyebrow" placeholder="Core Collection"/>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Page Title <span>Supports formatting</span></div>
+          <textarea class="form-textarea" data-key="bags_title" rows="2" placeholder="Men's &lt;em&gt;Bags.&lt;/em&gt;"></textarea>
+          <div class="html-hint">Use <code>&lt;em&gt;text&lt;/em&gt;</code> for italic · <code>&lt;br/&gt;</code> for line break</div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Page Description</div>
+          <textarea class="form-textarea" data-key="bags_desc" rows="3" placeholder="Engineered for the professional in motion..."></textarea>
+        </div>
+      </div>
+
+      <!-- ── WALLETS ── -->
+      <div class="tab-panel" data-group="pe" id="tabWallets">
+        <div class="flex items-center justify-between mb-2">
+          <a href="../wallets.html" target="_blank" class="page-preview-btn">↗ Preview Wallets Page</a>
+          <button class="reset-btn" onclick="resetPage('wallets')">Reset Wallets Page</button>
+        </div>
+        <div class="section-divider">Page Hero</div>
+        <div class="field-group">
+          <div class="field-label">Eyebrow Text</div>
+          <input class="form-input" data-key="wallets_eyebrow" placeholder="Core Collection"/>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Page Title <span>Supports formatting</span></div>
+          <textarea class="form-textarea" data-key="wallets_title" rows="2" placeholder="Wallets &amp; &lt;em&gt;Belts.&lt;/em&gt;"></textarea>
+          <div class="html-hint">Use <code>&lt;em&gt;text&lt;/em&gt;</code> for italic · <code>&lt;br/&gt;</code> for line break</div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Page Description</div>
+          <textarea class="form-textarea" data-key="wallets_desc" rows="3" placeholder="The details that define a gentleman..."></textarea>
+        </div>
+      </div>
+
+      <!-- ── LUGGAGE ── -->
+      <div class="tab-panel" data-group="pe" id="tabLuggage">
+        <div class="flex items-center justify-between mb-2">
+          <a href="../luggage.html" target="_blank" class="page-preview-btn">↗ Preview Luggage Page</a>
+          <button class="reset-btn" onclick="resetPage('luggage')">Reset Luggage Page</button>
+        </div>
+        <div class="section-divider">Page Hero</div>
+        <div class="field-group">
+          <div class="field-label">Eyebrow Text</div>
+          <input class="form-input" data-key="luggage_eyebrow" placeholder="Extension Line"/>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Page Title <span>Supports formatting</span></div>
+          <textarea class="form-textarea" data-key="luggage_title" rows="2" placeholder="Travel in&lt;br/&gt;&lt;em&gt;Style.&lt;/em&gt;"></textarea>
+          <div class="html-hint">Use <code>&lt;em&gt;text&lt;/em&gt;</code> for italic · <code>&lt;br/&gt;</code> for line break</div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Page Description</div>
+          <textarea class="form-textarea" data-key="luggage_desc" rows="3" placeholder="The European traveller's companion..."></textarea>
+        </div>
+      </div>
+
+      <!-- ── SHARED ── -->
+      <div class="tab-panel" data-group="pe" id="tabShared">
+        <div class="section-divider">Announcement Bar</div>
+        <div class="field-group">
+          <div class="field-label">Announcement Bar</div>
+          <div class="toggle-wrap mb-2"><label class="toggle"><input type="checkbox" id="annActive"/><span class="toggle-slider"></span></label><span class="toggle-label">Show announcement bar on all pages</span></div>
+          <input class="form-input" data-key="shared_ann_text" placeholder="e.g. Free shipping on orders above RM300 · Use code WELCOME15"/>
+          <div class="field-default">Leave blank to hide the bar even when toggled on.</div>
+        </div>
+
+        <div class="section-divider">Footer</div>
+        <div class="field-group">
+          <div class="field-label">Footer Copyright Text</div>
+          <input class="form-input" data-key="shared_footer" placeholder="© 2026 Euro Polo · europolo.my · All rights reserved."/>
+        </div>
+
+        <div class="section-divider">Social Media Handles</div>
+        <div class="field-group">
+          <div class="field-label">Instagram Handle <span>Without @</span></div>
+          <input class="form-input" id="cfgIG2" placeholder="europolomy"/>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Facebook Handle</div>
+          <input class="form-input" id="cfgFB2" placeholder="europolomy"/>
+        </div>
+        <div class="field-group">
+          <div class="field-label">TikTok Handle <span>Without @</span></div>
+          <input class="form-input" id="cfgTT2" placeholder="europolomy"/>
+        </div>
+      </div>
+
+    </div><!-- page-content -->
+  </div><!-- main-area -->
+</div>
+
+<div id="toast-container"></div>
+<script src="auth.js"></script>
+<script>
+Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
+
+// Sidebar quick links
+const tabMap = {navHome:0,navBags:1,navWallets:2,navLuggage:3,navShared:4};
+Object.entries(tabMap).forEach(([id,i])=>{
+  document.getElementById(id)?.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelectorAll('.tab-btn[data-group="pe"]')[i].click();
+  });
+});
+
+const PREFIX = 'ep_page_';
+
+function get(key){ try{return localStorage.getItem(PREFIX+key)||'';}catch{return '';} }
+function set(key,val){ try{localStorage.setItem(PREFIX+key,val);}catch(e){UI.toast('Storage full — clear some data','error');} }
+function del(key){ try{localStorage.removeItem(PREFIX+key);}catch{} }
+
+// Load all fields on page load
+function loadAll(){
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    el.value = get(el.dataset.key);
+  });
+  // Announcement toggle
+  document.getElementById('annActive').checked = localStorage.getItem(PREFIX+'shared_ann_active') !== 'false';
+  // Social handles from site_config
+  const cfg = Store.get('site_config',{});
+  document.getElementById('cfgIG2').value = cfg.instagram||'europolomy';
+  document.getElementById('cfgFB2').value = cfg.facebook||'europolomy';
+  document.getElementById('cfgTT2').value = cfg.tiktok||'europolomy';
+}
+
+// Save all fields
+function saveAll(){
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    if(el.value.trim()) set(el.dataset.key, el.value.trim());
+    else del(el.dataset.key);
+  });
+  // Announcement toggle
+  set('shared_ann_active', document.getElementById('annActive').checked ? 'true' : 'false');
+  // Social handles
+  const cfg = Store.get('site_config',{});
+  cfg.instagram = document.getElementById('cfgIG2').value.trim()||cfg.instagram;
+  cfg.facebook  = document.getElementById('cfgFB2').value.trim()||cfg.facebook;
+  cfg.tiktok    = document.getElementById('cfgTT2').value.trim()||cfg.tiktok;
+  Store.set('site_config', cfg);
+  Store.log('Published page content edits');
+  UI.toast('Saved & published to website ✓','success');
+  // Flash the save button
+  const btn = document.getElementById('saveAllBtn');
+  btn.textContent = '✓ Published!';
+  setTimeout(()=>btn.textContent='Save & Publish', 2000);
+}
+
+// Reset a specific page
+async function resetPage(page){
+  if(!await UI.confirm(`Reset all ${page} page content to original?`)) return;
+  const keys = [...document.querySelectorAll('#tab'+page.charAt(0).toUpperCase()+page.slice(1)+' [data-key]')].map(el=>el.dataset.key);
+  keys.forEach(k=>{ del(k); document.querySelector(`[data-key="${k}"]`).value=''; });
+  UI.toast(`${page} page reset to original`,'success');
+}
+
+// Reset everything
+async function resetAllContent(){
+  if(!await UI.confirm('Reset ALL page content to original? This cannot be undone.')) return;
+  document.querySelectorAll('[data-key]').forEach(el=>{ del(el.dataset.key); el.value=''; });
+  del('shared_ann_active');
+  document.getElementById('annActive').checked=true;
+  UI.toast('All content reset to original','success');
+}
+
+loadAll();
+</script>
+</body>
+</html>

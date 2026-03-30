@@ -114,9 +114,9 @@
     <div class="page-hero__bg"></div>
     <div class="page-hero__watermark">BAGS</div>
     <div class="page-hero__content">
-      <p class="section-eyebrow" style="animation:fadeUp 0.8s var(--ease-out) 0.1s both;opacity:0">Core Collection</p>
-      <h1 class="page-hero__title">Men's <em>Bags.</em></h1>
-      <p class="page-hero__desc">Engineered for the professional in motion — briefcases, backpacks, totes and crossbody bags that carry your world with European precision.</p>
+      <p class="section-eyebrow" style="animation:fadeUp 0.8s var(--ease-out) 0.1s both;opacity:0" data-ep="bags_eyebrow">Core Collection</p>
+      <h1 class="page-hero__title" data-ep-html="bags_title">Men's <em>Bags.</em></h1>
+      <p class="page-hero__desc" data-ep="bags_desc">Engineered for the professional in motion — briefcases, backpacks, totes and crossbody bags that carry your world with European precision.</p>
     </div>
   </section>
 
@@ -378,7 +378,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <p>© 2026 Euro Polo · europolo.my · All rights reserved.</p>
+        <p data-ep="shared_footer">© 2026 Euro Polo · europolo.my · All rights reserved.</p>
         <p>Crafted with precision for the modern Malaysian gentleman.</p>
       </div>
     </div>
@@ -394,6 +394,7 @@
   </a>
 
   <script src="script.js"></script>
+  <script src="content-injector.js"></script>
   <script src="products.js"></script>
 </body>
 </html>

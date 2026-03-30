@@ -112,9 +112,9 @@
     <div class="page-hero__bg"></div>
     <div class="page-hero__watermark">LUGGAGE</div>
     <div class="page-hero__content">
-      <p class="section-eyebrow" style="animation:fadeUp 0.8s var(--ease-out) 0.1s both;opacity:0">Extension Line</p>
-      <h1 class="page-hero__title">Travel in<br /><em>Style.</em></h1>
-      <p class="page-hero__desc">The European traveller's companion — lightweight, structured, undeniably refined. From cabin carry-ons to full journey sets.</p>
+      <p class="section-eyebrow" style="animation:fadeUp 0.8s var(--ease-out) 0.1s both;opacity:0" data-ep="luggage_eyebrow">Extension Line</p>
+      <h1 class="page-hero__title" data-ep-html="luggage_title">Travel in<br /><em>Style.</em></h1>
+      <p class="page-hero__desc" data-ep="luggage_desc">The European traveller's companion — lightweight, structured, undeniably refined. From cabin carry-ons to full journey sets.</p>
     </div>
   </section>
 
@@ -314,7 +314,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <p>© 2026 Euro Polo · europolo.my · All rights reserved.</p>
+        <p data-ep="shared_footer">© 2026 Euro Polo · europolo.my · All rights reserved.</p>
         <p>Crafted with precision for the modern Malaysian gentleman.</p>
       </div>
     </div>
@@ -330,6 +330,7 @@
   </a>
 
   <script src="script.js"></script>
+  <script src="content-injector.js"></script>
   <script src="products.js"></script>
 </body>
 </html>
