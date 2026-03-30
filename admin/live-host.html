@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Live Host — Euro Polo Admin</title><meta name="robots" content="noindex,nofollow"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body>
+<div class="admin-shell">
+  <nav class="sidebar">
+    <div class="sb-logo"><a href="dashboard.html"><span class="sb-logo-main">EURO POLO</span><span class="sb-logo-sub">.MY</span><span class="sb-logo-badge">Admin</span></a></div>
+    <div class="sb-nav">
+      <p class="sb-section-label">Overview</p>
+      <a href="dashboard.html"><span class="nav-icon">◈</span> Dashboard</a>
+      <p class="sb-section-label">Live Host</p>
+      <a href="live-host.html" id="navConfig"><span class="nav-icon">⊕</span> Site Config</a>
+      <a href="live-host.html" id="navChecklist"><span class="nav-icon">◇</span> Live Checklist</a>
+      <a href="live-host.html" id="navLinks"><span class="nav-icon">↗</span> Quick Links</a>
+      <p class="sb-section-label">Site</p>
+      <a href="../index.html" target="_blank"><span class="nav-icon">↗</span> View Website</a>
+    </div>
+    <div class="sb-footer"><div class="sb-user"><div class="sb-avatar"></div><div class="sb-user-info"><div class="sb-user-name"></div><div class="sb-user-role"></div></div><button class="sb-logout" title="Logout">⏻</button></div></div>
+  </nav>
+  <div class="sb-overlay" id="sbOverlay"></div>
+  <div class="main-area">
+    <header class="admin-header">
+      <div class="header-left">
+        <button class="sb-toggle" id="sbToggle">☰</button>
+        <div><div class="header-title">Live Host</div><div class="header-breadcrumb">Site Config · Checklist · Quick Links</div></div>
+      </div>
+      <div class="header-right">
+        <a href="../index.html" target="_blank" class="btn btn--outline btn--sm">↗ View Site</a>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="tabs" id="hostTabs">
+        <button class="tab-btn active" data-group="host" data-target="tabConfig">Site Config</button>
+        <button class="tab-btn" data-group="host" data-target="tabChecklist">Live Checklist</button>
+        <button class="tab-btn" data-group="host" data-target="tabLinks">Quick Links</button>
+      </div>
+
+      <!-- SITE CONFIG -->
+      <div class="tab-panel active" data-group="host" id="tabConfig">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="card">
+            <div class="card-header"><span class="card-title">Contact & Social</span></div>
+            <div class="card-body">
+              <div class="form-group mb-2"><label class="form-label">WhatsApp Number</label>
+                <input class="form-input" id="cfgWA" placeholder="601160601277"/>
+                <div style="font-size:.7rem;color:var(--muted);margin-top:.25rem">Include country code, no + or dashes</div>
+              </div>
+              <div class="form-group mb-2"><label class="form-label">Default WA Message</label><input class="form-input" id="cfgWAMsg" placeholder="Hello Euro Polo, I'm interested in your products"/></div>
+              <div class="form-group mb-2"><label class="form-label">Email</label><input class="form-input" id="cfgEmail" placeholder="hello@europolo.my"/></div>
+              <div class="form-group mb-2"><label class="form-label">Instagram Handle</label><input class="form-input" id="cfgIG" placeholder="europolomy"/></div>
+              <div class="form-group mb-2"><label class="form-label">Facebook Handle</label><input class="form-input" id="cfgFB" placeholder="europolomy"/></div>
+              <div class="form-group"><label class="form-label">TikTok Handle</label><input class="form-input" id="cfgTT" placeholder="europolomy"/></div>
+            </div>
+            <div class="card-footer"><button class="btn btn--gold w-full" onclick="saveConfig()" style="justify-content:center">Save Config</button></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">Analytics & Tracking</span></div>
+            <div class="card-body">
+              <div class="form-group mb-2"><label class="form-label">Google Analytics 4 ID</label><input class="form-input" id="cfgGA4" placeholder="G-XXXXXXXXXX"/></div>
+              <div class="form-group mb-3"><label class="form-label">Meta Pixel ID</label><input class="form-input" id="cfgPixel" placeholder="XXXXXXXXXXXXXXXXX"/></div>
+              <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:.85rem;font-size:.75rem;color:var(--mid);line-height:1.7">
+                <strong style="color:var(--text);display:block;margin-bottom:.35rem">How to apply:</strong>
+                After saving, update the GA4 and Pixel IDs directly in <code style="background:var(--border);padding:.1rem .3rem;border-radius:3px">index.html</code>, <code style="background:var(--border);padding:.1rem .3rem;border-radius:3px">bags.html</code>, <code style="background:var(--border);padding:.1rem .3rem;border-radius:3px">wallets.html</code>, and <code style="background:var(--border);padding:.1rem .3rem;border-radius:3px">luggage.html</code>.
+              </div>
+              <div class="form-group mt-2">
+                <div class="toggle-wrap"><label class="toggle"><input type="checkbox" id="cfgMaintenance"/><span class="toggle-slider"></span></label><span class="toggle-label">Maintenance Mode</span></div>
+              </div>
+            </div>
+            <div class="card-footer"><button class="btn btn--gold w-full" onclick="saveConfig()" style="justify-content:center">Save Config</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIVE CHECKLIST -->
+      <div class="tab-panel" data-group="host" id="tabChecklist">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Pre-Live Checklist</span>
+            <button class="btn btn--outline btn--sm" onclick="resetChecklist()">Reset All</button>
+          </div>
+          <div class="card-body" id="checklistBody"></div>
+        </div>
+        <div class="card" style="margin-top:1rem">
+          <div class="card-header"><span class="card-title">Live Session Notes</span></div>
+          <div class="card-body">
+            <textarea class="form-textarea" id="liveNotes" rows="5" placeholder="Notes for today's live session — products to feature, promos to announce, talking points..."></textarea>
+            <button class="btn btn--gold btn--sm mt-2" onclick="saveLiveNotes()" style="justify-content:center">Save Notes</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="tab-panel" data-group="host" id="tabLinks">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem" id="quickLinks"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="toast-container"></div>
+<script src="auth.js"></script>
+<script>
+Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
+
+['navChecklist','navLinks'].forEach((id,i)=>{
+  document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();document.querySelectorAll('.tab-btn[data-group="host"]')[i+1].click();});
+});
+
+// Config
+function loadConfig(){
+  const c=Store.get('site_config',{});
+  document.getElementById('cfgWA').value=c.whatsapp||'601160601277';
+  document.getElementById('cfgWAMsg').value=c.wa_msg||'Hello Euro Polo, I\'m interested in your products';
+  document.getElementById('cfgEmail').value=c.email||'hello@europolo.my';
+  document.getElementById('cfgIG').value=c.instagram||'europolomy';
+  document.getElementById('cfgFB').value=c.facebook||'europolomy';
+  document.getElementById('cfgTT').value=c.tiktok||'europolomy';
+  document.getElementById('cfgGA4').value=c.ga4||'';
+  document.getElementById('cfgPixel').value=c.pixel||'';
+  document.getElementById('cfgMaintenance').checked=c.maintenance||false;
+}
+function saveConfig(){
+  Store.set('site_config',{
+    whatsapp:document.getElementById('cfgWA').value.trim(),
+    wa_msg:document.getElementById('cfgWAMsg').value.trim(),
+    email:document.getElementById('cfgEmail').value.trim(),
+    instagram:document.getElementById('cfgIG').value.trim(),
+    facebook:document.getElementById('cfgFB').value.trim(),
+    tiktok:document.getElementById('cfgTT').value.trim(),
+    ga4:document.getElementById('cfgGA4').value.trim(),
+    pixel:document.getElementById('cfgPixel').value.trim(),
+    maintenance:document.getElementById('cfgMaintenance').checked,
+  });
+  Store.log('Updated site configuration');
+  UI.toast('Site config saved','success');
+}
+
+// Checklist
+const CHECKLIST_ITEMS=[
+  {id:'cl1',label:'Website is live and loading correctly',cat:'Website'},
+  {id:'cl2',label:'WhatsApp button links to correct number',cat:'Website'},
+  {id:'cl3',label:'All product pages are accessible',cat:'Website'},
+  {id:'cl4',label:'Contact form tested and working',cat:'Website'},
+  {id:'cl5',label:'Active promo codes confirmed',cat:'Marketing'},
+  {id:'cl6',label:'Social media posts scheduled',cat:'Marketing'},
+  {id:'cl7',label:'Product photos ready for live stream',cat:'Live Stream'},
+  {id:'cl8',label:'Script / talking points prepared',cat:'Live Stream'},
+  {id:'cl9',label:'Lighting and camera tested',cat:'Live Stream'},
+  {id:'cl10',label:'Internet connection stable',cat:'Live Stream'},
+  {id:'cl11',label:'Enquiries inbox cleared / responded',cat:'Customer Service'},
+  {id:'cl12',label:'FAQ page updated',cat:'Customer Service'},
+];
+function renderChecklist(){
+  const done=Store.get('checklist',{});
+  const cats=[...new Set(CHECKLIST_ITEMS.map(i=>i.cat))];
+  document.getElementById('checklistBody').innerHTML=cats.map(cat=>`
+    <div style="margin-bottom:1.25rem">
+      <div style="font-size:.7rem;font-weight:600;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:.6rem">${cat}</div>
+      ${CHECKLIST_ITEMS.filter(i=>i.cat===cat).map(item=>`
+        <div class="flex items-center gap-2" style="padding:.45rem 0;border-bottom:1px solid var(--border)">
+          <input type="checkbox" id="${item.id}" ${done[item.id]?'checked':''} onchange="toggleCheck('${item.id}',this.checked)" style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer"/>
+          <label for="${item.id}" style="font-size:.82rem;cursor:pointer;${done[item.id]?'text-decoration:line-through;color:var(--muted)':''}">${item.label}</label>
+        </div>`).join('')}
+    </div>`).join('');
+  const total=CHECKLIST_ITEMS.length;const checked=Object.values(done).filter(Boolean).length;
+  const pct=Math.round(checked/total*100);
+  document.getElementById('checklistBody').insertAdjacentHTML('afterbegin',`
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:.85rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:1rem">
+      <div style="flex:1;background:var(--border);border-radius:99px;height:8px;overflow:hidden">
+        <div style="width:${pct}%;height:100%;background:${pct===100?'var(--green)':'var(--gold)'};border-radius:99px;transition:width .3s"></div>
+      </div>
+      <span style="font-size:.8rem;font-weight:600;white-space:nowrap">${checked}/${total} done ${pct===100?'✓':''}</span>
+    </div>`);
+}
+function toggleCheck(id,val){const c=Store.get('checklist',{});c[id]=val;Store.set('checklist',c);renderChecklist();}
+function resetChecklist(){Store.set('checklist',{});renderChecklist();UI.toast('Checklist reset');}
+
+function saveLiveNotes(){Store.set('live_notes',document.getElementById('liveNotes').value);UI.toast('Notes saved','success');}
+
+// Quick Links
+const LINKS=[
+  {label:'Homepage',url:'../index.html',icon:'◈',desc:'View live homepage'},
+  {label:'Bags Page',url:'../bags.html',icon:'◇',desc:'Men\'s bags collection'},
+  {label:'Wallets & Belts',url:'../wallets.html',icon:'◆',desc:'Wallets and belts collection'},
+  {label:'Luggage Page',url:'../luggage.html',icon:'⊕',desc:'Luggage collection'},
+  {label:'WhatsApp',url:`https://wa.me/${(Store.get('site_config',{}).whatsapp)||'601160601277'}`,icon:'✉',desc:'Open WhatsApp chat',ext:true},
+  {label:'Instagram',url:'https://instagram.com/europolomy',icon:'◉',desc:'@europolomy',ext:true},
+  {label:'Facebook',url:'https://facebook.com/europolomy',icon:'◉',desc:'Euro Polo FB page',ext:true},
+  {label:'Vercel Dashboard',url:'https://vercel.com/dashboard',icon:'↗',desc:'Hosting & deployment',ext:true},
+];
+function renderQuickLinks(){
+  document.getElementById('quickLinks').innerHTML=LINKS.map(l=>`
+    <a href="${l.url}" ${l.ext?'target="_blank" rel="noopener"':''} class="card" style="display:block;cursor:pointer;transition:box-shadow .2s;text-decoration:none" onmouseenter="this.style.boxShadow='var(--shadow-md)'" onmouseleave="this.style.boxShadow='var(--shadow)'">
+      <div class="card-body">
+        <div style="font-size:1.5rem;color:var(--gold);margin-bottom:.5rem">${l.icon}</div>
+        <div style="font-weight:600;font-size:.88rem;margin-bottom:.2rem">${l.label} ${l.ext?'↗':''}</div>
+        <div style="font-size:.73rem;color:var(--muted)">${l.desc}</div>
+      </div>
+    </a>`).join('');
+}
+
+// Init
+loadConfig();renderChecklist();renderQuickLinks();
+document.getElementById('liveNotes').value=Store.get('live_notes','')||'';
+</script>
+</body>
+</html>

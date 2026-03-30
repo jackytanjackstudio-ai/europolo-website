@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Customer Service — Euro Polo Admin</title><meta name="robots" content="noindex,nofollow"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body>
+<div class="admin-shell">
+  <nav class="sidebar">
+    <div class="sb-logo"><a href="dashboard.html"><span class="sb-logo-main">EURO POLO</span><span class="sb-logo-sub">.MY</span><span class="sb-logo-badge">Admin</span></a></div>
+    <div class="sb-nav">
+      <p class="sb-section-label">Overview</p>
+      <a href="dashboard.html"><span class="nav-icon">◈</span> Dashboard</a>
+      <p class="sb-section-label">Customer Service</p>
+      <a href="customer-service.html" id="navEnquiries"><span class="nav-icon">◉</span> Enquiries</a>
+      <a href="customer-service.html" id="navFAQ"><span class="nav-icon">◇</span> FAQ</a>
+      <a href="customer-service.html" id="navTemplates"><span class="nav-icon">✉</span> Reply Templates</a>
+      <p class="sb-section-label">Site</p>
+      <a href="../index.html" target="_blank"><span class="nav-icon">↗</span> View Website</a>
+    </div>
+    <div class="sb-footer"><div class="sb-user"><div class="sb-avatar"></div><div class="sb-user-info"><div class="sb-user-name"></div><div class="sb-user-role"></div></div><button class="sb-logout" title="Logout">⏻</button></div></div>
+  </nav>
+  <div class="sb-overlay" id="sbOverlay"></div>
+  <div class="main-area">
+    <header class="admin-header">
+      <div class="header-left">
+        <button class="sb-toggle" id="sbToggle">☰</button>
+        <div><div class="header-title">Customer Service</div><div class="header-breadcrumb">Enquiries · FAQ · Templates</div></div>
+      </div>
+      <div class="header-right">
+        <a href="../index.html" target="_blank" class="btn btn--outline btn--sm">↗ View Site</a>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="stats-row" id="csStats"></div>
+      <div class="tabs" id="csTabs">
+        <button class="tab-btn active" data-group="cs" data-target="tabEnquiries">Enquiries</button>
+        <button class="tab-btn" data-group="cs" data-target="tabFAQ">FAQ</button>
+        <button class="tab-btn" data-group="cs" data-target="tabTemplates">Reply Templates</button>
+      </div>
+
+      <!-- ENQUIRIES -->
+      <div class="tab-panel active" data-group="cs" id="tabEnquiries">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Customer Enquiries</span>
+            <div class="flex gap-1">
+              <select class="form-select" id="enquiryFilter" style="font-size:.78rem;padding:.3rem .6rem" onchange="renderEnquiries()">
+                <option value="">All Status</option>
+                <option value="Unread">Unread</option>
+                <option value="Pending">Pending</option>
+                <option value="Replied">Replied</option>
+              </select>
+            </div>
+          </div>
+          <div id="enquiryList"></div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="tab-panel" data-group="cs" id="tabFAQ">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">FAQ Management</span>
+            <button class="btn btn--primary btn--sm" onclick="openFAQDrawer()">+ Add FAQ</button>
+          </div>
+          <div class="table-wrap">
+            <table><thead><tr><th>Question</th><th>Category</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="faqTbody"></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEMPLATES -->
+      <div class="tab-panel" data-group="cs" id="tabTemplates">
+        <div class="card">
+          <div class="card-header"><span class="card-title">WhatsApp Reply Templates</span><button class="btn btn--primary btn--sm" onclick="openTemplateDrawer()">+ Add Template</button></div>
+          <div id="templateList" style="padding:1rem;display:flex;flex-direction:column;gap:.75rem"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reply Drawer -->
+<div class="drawer-bg" id="replyDrawerBg"></div>
+<div class="drawer" id="replyDrawer" style="width:min(520px,100vw)">
+  <div class="drawer-header"><span class="drawer-title">Reply Enquiry</span><button class="drawer-close">✕</button></div>
+  <div class="drawer-body">
+    <input type="hidden" id="rdId"/>
+    <div id="rdInfo" style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:1rem;font-size:.82rem"></div>
+    <div class="form-group mb-2"><label class="form-label">Reply Message</label><textarea class="form-textarea" id="rdReply" rows="5" placeholder="Type your reply..."></textarea></div>
+    <div class="form-group mb-2"><label class="form-label">Internal Notes</label><input class="form-input" id="rdNotes" placeholder="e.g. VIP customer, follow up needed"/></div>
+    <div class="form-group"><label class="form-label">Status</label>
+      <select class="form-select" id="rdStatus"><option>Pending</option><option>Replied</option></select>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <button class="btn btn--outline" onclick="closeDrawer('replyDrawer','replyDrawerBg')">Cancel</button>
+    <button class="btn btn--gold" onclick="saveReply()">Save Reply</button>
+  </div>
+</div>
+
+<!-- FAQ Drawer -->
+<div class="drawer-bg" id="faqDrawerBg"></div>
+<div class="drawer" id="faqDrawer">
+  <div class="drawer-header"><span class="drawer-title">FAQ Item</span><button class="drawer-close">✕</button></div>
+  <div class="drawer-body">
+    <input type="hidden" id="fdId"/>
+    <div class="form-group mb-2"><label class="form-label">Question <span>*</span></label><input class="form-input" id="fdQ" placeholder="e.g. Do you offer warranty?"/></div>
+    <div class="form-group mb-2"><label class="form-label">Answer <span>*</span></label><textarea class="form-textarea" id="fdA" rows="5" placeholder="Write the answer..."></textarea></div>
+    <div class="form-grid form-grid--2 mb-2">
+      <div class="form-group"><label class="form-label">Category</label>
+        <select class="form-select" id="fdCat"><option>After-Sale</option><option>Shipping</option><option>Returns</option><option>Care</option><option>Product</option><option>Payment</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Status</label>
+        <select class="form-select" id="fdStatus"><option>Published</option><option>Draft</option></select>
+      </div>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <button class="btn btn--outline" onclick="closeDrawer('faqDrawer','faqDrawerBg')">Cancel</button>
+    <button class="btn btn--gold" onclick="saveFAQ()">Save FAQ</button>
+  </div>
+</div>
+
+<!-- Template Drawer -->
+<div class="drawer-bg" id="templateDrawerBg"></div>
+<div class="drawer" id="templateDrawer">
+  <div class="drawer-header"><span class="drawer-title">Reply Template</span><button class="drawer-close">✕</button></div>
+  <div class="drawer-body">
+    <input type="hidden" id="tdId"/>
+    <div class="form-group mb-2"><label class="form-label">Template Name <span>*</span></label><input class="form-input" id="tdName" placeholder="e.g. General Greeting"/></div>
+    <div class="form-group mb-2"><label class="form-label">Message <span>*</span></label><textarea class="form-textarea" id="tdMsg" rows="6" placeholder="Hello [Name], thank you for contacting Euro Polo..."></textarea></div>
+    <div class="form-group"><label class="form-label">Category</label>
+      <select class="form-select" id="tdCat"><option>Greeting</option><option>Enquiry</option><option>Shipping</option><option>After-Sale</option><option>Promo</option></select>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <button class="btn btn--outline" onclick="closeDrawer('templateDrawer','templateDrawerBg')">Cancel</button>
+    <button class="btn btn--gold" onclick="saveTemplate()">Save Template</button>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="auth.js"></script>
+<script>
+Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
+
+['navFAQ','navTemplates'].forEach((id,i)=>{
+  const targets=['tabFAQ','tabTemplates'];
+  document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();document.querySelectorAll('.tab-btn[data-group="cs"]')[i+1].click();});
+});
+
+function closeDrawer(id,bgId){document.getElementById(id).classList.remove('open');document.getElementById(bgId).classList.remove('open');}
+document.querySelectorAll('.drawer-close').forEach(b=>b.addEventListener('click',()=>{b.closest('.drawer').classList.remove('open');document.querySelectorAll('.drawer-bg').forEach(bg=>bg.classList.remove('open'));}));
+document.querySelectorAll('.drawer-bg').forEach(bg=>bg.addEventListener('click',()=>{bg.classList.remove('open');document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));}));
+
+// Stats
+function renderStats(){
+  const e=Store.get('enquiries',[]),f=Store.get('faq',[]);
+  document.getElementById('csStats').innerHTML=`
+    <div class="stat-card stat-card--red"><span class="stat-num">${e.filter(x=>x.status==='Unread').length}</span><span class="stat-label">Unread</span></div>
+    <div class="stat-card stat-card--amber"><span class="stat-num">${e.filter(x=>x.status==='Pending').length}</span><span class="stat-label">Pending</span></div>
+    <div class="stat-card stat-card--green"><span class="stat-num">${e.filter(x=>x.status==='Replied').length}</span><span class="stat-label">Replied</span></div>
+    <div class="stat-card"><span class="stat-num">${f.filter(x=>x.status==='Published').length}</span><span class="stat-label">Published FAQs</span></div>`;
+}
+
+// Enquiries
+function renderEnquiries(){
+  const filter=document.getElementById('enquiryFilter').value;
+  let data=Store.get('enquiries',[]);
+  if(filter)data=data.filter(e=>e.status===filter);
+  const bMap={Unread:'badge--red',Pending:'badge--amber',Replied:'badge--green'};
+  document.getElementById('enquiryList').innerHTML=data.length?data.map(e=>`
+    <div style="border-bottom:1px solid var(--border);padding:1rem">
+      <div class="flex items-center justify-between mb-1">
+        <div class="flex items-center gap-2">
+          <strong style="font-size:.9rem">${e.name}</strong>
+          <span class="badge ${bMap[e.status]||'badge--grey'}">${e.status}</span>
+        </div>
+        <span style="font-size:.72rem;color:var(--muted)">${e.date}</span>
+      </div>
+      <div style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem">${e.email} · ${e.phone||'—'} · Interest: <em>${e.interest||'—'}</em></div>
+      <div style="font-size:.82rem;color:var(--text);background:var(--surface2);border-radius:var(--radius);padding:.6rem .75rem;margin-bottom:.6rem">${e.message}</div>
+      ${e.reply?`<div style="font-size:.78rem;color:var(--green);background:var(--green-pale);border-radius:var(--radius);padding:.5rem .75rem;margin-bottom:.6rem"><strong>Reply:</strong> ${e.reply}</div>`:''}
+      ${e.notes?`<div style="font-size:.73rem;color:var(--muted);font-style:italic">Note: ${e.notes}</div>`:''}
+      <div class="flex gap-1 mt-2">
+        <button class="btn btn--primary btn--sm" onclick="openReplyDrawer('${e.id}')">Reply</button>
+        <button class="btn btn--outline btn--sm" onclick="copyWA('${e.id}')">Copy WA</button>
+        <button class="btn btn--danger btn--icon" onclick="deleteEnquiry('${e.id}')">✕</button>
+      </div>
+    </div>`).join(''):
+    `<div class="empty-state"><div class="empty-state-icon">◉</div><p>No enquiries${filter?' with status '+filter:''}.</p></div>`;
+}
+
+function openReplyDrawer(id){
+  const e=Store.get('enquiries',[]).find(x=>x.id===id);
+  if(!e)return;
+  document.getElementById('rdId').value=id;
+  document.getElementById('rdReply').value=e.reply||'';
+  document.getElementById('rdNotes').value=e.notes||'';
+  document.getElementById('rdStatus').value=e.status==='Unread'?'Pending':e.status;
+  document.getElementById('rdInfo').innerHTML=`<strong>${e.name}</strong> &middot; ${e.email}<br><span style="color:var(--muted)">${e.message}</span>`;
+  // Mark as read
+  if(e.status==='Unread')Store.update('enquiries',id,{status:'Pending'});
+  document.getElementById('replyDrawer').classList.add('open');
+  document.getElementById('replyDrawerBg').classList.add('open');
+  renderStats();renderEnquiries();
+}
+function saveReply(){
+  const id=document.getElementById('rdId').value;
+  const reply=document.getElementById('rdReply').value.trim();
+  if(!reply){UI.toast('Please write a reply','error');return;}
+  Store.update('enquiries',id,{reply,notes:document.getElementById('rdNotes').value,status:document.getElementById('rdStatus').value});
+  Store.log('Replied to enquiry #'+id);
+  closeDrawer('replyDrawer','replyDrawerBg');
+  renderEnquiries();renderStats();UI.toast('Reply saved','success');
+}
+function copyWA(id){
+  const e=Store.get('enquiries',[]).find(x=>x.id===id);
+  if(!e)return;
+  const cfg=Store.get('site_config',{});
+  const msg=encodeURIComponent(`Hi ${e.name}, thank you for contacting Euro Polo! `);
+  const url=`https://wa.me/${cfg.whatsapp||'601160601277'}?text=${msg}`;
+  navigator.clipboard?.writeText(url);UI.toast('WA link copied!','success');
+}
+async function deleteEnquiry(id){
+  if(!await UI.confirm('Delete this enquiry?'))return;
+  Store.remove('enquiries',id);renderEnquiries();renderStats();UI.toast('Enquiry deleted');
+}
+
+// FAQ
+function renderFAQ(){
+  const data=Store.get('faq',[]);
+  document.getElementById('faqTbody').innerHTML=data.length?data.map(f=>`
+    <tr>
+      <td style="max-width:280px"><strong style="font-size:.82rem">${f.q}</strong><div style="font-size:.73rem;color:var(--muted);margin-top:.2rem">${f.a.slice(0,80)}${f.a.length>80?'…':''}</div></td>
+      <td><span class="badge badge--gold">${f.cat}</span></td>
+      <td><span class="badge ${f.status==='Published'?'badge--green':'badge--grey'}">${f.status}</span></td>
+      <td class="td-actions">
+        <button class="btn btn--outline btn--icon" onclick="editFAQ('${f.id}')" title="Edit">✎</button>
+        <button class="btn btn--danger btn--icon" onclick="deleteFAQ('${f.id}')">✕</button>
+      </td>
+    </tr>`).join(''):
+    `<tr><td colspan="4"><div class="empty-state"><div class="empty-state-icon">◇</div><p>No FAQs yet.</p></div></td></tr>`;
+}
+function openFAQDrawer(){document.getElementById('fdId').value='';document.getElementById('fdQ').value='';document.getElementById('fdA').value='';document.getElementById('fdStatus').value='Published';document.getElementById('faqDrawer').classList.add('open');document.getElementById('faqDrawerBg').classList.add('open');}
+function editFAQ(id){
+  const f=Store.get('faq',[]).find(x=>x.id===id);if(!f)return;
+  document.getElementById('fdId').value=f.id;
+  document.getElementById('fdQ').value=f.q;
+  document.getElementById('fdA').value=f.a;
+  document.getElementById('fdCat').value=f.cat;
+  document.getElementById('fdStatus').value=f.status;
+  document.getElementById('faqDrawer').classList.add('open');document.getElementById('faqDrawerBg').classList.add('open');
+}
+function saveFAQ(){
+  const q=document.getElementById('fdQ').value.trim();const a=document.getElementById('fdA').value.trim();
+  if(!q||!a){UI.toast('Question and answer required','error');return;}
+  const item={q,a,cat:document.getElementById('fdCat').value,status:document.getElementById('fdStatus').value};
+  const id=document.getElementById('fdId').value;
+  if(id)Store.update('faq',id,item);else Store.push('faq',item);
+  Store.log(`${id?'Updated':'Created'} FAQ: ${q.slice(0,40)}`);
+  closeDrawer('faqDrawer','faqDrawerBg');renderFAQ();UI.toast('FAQ saved','success');
+}
+async function deleteFAQ(id){
+  if(!await UI.confirm('Delete this FAQ?'))return;
+  Store.remove('faq',id);renderFAQ();UI.toast('FAQ deleted');
+}
+
+// Templates
+function renderTemplates(){
+  const data=Store.get('templates',[]);
+  document.getElementById('templateList').innerHTML=data.length?data.map(t=>`
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.85rem 1rem">
+      <div class="flex items-center justify-between mb-1">
+        <strong style="font-size:.85rem">${t.name}</strong>
+        <div class="flex gap-1">
+          <span class="badge badge--gold">${t.cat}</span>
+          <button class="btn btn--outline btn--icon" onclick="copyTemplate('${t.id}')" title="Copy">⎘</button>
+          <button class="btn btn--outline btn--icon" onclick="editTemplate('${t.id}')">✎</button>
+          <button class="btn btn--danger btn--icon" onclick="deleteTemplate('${t.id}')">✕</button>
+        </div>
+      </div>
+      <div style="font-size:.78rem;color:var(--mid);white-space:pre-wrap">${t.msg}</div>
+    </div>`).join(''):
+    `<div class="empty-state"><div class="empty-state-icon">✉</div><p>No templates yet. Add common reply templates to speed up responses.</p></div>`;
+}
+function openTemplateDrawer(){document.getElementById('tdId').value='';document.getElementById('tdName').value='';document.getElementById('tdMsg').value='';document.getElementById('templateDrawer').classList.add('open');document.getElementById('templateDrawerBg').classList.add('open');}
+function editTemplate(id){
+  const t=Store.get('templates',[]).find(x=>x.id===id);if(!t)return;
+  document.getElementById('tdId').value=t.id;document.getElementById('tdName').value=t.name;document.getElementById('tdMsg').value=t.msg;document.getElementById('tdCat').value=t.cat;
+  document.getElementById('templateDrawer').classList.add('open');document.getElementById('templateDrawerBg').classList.add('open');
+}
+function saveTemplate(){
+  const name=document.getElementById('tdName').value.trim();const msg=document.getElementById('tdMsg').value.trim();
+  if(!name||!msg){UI.toast('Name and message required','error');return;}
+  const item={name,msg,cat:document.getElementById('tdCat').value};
+  const id=document.getElementById('tdId').value;
+  if(id)Store.update('templates',id,item);else Store.push('templates',item);
+  closeDrawer('templateDrawer','templateDrawerBg');renderTemplates();UI.toast('Template saved','success');
+}
+function copyTemplate(id){const t=Store.get('templates',[]).find(x=>x.id===id);if(t)navigator.clipboard?.writeText(t.msg);UI.toast('Template copied!','success');}
+async function deleteTemplate(id){if(!await UI.confirm('Delete this template?'))return;Store.remove('templates',id);renderTemplates();UI.toast('Template deleted');}
+
+// Init
+renderStats();renderEnquiries();renderFAQ();renderTemplates();
+</script>
+</body>
+</html>

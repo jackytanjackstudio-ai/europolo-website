@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Content — Euro Polo Admin</title><meta name="robots" content="noindex,nofollow"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body>
+<div class="admin-shell">
+  <nav class="sidebar">
+    <div class="sb-logo"><a href="dashboard.html"><span class="sb-logo-main">EURO POLO</span><span class="sb-logo-sub">.MY</span><span class="sb-logo-badge">Admin</span></a></div>
+    <div class="sb-nav">
+      <p class="sb-section-label">Overview</p>
+      <a href="dashboard.html"><span class="nav-icon">◈</span> Dashboard</a>
+      <p class="sb-section-label">Content</p>
+      <a href="content.html" id="navProducts"><span class="nav-icon">◇</span> Products</a>
+      <a href="content.html" id="navAnnounce"><span class="nav-icon">◆</span> Announcements</a>
+      <a href="content.html" id="navSEO"><span class="nav-icon">◉</span> SEO & Meta</a>
+      <p class="sb-section-label">Site</p>
+      <a href="../index.html" target="_blank"><span class="nav-icon">↗</span> View Website</a>
+    </div>
+    <div class="sb-footer"><div class="sb-user"><div class="sb-avatar"></div><div class="sb-user-info"><div class="sb-user-name"></div><div class="sb-user-role"></div></div><button class="sb-logout" title="Logout">⏻</button></div></div>
+  </nav>
+  <div class="sb-overlay" id="sbOverlay"></div>
+  <div class="main-area">
+    <header class="admin-header">
+      <div class="header-left">
+        <button class="sb-toggle" id="sbToggle">☰</button>
+        <div><div class="header-title">Content</div><div class="header-breadcrumb">Products · Announcements · SEO</div></div>
+      </div>
+      <div class="header-right">
+        <a href="../index.html" target="_blank" class="btn btn--outline btn--sm">↗ View Site</a>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="tabs" id="contentTabs">
+        <button class="tab-btn active" data-group="cnt" data-target="tabProducts">Products</button>
+        <button class="tab-btn" data-group="cnt" data-target="tabAnnounce">Announcements</button>
+        <button class="tab-btn" data-group="cnt" data-target="tabSEO">SEO & Meta</button>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="tab-panel active" data-group="cnt" id="tabProducts">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Product Catalogue</span>
+            <div class="flex gap-1">
+              <select class="form-select" id="catFilter" style="font-size:.78rem;padding:.3rem .6rem" onchange="renderProducts()">
+                <option value="">All Categories</option>
+                <option value="Bags">Bags</option>
+                <option value="Wallets">Wallets</option>
+                <option value="Belts">Belts</option>
+                <option value="Luggage">Luggage</option>
+              </select>
+              <button class="btn btn--primary btn--sm" onclick="openProductDrawer()">+ Add Product</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="productTbody"></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANNOUNCEMENTS -->
+      <div class="tab-panel" data-group="cnt" id="tabAnnounce">
+        <div class="card">
+          <div class="card-header"><span class="card-title">Site Announcements</span><button class="btn btn--primary btn--sm" onclick="openAnnounceDrawer()">+ New Announcement</button></div>
+          <div class="table-wrap">
+            <table><thead><tr><th>Message</th><th>Type</th><th>Start</th><th>End</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="announceTbody"></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO -->
+      <div class="tab-panel" data-group="cnt" id="tabSEO">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="card">
+            <div class="card-header"><span class="card-title">Page Meta Titles</span></div>
+            <div class="card-body" id="seoList" style="display:flex;flex-direction:column;gap:.75rem"></div>
+            <div class="card-footer"><button class="btn btn--gold btn--sm" onclick="saveSEO()" style="justify-content:center;width:100%">Save Changes</button></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">SEO Tips</span></div>
+            <div class="card-body" style="font-size:.78rem;color:var(--mid);line-height:1.7">
+              <p style="margin-bottom:.6rem">✓ Keep titles under <strong>60 characters</strong></p>
+              <p style="margin-bottom:.6rem">✓ Keep descriptions under <strong>160 characters</strong></p>
+              <p style="margin-bottom:.6rem">✓ Include your main keyword near the start</p>
+              <p style="margin-bottom:.6rem">✓ Each page should have a <strong>unique</strong> title</p>
+              <p>✓ Brand name (Euro Polo) at the end works well</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Drawer -->
+<div class="drawer-bg" id="productDrawerBg"></div>
+<div class="drawer" id="productDrawer">
+  <div class="drawer-header"><span class="drawer-title">Product</span><button class="drawer-close">✕</button></div>
+  <div class="drawer-body">
+    <input type="hidden" id="prId"/>
+    <div class="form-grid mb-2">
+      <div class="form-group"><label class="form-label">Product Name <span>*</span></label><input class="form-input" id="prName" placeholder="e.g. Milano Executive Briefcase"/></div>
+      <div class="form-group"><label class="form-label">Category</label>
+        <select class="form-select" id="prCat"><option>Bags</option><option>Wallets</option><option>Belts</option><option>Luggage</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Price (RM) <span>*</span></label><input class="form-input" id="prPrice" type="number" placeholder="690"/></div>
+      <div class="form-group"><label class="form-label">SKU</label><input class="form-input" id="prSKU" placeholder="e.g. EP-BAG-001"/></div>
+    </div>
+    <div class="form-group mb-2"><label class="form-label">Description</label><textarea class="form-textarea" id="prDesc" rows="3" placeholder="Short product description..."></textarea></div>
+    <div class="form-group mb-2"><label class="form-label">Image URL</label><input class="form-input" id="prImg" placeholder="https://..."/></div>
+    <div class="form-group"><label class="form-label">Status</label>
+      <select class="form-select" id="prStatus"><option>Active</option><option>Hidden</option><option>Out of Stock</option></select>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <button class="btn btn--outline" onclick="closeDrawer('productDrawer','productDrawerBg')">Cancel</button>
+    <button class="btn btn--gold" onclick="saveProduct()">Save Product</button>
+  </div>
+</div>
+
+<!-- Announcement Drawer -->
+<div class="drawer-bg" id="announceDrawerBg"></div>
+<div class="drawer" id="announceDrawer">
+  <div class="drawer-header"><span class="drawer-title">Announcement</span><button class="drawer-close">✕</button></div>
+  <div class="drawer-body">
+    <input type="hidden" id="anId"/>
+    <div class="form-group mb-2"><label class="form-label">Message <span>*</span></label><input class="form-input" id="anMsg" placeholder="e.g. Free shipping on orders above RM300!"/></div>
+    <div class="form-grid form-grid--2 mb-2">
+      <div class="form-group"><label class="form-label">Type</label>
+        <select class="form-select" id="anType"><option>Info</option><option>Promo</option><option>Alert</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Status</label>
+        <select class="form-select" id="anStatus"><option>Active</option><option>Draft</option><option>Ended</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Start Date</label><input class="form-input" type="date" id="anStart"/></div>
+      <div class="form-group"><label class="form-label">End Date</label><input class="form-input" type="date" id="anEnd"/></div>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <button class="btn btn--outline" onclick="closeDrawer('announceDrawer','announceDrawerBg')">Cancel</button>
+    <button class="btn btn--gold" onclick="saveAnnounce()">Save Announcement</button>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="auth.js"></script>
+<script>
+Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
+
+['navAnnounce','navSEO'].forEach((id,i)=>{
+  document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();document.querySelectorAll('.tab-btn[data-group="cnt"]')[i+1].click();});
+});
+
+function closeDrawer(id,bgId){document.getElementById(id).classList.remove('open');document.getElementById(bgId).classList.remove('open');}
+document.querySelectorAll('.drawer-close').forEach(b=>b.addEventListener('click',()=>{b.closest('.drawer').classList.remove('open');document.querySelectorAll('.drawer-bg').forEach(bg=>bg.classList.remove('open'));}));
+document.querySelectorAll('.drawer-bg').forEach(bg=>bg.addEventListener('click',()=>{bg.classList.remove('open');document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));}));
+
+// Default products (catalogue)
+const DEFAULT_PRODUCTS = [
+  {id:'prod1',name:'Milano Executive Briefcase',cat:'Bags',price:'690',sku:'EP-BAG-001',desc:'Full-grain leather, fits 15" laptop',status:'Active'},
+  {id:'prod2',name:'Vienna Slim Backpack',cat:'Bags',price:'490',sku:'EP-BAG-002',desc:'Water-resistant, padded compartments',status:'Active'},
+  {id:'prod3',name:'Zürich Classic Tote',cat:'Bags',price:'420',sku:'EP-BAG-003',desc:'Canvas + leather trim',status:'Active'},
+  {id:'prod4',name:'Roma Crossbody',cat:'Bags',price:'320',sku:'EP-BAG-004',desc:'Compact everyday crossbody',status:'Active'},
+  {id:'prod5',name:'London Weekend Duffel',cat:'Bags',price:'580',sku:'EP-BAG-005',desc:'48hr travel bag',status:'Active'},
+  {id:'prod6',name:'Paris Messenger',cat:'Bags',price:'380',sku:'EP-BAG-006',desc:'Urban commuter bag',status:'Active'},
+  {id:'prod7',name:'Berlin Slim Bifold',cat:'Wallets',price:'220',sku:'EP-WAL-001',desc:'8-card slim bifold',status:'Active'},
+  {id:'prod8',name:'Monaco Card Holder',cat:'Wallets',price:'160',sku:'EP-WAL-002',desc:'Minimalist card holder',status:'Active'},
+  {id:'prod9',name:'Geneva Long Wallet',cat:'Wallets',price:'280',sku:'EP-WAL-003',desc:'Full-length zip wallet',status:'Active'},
+  {id:'prod10',name:'Florence Zip Wallet',cat:'Wallets',price:'240',sku:'EP-WAL-004',desc:'Zip-around compact wallet',status:'Active'},
+  {id:'prod11',name:'Madrid Classic Belt',cat:'Belts',price:'180',sku:'EP-BLT-001',desc:'Full-grain leather, single prong',status:'Active'},
+  {id:'prod12',name:'Copenhagen Reversible Belt',cat:'Belts',price:'210',sku:'EP-BLT-002',desc:'Reversible black/tan',status:'Active'},
+  {id:'prod13',name:'Oslo Woven Belt',cat:'Belts',price:'190',sku:'EP-BLT-003',desc:'Woven leather, casual style',status:'Active'},
+  {id:'prod14',name:'Monaco Cabin Trolley 20"',cat:'Luggage',price:'890',sku:'EP-LUG-001',desc:'Cabin-size, TSA lock',status:'Active'},
+  {id:'prod15',name:'Florence Check-in 24"',cat:'Luggage',price:'1090',sku:'EP-LUG-002',desc:'Check-in size, spinner wheels',status:'Active'},
+  {id:'prod16',name:'Grand Euro Traveller 28"',cat:'Luggage',price:'1290',sku:'EP-LUG-003',desc:'Large check-in, expandable',status:'Active'},
+  {id:'prod17',name:'Euro Journey Set 20"+24"',cat:'Luggage',price:'1790',sku:'EP-LUG-004',desc:'Matching cabin + check-in set',status:'Active'},
+];
+
+function getProducts(){
+  let p=Store.get('products',null);
+  if(!p){Store.set('products',DEFAULT_PRODUCTS);p=DEFAULT_PRODUCTS;}
+  return p;
+}
+
+function renderProducts(){
+  const filter=document.getElementById('catFilter').value;
+  let data=getProducts();
+  if(filter)data=data.filter(p=>p.cat===filter);
+  const sMap={Active:'badge--green','Out of Stock':'badge--red',Hidden:'badge--grey'};
+  document.getElementById('productTbody').innerHTML=data.length?data.map(p=>`
+    <tr>
+      <td><strong>${p.name}</strong>${p.sku?`<div style="font-size:.7rem;color:var(--muted)">${p.sku}</div>`:''}</td>
+      <td><span class="badge badge--gold">${p.cat}</span></td>
+      <td><strong>RM ${p.price}</strong></td>
+      <td><span class="badge ${sMap[p.status]||'badge--grey'}">${p.status}</span></td>
+      <td class="td-actions">
+        <button class="btn btn--outline btn--icon" onclick="editProduct('${p.id}')">✎</button>
+        <button class="btn btn--danger btn--icon" onclick="deleteProduct('${p.id}')">✕</button>
+      </td>
+    </tr>`).join(''):
+    `<tr><td colspan="5"><div class="empty-state"><p>No products found.</p></div></td></tr>`;
+}
+
+function openProductDrawer(){
+  ['prId','prName','prPrice','prSKU','prDesc','prImg'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('prStatus').value='Active';
+  document.getElementById('productDrawer').classList.add('open');document.getElementById('productDrawerBg').classList.add('open');
+}
+function editProduct(id){
+  const p=getProducts().find(x=>x.id===id);if(!p)return;
+  document.getElementById('prId').value=p.id;
+  document.getElementById('prName').value=p.name;
+  document.getElementById('prCat').value=p.cat;
+  document.getElementById('prPrice').value=p.price;
+  document.getElementById('prSKU').value=p.sku||'';
+  document.getElementById('prDesc').value=p.desc||'';
+  document.getElementById('prImg').value=p.img||'';
+  document.getElementById('prStatus').value=p.status;
+  document.getElementById('productDrawer').classList.add('open');document.getElementById('productDrawerBg').classList.add('open');
+}
+function saveProduct(){
+  const name=document.getElementById('prName').value.trim();const price=document.getElementById('prPrice').value;
+  if(!name||!price){UI.toast('Name and price required','error');return;}
+  const item={name,cat:document.getElementById('prCat').value,price,sku:document.getElementById('prSKU').value,desc:document.getElementById('prDesc').value,img:document.getElementById('prImg').value,status:document.getElementById('prStatus').value};
+  const id=document.getElementById('prId').value;
+  const prods=getProducts();
+  if(id){const idx=prods.findIndex(x=>x.id===id);if(idx!==-1)prods[idx]={...prods[idx],...item};Store.set('products',prods);}
+  else{item.id='pr'+Date.now().toString(36);prods.unshift(item);Store.set('products',prods);}
+  Store.log(`${id?'Updated':'Added'} product: ${name}`);
+  closeDrawer('productDrawer','productDrawerBg');renderProducts();UI.toast('Product saved','success');
+}
+async function deleteProduct(id){
+  if(!await UI.confirm('Delete this product?'))return;
+  const prods=getProducts().filter(x=>x.id!==id);Store.set('products',prods);renderProducts();UI.toast('Product deleted');
+}
+
+// Announcements
+function renderAnnouncements(){
+  const data=Store.get('announcements',[]);
+  const bMap={Active:'badge--green',Draft:'badge--grey',Ended:'badge--red'};
+  const tMap={Info:'badge--blue',Promo:'badge--gold',Alert:'badge--red'};
+  document.getElementById('announceTbody').innerHTML=data.length?data.map(a=>`
+    <tr>
+      <td style="max-width:240px"><strong style="font-size:.82rem">${a.msg}</strong></td>
+      <td><span class="badge ${tMap[a.type]||'badge--grey'}">${a.type}</span></td>
+      <td>${a.start||'—'}</td><td>${a.end||'—'}</td>
+      <td><span class="badge ${bMap[a.status]||'badge--grey'}">${a.status}</span></td>
+      <td class="td-actions">
+        <button class="btn btn--outline btn--icon" onclick="editAnnounce('${a.id}')">✎</button>
+        <button class="btn btn--danger btn--icon" onclick="deleteAnnounce('${a.id}')">✕</button>
+      </td>
+    </tr>`).join(''):
+    `<tr><td colspan="6"><div class="empty-state"><div class="empty-state-icon">◆</div><p>No announcements yet.</p></div></td></tr>`;
+}
+function openAnnounceDrawer(){['anId','anMsg','anStart','anEnd'].forEach(id=>document.getElementById(id).value='');document.getElementById('anStatus').value='Active';document.getElementById('announceDrawer').classList.add('open');document.getElementById('announceDrawerBg').classList.add('open');}
+function editAnnounce(id){
+  const a=Store.get('announcements',[]).find(x=>x.id===id);if(!a)return;
+  document.getElementById('anId').value=a.id;document.getElementById('anMsg').value=a.msg;document.getElementById('anType').value=a.type;document.getElementById('anStatus').value=a.status;document.getElementById('anStart').value=a.start||'';document.getElementById('anEnd').value=a.end||'';
+  document.getElementById('announceDrawer').classList.add('open');document.getElementById('announceDrawerBg').classList.add('open');
+}
+function saveAnnounce(){
+  const msg=document.getElementById('anMsg').value.trim();
+  if(!msg){UI.toast('Message required','error');return;}
+  const item={msg,type:document.getElementById('anType').value,status:document.getElementById('anStatus').value,start:document.getElementById('anStart').value,end:document.getElementById('anEnd').value};
+  const id=document.getElementById('anId').value;
+  if(id)Store.update('announcements',id,item);else Store.push('announcements',item);
+  closeDrawer('announceDrawer','announceDrawerBg');renderAnnouncements();UI.toast('Announcement saved','success');
+}
+async function deleteAnnounce(id){if(!await UI.confirm('Delete?'))return;Store.remove('announcements',id);renderAnnouncements();}
+
+// SEO
+const SEO_PAGES=[
+  {key:'seo_home',label:'Homepage',placeholder:'Euro Polo — Premium European Men\'s Accessories Malaysia'},
+  {key:'seo_bags',label:'Bags Page',placeholder:'Men\'s Bags — Euro Polo Malaysia'},
+  {key:'seo_wallets',label:'Wallets & Belts Page',placeholder:'Men\'s Wallets & Belts — Euro Polo Malaysia'},
+  {key:'seo_luggage',label:'Luggage Page',placeholder:'Premium Luggage — Euro Polo Malaysia'},
+];
+function renderSEO(){
+  document.getElementById('seoList').innerHTML=SEO_PAGES.map(p=>`
+    <div class="form-group">
+      <label class="form-label">${p.label}</label>
+      <input class="form-input" id="${p.key}" value="${Store.get(p.key,'')||''}" placeholder="${p.placeholder}" style="font-size:.8rem"/>
+      <div style="font-size:.68rem;color:var(--muted);margin-top:.25rem" id="${p.key}_count"></div>
+    </div>`).join('');
+  SEO_PAGES.forEach(p=>{
+    const el=document.getElementById(p.key);
+    const countEl=document.getElementById(p.key+'_count');
+    const update=()=>{const l=el.value.length;countEl.textContent=`${l}/60 characters${l>60?' — too long!':''}`;countEl.style.color=l>60?'var(--red)':'var(--muted)';};
+    el.addEventListener('input',update);update();
+  });
+}
+function saveSEO(){
+  SEO_PAGES.forEach(p=>Store.set(p.key,document.getElementById(p.key).value.trim()));
+  UI.toast('SEO titles saved','success');
+}
+
+// Init
+renderProducts();renderAnnouncements();renderSEO();
+</script>
+</body>
+</html>
