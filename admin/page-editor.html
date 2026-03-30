@@ -266,9 +266,12 @@ function saveAll(){
   set('shared_ann_active', document.getElementById('annActive').checked ? 'true' : 'false');
   // Social handles
   const cfg = Store.get('site_config',{});
-  cfg.instagram = document.getElementById('cfgIG2').value.trim()||cfg.instagram;
-  cfg.facebook  = document.getElementById('cfgFB2').value.trim()||cfg.facebook;
-  cfg.tiktok    = document.getElementById('cfgTT2').value.trim()||cfg.tiktok;
+  const ig = document.getElementById('cfgIG2').value.trim();
+  const fb = document.getElementById('cfgFB2').value.trim();
+  const tt = document.getElementById('cfgTT2').value.trim();
+  if(ig) cfg.instagram = ig;
+  if(fb) cfg.facebook  = fb;
+  if(tt) cfg.tiktok    = tt;
   Store.set('site_config', cfg);
   Store.log('Published page content edits');
   UI.toast('Saved & published to website ✓','success');

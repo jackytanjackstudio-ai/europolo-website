@@ -29,7 +29,7 @@
   // Background image
   document.querySelectorAll('[data-ep-bg]').forEach(el => {
     const val = get(el.getAttribute('data-ep-bg'));
-    if (val !== null && val.trim() !== '') el.style.backgroundImage = 'url(' + val + ')';
+    if (val !== null && val.trim() !== '') el.style.backgroundImage = 'url("' + val.replace(/"/g, '%22') + '")';
   });
 
   // Announcement bar
@@ -37,7 +37,7 @@
   const annText   = get('shared_ann_text');
   const annBar    = document.getElementById('ep-announcement');
   if (annBar) {
-    if (annActive === 'false') {
+    if (annActive !== 'true') {
       annBar.style.display = 'none';
     } else {
       annBar.style.display = '';
