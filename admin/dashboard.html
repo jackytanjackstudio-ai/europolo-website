@@ -14,10 +14,12 @@
     <div class="sb-nav">
       <p class="sb-section-label">Overview</p>
       <a href="dashboard.html"><span class="nav-icon">◈</span> Dashboard</a>
+      <p class="sb-section-label">Commerce</p>
+      <a href="orders.html"><span class="nav-icon">◉</span> Orders</a>
       <p class="sb-section-label">Departments</p>
       <a href="marketing.html"><span class="nav-icon">◆</span> Marketing</a>
       <a href="content.html"><span class="nav-icon">◇</span> Content</a>
-      <a href="customer-service.html"><span class="nav-icon">◉</span> Customer Service</a>
+      <a href="customer-service.html"><span class="nav-icon">◎</span> Customer Service</a>
       <a href="live-host.html"><span class="nav-icon">⊕</span> Live Host</a>
       <a href="page-editor.html"><span class="nav-icon">✎</span> Page Editor</a>
       <p class="sb-section-label">Site</p>
@@ -62,19 +64,37 @@ const camps = Store.get('campaigns',[]);
 const enquiries = Store.get('enquiries',[]);
 const promos = Store.get('promos',[]);
 const faq = Store.get('faq',[]);
+const orders = (()=>{ try{ return JSON.parse(localStorage.getItem('ep_orders')||'[]'); }catch(e){ return []; } })();
+const products = Store.get('products',[]);
+const lowStockItems = products.filter(p=>p.stock!==undefined && !isNaN(parseInt(p.stock)) && parseInt(p.stock)<=( parseInt(p.lowStock)||5) && p.status!=='Hidden');
+const orderRevenue = orders.reduce((s,o)=>s+(o.total||0),0);
 
 document.getElementById('statsRow').innerHTML = `
-  <div class="stat-card"><span class="stat-num">17</span><span class="stat-label">Total Products</span></div>
+  <div class="stat-card" style="cursor:pointer" onclick="location.href='orders.html'"><span class="stat-num">${orders.length}</span><span class="stat-label">Total Orders</span></div>
+  <div class="stat-card stat-card--green" style="cursor:pointer" onclick="location.href='orders.html'"><span class="stat-num">RM ${orderRevenue.toLocaleString('en-MY',{minimumFractionDigits:0})}</span><span class="stat-label">Revenue</span></div>
   <div class="stat-card stat-card--red"><span class="stat-num">${enquiries.filter(e=>e.status==='Unread').length}</span><span class="stat-label">Unread Enquiries</span></div>
-  <div class="stat-card stat-card--green"><span class="stat-num">${promos.filter(p=>p.active).length}</span><span class="stat-label">Active Promo Codes</span></div>
-  <div class="stat-card stat-card--blue"><span class="stat-num">${camps.filter(c=>c.status==='Active').length}</span><span class="stat-label">Active Campaigns</span></div>
+  <div class="stat-card stat-card--blue"><span class="stat-num">${promos.filter(p=>p.active).length}</span><span class="stat-label">Active Promos</span></div>
 `;
 
+// Low stock alert
+if(lowStockItems.length){
+  const alertHtml = `<div class="card" style="border-left:3px solid var(--gold);margin-bottom:1rem">
+    <div class="card-body">
+      <div style="font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">⚠ Low Stock Alert</div>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+        ${lowStockItems.map(p=>`<span class="badge badge--gold">${p.name} — ${p.stock} left</span>`).join('')}
+      </div>
+      <a href="content.html" style="font-size:.72rem;color:var(--gold);text-decoration:underline;display:inline-block;margin-top:.6rem">Update stock levels →</a>
+    </div>
+  </div>`;
+  document.getElementById('pageContent').insertAdjacentHTML('afterbegin', alertHtml);
+}
+
 const depts = [
+  {name:'Orders',icon:'◉',desc:'Customer orders, revenue, shipment tracking',href:'orders.html',stat:orders.filter(o=>o.status==='Processing').length+' processing',color:'var(--green)'},
   {name:'Marketing',icon:'◆',desc:'Campaigns, promo codes, social planner',href:'marketing.html',stat:camps.length+' campaigns',color:'var(--gold)'},
-  {name:'Content',icon:'◇',desc:'Products, announcements, SEO',href:'content.html',stat:'17 products',color:'var(--green)'},
-  {name:'Customer Service',icon:'◉',desc:'Enquiries, templates, FAQ',href:'customer-service.html',stat:enquiries.filter(e=>e.status==='Unread').length+' unread',color:'var(--red)'},
-  {name:'Live Host',icon:'⊕',desc:'Site config, checklist, deployment',href:'live-host.html',stat:'Config ready',color:'var(--blue)'},
+  {name:'Content',icon:'◇',desc:'Products, inventory, announcements, SEO',href:'content.html',stat:products.length+' products',color:'var(--prestige-alt)'},
+  {name:'Customer Service',icon:'◎',desc:'Enquiries, templates, FAQ',href:'customer-service.html',stat:enquiries.filter(e=>e.status==='Unread').length+' unread',color:'var(--red)'},
 ];
 document.getElementById('deptCards').innerHTML = depts.map(d=>`
   <div class="card" style="cursor:pointer;transition:box-shadow .2s" onclick="location.href='${d.href}'" onmouseenter="this.style.boxShadow='var(--shadow-md)'" onmouseleave="this.style.boxShadow='var(--shadow)'">

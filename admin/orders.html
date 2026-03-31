@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Orders — Euro Polo Admin</title><meta name="robots" content="noindex,nofollow"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body>
+<div class="admin-shell">
+  <nav class="sidebar">
+    <div class="sb-logo"><a href="dashboard.html"><span class="sb-logo-main">EURO POLO</span><span class="sb-logo-sub">.MY</span><span class="sb-logo-badge">Admin</span></a></div>
+    <div class="sb-nav">
+      <p class="sb-section-label">Overview</p>
+      <a href="dashboard.html"><span class="nav-icon">◈</span> Dashboard</a>
+      <p class="sb-section-label">Commerce</p>
+      <a href="orders.html"><span class="nav-icon">◉</span> Orders</a>
+      <p class="sb-section-label">Content</p>
+      <a href="content.html"><span class="nav-icon">◇</span> Products</a>
+      <a href="marketing.html"><span class="nav-icon">◆</span> Marketing</a>
+      <a href="customer-service.html"><span class="nav-icon">◎</span> Customer Service</a>
+      <a href="live-host.html"><span class="nav-icon">⊕</span> Live Host</a>
+      <a href="page-editor.html"><span class="nav-icon">✎</span> Page Editor</a>
+      <p class="sb-section-label">Site</p>
+      <a href="../index.html" target="_blank"><span class="nav-icon">↗</span> View Website</a>
+    </div>
+    <div class="sb-footer"><div class="sb-user"><div class="sb-avatar"></div><div class="sb-user-info"><div class="sb-user-name"></div><div class="sb-user-role"></div></div><button class="sb-logout" title="Logout">⏻</button></div></div>
+  </nav>
+  <div class="sb-overlay" id="sbOverlay"></div>
+  <div class="main-area">
+    <header class="admin-header">
+      <div class="header-left">
+        <button class="sb-toggle" id="sbToggle">☰</button>
+        <div><div class="header-title">Orders</div><div class="header-breadcrumb">Customer Orders · Inventory Updates</div></div>
+      </div>
+      <div class="header-right">
+        <a href="../index.html" target="_blank" class="btn btn--outline btn--sm">↗ View Site</a>
+      </div>
+    </header>
+    <div class="page-content">
+
+      <!-- Stats row -->
+      <div class="stats-row" id="orderStats"></div>
+
+      <!-- Orders table -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">All Orders</span>
+          <div class="flex gap-1">
+            <select class="form-select" id="statusFilter" style="font-size:.78rem;padding:.3rem .6rem" onchange="renderOrders()">
+              <option value="">All Statuses</option>
+              <option>Processing</option>
+              <option>Shipped</option>
+              <option>Delivered</option>
+              <option>Cancelled</option>
+            </select>
+            <button class="btn btn--outline btn--sm" onclick="exportCSV()">Export CSV</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Order Detail Modal -->
+<div class="modal-bg" id="orderModalBg">
+  <div class="modal" style="max-width:580px">
+    <div class="modal-header">
+      <span class="modal-title" id="modalOrderId">Order Details</span>
+      <button onclick="closeModal()" style="background:none;border:none;cursor:pointer;font-size:1rem;color:var(--mid)">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody" style="max-height:70vh;overflow-y:auto"></div>
+    <div class="modal-footer">
+      <select class="form-select" id="modalStatus" style="flex:1">
+        <option>Processing</option>
+        <option>Shipped</option>
+        <option>Delivered</option>
+        <option>Cancelled</option>
+      </select>
+      <button class="btn btn--gold" onclick="updateOrderStatus()">Update Status</button>
+      <button class="btn btn--outline" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="auth.js"></script>
+<script>
+Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar();
+
+var currentOrderId = null;
+
+function getOrders() {
+  try { return JSON.parse(localStorage.getItem('ep_orders') || '[]'); } catch(e) { return []; }
+}
+
+function renderStats() {
+  var orders = getOrders();
+  var total = orders.reduce(function(s,o){ return s + (o.total||0); }, 0);
+  var processing = orders.filter(function(o){ return o.status === 'Processing'; }).length;
+  var shipped = orders.filter(function(o){ return o.status === 'Shipped'; }).length;
+  document.getElementById('orderStats').innerHTML =
+    '<div class="stat-card"><span class="stat-num">' + orders.length + '</span><span class="stat-label">Total Orders</span></div>' +
+    '<div class="stat-card stat-card--green"><span class="stat-num">RM ' + total.toLocaleString('en-MY',{minimumFractionDigits:0}) + '</span><span class="stat-label">Revenue</span></div>' +
+    '<div class="stat-card stat-card--blue"><span class="stat-num">' + processing + '</span><span class="stat-label">Processing</span></div>' +
+    '<div class="stat-card stat-card--red"><span class="stat-num">' + shipped + '</span><span class="stat-label">Shipped</span></div>';
+}
+
+function renderOrders() {
+  var filter = document.getElementById('statusFilter').value;
+  var orders = getOrders();
+  if (filter) orders = orders.filter(function(o){ return o.status === filter; });
+
+  var sMap = { Processing:'badge--blue', Shipped:'badge--gold', Delivered:'badge--green', Cancelled:'badge--red' };
+
+  document.getElementById('ordersTbody').innerHTML = orders.length ? orders.map(function(o) {
+    var itemCount = (o.items||[]).reduce(function(s,i){ return s+i.qty; }, 0);
+    var dateStr = o.date ? new Date(o.date).toLocaleDateString('en-MY', {day:'2-digit',month:'short',year:'numeric'}) : '—';
+    return '<tr>' +
+      '<td><strong style="font-size:.78rem">' + o.id + '</strong></td>' +
+      '<td>' +
+        '<div style="font-size:.82rem;font-weight:600">' + (o.customer&&o.customer.name||'—') + '</div>' +
+        '<div style="font-size:.7rem;color:var(--muted)">' + (o.customer&&o.customer.email||'') + '</div>' +
+      '</td>' +
+      '<td><span class="badge badge--grey">' + itemCount + ' item' + (itemCount!==1?'s':'') + '</span></td>' +
+      '<td><strong>RM ' + (o.total||0).toLocaleString('en-MY',{minimumFractionDigits:2}) + '</strong></td>' +
+      '<td style="font-size:.78rem;color:var(--muted)">' + dateStr + '</td>' +
+      '<td><span class="badge ' + (sMap[o.status]||'badge--grey') + '">' + o.status + '</span></td>' +
+      '<td class="td-actions">' +
+        '<button class="btn btn--outline btn--icon" onclick="viewOrder(\'' + o.id + '\')">View</button>' +
+        '<button class="btn btn--danger btn--icon" onclick="deleteOrder(\'' + o.id + '\')">✕</button>' +
+      '</td>' +
+    '</tr>';
+  }).join('') :
+  '<tr><td colspan="7"><div class="empty-state"><div class="empty-state-icon">◉</div><p>No orders yet. Orders placed via the checkout will appear here.</p></div></td></tr>';
+}
+
+function viewOrder(id) {
+  var orders = getOrders();
+  var o = orders.find(function(x){ return x.id === id; });
+  if (!o) return;
+  currentOrderId = id;
+
+  document.getElementById('modalOrderId').textContent = 'Order ' + o.id;
+  document.getElementById('modalStatus').value = o.status || 'Processing';
+
+  var c = o.customer || {};
+  var items = o.items || [];
+  var itemsHtml = items.map(function(item) {
+    return '<div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.82rem">' +
+      '<span>' + item.name + ' &times;' + item.qty + (item.sku?' <em style="color:var(--muted)">'+item.sku+'</em>':'') + '</span>' +
+      '<span>RM ' + (parseFloat(item.price)*item.qty).toLocaleString('en-MY',{minimumFractionDigits:0}) + '</span>' +
+    '</div>';
+  }).join('');
+
+  document.getElementById('modalBody').innerHTML =
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem">' +
+      '<div>' +
+        '<div style="font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Customer</div>' +
+        '<div style="font-size:.85rem;font-weight:600">' + (c.name||'—') + '</div>' +
+        '<div style="font-size:.78rem;color:var(--muted)">' + (c.email||'') + '</div>' +
+        '<div style="font-size:.78rem;color:var(--muted)">' + (c.phone||'') + '</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Delivery Address</div>' +
+        '<div style="font-size:.78rem;color:var(--muted);line-height:1.6">' +
+          [c.address, c.city, c.postcode, c.state].filter(Boolean).join(', ') ||
+          '—' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div style="font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem">Items</div>' +
+    itemsHtml +
+    '<div style="margin-top:.75rem;padding-top:.5rem;display:flex;flex-direction:column;gap:.25rem">' +
+      '<div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--mid)"><span>Subtotal</span><span>RM ' + (o.subtotal||0).toLocaleString('en-MY',{minimumFractionDigits:2}) + '</span></div>' +
+      (o.discount>0 ? '<div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--green)"><span>Discount' + (o.promoCode?' ('+o.promoCode+')':'') + '</span><span>−RM ' + (o.discount||0).toLocaleString('en-MY',{minimumFractionDigits:2}) + '</span></div>' : '') +
+      '<div style="display:flex;justify-content:space-between;font-size:.9rem;font-weight:600;color:var(--text);border-top:1px solid var(--border);padding-top:.5rem;margin-top:.25rem"><span>Total</span><span>RM ' + (o.total||0).toLocaleString('en-MY',{minimumFractionDigits:2}) + '</span></div>' +
+    '</div>';
+
+  document.getElementById('orderModalBg').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('orderModalBg').classList.remove('open');
+  currentOrderId = null;
+}
+
+function updateOrderStatus() {
+  if (!currentOrderId) return;
+  var newStatus = document.getElementById('modalStatus').value;
+  var orders = getOrders();
+  var idx = orders.findIndex(function(o){ return o.id === currentOrderId; });
+  if (idx !== -1) {
+    orders[idx].status = newStatus;
+    localStorage.setItem('ep_orders', JSON.stringify(orders));
+    Store.log('Updated order ' + currentOrderId + ' → ' + newStatus);
+    renderOrders(); renderStats();
+    UI.toast('Order status updated to ' + newStatus, 'success');
+    closeModal();
+  }
+}
+
+async function deleteOrder(id) {
+  if (!await UI.confirm('Delete order ' + id + '? This cannot be undone.')) return;
+  var orders = getOrders().filter(function(o){ return o.id !== id; });
+  localStorage.setItem('ep_orders', JSON.stringify(orders));
+  renderOrders(); renderStats();
+  UI.toast('Order deleted');
+}
+
+function exportCSV() {
+  var orders = getOrders();
+  if (!orders.length) { UI.toast('No orders to export', 'info'); return; }
+  var rows = [['Order ID','Customer Name','Email','Phone','State','Items','Subtotal','Discount','Total','Date','Status','Promo']];
+  orders.forEach(function(o) {
+    var c = o.customer || {};
+    var itemStr = (o.items||[]).map(function(i){ return i.name + ' x' + i.qty; }).join('; ');
+    rows.push([o.id, c.name||'', c.email||'', c.phone||'', c.state||'', itemStr,
+      (o.subtotal||0).toFixed(2), (o.discount||0).toFixed(2), (o.total||0).toFixed(2),
+      o.date ? new Date(o.date).toLocaleDateString('en-MY') : '', o.status||'', o.promoCode||'']);
+  });
+  var csv = rows.map(function(r){ return r.map(function(v){ return '"'+String(v).replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
+  var blob = new Blob([csv], { type: 'text/csv' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'euro-polo-orders-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+  UI.toast('CSV exported', 'success');
+}
+
+document.getElementById('orderModalBg').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+renderStats();
+renderOrders();
+</script>
+</body>
+</html>

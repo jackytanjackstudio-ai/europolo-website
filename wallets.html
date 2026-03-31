@@ -93,6 +93,7 @@
         <li><a href="luggage.html">Luggage</a></li>
         <li><a href="index.html#about">Our Story</a></li>
         <li><a href="index.html#contact" class="nav__cta">Contact</a></li>
+        <li><button class="cart-nav-btn" onclick="openCart()" aria-label="Open cart"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-badge" style="display:none">0</span></button></li>
       </ul>
       <button class="nav__burger" id="burger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -148,7 +149,7 @@
       <div class="products-grid products-grid--small">
 
         <!-- 1 · Berlin Slim Bifold -->
-        <div class="product-card product-card--page reveal" data-category="wallet">
+        <div class="product-card product-card--page reveal" data-category="wallet" data-product-id="prod7" data-product-name="Berlin Slim Bifold" data-product-price="220" data-product-sku="EP-WAL-001" data-product-cat="Wallets">
           <div class="product-card__img product-card--wallet-img pc-img--w1" data-label="BERLIN BIFOLD">
             <div class="product-card__hover-tag">Bestseller</div>
             <div class="product-card__wishlist">◇</div>
@@ -164,13 +165,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 220</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Berlin%20Slim%20Bifold%20(RM220)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Berlin%20Slim%20Bifold%20(RM220)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 2 · Monaco Card Holder -->
-        <div class="product-card product-card--page reveal" data-category="wallet">
+        <div class="product-card product-card--page reveal" data-category="wallet" data-product-id="prod8" data-product-name="Monaco Card Holder" data-product-price="160" data-product-sku="EP-WAL-002" data-product-cat="Wallets">
           <div class="product-card__img product-card--wallet-img pc-img--w2" data-label="MONACO CARD HOLDER">
             <div class="product-card__hover-tag">Core</div>
             <div class="product-card__wishlist">◇</div>
@@ -186,13 +190,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 160</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Monaco%20Card%20Holder%20(RM160)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Monaco%20Card%20Holder%20(RM160)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 3 · Geneva Long Wallet -->
-        <div class="product-card product-card--page reveal" data-category="wallet">
+        <div class="product-card product-card--page reveal" data-category="wallet" data-product-id="prod9" data-product-name="Geneva Long Wallet" data-product-price="280" data-product-sku="EP-WAL-003" data-product-cat="Wallets">
           <div class="product-card__img product-card--wallet-img pc-img--w3" data-label="GENEVA LONG">
             <div class="product-card__hover-tag">Premium</div>
             <div class="product-card__wishlist">◇</div>
@@ -208,13 +215,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 280</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Geneva%20Long%20Wallet%20(RM280)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Geneva%20Long%20Wallet%20(RM280)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 4 · Florence Zip Wallet -->
-        <div class="product-card product-card--page reveal" data-category="wallet">
+        <div class="product-card product-card--page reveal" data-category="wallet" data-product-id="prod10" data-product-name="Florence Zip Wallet" data-product-price="240" data-product-sku="EP-WAL-004" data-product-cat="Wallets">
           <div class="product-card__img product-card--wallet-img pc-img--w4" data-label="FLORENCE ZIP">
             <div class="product-card__hover-tag">New</div>
             <div class="product-card__wishlist">◇</div>
@@ -230,13 +240,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 240</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Florence%20Zip%20Wallet%20(RM240)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Florence%20Zip%20Wallet%20(RM240)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 5 · Madrid Classic Belt -->
-        <div class="product-card product-card--page reveal" data-category="belt">
+        <div class="product-card product-card--page reveal" data-category="belt" data-product-id="prod11" data-product-name="Madrid Classic Belt" data-product-price="180" data-product-sku="EP-BLT-001" data-product-cat="Belts">
           <div class="product-card__img product-card--wallet-img pc-img--belt1" data-label="MADRID BELT">
             <div class="product-card__hover-tag">Core</div>
             <div class="product-card__wishlist">◇</div>
@@ -252,13 +265,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 180</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Madrid%20Classic%20Belt%20(RM180)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Madrid%20Classic%20Belt%20(RM180)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 6 · Copenhagen Reversible Belt -->
-        <div class="product-card product-card--page reveal" data-category="belt">
+        <div class="product-card product-card--page reveal" data-category="belt" data-product-id="prod12" data-product-name="Copenhagen Reversible Belt" data-product-price="210" data-product-sku="EP-BLT-002" data-product-cat="Belts">
           <div class="product-card__img product-card--wallet-img pc-img--belt2" data-label="COPENHAGEN REVERSIBLE">
             <div class="product-card__hover-tag">Bestseller</div>
             <div class="product-card__wishlist">◇</div>
@@ -274,13 +290,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 210</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Copenhagen%20Reversible%20Belt%20(RM210)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Copenhagen%20Reversible%20Belt%20(RM210)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 7 · Oslo Woven Belt -->
-        <div class="product-card product-card--page reveal" data-category="belt">
+        <div class="product-card product-card--page reveal" data-category="belt" data-product-id="prod13" data-product-name="Oslo Woven Belt" data-product-price="190" data-product-sku="EP-BLT-003" data-product-cat="Belts">
           <div class="product-card__img product-card--wallet-img pc-img--belt3" data-label="OSLO WOVEN">
             <div class="product-card__hover-tag">Casual</div>
             <div class="product-card__wishlist">◇</div>
@@ -296,7 +315,10 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 190</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Oslo%20Woven%20Belt%20(RM190)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Oslo%20Woven%20Belt%20(RM190)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
@@ -374,5 +396,6 @@
   <script src="script.js"></script>
   <script src="content-injector.js"></script>
   <script src="products.js"></script>
+  <script src="cart.js"></script>
 </body>
 </html>

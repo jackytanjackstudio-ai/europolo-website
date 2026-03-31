@@ -59,7 +59,7 @@
             </div>
           </div>
           <div class="table-wrap">
-            <table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+            <table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody id="productTbody"></tbody></table>
           </div>
         </div>
@@ -131,6 +131,8 @@
       </div>
       <div class="form-group"><label class="form-label">Price (RM) <span>*</span></label><input class="form-input" id="prPrice" type="number" placeholder="690"/></div>
       <div class="form-group"><label class="form-label">SKU</label><input class="form-input" id="prSKU" placeholder="e.g. EP-BAG-001"/></div>
+      <div class="form-group"><label class="form-label">Stock Quantity</label><input class="form-input" id="prStock" type="number" min="0" placeholder="e.g. 50"/></div>
+      <div class="form-group"><label class="form-label">Low Stock Alert at</label><input class="form-input" id="prLowStock" type="number" min="0" placeholder="e.g. 5"/></div>
     </div>
     <div class="form-group mb-2"><label class="form-label">Description</label><textarea class="form-textarea" id="prDesc" rows="3" placeholder="Short product description..."></textarea></div>
     <div class="form-group mb-2">
@@ -245,6 +247,15 @@ function getProducts(){
   return p;
 }
 
+function stockBadge(p){
+  const s=parseInt(p.stock);
+  if(p.stock===undefined||p.stock===''||isNaN(s))return`<span class="badge badge--grey">—</span>`;
+  if(s===0)return`<span class="badge badge--red">Out</span>`;
+  const low=parseInt(p.lowStock)||5;
+  if(s<=low)return`<span class="badge badge--gold" title="Low stock">${s} ⚠</span>`;
+  return`<span class="badge badge--green">${s}</span>`;
+}
+
 function renderProducts(){
   const filter=document.getElementById('catFilter').value;
   let data=getProducts();
@@ -255,13 +266,14 @@ function renderProducts(){
       <td><strong>${p.name}</strong>${p.sku?`<div style="font-size:.7rem;color:var(--muted)">${p.sku}</div>`:''}</td>
       <td><span class="badge badge--gold">${p.cat}</span></td>
       <td><strong>RM ${p.price}</strong></td>
+      <td>${stockBadge(p)}</td>
       <td><span class="badge ${sMap[p.status]||'badge--grey'}">${p.status}</span></td>
       <td class="td-actions">
         <button class="btn btn--outline btn--icon" onclick="editProduct('${p.id}')">✎</button>
         <button class="btn btn--danger btn--icon" onclick="deleteProduct('${p.id}')">✕</button>
       </td>
     </tr>`).join(''):
-    `<tr><td colspan="5"><div class="empty-state"><p>No products found.</p></div></td></tr>`;
+    `<tr><td colspan="6"><div class="empty-state"><p>No products found.</p></div></td></tr>`;
 }
 
 function resetImgPreview(val){
@@ -271,7 +283,7 @@ function resetImgPreview(val){
   else{preview.src='';preview.style.display='none';placeholder.style.display='block';}
 }
 function openProductDrawer(){
-  ['prId','prName','prPrice','prSKU','prDesc','prImg'].forEach(id=>document.getElementById(id).value='');
+  ['prId','prName','prPrice','prSKU','prDesc','prImg','prStock','prLowStock'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('prCat').value='Bags';
   document.getElementById('prStatus').value='Active';
   resetImgPreview('');
@@ -287,13 +299,27 @@ function editProduct(id){
   document.getElementById('prDesc').value=p.desc||'';
   document.getElementById('prImg').value=p.img||'';
   document.getElementById('prStatus').value=p.status;
+  document.getElementById('prStock').value=p.stock!==undefined?p.stock:'';
+  document.getElementById('prLowStock').value=p.lowStock||'';
   resetImgPreview(p.img||'');
   document.getElementById('productDrawer').classList.add('open');document.getElementById('productDrawerBg').classList.add('open');
 }
 function saveProduct(){
   const name=document.getElementById('prName').value.trim();const price=document.getElementById('prPrice').value;
   if(!name||!price){UI.toast('Name and price required','error');return;}
-  const item={name,cat:document.getElementById('prCat').value,price,sku:document.getElementById('prSKU').value,desc:document.getElementById('prDesc').value,img:document.getElementById('prImg').value,status:document.getElementById('prStatus').value};
+  const stockVal=document.getElementById('prStock').value;
+  const lowStockVal=document.getElementById('prLowStock').value;
+  const item={
+    name,cat:document.getElementById('prCat').value,price,
+    sku:document.getElementById('prSKU').value,
+    desc:document.getElementById('prDesc').value,
+    img:document.getElementById('prImg').value,
+    status:document.getElementById('prStatus').value,
+    stock:stockVal!==''?parseInt(stockVal):undefined,
+    lowStock:lowStockVal!==''?parseInt(lowStockVal):undefined,
+  };
+  // Auto-set status based on stock
+  if(item.stock===0)item.status='Out of Stock';
   const id=document.getElementById('prId').value;
   const prods=getProducts();
   if(id){const idx=prods.findIndex(x=>x.id===id);if(idx!==-1)prods[idx]={...prods[idx],...item};Store.set('products',prods);}

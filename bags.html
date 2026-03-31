@@ -92,6 +92,7 @@
         <li><a href="luggage.html">Luggage</a></li>
         <li><a href="index.html#about">Our Story</a></li>
         <li><a href="index.html#contact" class="nav__cta">Contact</a></li>
+        <li><button class="cart-nav-btn" onclick="openCart()" aria-label="Open cart"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-badge" style="display:none">0</span></button></li>
       </ul>
       <button class="nav__burger" id="burger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -151,7 +152,7 @@
       <div class="products-grid products-grid--bags">
 
         <!-- 1 · Milano Executive Briefcase -->
-        <div class="product-card product-card--page reveal" data-category="briefcase">
+        <div class="product-card product-card--page reveal" data-category="briefcase" data-product-id="prod1" data-product-name="Milano Executive Briefcase" data-product-price="690" data-product-sku="EP-BAG-001" data-product-cat="Bags">
           <div class="product-card__img pc-img--b1" data-label="MILANO BRIEFCASE">
             <div class="product-card__hover-tag">Bestseller</div>
             <div class="product-card__wishlist">◇</div>
@@ -174,13 +175,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 690</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Milano%20Executive%20Briefcase%20(RM690)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Milano%20Executive%20Briefcase%20(RM690)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 2 · Vienna Slim Backpack -->
-        <div class="product-card product-card--page reveal" data-category="backpack">
+        <div class="product-card product-card--page reveal" data-category="backpack" data-product-id="prod2" data-product-name="Vienna Slim Backpack" data-product-price="490" data-product-sku="EP-BAG-002" data-product-cat="Bags">
           <div class="product-card__img pc-img--b2" data-label="VIENNA BACKPACK">
             <div class="product-card__hover-tag">Core</div>
             <div class="product-card__wishlist">◇</div>
@@ -203,13 +207,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 490</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Vienna%20Slim%20Backpack%20(RM490)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Vienna%20Slim%20Backpack%20(RM490)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 3 · Zürich Classic Tote -->
-        <div class="product-card product-card--page reveal" data-category="tote">
+        <div class="product-card product-card--page reveal" data-category="tote" data-product-id="prod3" data-product-name="Zürich Classic Tote" data-product-price="420" data-product-sku="EP-BAG-003" data-product-cat="Bags">
           <div class="product-card__img pc-img--b3" data-label="ZÜRICH TOTE">
             <div class="product-card__hover-tag">New Arrival</div>
             <div class="product-card__wishlist">◇</div>
@@ -232,13 +239,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 420</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Zürich%20Classic%20Tote%20(RM420)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Zürich%20Classic%20Tote%20(RM420)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 4 · Roma Crossbody -->
-        <div class="product-card product-card--page reveal" data-category="crossbody">
+        <div class="product-card product-card--page reveal" data-category="crossbody" data-product-id="prod4" data-product-name="Roma Crossbody" data-product-price="320" data-product-sku="EP-BAG-004" data-product-cat="Bags">
           <div class="product-card__img pc-img--b4" data-label="ROMA CROSSBODY">
             <div class="product-card__hover-tag">Core</div>
             <div class="product-card__wishlist">◇</div>
@@ -260,13 +270,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 320</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Roma%20Crossbody%20(RM320)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Roma%20Crossbody%20(RM320)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 5 · London Weekend Duffel -->
-        <div class="product-card product-card--page reveal" data-category="duffel">
+        <div class="product-card product-card--page reveal" data-category="duffel" data-product-id="prod5" data-product-name="London Weekend Duffel" data-product-price="580" data-product-sku="EP-BAG-005" data-product-cat="Bags">
           <div class="product-card__img pc-img--b5" data-label="LONDON DUFFEL">
             <div class="product-card__hover-tag">Premium</div>
             <div class="product-card__wishlist">◇</div>
@@ -289,13 +302,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 580</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20London%20Weekend%20Duffel%20(RM580)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20London%20Weekend%20Duffel%20(RM580)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 6 · Paris Messenger -->
-        <div class="product-card product-card--page reveal" data-category="messenger">
+        <div class="product-card product-card--page reveal" data-category="messenger" data-product-id="prod6" data-product-name="Paris Messenger Bag" data-product-price="380" data-product-sku="EP-BAG-006" data-product-cat="Bags">
           <div class="product-card__img pc-img--b6" data-label="PARIS MESSENGER">
             <div class="product-card__hover-tag">New</div>
             <div class="product-card__wishlist">◇</div>
@@ -318,7 +334,10 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 380</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Paris%20Messenger%20(RM380)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Paris%20Messenger%20(RM380)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
@@ -396,5 +415,6 @@
   <script src="script.js"></script>
   <script src="content-injector.js"></script>
   <script src="products.js"></script>
+  <script src="cart.js"></script>
 </body>
 </html>

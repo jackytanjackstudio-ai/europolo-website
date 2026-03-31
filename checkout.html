@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Checkout — Euro Polo</title>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .checkout-page { min-height: 100vh; background: var(--white); padding-top: var(--nav-h); }
+    .checkout-header { background: var(--prestige); padding: 1.5rem 0; text-align: center; }
+    .checkout-header a { font-family: var(--font-serif); font-size: 1.5rem; color: var(--white); letter-spacing: .18em; text-decoration: none; }
+    .checkout-header span { color: var(--gold); font-size: .7rem; font-family: var(--font-sans); letter-spacing: .28em; display: block; margin-top: .15rem; }
+    .checkout-wrap { max-width: 1080px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; display: grid; grid-template-columns: 1fr 400px; gap: 2.5rem; align-items: start; }
+    @media (max-width: 820px) { .checkout-wrap { grid-template-columns: 1fr; } .co-summary { order: -1; } }
+
+    /* Form Column */
+    .co-form h2 { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; color: var(--charcoal); margin-bottom: 1.5rem; }
+    .co-section { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.25rem; }
+    .co-section-title { font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .co-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+    .co-grid--full { grid-column: 1/-1; }
+    .co-label { display: block; font-size: .72rem; font-weight: 600; color: var(--charcoal); margin-bottom: .35rem; letter-spacing: .04em; }
+    .co-input { width: 100%; padding: .65rem .85rem; border: 1px solid var(--border); border-radius: 5px; font-family: var(--font-sans); font-size: .82rem; color: var(--charcoal); background: var(--white); transition: border-color .2s; outline: none; }
+    .co-input:focus { border-color: var(--gold); }
+    .co-input::placeholder { color: var(--muted); }
+    .co-select { width: 100%; padding: .65rem .85rem; border: 1px solid var(--border); border-radius: 5px; font-family: var(--font-sans); font-size: .82rem; color: var(--charcoal); background: var(--white); cursor: pointer; outline: none; }
+    .co-select:focus { border-color: var(--gold); }
+
+    /* Promo */
+    .promo-row { display: flex; gap: .6rem; }
+    .promo-row .co-input { flex: 1; }
+    .promo-apply-btn { padding: .65rem 1.1rem; background: var(--prestige); color: var(--white); border: none; border-radius: 5px; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: background .2s; }
+    .promo-apply-btn:hover { background: var(--gold); }
+    .promo-msg { font-size: .75rem; margin-top: .5rem; }
+    .promo-msg--ok { color: var(--prestige); }
+    .promo-msg--err { color: #a81c1c; }
+
+    /* Pay button */
+    .pay-btn { width: 100%; padding: 1rem; background: var(--gold); color: var(--white); border: none; border-radius: 6px; font-family: var(--font-sans); font-size: .82rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; transition: background .25s; margin-top: .5rem; position: relative; }
+    .pay-btn:hover:not(:disabled) { background: var(--prestige); }
+    .pay-btn:disabled { opacity: .6; cursor: not-allowed; }
+    .pay-btn .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: .4rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Summary Column */
+    .co-summary { position: sticky; top: calc(var(--nav-h) + 1.5rem); }
+    .co-summary-box { background: var(--cream); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; }
+    .co-summary-box h3 { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 400; color: var(--charcoal); margin-bottom: 1.1rem; }
+    .sum-item { display: flex; gap: .85rem; padding: .75rem 0; border-bottom: 1px solid var(--border); }
+    .sum-item:last-of-type { border-bottom: none; }
+    .sum-img { width: 60px; height: 60px; border-radius: 5px; background: var(--stone); flex-shrink: 0; overflow: hidden; position: relative; }
+    .sum-img img { width: 100%; height: 100%; object-fit: cover; }
+    .sum-img-ph { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; color: var(--muted); font-size: 1.2rem; }
+    .sum-qty-badge { position: absolute; top: -6px; right: -6px; background: var(--prestige); color: var(--white); font-size: .6rem; font-weight: 700; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
+    .sum-info { flex: 1; }
+    .sum-name { font-size: .82rem; font-weight: 600; color: var(--charcoal); }
+    .sum-sku { font-size: .68rem; color: var(--muted); margin-top: .1rem; }
+    .sum-price { font-size: .82rem; color: var(--charcoal); margin-top: auto; text-align: right; }
+    .sum-totals { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .sum-row { display: flex; justify-content: space-between; font-size: .82rem; color: var(--mid); margin-bottom: .5rem; }
+    .sum-row strong { color: var(--charcoal); }
+    .sum-row--total { font-size: .95rem; font-weight: 600; color: var(--charcoal); border-top: 1px solid var(--border); padding-top: .75rem; margin-top: .25rem; }
+    .sum-row--discount { color: var(--prestige); }
+
+    .co-empty { text-align: center; padding: 5rem 1.5rem; }
+    .co-empty h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; color: var(--charcoal); margin-bottom: 1rem; }
+    .co-secure { text-align: center; font-size: .68rem; color: var(--muted); margin-top: 1rem; letter-spacing: .05em; }
+
+    #coError { display: none; background: #fff0f0; border: 1px solid #f5c6c6; border-radius: 6px; padding: .85rem 1rem; font-size: .8rem; color: #a81c1c; margin-top: .75rem; }
+  </style>
+</head>
+<body>
+
+<div class="checkout-page">
+  <header class="checkout-header">
+    <a href="index.html">EURO POLO<span>.MY · SECURE CHECKOUT</span></a>
+  </header>
+
+  <div id="emptyCart" class="co-empty" style="display:none">
+    <h2>Your cart is empty</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem">Add some items before checking out.</p>
+    <a href="bags.html" class="btn btn--gold">Shop Now</a>
+  </div>
+
+  <div class="checkout-wrap" id="checkoutWrap">
+
+    <!-- ── Customer Form ── -->
+    <div class="co-form">
+      <h2>Checkout</h2>
+
+      <div class="co-section">
+        <div class="co-section-title">Contact Information</div>
+        <div class="co-grid">
+          <div>
+            <label class="co-label" for="coName">Full Name *</label>
+            <input class="co-input" id="coName" type="text" placeholder="Ahmad bin Ismail" autocomplete="name" required/>
+          </div>
+          <div>
+            <label class="co-label" for="coPhone">Phone Number *</label>
+            <input class="co-input" id="coPhone" type="tel" placeholder="012-3456789" autocomplete="tel" required/>
+          </div>
+          <div class="co-grid--full">
+            <label class="co-label" for="coEmail">Email Address *</label>
+            <input class="co-input" id="coEmail" type="email" placeholder="your@email.com" autocomplete="email" required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="co-section">
+        <div class="co-section-title">Delivery Address</div>
+        <div class="co-grid">
+          <div class="co-grid--full">
+            <label class="co-label" for="coAddr">Address</label>
+            <input class="co-input" id="coAddr" type="text" placeholder="Unit/No., Street Name" autocomplete="address-line1"/>
+          </div>
+          <div>
+            <label class="co-label" for="coCity">City</label>
+            <input class="co-input" id="coCity" type="text" placeholder="Kuala Lumpur" autocomplete="address-level2"/>
+          </div>
+          <div>
+            <label class="co-label" for="coPostcode">Postcode</label>
+            <input class="co-input" id="coPostcode" type="text" placeholder="50000" autocomplete="postal-code"/>
+          </div>
+          <div>
+            <label class="co-label" for="coState">State</label>
+            <select class="co-select" id="coState">
+              <option value="">Select State</option>
+              <option>Kuala Lumpur</option><option>Selangor</option><option>Putrajaya</option>
+              <option>Johor</option><option>Kedah</option><option>Kelantan</option><option>Melaka</option>
+              <option>Negeri Sembilan</option><option>Pahang</option><option>Perak</option>
+              <option>Perlis</option><option>Pulau Pinang</option><option>Sabah</option>
+              <option>Sarawak</option><option>Terengganu</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="co-section">
+        <div class="co-section-title">Promo Code</div>
+        <div class="promo-row">
+          <input class="co-input" id="coPromo" type="text" placeholder="Enter promo code" style="text-transform:uppercase"/>
+          <button class="promo-apply-btn" onclick="applyPromo()">Apply</button>
+        </div>
+        <div class="promo-msg" id="promoMsg"></div>
+      </div>
+
+      <button class="pay-btn" id="payBtn" onclick="submitCheckout()">
+        Pay with Card
+      </button>
+      <div id="coError"></div>
+      <p class="co-secure">&#x1F512; Secured by Stripe · SSL Encrypted · We never store your card details</p>
+    </div>
+
+    <!-- ── Order Summary ── -->
+    <div class="co-summary">
+      <div class="co-summary-box">
+        <h3>Order Summary</h3>
+        <div id="sumItems"></div>
+        <div class="sum-totals">
+          <div class="sum-row"><span>Subtotal</span><strong id="sumSubtotal">RM 0.00</strong></div>
+          <div class="sum-row sum-row--discount" id="sumDiscountRow" style="display:none"><span id="sumDiscountLabel">Discount</span><strong id="sumDiscount">−RM 0.00</strong></div>
+          <div class="sum-row"><span>Shipping</span><span style="color:var(--prestige);font-weight:600">Calculated at payment</span></div>
+          <div class="sum-row sum-row--total"><span>Total</span><strong id="sumTotal">RM 0.00</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Cart & Promo state ─────────────────────────────
+var cartItems = [];
+var discount = 0;
+var promoData = null;
+var promoCode = '';
+
+try { cartItems = JSON.parse(localStorage.getItem('ep_cart') || '[]'); } catch(e) {}
+
+// ── On load ────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', function () {
+  if (!cartItems.length) {
+    document.getElementById('checkoutWrap').style.display = 'none';
+    document.getElementById('emptyCart').style.display = 'block';
+    return;
+  }
+  renderSummary();
+});
+
+// ── Render order summary ───────────────────────────
+function renderSummary() {
+  var subtotal = cartItems.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
+
+  document.getElementById('sumItems').innerHTML = cartItems.map(function (item) {
+    return '<div class="sum-item">' +
+      '<div class="sum-img">' +
+        (item.img ? '<img src="' + item.img + '" alt="' + item.name + '" loading="lazy"/>' : '<div class="sum-img-ph">◇</div>') +
+        '<div class="sum-qty-badge">' + item.qty + '</div>' +
+      '</div>' +
+      '<div class="sum-info">' +
+        '<div class="sum-name">' + item.name + '</div>' +
+        (item.sku ? '<div class="sum-sku">' + item.sku + '</div>' : '') +
+      '</div>' +
+      '<div class="sum-price">RM ' + (parseFloat(item.price) * item.qty).toLocaleString('en-MY', { minimumFractionDigits: 0 }) + '</div>' +
+    '</div>';
+  }).join('');
+
+  var total = subtotal - discount;
+  document.getElementById('sumSubtotal').textContent = 'RM ' + subtotal.toLocaleString('en-MY', { minimumFractionDigits: 2 });
+  document.getElementById('sumTotal').textContent = 'RM ' + Math.max(0, total).toLocaleString('en-MY', { minimumFractionDigits: 2 });
+}
+
+// ── Promo code ─────────────────────────────────────
+function applyPromo() {
+  var code = document.getElementById('coPromo').value.trim().toUpperCase();
+  var msg = document.getElementById('promoMsg');
+  if (!code) { msg.textContent = ''; return; }
+
+  var promos = [];
+  try { promos = JSON.parse(localStorage.getItem('ep_promos') || '[]'); } catch(e) {}
+  var promo = promos.find(function (p) { return p.code.toUpperCase() === code && p.active; });
+
+  if (!promo) {
+    msg.className = 'promo-msg promo-msg--err';
+    msg.textContent = 'Invalid or expired promo code.';
+    discount = 0; promoData = null; promoCode = '';
+    updateTotals();
+    return;
+  }
+
+  var subtotal = cartItems.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
+  var minPurchase = parseFloat(promo.min) || 0;
+  if (subtotal < minPurchase) {
+    msg.className = 'promo-msg promo-msg--err';
+    msg.textContent = 'Minimum purchase of RM ' + minPurchase.toLocaleString('en-MY', { minimumFractionDigits: 0 }) + ' required.';
+    discount = 0; promoData = null; promoCode = '';
+    updateTotals();
+    return;
+  }
+
+  if (promo.expiry && new Date(promo.expiry) < new Date()) {
+    msg.className = 'promo-msg promo-msg--err';
+    msg.textContent = 'This promo code has expired.';
+    discount = 0; promoData = null; promoCode = '';
+    updateTotals();
+    return;
+  }
+
+  promoData = promo;
+  promoCode = code;
+  if (promo.type === 'Percent') {
+    discount = subtotal * (parseFloat(promo.value) / 100);
+  } else {
+    discount = parseFloat(promo.value) || 0;
+  }
+  discount = Math.min(discount, subtotal);
+
+  msg.className = 'promo-msg promo-msg--ok';
+  msg.textContent = 'Code applied! You save RM ' + discount.toLocaleString('en-MY', { minimumFractionDigits: 2 });
+  updateTotals();
+}
+
+function updateTotals() {
+  var subtotal = cartItems.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
+  var total = Math.max(0, subtotal - discount);
+  document.getElementById('sumSubtotal').textContent = 'RM ' + subtotal.toLocaleString('en-MY', { minimumFractionDigits: 2 });
+  document.getElementById('sumTotal').textContent = 'RM ' + total.toLocaleString('en-MY', { minimumFractionDigits: 2 });
+
+  var discRow = document.getElementById('sumDiscountRow');
+  if (discount > 0) {
+    discRow.style.display = 'flex';
+    document.getElementById('sumDiscountLabel').textContent = 'Discount' + (promoCode ? ' (' + promoCode + ')' : '');
+    document.getElementById('sumDiscount').textContent = '−RM ' + discount.toLocaleString('en-MY', { minimumFractionDigits: 2 });
+  } else {
+    discRow.style.display = 'none';
+  }
+}
+
+// ── Submit to Stripe ───────────────────────────────
+async function submitCheckout() {
+  var name = document.getElementById('coName').value.trim();
+  var email = document.getElementById('coEmail').value.trim();
+  var phone = document.getElementById('coPhone').value.trim();
+  var errEl = document.getElementById('coError');
+  var payBtn = document.getElementById('payBtn');
+
+  errEl.style.display = 'none';
+
+  if (!name || !email || !phone) {
+    errEl.textContent = 'Please fill in your name, email and phone number.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errEl.textContent = 'Please enter a valid email address.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (!cartItems.length) {
+    errEl.textContent = 'Your cart is empty.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  payBtn.disabled = true;
+  payBtn.innerHTML = '<span class="spinner"></span>Connecting to payment...';
+
+  var customer = {
+    name: name,
+    email: email,
+    phone: phone,
+    city: document.getElementById('coCity').value.trim(),
+    state: document.getElementById('coState').value,
+    postcode: document.getElementById('coPostcode').value.trim(),
+    address: document.getElementById('coAddr').value.trim(),
+  };
+
+  // Save pending order to sessionStorage for success page
+  sessionStorage.setItem('ep_pending', JSON.stringify({ items: cartItems, customer: customer, discount: discount, promoCode: promoCode }));
+
+  try {
+    var res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: cartItems, customer: customer, promoCode: promoCode, discountAmount: discount }),
+    });
+    var data = await res.json();
+
+    if (!res.ok || data.error) {
+      throw new Error(data.error || 'Payment could not be started.');
+    }
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error('Invalid response from payment server.');
+    }
+  } catch (err) {
+    errEl.textContent = err.message || 'Something went wrong. Please try again.';
+    errEl.style.display = 'block';
+    payBtn.disabled = false;
+    payBtn.innerHTML = 'Pay with Card';
+  }
+}
+
+// Allow Enter key to apply promo
+document.getElementById('coPromo').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') applyPromo();
+});
+</script>
+</body>
+</html>

@@ -90,6 +90,7 @@
         <li><a href="luggage.html" aria-current="page">Luggage</a></li>
         <li><a href="index.html#about">Our Story</a></li>
         <li><a href="index.html#contact" class="nav__cta">Contact</a></li>
+        <li><button class="cart-nav-btn" onclick="openCart()" aria-label="Open cart"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-badge" style="display:none">0</span></button></li>
       </ul>
       <button class="nav__burger" id="burger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -147,7 +148,7 @@
       <div class="products-grid products-grid--luggage">
 
         <!-- 1 · Monaco Cabin 20" -->
-        <div class="product-card product-card--page reveal" data-category="cabin">
+        <div class="product-card product-card--page reveal" data-category="cabin" data-product-id="prod14" data-product-name="Monaco Cabin Trolley" data-product-price="890" data-product-sku="EP-LUG-001" data-product-cat="Luggage">
           <div class="product-card__img product-card--luggage-img pc-img--l1" data-label="MONACO 20&quot;">
             <div class="product-card__hover-tag">Cabin Approved</div>
             <div class="product-card__wishlist">◇</div>
@@ -171,13 +172,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 890</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Monaco%20Cabin%20Trolley%2020%22%20(RM890)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Monaco%20Cabin%20Trolley%2020%22%20(RM890)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 2 · Florence Check-in 24" -->
-        <div class="product-card product-card--page reveal" data-category="checkin">
+        <div class="product-card product-card--page reveal" data-category="checkin" data-product-id="prod15" data-product-name="Florence Check-in Trolley" data-product-price="1090" data-product-sku="EP-LUG-002" data-product-cat="Luggage">
           <div class="product-card__img product-card--luggage-img pc-img--l2" data-label="FLORENCE 24&quot;">
             <div class="product-card__hover-tag">Bestseller</div>
             <div class="product-card__wishlist">◇</div>
@@ -201,13 +205,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 1,090</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Florence%20Check-in%2024%22%20(RM1090)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Florence%20Check-in%2024%22%20(RM1090)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 3 · Grand Euro Traveller 28" -->
-        <div class="product-card product-card--page reveal" data-category="large">
+        <div class="product-card product-card--page reveal" data-category="large" data-product-id="prod16" data-product-name="Grand Euro Traveller" data-product-price="1290" data-product-sku="EP-LUG-003" data-product-cat="Luggage">
           <div class="product-card__img product-card--luggage-img pc-img--l3" data-label="GRAND EURO 28&quot;">
             <div class="product-card__hover-tag">Long Haul</div>
             <div class="product-card__wishlist">◇</div>
@@ -231,13 +238,16 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 1,290</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Grand%20Euro%20Traveller%2028%22%20(RM1290)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Grand%20Euro%20Traveller%2028%22%20(RM1290)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 4 · Euro Journey Set 20"+24" -->
-        <div class="product-card product-card--page reveal" data-category="set">
+        <div class="product-card product-card--page reveal" data-category="set" data-product-id="prod17" data-product-name="Euro Journey Set" data-product-price="1790" data-product-sku="EP-LUG-004" data-product-cat="Luggage">
           <div class="product-card__img product-card--luggage-img pc-img--l4" data-label="EURO JOURNEY SET">
             <div class="product-card__hover-tag">Best Value</div>
             <div class="product-card__wishlist">◇</div>
@@ -254,7 +264,10 @@
             </ul>
             <div class="product-card__footer">
               <span class="product-card__price">RM 1,790</span>
-              <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Euro%20Journey%20Set%2020%22%2B24%22%20(RM1790)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+              <div style="display:flex;gap:.45rem">
+                <a href="https://wa.me/601160601277?text=Hello%20Euro%20Polo%2C%20I%27m%20interested%20in%20the%20Euro%20Journey%20Set%2020%22%2B24%22%20(RM1790)" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>
+                <button class="btn btn--cart add-to-cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
         </div>
@@ -332,5 +345,6 @@
   <script src="script.js"></script>
   <script src="content-injector.js"></script>
   <script src="products.js"></script>
+  <script src="cart.js"></script>
 </body>
 </html>

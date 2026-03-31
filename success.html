@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Order Confirmed — Euro Polo</title>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .success-page { min-height: 100vh; background: var(--white); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; text-align: center; }
+    .success-icon { width: 72px; height: 72px; background: var(--prestige); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.75rem; }
+    .success-icon svg { width: 36px; height: 36px; }
+    .success-eyebrow { font-family: var(--font-sans); font-size: .7rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: .75rem; }
+    .success-title { font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; color: var(--charcoal); margin-bottom: 1rem; line-height: 1.2; }
+    .success-sub { font-size: .9rem; color: var(--mid); max-width: 480px; margin: 0 auto 2rem; line-height: 1.7; }
+    .order-ref { background: var(--cream); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 2rem; margin-bottom: 2rem; display: inline-block; }
+    .order-ref-label { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: .35rem; }
+    .order-ref-id { font-family: var(--font-serif); font-size: 1.3rem; color: var(--charcoal); }
+    .success-items { background: var(--cream); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; max-width: 520px; width: 100%; margin: 0 auto 2rem; text-align: left; }
+    .success-items h4 { font-family: var(--font-serif); font-size: 1rem; font-weight: 400; color: var(--charcoal); margin-bottom: 1rem; }
+    .success-item { display: flex; justify-content: space-between; align-items: center; padding: .5rem 0; border-bottom: 1px solid var(--border); font-size: .82rem; color: var(--mid); }
+    .success-item:last-child { border-bottom: none; }
+    .success-item strong { color: var(--charcoal); }
+    .success-total { display: flex; justify-content: space-between; padding-top: .75rem; margin-top: .25rem; font-size: .9rem; font-weight: 600; color: var(--charcoal); }
+    .success-actions { display: flex; flex-direction: column; gap: .85rem; align-items: center; }
+    .success-wa { display: flex; align-items: center; gap: .5rem; font-size: .8rem; color: var(--mid); margin-top: 1rem; }
+  </style>
+</head>
+<body>
+<div class="success-page">
+
+  <div class="success-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#C09A42" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </div>
+
+  <p class="success-eyebrow">Order Confirmed</p>
+  <h1 class="success-title">Thank you for<br/><em>your order.</em></h1>
+  <p class="success-sub" id="successMsg">Your payment was successful. We'll prepare your order and be in touch shortly.</p>
+
+  <div class="order-ref">
+    <div class="order-ref-label">Order Reference</div>
+    <div class="order-ref-id" id="orderRef">EP-LOADING</div>
+  </div>
+
+  <div class="success-items" id="orderSummary" style="display:none">
+    <h4>What you ordered</h4>
+    <div id="orderItemsList"></div>
+    <div class="success-total">
+      <span>Total Paid</span>
+      <span id="orderTotal"></span>
+    </div>
+  </div>
+
+  <div class="success-actions">
+    <a href="index.html" class="btn btn--gold">Back to Home</a>
+    <a href="bags.html" class="btn btn--sm">Continue Shopping</a>
+  </div>
+
+  <div class="success-wa">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.16 1.6 5.97L0 24l6.18-1.57A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.21-1.25-6.22-3.48-8.52zM12 22c-1.85 0-3.66-.5-5.24-1.44l-.37-.22-3.87.99 1.02-3.77-.24-.39A9.93 9.93 0 0 1 2 12C2 6.49 6.49 2 12 2c2.66 0 5.16 1.04 7.04 2.92A9.92 9.92 0 0 1 22 12c0 5.51-4.49 10-10 10z"/></svg>
+    Questions? <a href="https://wa.me/601160601277" target="_blank" rel="noopener" style="color:var(--gold);margin-left:.25rem">Chat with us on WhatsApp</a>
+  </div>
+</div>
+
+<script>
+window.addEventListener('DOMContentLoaded', function () {
+  // Get session_id from URL
+  var params = new URLSearchParams(window.location.search);
+  var sessionId = params.get('session_id') || '';
+
+  // Generate order reference
+  var orderId = 'EP-' + Date.now().toString(36).toUpperCase().slice(-6);
+  document.getElementById('orderRef').textContent = orderId;
+
+  // Retrieve pending order from sessionStorage
+  var pending = null;
+  try { pending = JSON.parse(sessionStorage.getItem('ep_pending') || 'null'); } catch(e) {}
+
+  if (pending && pending.items && pending.items.length) {
+    var subtotal = pending.items.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
+    var total = Math.max(0, subtotal - (pending.discount || 0));
+
+    // Show order items
+    var itemsEl = document.getElementById('orderItemsList');
+    itemsEl.innerHTML = pending.items.map(function (item) {
+      return '<div class="success-item"><strong>' + item.name + ' &times;' + item.qty + '</strong><span>RM ' + (parseFloat(item.price) * item.qty).toLocaleString('en-MY', { minimumFractionDigits: 0 }) + '</span></div>';
+    }).join('');
+    document.getElementById('orderTotal').textContent = 'RM ' + total.toLocaleString('en-MY', { minimumFractionDigits: 2 });
+    document.getElementById('orderSummary').style.display = 'block';
+
+    if (pending.customer && pending.customer.email) {
+      document.getElementById('successMsg').textContent = 'Your payment was successful. A confirmation has been sent to ' + pending.customer.email + '.';
+    }
+
+    // Save order to localStorage for admin
+    var order = {
+      id: orderId,
+      sessionId: sessionId,
+      items: pending.items,
+      customer: pending.customer || {},
+      subtotal: subtotal,
+      discount: pending.discount || 0,
+      promoCode: pending.promoCode || '',
+      total: total,
+      date: new Date().toISOString(),
+      status: 'Processing',
+    };
+    var orders = [];
+    try { orders = JSON.parse(localStorage.getItem('ep_orders') || '[]'); } catch(e) {}
+    orders.unshift(order);
+    localStorage.setItem('ep_orders', JSON.stringify(orders));
+
+    // Deduct stock for each item
+    var products = [];
+    try { products = JSON.parse(localStorage.getItem('ep_products') || '[]'); } catch(e) {}
+    pending.items.forEach(function (item) {
+      var prod = products.find(function (p) { return p.id === item.id; });
+      if (prod && prod.stock !== undefined) {
+        var newStock = Math.max(0, parseInt(prod.stock) - item.qty);
+        prod.stock = newStock;
+        if (newStock === 0) prod.status = 'Out of Stock';
+      }
+    });
+    localStorage.setItem('ep_products', JSON.stringify(products));
+  }
+
+  // Clear cart and pending order
+  localStorage.removeItem('ep_cart');
+  sessionStorage.removeItem('ep_pending');
+});
+</script>
+</body>
+</html>
