@@ -6,6 +6,7 @@
 const EP_USERS = {
   admin:     { password:'europolo2026', role:'admin',     name:'Admin',           path:'dashboard.html' },
   marketing: { password:'mkt@polo',     role:'marketing', name:'Marketing Team',  path:'marketing.html' },
+  lovart:    { password:'lovart@polo',  role:'marketing', name:'Lovart · Nanobanana', path:'marketing.html' },
   content:   { password:'cnt@polo',     role:'content',   name:'Content Team',    path:'content.html' },
   cs:        { password:'cs@polo',      role:'cs',        name:'Customer Service',path:'customer-service.html' },
   host:      { password:'host@polo',    role:'host',      name:'Live Host',       path:'live-host.html' },

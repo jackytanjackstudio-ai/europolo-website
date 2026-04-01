@@ -17,6 +17,8 @@
       <a href="marketing.html"><span class="nav-icon">◆</span> Campaigns</a>
       <a href="marketing.html" id="navPromos"><span class="nav-icon">◇</span> Promo Codes</a>
       <a href="marketing.html" id="navSocial"><span class="nav-icon">◉</span> Social Planner</a>
+      <a href="marketing.html" id="navCal"><span class="nav-icon">▦</span> Calendar</a>
+      <a href="marketing.html" id="navSEO"><span class="nav-icon">◎</span> SEO Planner</a>
       <a href="marketing.html" id="navNL"><span class="nav-icon">✉</span> Newsletter</a>
       <p class="sb-section-label">Site</p>
       <a href="../index.html" target="_blank"><span class="nav-icon">↗</span> View Website</a>
@@ -28,7 +30,7 @@
     <header class="admin-header">
       <div class="header-left">
         <button class="sb-toggle" id="sbToggle">☰</button>
-        <div><div class="header-title">Marketing</div><div class="header-breadcrumb">Campaigns · Promos · Social · Newsletter</div></div>
+        <div><div class="header-title">Marketing</div><div class="header-breadcrumb">Campaigns · Promos · Social · Calendar · SEO · Newsletter</div></div>
       </div>
       <div class="header-right">
         <button class="btn btn--gold" id="newItemBtn">+ New</button>
@@ -36,10 +38,21 @@
     </header>
     <div class="page-content">
       <div class="stats-row" id="mktStats"></div>
+
+      <!-- Quick Actions -->
+      <div id="quickBar" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem">
+        <button class="btn btn--outline btn--sm" onclick="openCampaignDrawer()">+ Campaign</button>
+        <button class="btn btn--outline btn--sm" onclick="openPromoDrawer()">+ Promo Code</button>
+        <button class="btn btn--outline btn--sm" onclick="openPostDrawer()">+ Social Post</button>
+        <button class="btn btn--outline btn--sm" onclick="openSEODrawer()">+ SEO Task</button>
+        <button class="btn btn--outline btn--sm" onclick="addSubModal()">+ Subscriber</button>
+      </div>
+
       <div class="tabs" id="mktTabs">
         <button class="tab-btn active" data-group="mkt" data-target="tabCampaigns">Campaigns</button>
         <button class="tab-btn" data-group="mkt" data-target="tabPromos">Promo Codes</button>
         <button class="tab-btn" data-group="mkt" data-target="tabSocial">Social Planner</button>
+        <button class="tab-btn" data-group="mkt" data-target="tabCalendar">📅 Calendar</button>
         <button class="tab-btn" data-group="mkt" data-target="tabNewsletter">Newsletter</button>
       </div>
 
@@ -74,6 +87,72 @@
           </div>
           <div class="table-wrap"><table><thead><tr><th>Platform</th><th>Caption</th><th>Scheduled</th><th>Status</th><th>Actions</th></tr></thead><tbody id="socialTbody"></tbody></table></div>
           <div class="card-footer"><p class="text-muted text-sm">Tip: After scheduling, copy the caption and publish directly on each platform.</p></div>
+        </div>
+      </div>
+
+      <!-- CALENDAR -->
+      <div class="tab-panel" data-group="mkt" id="tabCalendar">
+
+        <!-- Calendar controls -->
+        <div class="card" style="margin-bottom:1rem">
+          <div class="card-header" style="align-items:center">
+            <div style="display:flex;align-items:center;gap:.75rem">
+              <button class="btn btn--outline btn--sm" id="calPrev">&#8249;</button>
+              <span style="font-family:var(--font-serif);font-size:1.2rem;font-weight:500;min-width:160px;text-align:center" id="calTitle"></span>
+              <button class="btn btn--outline btn--sm" id="calNext">&#8250;</button>
+              <button class="btn btn--outline btn--sm" id="calToday">Today</button>
+            </div>
+            <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;font-size:.72rem;color:var(--muted)">
+              <span style="display:inline-flex;align-items:center;gap:.3rem"><span style="width:10px;height:10px;border-radius:2px;background:#E1306C;display:inline-block"></span>Instagram</span>
+              <span style="display:inline-flex;align-items:center;gap:.3rem"><span style="width:10px;height:10px;border-radius:2px;background:#1877F2;display:inline-block"></span>Facebook</span>
+              <span style="display:inline-flex;align-items:center;gap:.3rem"><span style="width:10px;height:10px;border-radius:2px;background:#222;display:inline-block"></span>TikTok</span>
+              <span style="display:inline-flex;align-items:center;gap:.3rem"><span style="width:10px;height:10px;border-radius:2px;background:#166534;display:inline-block"></span>SEO</span>
+              <span style="display:inline-flex;align-items:center;gap:.3rem"><span style="width:10px;height:10px;border-radius:2px;background:#C09A42;display:inline-block"></span>Campaign</span>
+            </div>
+          </div>
+          <div style="padding:0 1rem 1rem">
+            <!-- Day headers -->
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px">
+              <div style="text-align:center;font-size:.7rem;font-weight:600;color:var(--muted);padding:.3rem 0">SUN</div>
+              <div style="text-align:center;font-size:.7rem;font-weight:600;color:var(--muted);padding:.3rem 0">MON</div>
+              <div style="text-align:center;font-size:.7rem;font-weight:600;color:var(--muted);padding:.3rem 0">TUE</div>
+              <div style="text-align:center;font-size:.7rem;font-weight:600;color:var(--muted);padding:.3rem 0">WED</div>
+              <div style="text-align:center;font-size:.7rem;font-weight:600;color:var(--muted);padding:.3rem 0">THU</div>
+              <div style="text-align:center;font-size:.7rem;font-weight:600;color:var(--muted);padding:.3rem 0">FRI</div>
+              <div style="text-align:center;font-size:.7rem;font-weight:600;color:var(--muted);padding:.3rem 0">SAT</div>
+            </div>
+            <!-- Calendar grid -->
+            <div id="calGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px"></div>
+          </div>
+        </div>
+
+        <!-- SEO Planner -->
+        <div id="seoSection" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+
+          <!-- Keyword Targets -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Keyword Targets</span>
+              <button class="btn btn--primary btn--sm" onclick="openSEODrawer('keyword')">+ Add Keyword</button>
+            </div>
+            <div class="table-wrap">
+              <table><thead><tr><th>Keyword</th><th>Target Page</th><th>Priority</th><th>Status</th><th></th></tr></thead>
+              <tbody id="seoKeywordTbody"></tbody></table>
+            </div>
+          </div>
+
+          <!-- Content / Blog Schedule -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Content Schedule</span>
+              <button class="btn btn--primary btn--sm" onclick="openSEODrawer('blog')">+ Add Content</button>
+            </div>
+            <div class="table-wrap">
+              <table><thead><tr><th>Title</th><th>Publish Date</th><th>Type</th><th>Status</th><th></th></tr></thead>
+              <tbody id="seoBlogTbody"></tbody></table>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -181,6 +260,42 @@
     </div>
   </div>
   <div class="drawer-footer"><button class="btn btn--outline" onclick="closeDrawer('postDrawer','postDrawerBg')">Cancel</button><button class="btn btn--gold" onclick="savePost()">Schedule Post</button></div>
+</div>
+
+<!-- SEO Drawer -->
+<div class="drawer-bg" id="seoDrawerBg"></div>
+<div class="drawer" id="seoDrawer">
+  <div class="drawer-header"><span class="drawer-title" id="seoDrawerTitle">SEO Task</span><button class="drawer-close">✕</button></div>
+  <div class="drawer-body">
+    <input type="hidden" id="sdId"/>
+    <input type="hidden" id="sdType"/>
+    <div id="sdKeywordFields">
+      <div class="form-group mb-2"><label class="form-label">Keyword / Phrase <span>*</span></label><input class="form-input" id="sdKeyword" placeholder="e.g. leather wallet Malaysia"/></div>
+      <div class="form-group mb-2"><label class="form-label">Target Page / URL</label><input class="form-input" id="sdPage" placeholder="e.g. /products/wallets"/></div>
+      <div class="form-group mb-2"><label class="form-label">Priority</label>
+        <select class="form-select" id="sdPriority"><option>High</option><option>Medium</option><option>Low</option></select>
+      </div>
+      <div class="form-group mb-2"><label class="form-label">Status</label>
+        <select class="form-select" id="sdKwStatus"><option>Planned</option><option>In Progress</option><option>Ranking</option><option>Done</option></select>
+      </div>
+    </div>
+    <div id="sdBlogFields" style="display:none">
+      <div class="form-group mb-2"><label class="form-label">Title <span>*</span></label><input class="form-input" id="sdTitle" placeholder="e.g. Best Leather Wallets in Malaysia 2026"/></div>
+      <div class="form-group mb-2"><label class="form-label">Content Type</label>
+        <select class="form-select" id="sdContentType"><option>Blog Post</option><option>Product Page</option><option>Category Page</option><option>Landing Page</option><option>Social Caption</option></select>
+      </div>
+      <div class="form-group mb-2"><label class="form-label">Publish Date</label><input class="form-input" type="date" id="sdDate"/></div>
+      <div class="form-group mb-2"><label class="form-label">Target Keywords</label><input class="form-input" id="sdTags" placeholder="e.g. leather wallet, men wallet KL"/></div>
+      <div class="form-group mb-2"><label class="form-label">Status</label>
+        <select class="form-select" id="sdBlogStatus"><option>Planned</option><option>Writing</option><option>Review</option><option>Published</option></select>
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">Notes</label><textarea class="form-textarea" id="sdNotes" rows="3" placeholder="Strategy notes, links, ideas..."></textarea></div>
+  </div>
+  <div class="drawer-footer">
+    <button class="btn btn--outline" onclick="closeDrawer('seoDrawer','seoDrawerBg')">Cancel</button>
+    <button class="btn btn--gold" onclick="saveSEO()">Save</button>
+  </div>
 </div>
 
 <div id="toast-container"></div>
@@ -407,8 +522,153 @@ function saveNLDraft(){
   UI.toast('Draft saved','success');
 }
 
+// ── Calendar
+let calYear=new Date().getFullYear(), calMonth=new Date().getMonth();
+const PLATFORM_COLORS={'Instagram':'#E1306C','Facebook':'#1877F2','TikTok':'#222','Unspecified':'#888'};
+const MONTH_NAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function getCalEvents(y,m,d){
+  const pad=n=>String(n).padStart(2,'0');
+  const dateStr=`${y}-${pad(m+1)}-${pad(d)}`;
+  const posts=Store.get('posts',[]).filter(p=>p.date===dateStr);
+  const seo=Store.get('seo_tasks',[]).filter(s=>s.date===dateStr);
+  const campaigns=Store.get('campaigns',[]).filter(c=>c.start===dateStr||c.end===dateStr);
+  return {posts,seo,campaigns};
+}
+
+function renderCalendar(){
+  const title=document.getElementById('calTitle');
+  if(!title)return;
+  title.textContent=`${MONTH_NAMES[calMonth]} ${calYear}`;
+  const grid=document.getElementById('calGrid');
+  const today=new Date();
+  const firstDay=new Date(calYear,calMonth,1).getDay();
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  let html='';
+  // blank cells before first day
+  for(let i=0;i<firstDay;i++) html+=`<div style="min-height:80px;background:var(--surface2);border-radius:4px;opacity:.3"></div>`;
+  for(let day=1;day<=daysInMonth;day++){
+    const isToday=today.getFullYear()===calYear&&today.getMonth()===calMonth&&today.getDate()===day;
+    const {posts,seo,campaigns}=getCalEvents(calYear,calMonth,day);
+    let dots='';
+    posts.forEach(p=>{
+      const platforms=p.platform.split(',').map(x=>x.trim());
+      platforms.forEach(pl=>{
+        const col=PLATFORM_COLORS[pl]||'#888';
+        dots+=`<div title="${pl}: ${p.caption.slice(0,40)}" style="background:${col};color:#fff;font-size:.6rem;padding:1px 4px;border-radius:3px;white-space:nowrap;overflow:hidden;max-width:100%;text-overflow:ellipsis;margin-bottom:1px;cursor:default">${pl.slice(0,2)}: ${p.caption.slice(0,16)}…</div>`;
+      });
+    });
+    seo.forEach(s=>{
+      dots+=`<div title="SEO: ${s.title||s.keyword}" style="background:#166534;color:#fff;font-size:.6rem;padding:1px 4px;border-radius:3px;white-space:nowrap;overflow:hidden;max-width:100%;text-overflow:ellipsis;margin-bottom:1px;cursor:default">SEO: ${(s.title||s.keyword).slice(0,16)}…</div>`;
+    });
+    campaigns.forEach(c=>{
+      dots+=`<div title="Campaign: ${c.name}" style="background:#C09A42;color:#fff;font-size:.6rem;padding:1px 4px;border-radius:3px;white-space:nowrap;overflow:hidden;max-width:100%;text-overflow:ellipsis;margin-bottom:1px;cursor:default">📌 ${c.name.slice(0,14)}…</div>`;
+    });
+    const pad=n=>String(n).padStart(2,'0');
+    const dateStr=`${calYear}-${pad(calMonth+1)}-${pad(day)}`;
+    html+=`<div onclick="calDayClick('${dateStr}')" style="min-height:80px;background:var(--surface);border:1.5px solid ${isToday?'var(--gold)':'var(--border)'};border-radius:4px;padding:4px;cursor:pointer;transition:border-color .15s" onmouseenter="this.style.borderColor='var(--gold)'" onmouseleave="this.style.borderColor='${isToday?'var(--gold)':'var(--border)'}'">
+      <div style="font-size:.72rem;font-weight:${isToday?'700':'500'};color:${isToday?'var(--gold)':'var(--text)'};margin-bottom:3px">${day}</div>
+      ${dots}
+    </div>`;
+  }
+  grid.innerHTML=html;
+}
+
+function calDayClick(dateStr){
+  // Pre-fill the post drawer with this date and switch to Social tab
+  openPostDrawer();
+  document.getElementById('spDate').value=dateStr;
+}
+
+document.getElementById('calPrev')?.addEventListener('click',()=>{calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalendar();});
+document.getElementById('calNext')?.addEventListener('click',()=>{calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalendar();});
+document.getElementById('calToday')?.addEventListener('click',()=>{calYear=new Date().getFullYear();calMonth=new Date().getMonth();renderCalendar();});
+
+// ── SEO Tasks
+function renderSEO(){
+  const data=Store.get('seo_tasks',[]);
+  const keywords=data.filter(x=>x.type==='keyword');
+  const blogs=data.filter(x=>x.type==='blog');
+  const priMap={High:'badge--red',Medium:'badge--amber',Low:'badge--grey'};
+  const stMap={Planned:'badge--grey','In Progress':'badge--blue',Ranking:'badge--green',Done:'badge--green',Writing:'badge--blue',Review:'badge--amber',Published:'badge--green'};
+  document.getElementById('seoKeywordTbody').innerHTML=keywords.length?keywords.map(k=>`
+    <tr><td><strong>${k.keyword}</strong></td><td style="font-size:.78rem;color:var(--muted)">${k.page||'—'}</td>
+    <td><span class="badge ${priMap[k.priority]||'badge--grey'}">${k.priority||'—'}</span></td>
+    <td><span class="badge ${stMap[k.kwStatus]||'badge--grey'}">${k.kwStatus||'Planned'}</span></td>
+    <td class="td-actions">
+      <button class="btn btn--outline btn--icon" onclick="editSEO('${k.id}')">✎</button>
+      <button class="btn btn--danger btn--icon" onclick="deleteSEO('${k.id}')">✕</button>
+    </td></tr>`).join(''):
+    `<tr><td colspan="5"><div class="empty-state"><div class="empty-state-icon">◎</div><p>No keyword targets yet.</p></div></td></tr>`;
+  document.getElementById('seoBlogTbody').innerHTML=blogs.length?blogs.map(b=>`
+    <tr><td><strong>${b.title}</strong>${b.tags?`<br><span style="font-size:.7rem;color:var(--muted)">${b.tags}</span>`:''}</td>
+    <td style="font-size:.78rem">${b.date||'—'}</td>
+    <td><span class="badge badge--gold">${b.contentType||'Blog Post'}</span></td>
+    <td><span class="badge ${stMap[b.blogStatus]||'badge--grey'}">${b.blogStatus||'Planned'}</span></td>
+    <td class="td-actions">
+      <button class="btn btn--outline btn--icon" onclick="editSEO('${b.id}')">✎</button>
+      <button class="btn btn--danger btn--icon" onclick="deleteSEO('${b.id}')">✕</button>
+    </td></tr>`).join(''):
+    `<tr><td colspan="5"><div class="empty-state"><div class="empty-state-icon">◇</div><p>No content scheduled yet.</p></div></td></tr>`;
+}
+
+function openSEODrawer(type='keyword',id){
+  const item=id?Store.get('seo_tasks',[]).find(x=>x.id===id):{};
+  const t=id?(item.type||type):type;
+  document.getElementById('sdId').value=id||'';
+  document.getElementById('sdType').value=t;
+  document.getElementById('sdNotes').value=item.notes||'';
+  const isKw=t==='keyword';
+  document.getElementById('seoDrawerTitle').textContent=isKw?'Keyword Target':'Content / Blog';
+  document.getElementById('sdKeywordFields').style.display=isKw?'':'none';
+  document.getElementById('sdBlogFields').style.display=isKw?'none':'';
+  if(isKw){
+    document.getElementById('sdKeyword').value=item.keyword||'';
+    document.getElementById('sdPage').value=item.page||'';
+    document.getElementById('sdPriority').value=item.priority||'High';
+    document.getElementById('sdKwStatus').value=item.kwStatus||'Planned';
+  } else {
+    document.getElementById('sdTitle').value=item.title||'';
+    document.getElementById('sdContentType').value=item.contentType||'Blog Post';
+    document.getElementById('sdDate').value=item.date||'';
+    document.getElementById('sdTags').value=item.tags||'';
+    document.getElementById('sdBlogStatus').value=item.blogStatus||'Planned';
+  }
+  document.getElementById('seoDrawer').classList.add('open');
+  document.getElementById('seoDrawerBg').classList.add('open');
+}
+
+function editSEO(id){openSEODrawer(null,id);}
+
+function saveSEO(){
+  const t=document.getElementById('sdType').value;
+  const id=document.getElementById('sdId').value;
+  let item={type:t,notes:document.getElementById('sdNotes').value};
+  if(t==='keyword'){
+    const kw=document.getElementById('sdKeyword').value.trim();
+    if(!kw){UI.toast('Keyword required','error');return;}
+    Object.assign(item,{keyword:kw,page:document.getElementById('sdPage').value,priority:document.getElementById('sdPriority').value,kwStatus:document.getElementById('sdKwStatus').value});
+  } else {
+    const title=document.getElementById('sdTitle').value.trim();
+    if(!title){UI.toast('Title required','error');return;}
+    Object.assign(item,{title,contentType:document.getElementById('sdContentType').value,date:document.getElementById('sdDate').value,tags:document.getElementById('sdTags').value,blogStatus:document.getElementById('sdBlogStatus').value});
+  }
+  if(id)Store.update('seo_tasks',id,item);else Store.push('seo_tasks',item);
+  Store.log(`${id?'Updated':'Added'} SEO task`);
+  closeDrawer('seoDrawer','seoDrawerBg');renderSEO();renderCalendar();UI.toast('SEO task saved','success');
+}
+
+async function deleteSEO(id){
+  if(!await UI.confirm('Delete this SEO task?'))return;
+  Store.remove('seo_tasks',id);renderSEO();renderCalendar();UI.toast('Deleted');
+}
+
+// Sidebar quick nav for Calendar + SEO
+document.getElementById('navCal')?.addEventListener('click',e=>{e.preventDefault();document.querySelector('.tab-btn[data-target="tabCalendar"]').click();});
+document.getElementById('navSEO')?.addEventListener('click',e=>{e.preventDefault();document.querySelector('.tab-btn[data-target="tabCalendar"]').click();setTimeout(()=>document.getElementById('seoSection')?.scrollIntoView({behavior:'smooth'}),200);});
+
 // Init
-renderStats();renderCampaigns();renderPromos();renderSocial();renderSubs();
+renderStats();renderCampaigns();renderPromos();renderSocial();renderSubs();renderCalendar();renderSEO();
 // Load NL draft
 const d=Store.get('nl_draft');if(d){document.getElementById('nlSubject').value=d.subject||'';document.getElementById('nlBody').value=d.body||'';}
 </script>
