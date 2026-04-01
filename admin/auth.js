@@ -51,9 +51,10 @@ const Store = {
 /* ── Auth helper ── */
 const Auth = {
   login(username, password) {
-    const u = EP_USERS[username];
+    const key = username.toLowerCase().trim();
+    const u = EP_USERS[key];
     if (!u || u.password !== password) return null;
-    sessionStorage.setItem('ep_user', username);
+    sessionStorage.setItem('ep_user', key);
     sessionStorage.setItem('ep_role', u.role);
     return u;
   },
