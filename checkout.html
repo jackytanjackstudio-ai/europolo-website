@@ -148,10 +148,10 @@
       </div>
 
       <button class="pay-btn" id="payBtn" onclick="submitCheckout()">
-        Pay with Card
+        Pay Now — FPX / Credit Card
       </button>
       <div id="coError"></div>
-      <p class="co-secure">&#x1F512; Secured by Stripe · SSL Encrypted · We never store your card details</p>
+      <p class="co-secure">&#x1F512; Secured by Toyyibpay · SSL Encrypted · We never store your card details</p>
     </div>
 
     <!-- ── Order Summary ── -->
@@ -181,6 +181,14 @@ try { cartItems = JSON.parse(localStorage.getItem('ep_cart') || '[]'); } catch(e
 
 // ── On load ────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', function () {
+  // Show error from failed payment redirect (e.g. user cancelled)
+  var urlErr = new URLSearchParams(window.location.search).get('err');
+  if (urlErr) {
+    var errEl = document.getElementById('coError');
+    errEl.textContent = decodeURIComponent(urlErr);
+    errEl.style.display = 'block';
+  }
+
   if (!cartItems.length) {
     document.getElementById('checkoutWrap').style.display = 'none';
     document.getElementById('emptyCart').style.display = 'block';
@@ -278,12 +286,12 @@ function updateTotals() {
   }
 }
 
-// ── Submit to Stripe ───────────────────────────────
+// ── Submit to Toyyibpay ───────────────────────────
 async function submitCheckout() {
-  var name = document.getElementById('coName').value.trim();
+  var name  = document.getElementById('coName').value.trim();
   var email = document.getElementById('coEmail').value.trim();
   var phone = document.getElementById('coPhone').value.trim();
-  var errEl = document.getElementById('coError');
+  var errEl  = document.getElementById('coError');
   var payBtn = document.getElementById('payBtn');
 
   errEl.style.display = 'none';
@@ -308,39 +316,42 @@ async function submitCheckout() {
   payBtn.innerHTML = '<span class="spinner"></span>Connecting to payment...';
 
   var customer = {
-    name: name,
-    email: email,
-    phone: phone,
-    city: document.getElementById('coCity').value.trim(),
-    state: document.getElementById('coState').value,
+    name:     name,
+    email:    email,
+    phone:    phone,
+    city:     document.getElementById('coCity').value.trim(),
+    state:    document.getElementById('coState').value,
     postcode: document.getElementById('coPostcode').value.trim(),
-    address: document.getElementById('coAddr').value.trim(),
+    address:  document.getElementById('coAddr').value.trim(),
   };
 
-  // Save pending order to sessionStorage for success page
-  sessionStorage.setItem('ep_pending', JSON.stringify({ items: cartItems, customer: customer, discount: discount, promoCode: promoCode }));
+  // Save pending order to sessionStorage — success page reads this after payment
+  sessionStorage.setItem('ep_pending', JSON.stringify({
+    items: cartItems, customer: customer, discount: discount, promoCode: promoCode,
+  }));
 
   try {
-    var res = await fetch('/api/checkout', {
-      method: 'POST',
+    var res  = await fetch('/api/checkout', {
+      method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: cartItems, customer: customer, promoCode: promoCode, discountAmount: discount }),
+      body:    JSON.stringify({ items: cartItems, customer: customer, promoCode: promoCode, discountAmount: discount }),
     });
     var data = await res.json();
 
-    if (!res.ok || data.error) {
-      throw new Error(data.error || 'Payment could not be started.');
-    }
+    if (!res.ok || data.error) throw new Error(data.error || 'Payment could not be started.');
+
+    // Redirect to Toyyibpay payment page
     if (data.url) {
       window.location.href = data.url;
     } else {
       throw new Error('Invalid response from payment server.');
     }
+
   } catch (err) {
     errEl.textContent = err.message || 'Something went wrong. Please try again.';
     errEl.style.display = 'block';
     payBtn.disabled = false;
-    payBtn.innerHTML = 'Pay with Card';
+    payBtn.innerHTML = 'Pay Now — FPX / Credit Card';
   }
 }
 

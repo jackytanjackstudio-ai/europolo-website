@@ -68,12 +68,14 @@
 
 <script>
 window.addEventListener('DOMContentLoaded', function () {
-  // Get session_id from URL
-  var params = new URLSearchParams(window.location.search);
-  var sessionId = params.get('session_id') || '';
+  // Get iPay88 response from URL (redirected via api/payment-response)
+  var params    = new URLSearchParams(window.location.search);
+  var status    = params.get('status');
+  var refNo     = params.get('refno')   || '';
+  var transId   = params.get('transid') || '';
 
-  // Generate order reference
-  var orderId = 'EP-' + Date.now().toString(36).toUpperCase().slice(-6);
+  // Use iPay88 RefNo as order ID, or generate fallback
+  var orderId = refNo || ('EP-' + Date.now().toString(36).toUpperCase().slice(-6));
   document.getElementById('orderRef').textContent = orderId;
 
   // Retrieve pending order from sessionStorage

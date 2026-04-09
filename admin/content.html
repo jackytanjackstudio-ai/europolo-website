@@ -18,8 +18,9 @@
       <a href="content.html" id="navAnnounce"><span class="nav-icon">◆</span> Announcements</a>
       <a href="content.html" id="navMedia"><span class="nav-icon">🖼</span> Media Library</a>
       <a href="content.html" id="navSEO"><span class="nav-icon">◉</span> SEO & Meta</a>
+      <a href="content.html" id="navPages"><span class="nav-icon">▣</span> Pages & Cover</a>
       <p class="sb-section-label">Creative Tools</p>
-      <a href="https://www.lovart.ai/home" target="_blank" style="color:var(--sb-gold)"><span class="nav-icon">✦</span> Lovart AI</a>
+      <a href="https://www.lovart.ai/canvas?projectId=8a7481a4bc3b4cc8becaefde65aad3ff" target="_blank" style="color:var(--sb-gold)"><span class="nav-icon">✦</span> Lovart AI</a>
       <a href="https://www.canva.com" target="_blank" style="color:var(--sb-gold)"><span class="nav-icon">⬡</span> Canva</a>
       <p class="sb-section-label">Site</p>
       <a href="../index.html" target="_blank"><span class="nav-icon">↗</span> View Website</a>
@@ -45,7 +46,7 @@
             <div style="color:#C09A42;font-family:var(--font-serif);font-size:1rem;font-weight:500;margin-bottom:.2rem">✦ Lovart AI</div>
             <div style="color:rgba(255,255,255,0.55);font-size:.72rem">AI image generation for products & content</div>
           </div>
-          <a href="https://www.lovart.ai/home" target="_blank" class="btn btn--gold btn--sm" style="white-space:nowrap;flex-shrink:0">Open ↗</a>
+          <a href="https://www.lovart.ai/canvas?projectId=8a7481a4bc3b4cc8becaefde65aad3ff" target="_blank" class="btn btn--gold btn--sm" style="white-space:nowrap;flex-shrink:0">Open ↗</a>
         </div>
         <div style="background:linear-gradient(135deg,#00C4CC,#7D2AE7);border-radius:8px;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap">
           <div>
@@ -60,6 +61,7 @@
         <button class="tab-btn" data-group="cnt" data-target="tabAnnounce">Announcements</button>
         <button class="tab-btn" data-group="cnt" data-target="tabMedia">Media Library</button>
         <button class="tab-btn" data-group="cnt" data-target="tabSEO">SEO & Meta</button>
+        <button class="tab-btn" data-group="cnt" data-target="tabPages">Pages & Cover</button>
       </div>
 
       <!-- PRODUCTS -->
@@ -111,6 +113,133 @@
           <div class="card-footer" style="font-size:.72rem;color:var(--muted)">
             Images are stored in your browser. Max ~60 photos. To use on the website, copy the image URL from a product or paste a direct link.
           </div>
+        </div>
+      </div>
+
+      <!-- PAGES & COVER -->
+      <div class="tab-panel" data-group="cnt" id="tabPages">
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem;line-height:1.6">修改後點擊「Save」，然後重新整理前台網頁即可看到更改。留空則恢復預設文字。</div>
+
+        <!-- Homepage Hero -->
+        <div class="card" style="margin-bottom:1rem">
+          <div class="card-header"><span class="card-title">◈ Homepage — Hero 封面</span><a href="../index.html" target="_blank" class="btn btn--outline btn--sm">Preview ↗</a></div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:.75rem">
+            <div class="form-group">
+              <label class="form-label">Eyebrow 副標</label>
+              <input class="form-input" id="pg_home_hero_eyebrow" placeholder="European Craftsmanship · Modern Gentleman"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Main Title 主標題 <span style="font-size:.68rem;color:var(--muted);font-weight:400">— 可用 HTML：&lt;em&gt; &lt;br /&gt;</span></label>
+              <textarea class="form-textarea" id="pg_home_hero_title" rows="4" placeholder="Refined by&lt;br /&gt;&#10;&lt;em&gt;European Taste.&lt;/em&gt;&lt;br /&gt;Built for&lt;br /&gt;&lt;em&gt;Modern Life.&lt;/em&gt;"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description 描述</label>
+              <textarea class="form-textarea" id="pg_home_hero_desc" rows="2" placeholder="Premium accessories for the man who moves with purpose..."></textarea>
+            </div>
+            <div class="form-grid form-grid--2">
+              <div class="form-group">
+                <label class="form-label">Button 1 按鈕文字</label>
+                <input class="form-input" id="pg_home_hero_btn1" placeholder="Explore Collections"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Button 2 按鈕文字</label>
+                <input class="form-input" id="pg_home_hero_btn2" placeholder="Our Story"/>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer"><button class="btn btn--gold btn--sm" onclick="savePageSection('home_hero',['home_hero_eyebrow','home_hero_desc','home_hero_btn1','home_hero_btn2'],['home_hero_title'])">Save Homepage Hero</button></div>
+        </div>
+
+        <!-- Homepage Collections -->
+        <div class="card" style="margin-bottom:1rem">
+          <div class="card-header"><span class="card-title">◇ Homepage — Collections 區塊</span></div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:.75rem">
+            <div class="form-group">
+              <label class="form-label">Eyebrow 副標</label>
+              <input class="form-input" id="pg_home_coll_eyebrow" placeholder="Our Collections"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Title 標題</label>
+              <input class="form-input" id="pg_home_coll_title" placeholder="Crafted for Every Chapter"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description 描述</label>
+              <textarea class="form-textarea" id="pg_home_coll_desc" rows="2" placeholder="Four product lines. One philosophy..."></textarea>
+            </div>
+          </div>
+          <div class="card-footer"><button class="btn btn--gold btn--sm" onclick="savePageSection('home_coll',['home_coll_eyebrow','home_coll_title','home_coll_desc'],[])">Save Collections Section</button></div>
+        </div>
+
+        <!-- Bags Page -->
+        <div class="card" style="margin-bottom:1rem">
+          <div class="card-header"><span class="card-title">◆ Bags 頁面 — Hero 封面</span><a href="../bags.html" target="_blank" class="btn btn--outline btn--sm">Preview ↗</a></div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:.75rem">
+            <div class="form-group">
+              <label class="form-label">Eyebrow 副標</label>
+              <input class="form-input" id="pg_bags_eyebrow" placeholder="Core Collection"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Title 標題 <span style="font-size:.68rem;color:var(--muted);font-weight:400">— 可用 HTML：&lt;em&gt;</span></label>
+              <input class="form-input" id="pg_bags_title" placeholder="Men's &lt;em&gt;Bags.&lt;/em&gt;"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description 描述</label>
+              <textarea class="form-textarea" id="pg_bags_desc" rows="2" placeholder="Engineered for the professional in motion..."></textarea>
+            </div>
+          </div>
+          <div class="card-footer"><button class="btn btn--gold btn--sm" onclick="savePageSection('bags',['bags_eyebrow','bags_desc'],['bags_title'])">Save Bags Hero</button></div>
+        </div>
+
+        <!-- Wallets Page -->
+        <div class="card" style="margin-bottom:1rem">
+          <div class="card-header"><span class="card-title">◈ Wallets & Belts 頁面 — Hero 封面</span><a href="../wallets.html" target="_blank" class="btn btn--outline btn--sm">Preview ↗</a></div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:.75rem">
+            <div class="form-group">
+              <label class="form-label">Eyebrow 副標</label>
+              <input class="form-input" id="pg_wallets_eyebrow" placeholder="Core Collection"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Title 標題 <span style="font-size:.68rem;color:var(--muted);font-weight:400">— 可用 HTML：&lt;em&gt; &lt;br /&gt;</span></label>
+              <input class="form-input" id="pg_wallets_title" placeholder="Wallets &amp; &lt;br /&gt;&lt;em&gt;Belts.&lt;/em&gt;"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description 描述</label>
+              <textarea class="form-textarea" id="pg_wallets_desc" rows="2" placeholder="The details that define a gentleman..."></textarea>
+            </div>
+          </div>
+          <div class="card-footer"><button class="btn btn--gold btn--sm" onclick="savePageSection('wallets',['wallets_eyebrow','wallets_desc'],['wallets_title'])">Save Wallets Hero</button></div>
+        </div>
+
+        <!-- Luggage Page -->
+        <div class="card" style="margin-bottom:1rem">
+          <div class="card-header"><span class="card-title">◉ Luggage 頁面 — Hero 封面</span><a href="../luggage.html" target="_blank" class="btn btn--outline btn--sm">Preview ↗</a></div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:.75rem">
+            <div class="form-group">
+              <label class="form-label">Eyebrow 副標</label>
+              <input class="form-input" id="pg_luggage_eyebrow" placeholder="Extension Line"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Title 標題 <span style="font-size:.68rem;color:var(--muted);font-weight:400">— 可用 HTML：&lt;em&gt; &lt;br /&gt;</span></label>
+              <input class="form-input" id="pg_luggage_title" placeholder="Travel in&lt;br /&gt;&lt;em&gt;Style.&lt;/em&gt;"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description 描述</label>
+              <textarea class="form-textarea" id="pg_luggage_desc" rows="2" placeholder="The European traveller's companion..."></textarea>
+            </div>
+          </div>
+          <div class="card-footer"><button class="btn btn--gold btn--sm" onclick="savePageSection('luggage',['luggage_eyebrow','luggage_desc'],['luggage_title'])">Save Luggage Hero</button></div>
+        </div>
+
+        <!-- Shared Footer -->
+        <div class="card">
+          <div class="card-header"><span class="card-title">◎ 共用 — Footer 頁腳版權</span></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">Footer Text（所有頁面共用）</label>
+              <input class="form-input" id="pg_shared_footer" placeholder="© 2026 Euro Polo · europolo.my · All rights reserved."/>
+            </div>
+          </div>
+          <div class="card-footer"><button class="btn btn--gold btn--sm" onclick="savePageSection('shared',['shared_footer'],[])">Save Footer</button></div>
         </div>
       </div>
 
@@ -210,8 +339,8 @@
 <script>
 Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
 
-// Sidebar nav quick links (index matches tab order: 0=Products,1=Announce,2=Media,3=SEO)
-[['navAnnounce',1],['navMedia',2],['navSEO',3]].forEach(([id,i])=>{
+// Sidebar nav quick links (index matches tab order: 0=Products,1=Announce,2=Media,3=SEO,4=Pages)
+[['navAnnounce',1],['navMedia',2],['navSEO',3],['navPages',4]].forEach(([id,i])=>{
   document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();document.querySelectorAll('.tab-btn[data-group="cnt"]')[i].click();});
 });
 
@@ -450,8 +579,31 @@ async function deleteMedia(id){
   renderMediaLibrary();UI.toast('Photo deleted');
 }
 
+// ── Pages & Cover editor (reads/writes ep_page_ directly for content-injector.js)
+function pgGet(key){return localStorage.getItem('ep_page_'+key)||'';}
+function pgSet(key,val){
+  const v=(val||'').trim();
+  if(v)localStorage.setItem('ep_page_'+key,v);
+  else localStorage.removeItem('ep_page_'+key);
+}
+function loadPageFields(){
+  ['home_hero_eyebrow','home_hero_desc','home_hero_btn1','home_hero_btn2',
+   'home_coll_eyebrow','home_coll_title','home_coll_desc',
+   'bags_eyebrow','bags_desc',
+   'wallets_eyebrow','wallets_desc',
+   'luggage_eyebrow','luggage_desc',
+   'shared_footer',
+   'home_hero_title','bags_title','wallets_title','luggage_title'
+  ].forEach(k=>{const el=document.getElementById('pg_'+k);if(el)el.value=pgGet(k);});
+}
+function savePageSection(label,textKeys,htmlKeys){
+  [...textKeys,...htmlKeys].forEach(k=>pgSet(k,document.getElementById('pg_'+k)?.value||''));
+  Store.log('Updated page content: '+label);
+  UI.toast('已儲存 — 重新整理前台即可看到更改','success');
+}
+
 // Init
-renderProducts();renderAnnouncements();renderMediaLibrary();renderSEO();
+renderProducts();renderAnnouncements();renderMediaLibrary();renderSEO();loadPageFields();
 </script>
 </body>
 </html>
