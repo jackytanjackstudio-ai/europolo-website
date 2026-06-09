@@ -43,7 +43,7 @@
 
     el.style.backgroundImage   = "url('" + p.images.cover.replace(/'/g, "\\'") + "')";
     el.style.backgroundSize    = 'cover';
-    el.style.backgroundPosition = 'center';
+    el.style.backgroundPosition = 'center top';
     el.classList.add('has-img');
 
     var card = el.closest('.collection-card');
