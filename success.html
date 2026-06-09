@@ -87,7 +87,14 @@ window.addEventListener('DOMContentLoaded', function () {
     // Show order items
     var itemsEl = document.getElementById('orderItemsList');
     itemsEl.innerHTML = pending.items.map(function (item) {
-      return '<div class="success-item"><strong>' + item.name + ' &times;' + item.qty + '</strong><span>RM ' + (parseFloat(item.price) * item.qty).toLocaleString('en-MY', { minimumFractionDigits: 0 }) + '</span></div>';
+      return '<div class="success-item">' +
+        '<div><strong>' + item.name + ' ×' + item.qty + '</strong>' +
+        (item.option1 ? '<div style="font-size:.68rem;color:var(--muted);margin-top:.15rem">' + (item.option1Name || 'Colour') + ': ' + item.option1 + '</div>' :
+         item.colour  ? '<div style="font-size:.68rem;color:var(--muted);margin-top:.15rem">Colour: ' + item.colour + '</div>' : '') +
+        (item.option2 ? '<div style="font-size:.68rem;color:var(--muted);margin-top:.1rem">' + (item.option2Name || 'Size') + ': ' + item.option2 + '</div>' : '') +
+        '</div>' +
+        '<span>RM ' + (parseFloat(item.price) * item.qty).toLocaleString('en-MY', { minimumFractionDigits: 0 }) + '</span>' +
+        '</div>';
     }).join('');
     document.getElementById('orderTotal').textContent = 'RM ' + total.toLocaleString('en-MY', { minimumFractionDigits: 2 });
     document.getElementById('orderSummary').style.display = 'block';
