@@ -197,66 +197,65 @@
       <div class="section-header reveal">
         <p class="section-eyebrow" data-ep="home_coll_eyebrow">Our Collections</p>
         <h2 class="section-title" data-ep="home_coll_title">Crafted for Every Chapter</h2>
-        <p class="section-desc" data-ep="home_coll_desc">Four product lines. One philosophy: refined living for the modern European gentleman.</p>
+        <p class="section-desc" data-ep="home_coll_desc">Three curated collections. One philosophy: refined living for the modern European gentleman.</p>
       </div>
       <div class="collections__grid">
 
         <!-- Bags -->
         <div class="collection-card reveal" id="bags">
-          <div class="collection-card__img collection-card__img--bags">
+          <div class="collection-card__img collection-card__img--bags" id="collImgBags">
             <div class="collection-card__overlay">
-              <a href="#bags" class="collection-card__link">View Collection →</a>
+              <a href="bags.html" class="collection-card__link">View Collection →</a>
             </div>
             <div class="collection-card__badge">Core Line</div>
           </div>
           <div class="collection-card__body">
-            <h3>Men's Bags</h3>
-            <p>Briefcases, totes, backpacks and crossbody — engineered for the professional in motion.</p>
+            <h3><a href="bags.html" class="collection-card__title-link">Men's Bags</a></h3>
+            <p>Crossbody bags, backpacks and waist bags — engineered for the professional in motion.</p>
             <ul class="product-tags">
-              <li>Briefcase</li>
-              <li>Tote</li>
-              <li>Backpack</li>
-              <li>Crossbody</li>
+              <li><a href="bags.html?sub=crossbody" class="product-tag-link">Crossbody</a></li>
+              <li><a href="bags.html?sub=backpacks" class="product-tag-link">Backpacks</a></li>
+              <li><a href="bags.html?sub=waist-chest" class="product-tag-link">Waist &amp; Chest</a></li>
             </ul>
           </div>
         </div>
 
-        <!-- Wallets -->
+        <!-- Wallets & Belts -->
         <div class="collection-card reveal" id="wallets">
-          <div class="collection-card__img collection-card__img--wallets">
+          <div class="collection-card__img collection-card__img--wallets" id="collImgWallets">
             <div class="collection-card__overlay">
-              <a href="#wallets" class="collection-card__link">View Collection →</a>
+              <a href="wallets.html" class="collection-card__link">View Collection →</a>
             </div>
             <div class="collection-card__badge">Core Line</div>
           </div>
           <div class="collection-card__body">
-            <h3>Wallets &amp; Belts</h3>
+            <h3><a href="wallets.html" class="collection-card__title-link">Wallets &amp; Belts</a></h3>
             <p>Slim-profile wallets and hand-finished belts — the details that define a man's standard.</p>
             <ul class="product-tags">
-              <li>Bifold</li>
-              <li>Card Holder</li>
-              <li>Classic Belt</li>
-              <li>Reversible Belt</li>
+              <li><a href="wallets.html?sub=bifold-trifold" class="product-tag-link">Bifold Wallets</a></li>
+              <li><a href="wallets.html?sub=card-holders" class="product-tag-link">Card Holders</a></li>
+              <li><a href="wallets.html?sub=long-wallets" class="product-tag-link">Long Wallets</a></li>
+              <li><a href="wallets.html?sub=belts" class="product-tag-link">Belts</a></li>
             </ul>
           </div>
         </div>
 
         <!-- Luggage -->
         <div class="collection-card collection-card--wide reveal" id="luggage">
-          <div class="collection-card__img collection-card__img--luggage">
+          <div class="collection-card__img collection-card__img--luggage" id="collImgLuggage">
             <div class="collection-card__overlay">
-              <a href="#luggage" class="collection-card__link">View Collection →</a>
+              <a href="luggage.html" class="collection-card__link">View Collection →</a>
             </div>
             <div class="collection-card__badge collection-card__badge--gold">Extension Line</div>
           </div>
           <div class="collection-card__body">
-            <h3>Luggage</h3>
+            <h3><a href="luggage.html" class="collection-card__title-link">Luggage</a></h3>
             <p>The European traveller's companion — lightweight, structured, and undeniably refined. From cabin carry-ons to full journey sets.</p>
             <ul class="product-tags">
-              <li>Cabin 20"</li>
-              <li>Check-in 24"</li>
-              <li>Large 28"</li>
-              <li>Travel Sets</li>
+              <li><a href="luggage.html" class="product-tag-link">Cabin 20"</a></li>
+              <li><a href="luggage.html" class="product-tag-link">Check-in 24"</a></li>
+              <li><a href="luggage.html" class="product-tag-link">Large 28"</a></li>
+              <li><a href="luggage.html" class="product-tag-link">Travel Sets</a></li>
             </ul>
           </div>
         </div>
@@ -265,74 +264,14 @@
     </div>
   </section>
 
-  <!-- ═══════════════════ FEATURED PRODUCTS ═══════════════════ -->
-  <section class="featured">
-    <div class="featured__header reveal">
-      <p class="section-eyebrow" data-ep="home_feat_eyebrow">Signature Pieces</p>
-      <h2 class="section-title" data-ep="home_feat_title">Editor's Selection</h2>
+  <!-- ═══════════════════ TRENDING THIS MONTH ═══════════════════ -->
+  <section class="showcase" id="showcase">
+    <div class="showcase__header reveal">
+      <p class="section-eyebrow">Most Wanted</p>
+      <h2 class="section-title">Trending <em>This Month</em></h2>
     </div>
-    <div class="products-row">
-
-      <div class="product-card reveal">
-        <div class="product-card__img product-card__img--1">
-          <div class="product-card__hover-tag">New Arrival</div>
-        </div>
-        <div class="product-card__info">
-          <span class="product-card__cat">Bags</span>
-          <h4>Milano Executive Briefcase</h4>
-          <p class="product-card__desc">Full-grain leather, aluminium hardware, 15" laptop compartment.</p>
-          <div class="product-card__footer">
-            <span class="product-card__price">RM 690</span>
-            <a href="#contact" class="btn btn--sm">Enquire</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__img product-card__img--2">
-          <div class="product-card__hover-tag">Bestseller</div>
-        </div>
-        <div class="product-card__info">
-          <span class="product-card__cat">Bags</span>
-          <h4>Vienna Slim Backpack</h4>
-          <p class="product-card__desc">Structured nylon body, leather trim, anti-theft rear pocket.</p>
-          <div class="product-card__footer">
-            <span class="product-card__price">RM 490</span>
-            <a href="#contact" class="btn btn--sm">Enquire</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__img product-card__img--3">
-          <div class="product-card__hover-tag">Core</div>
-        </div>
-        <div class="product-card__info">
-          <span class="product-card__cat">Wallets</span>
-          <h4>Berlin Slim Bifold</h4>
-          <p class="product-card__desc">8-card capacity, RFID blocking, Italian calf leather.</p>
-          <div class="product-card__footer">
-            <span class="product-card__price">RM 220</span>
-            <a href="#contact" class="btn btn--sm">Enquire</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__img product-card__img--4">
-          <div class="product-card__hover-tag">Extension</div>
-        </div>
-        <div class="product-card__info">
-          <span class="product-card__cat">Luggage</span>
-          <h4>Monaco Cabin Trolley 20"</h4>
-          <p class="product-card__desc">Aerospace polycarbonate shell, silent spinner wheels, TSA lock.</p>
-          <div class="product-card__footer">
-            <span class="product-card__price">RM 890</span>
-            <a href="#contact" class="btn btn--sm">Enquire</a>
-          </div>
-        </div>
-      </div>
-
+    <div class="trending__grid" id="trendingGrid">
+      <!-- Populated by js/homepage-showcase.js -->
     </div>
   </section>
 
@@ -609,10 +548,10 @@
           <div class="footer__col">
             <h5>Collections</h5>
             <ul>
-              <li><a href="#bags">Men's Bags</a></li>
-              <li><a href="#wallets">Wallets</a></li>
-              <li><a href="#wallets">Belts</a></li>
-              <li><a href="#luggage">Luggage</a></li>
+              <li><a href="bags.html">Men's Bags</a></li>
+              <li><a href="wallets.html">Wallets</a></li>
+              <li><a href="wallets.html">Belts</a></li>
+              <li><a href="luggage.html">Luggage</a></li>
             </ul>
           </div>
           <div class="footer__col">
@@ -653,6 +592,9 @@
     </svg>
   </a>
 
+  <script src="js/product-data-embed.js"></script>
+  <script src="js/homepage-collections.js"></script>
+  <script src="js/homepage-showcase.js"></script>
   <script src="script.js"></script>
   <script src="content-injector.js"></script>
   <script src="cart.js"></script>

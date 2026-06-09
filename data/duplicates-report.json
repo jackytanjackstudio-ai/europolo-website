@@ -1,0 +1,34 @@
+{
+  "generated": "2026-06-05",
+  "note": "EBK 40116 duplicate resolved (row 64 removed). EBL 001 still needs distinct SKUs before going live.",
+  "totalDuplicateGroups": 1,
+  "duplicateGroups": [
+    {
+      "sku": "EBL 001",
+      "rowNumbers": [
+        44,
+        55
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "sku": "EBL 001",
+      "rowNumber": 44,
+      "generatedId": "ebl-001-1",
+      "name": "Euro Polo Smart Automatic Buckle Genuine Cowhide Leather Belt For Men tali pinggang lelaki",
+      "category": "belts",
+      "subcategory": null,
+      "priceDisplay": "RM 159.90"
+    },
+    {
+      "sku": "EBL 001",
+      "rowNumber": 55,
+      "generatedId": "ebl-001-2",
+      "name": "Euro Polo Cowhide Genuine Leather Automatic Auto-Lock Buckle Belt Men With Box",
+      "category": "belts",
+      "subcategory": null,
+      "priceDisplay": "RM 159.90"
+    }
+  ]
+}

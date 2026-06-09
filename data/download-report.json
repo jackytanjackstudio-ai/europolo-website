@@ -1,0 +1,1185 @@
+{
+  "generated": "2026-06-05",
+  "downloadedAt": "2026-06-05T11:47:26",
+  "totalImages": 531,
+  "succeeded": 531,
+  "failed": 0,
+  "totalSizeMB": 228.93,
+  "elapsedSeconds": 25.6,
+  "byCategory": {
+    "bags": {
+      "products": 18,
+      "images": 151,
+      "sizeMB": 51.55
+    },
+    "belts": {
+      "products": 6,
+      "images": 54,
+      "sizeMB": 20.24
+    },
+    "luggage": {
+      "products": 1,
+      "images": 9,
+      "sizeMB": 3.87
+    },
+    "wallets": {
+      "products": 37,
+      "images": 317,
+      "sizeMB": 153.28
+    }
+  },
+  "failures": [],
+  "products": [
+    {
+      "id": "eba51208s",
+      "originalId": "eba51208s",
+      "category": "bags",
+      "coverPath": "/images/products/bags/eba51208s/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/eba51208s/gallery-1.jpg",
+        "/images/products/bags/eba51208s/gallery-2.jpg",
+        "/images/products/bags/eba51208s/gallery-3.jpg",
+        "/images/products/bags/eba51208s/gallery-4.jpg",
+        "/images/products/bags/eba51208s/gallery-5.jpg",
+        "/images/products/bags/eba51208s/gallery-6.jpg",
+        "/images/products/bags/eba51208s/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 5040.099999999999,
+      "failures": []
+    },
+    {
+      "id": "eba60302m",
+      "originalId": "eba60302m",
+      "category": "bags",
+      "coverPath": "/images/products/bags/eba60302m/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/eba60302m/gallery-1.jpg",
+        "/images/products/bags/eba60302m/gallery-2.jpg",
+        "/images/products/bags/eba60302m/gallery-3.jpg",
+        "/images/products/bags/eba60302m/gallery-4.jpg",
+        "/images/products/bags/eba60302m/gallery-5.jpg",
+        "/images/products/bags/eba60302m/gallery-6.jpg",
+        "/images/products/bags/eba60302m/gallery-7.jpg",
+        "/images/products/bags/eba60302m/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 1576.6,
+      "failures": []
+    },
+    {
+      "id": "eba60301s",
+      "originalId": "eba60301s",
+      "category": "bags",
+      "coverPath": "/images/products/bags/eba60301s/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/eba60301s/gallery-1.jpg",
+        "/images/products/bags/eba60301s/gallery-2.jpg",
+        "/images/products/bags/eba60301s/gallery-3.jpg",
+        "/images/products/bags/eba60301s/gallery-4.jpg",
+        "/images/products/bags/eba60301s/gallery-5.jpg",
+        "/images/products/bags/eba60301s/gallery-6.jpg",
+        "/images/products/bags/eba60301s/gallery-7.jpg",
+        "/images/products/bags/eba60301s/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 1539.0,
+      "failures": []
+    },
+    {
+      "id": "eba51207h",
+      "originalId": "eba51207h",
+      "category": "bags",
+      "coverPath": "/images/products/bags/eba51207h/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/eba51207h/gallery-1.jpg",
+        "/images/products/bags/eba51207h/gallery-2.jpg",
+        "/images/products/bags/eba51207h/gallery-3.jpg",
+        "/images/products/bags/eba51207h/gallery-4.jpg",
+        "/images/products/bags/eba51207h/gallery-5.jpg",
+        "/images/products/bags/eba51207h/gallery-6.jpg",
+        "/images/products/bags/eba51207h/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 4673.6,
+      "failures": []
+    },
+    {
+      "id": "ebk41002b",
+      "originalId": "ebk41002b",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk41002b/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk41002b/gallery-1.jpg",
+        "/images/products/bags/ebk41002b/gallery-2.jpg",
+        "/images/products/bags/ebk41002b/gallery-3.jpg",
+        "/images/products/bags/ebk41002b/gallery-4.jpg",
+        "/images/products/bags/ebk41002b/gallery-5.jpg",
+        "/images/products/bags/ebk41002b/gallery-6.jpg"
+      ],
+      "imageCount": 7,
+      "sizeKB": 1308.8,
+      "failures": []
+    },
+    {
+      "id": "ebk50113b",
+      "originalId": "ebk50113b",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk50113b/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk50113b/gallery-1.jpg",
+        "/images/products/bags/ebk50113b/gallery-2.jpg",
+        "/images/products/bags/ebk50113b/gallery-3.jpg",
+        "/images/products/bags/ebk50113b/gallery-4.jpg",
+        "/images/products/bags/ebk50113b/gallery-5.jpg",
+        "/images/products/bags/ebk50113b/gallery-6.jpg",
+        "/images/products/bags/ebk50113b/gallery-7.jpg",
+        "/images/products/bags/ebk50113b/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3627.3999999999996,
+      "failures": []
+    },
+    {
+      "id": "ebk40802b",
+      "originalId": "ebk40802b",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk40802b/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk40802b/gallery-1.jpg",
+        "/images/products/bags/ebk40802b/gallery-2.jpg",
+        "/images/products/bags/ebk40802b/gallery-3.jpg",
+        "/images/products/bags/ebk40802b/gallery-4.jpg",
+        "/images/products/bags/ebk40802b/gallery-5.jpg",
+        "/images/products/bags/ebk40802b/gallery-6.jpg"
+      ],
+      "imageCount": 7,
+      "sizeKB": 919.2,
+      "failures": []
+    },
+    {
+      "id": "ry003f",
+      "originalId": "ry003f",
+      "category": "luggage",
+      "coverPath": "/images/products/luggage/ry003f/cover.jpg",
+      "galleryPaths": [
+        "/images/products/luggage/ry003f/gallery-1.jpg",
+        "/images/products/luggage/ry003f/gallery-2.jpg",
+        "/images/products/luggage/ry003f/gallery-3.jpg",
+        "/images/products/luggage/ry003f/gallery-4.jpg",
+        "/images/products/luggage/ry003f/gallery-5.jpg",
+        "/images/products/luggage/ry003f/gallery-6.jpg",
+        "/images/products/luggage/ry003f/gallery-7.jpg",
+        "/images/products/luggage/ry003f/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3959.9,
+      "failures": []
+    },
+    {
+      "id": "ep-classic-set",
+      "originalId": "ep-classic-set",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ep-classic-set/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ep-classic-set/gallery-1.jpg",
+        "/images/products/wallets/ep-classic-set/gallery-2.jpg",
+        "/images/products/wallets/ep-classic-set/gallery-3.jpg",
+        "/images/products/wallets/ep-classic-set/gallery-4.jpg",
+        "/images/products/wallets/ep-classic-set/gallery-5.jpg",
+        "/images/products/wallets/ep-classic-set/gallery-6.jpg",
+        "/images/products/wallets/ep-classic-set/gallery-7.jpg",
+        "/images/products/wallets/ep-classic-set/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 4390.200000000001,
+      "failures": []
+    },
+    {
+      "id": "ebk50102c",
+      "originalId": "ebk50102c",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk50102c/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk50102c/gallery-1.jpg",
+        "/images/products/bags/ebk50102c/gallery-2.jpg",
+        "/images/products/bags/ebk50102c/gallery-3.jpg",
+        "/images/products/bags/ebk50102c/gallery-4.jpg",
+        "/images/products/bags/ebk50102c/gallery-5.jpg"
+      ],
+      "imageCount": 6,
+      "sizeKB": 840.4,
+      "failures": []
+    },
+    {
+      "id": "ebk50112b",
+      "originalId": "ebk50112b",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk50112b/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk50112b/gallery-1.jpg",
+        "/images/products/bags/ebk50112b/gallery-2.jpg",
+        "/images/products/bags/ebk50112b/gallery-3.jpg",
+        "/images/products/bags/ebk50112b/gallery-4.jpg",
+        "/images/products/bags/ebk50112b/gallery-5.jpg",
+        "/images/products/bags/ebk50112b/gallery-6.jpg",
+        "/images/products/bags/ebk50112b/gallery-7.jpg",
+        "/images/products/bags/ebk50112b/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3703.0,
+      "failures": []
+    },
+    {
+      "id": "ewb-50156-50157-l",
+      "originalId": "ewb-50156-50157-l",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-50156-50157-l/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-50156-50157-l/gallery-1.jpg",
+        "/images/products/wallets/ewb-50156-50157-l/gallery-2.jpg",
+        "/images/products/wallets/ewb-50156-50157-l/gallery-3.jpg",
+        "/images/products/wallets/ewb-50156-50157-l/gallery-4.jpg",
+        "/images/products/wallets/ewb-50156-50157-l/gallery-5.jpg",
+        "/images/products/wallets/ewb-50156-50157-l/gallery-6.jpg",
+        "/images/products/wallets/ewb-50156-50157-l/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 1135.3,
+      "failures": []
+    },
+    {
+      "id": "ebk40801b",
+      "originalId": "ebk40801b",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk40801b/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk40801b/gallery-1.jpg",
+        "/images/products/bags/ebk40801b/gallery-2.jpg",
+        "/images/products/bags/ebk40801b/gallery-3.jpg",
+        "/images/products/bags/ebk40801b/gallery-4.jpg",
+        "/images/products/bags/ebk40801b/gallery-5.jpg",
+        "/images/products/bags/ebk40801b/gallery-6.jpg"
+      ],
+      "imageCount": 7,
+      "sizeKB": 1215.4,
+      "failures": []
+    },
+    {
+      "id": "ebk50110b",
+      "originalId": "ebk50110b",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk50110b/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk50110b/gallery-1.jpg",
+        "/images/products/bags/ebk50110b/gallery-2.jpg",
+        "/images/products/bags/ebk50110b/gallery-3.jpg",
+        "/images/products/bags/ebk50110b/gallery-4.jpg",
+        "/images/products/bags/ebk50110b/gallery-5.jpg",
+        "/images/products/bags/ebk50110b/gallery-6.jpg",
+        "/images/products/bags/ebk50110b/gallery-7.jpg",
+        "/images/products/bags/ebk50110b/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3694.6,
+      "failures": []
+    },
+    {
+      "id": "ebc-40322",
+      "originalId": "ebc-40322",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebc-40322/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebc-40322/gallery-1.jpg",
+        "/images/products/bags/ebc-40322/gallery-2.jpg",
+        "/images/products/bags/ebc-40322/gallery-3.jpg",
+        "/images/products/bags/ebc-40322/gallery-4.jpg",
+        "/images/products/bags/ebc-40322/gallery-5.jpg",
+        "/images/products/bags/ebc-40322/gallery-6.jpg",
+        "/images/products/bags/ebc-40322/gallery-7.jpg",
+        "/images/products/bags/ebc-40322/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 4065.4,
+      "failures": []
+    },
+    {
+      "id": "ebl2512",
+      "originalId": "ebl2512",
+      "category": "belts",
+      "coverPath": "/images/products/belts/ebl2512/cover.jpg",
+      "galleryPaths": [
+        "/images/products/belts/ebl2512/gallery-1.jpg",
+        "/images/products/belts/ebl2512/gallery-2.jpg",
+        "/images/products/belts/ebl2512/gallery-3.jpg",
+        "/images/products/belts/ebl2512/gallery-4.jpg",
+        "/images/products/belts/ebl2512/gallery-5.jpg",
+        "/images/products/belts/ebl2512/gallery-6.jpg",
+        "/images/products/belts/ebl2512/gallery-7.jpg",
+        "/images/products/belts/ebl2512/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3619.7000000000003,
+      "failures": []
+    },
+    {
+      "id": "ebl-1501-a",
+      "originalId": "ebl-1501-a",
+      "category": "belts",
+      "coverPath": "/images/products/belts/ebl-1501-a/cover.jpg",
+      "galleryPaths": [
+        "/images/products/belts/ebl-1501-a/gallery-1.jpg",
+        "/images/products/belts/ebl-1501-a/gallery-2.jpg",
+        "/images/products/belts/ebl-1501-a/gallery-3.jpg",
+        "/images/products/belts/ebl-1501-a/gallery-4.jpg",
+        "/images/products/belts/ebl-1501-a/gallery-5.jpg",
+        "/images/products/belts/ebl-1501-a/gallery-6.jpg",
+        "/images/products/belts/ebl-1501-a/gallery-7.jpg",
+        "/images/products/belts/ebl-1501-a/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 5915.300000000001,
+      "failures": []
+    },
+    {
+      "id": "ebk-40116",
+      "originalId": "ebk-40116",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk-40116/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk-40116/gallery-1.jpg",
+        "/images/products/bags/ebk-40116/gallery-2.jpg",
+        "/images/products/bags/ebk-40116/gallery-3.jpg",
+        "/images/products/bags/ebk-40116/gallery-4.jpg",
+        "/images/products/bags/ebk-40116/gallery-5.jpg",
+        "/images/products/bags/ebk-40116/gallery-6.jpg",
+        "/images/products/bags/ebk-40116/gallery-7.jpg",
+        "/images/products/bags/ebk-40116/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 4333.1,
+      "failures": []
+    },
+    {
+      "id": "ebk50101b",
+      "originalId": "ebk50101b",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk50101b/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk50101b/gallery-1.jpg",
+        "/images/products/bags/ebk50101b/gallery-2.jpg",
+        "/images/products/bags/ebk50101b/gallery-3.jpg",
+        "/images/products/bags/ebk50101b/gallery-4.jpg",
+        "/images/products/bags/ebk50101b/gallery-5.jpg",
+        "/images/products/bags/ebk50101b/gallery-6.jpg",
+        "/images/products/bags/ebk50101b/gallery-7.jpg",
+        "/images/products/bags/ebk50101b/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 1574.3,
+      "failures": []
+    },
+    {
+      "id": "ewb-40354-40355-40356",
+      "originalId": "ewb-40354-40355-40356",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40354-40355-40356/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40354-40355-40356/gallery-1.jpg",
+        "/images/products/wallets/ewb-40354-40355-40356/gallery-2.jpg",
+        "/images/products/wallets/ewb-40354-40355-40356/gallery-3.jpg",
+        "/images/products/wallets/ewb-40354-40355-40356/gallery-4.jpg",
+        "/images/products/wallets/ewb-40354-40355-40356/gallery-5.jpg",
+        "/images/products/wallets/ewb-40354-40355-40356/gallery-6.jpg",
+        "/images/products/wallets/ewb-40354-40355-40356/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 3734.0000000000005,
+      "failures": []
+    },
+    {
+      "id": "ewb-40163",
+      "originalId": "ewb-40163",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40163/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40163/gallery-1.jpg",
+        "/images/products/wallets/ewb-40163/gallery-2.jpg",
+        "/images/products/wallets/ewb-40163/gallery-3.jpg",
+        "/images/products/wallets/ewb-40163/gallery-4.jpg",
+        "/images/products/wallets/ewb-40163/gallery-5.jpg",
+        "/images/products/wallets/ewb-40163/gallery-6.jpg",
+        "/images/products/wallets/ewb-40163/gallery-7.jpg",
+        "/images/products/wallets/ewb-40163/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3520.1000000000004,
+      "failures": []
+    },
+    {
+      "id": "ewb-40157-40158-40159-40160",
+      "originalId": "ewb-40157-40158-40159-40160",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40157-40158-40159-40160/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40157-40158-40159-40160/gallery-1.jpg",
+        "/images/products/wallets/ewb-40157-40158-40159-40160/gallery-2.jpg",
+        "/images/products/wallets/ewb-40157-40158-40159-40160/gallery-3.jpg",
+        "/images/products/wallets/ewb-40157-40158-40159-40160/gallery-4.jpg",
+        "/images/products/wallets/ewb-40157-40158-40159-40160/gallery-5.jpg",
+        "/images/products/wallets/ewb-40157-40158-40159-40160/gallery-6.jpg",
+        "/images/products/wallets/ewb-40157-40158-40159-40160/gallery-7.jpg",
+        "/images/products/wallets/ewb-40157-40158-40159-40160/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 6124.1,
+      "failures": []
+    },
+    {
+      "id": "ebk-40312",
+      "originalId": "ebk-40312",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk-40312/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk-40312/gallery-1.jpg",
+        "/images/products/bags/ebk-40312/gallery-2.jpg",
+        "/images/products/bags/ebk-40312/gallery-3.jpg",
+        "/images/products/bags/ebk-40312/gallery-4.jpg",
+        "/images/products/bags/ebk-40312/gallery-5.jpg",
+        "/images/products/bags/ebk-40312/gallery-6.jpg",
+        "/images/products/bags/ebk-40312/gallery-7.jpg",
+        "/images/products/bags/ebk-40312/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3970.7000000000007,
+      "failures": []
+    },
+    {
+      "id": "ebk-40310",
+      "originalId": "ebk-40310",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk-40310/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk-40310/gallery-1.jpg",
+        "/images/products/bags/ebk-40310/gallery-2.jpg",
+        "/images/products/bags/ebk-40310/gallery-3.jpg",
+        "/images/products/bags/ebk-40310/gallery-4.jpg",
+        "/images/products/bags/ebk-40310/gallery-5.jpg",
+        "/images/products/bags/ebk-40310/gallery-6.jpg",
+        "/images/products/bags/ebk-40310/gallery-7.jpg",
+        "/images/products/bags/ebk-40310/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3118.1999999999994,
+      "failures": []
+    },
+    {
+      "id": "ewb-40165-40166-40167",
+      "originalId": "ewb-40165-40166-40167",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40165-40166-40167/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40165-40166-40167/gallery-1.jpg",
+        "/images/products/wallets/ewb-40165-40166-40167/gallery-2.jpg",
+        "/images/products/wallets/ewb-40165-40166-40167/gallery-3.jpg",
+        "/images/products/wallets/ewb-40165-40166-40167/gallery-4.jpg",
+        "/images/products/wallets/ewb-40165-40166-40167/gallery-5.jpg",
+        "/images/products/wallets/ewb-40165-40166-40167/gallery-6.jpg",
+        "/images/products/wallets/ewb-40165-40166-40167/gallery-7.jpg",
+        "/images/products/wallets/ewb-40165-40166-40167/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 5023.2,
+      "failures": []
+    },
+    {
+      "id": "ewa-40172-40175",
+      "originalId": "ewa-40172-40175",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewa-40172-40175/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewa-40172-40175/gallery-1.jpg",
+        "/images/products/wallets/ewa-40172-40175/gallery-2.jpg",
+        "/images/products/wallets/ewa-40172-40175/gallery-3.jpg",
+        "/images/products/wallets/ewa-40172-40175/gallery-4.jpg",
+        "/images/products/wallets/ewa-40172-40175/gallery-5.jpg",
+        "/images/products/wallets/ewa-40172-40175/gallery-6.jpg",
+        "/images/products/wallets/ewa-40172-40175/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 3991.1,
+      "failures": []
+    },
+    {
+      "id": "ewa-40173-40174",
+      "originalId": "ewa-40173-40174",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewa-40173-40174/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewa-40173-40174/gallery-1.jpg",
+        "/images/products/wallets/ewa-40173-40174/gallery-2.jpg",
+        "/images/products/wallets/ewa-40173-40174/gallery-3.jpg",
+        "/images/products/wallets/ewa-40173-40174/gallery-4.jpg",
+        "/images/products/wallets/ewa-40173-40174/gallery-5.jpg",
+        "/images/products/wallets/ewa-40173-40174/gallery-6.jpg",
+        "/images/products/wallets/ewa-40173-40174/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 2402.1,
+      "failures": []
+    },
+    {
+      "id": "ewb-40351-40352-40353",
+      "originalId": "ewb-40351-40352-40353",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40351-40352-40353/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40351-40352-40353/gallery-1.jpg",
+        "/images/products/wallets/ewb-40351-40352-40353/gallery-2.jpg",
+        "/images/products/wallets/ewb-40351-40352-40353/gallery-3.jpg",
+        "/images/products/wallets/ewb-40351-40352-40353/gallery-4.jpg",
+        "/images/products/wallets/ewb-40351-40352-40353/gallery-5.jpg",
+        "/images/products/wallets/ewb-40351-40352-40353/gallery-6.jpg",
+        "/images/products/wallets/ewb-40351-40352-40353/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 3617.0,
+      "failures": []
+    },
+    {
+      "id": "ewb-40164",
+      "originalId": "ewb-40164",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40164/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40164/gallery-1.jpg",
+        "/images/products/wallets/ewb-40164/gallery-2.jpg",
+        "/images/products/wallets/ewb-40164/gallery-3.jpg",
+        "/images/products/wallets/ewb-40164/gallery-4.jpg",
+        "/images/products/wallets/ewb-40164/gallery-5.jpg",
+        "/images/products/wallets/ewb-40164/gallery-6.jpg",
+        "/images/products/wallets/ewb-40164/gallery-7.jpg",
+        "/images/products/wallets/ewb-40164/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3952.8999999999996,
+      "failures": []
+    },
+    {
+      "id": "ewb-40361",
+      "originalId": "ewb-40361",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40361/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40361/gallery-1.jpg",
+        "/images/products/wallets/ewb-40361/gallery-2.jpg",
+        "/images/products/wallets/ewb-40361/gallery-3.jpg",
+        "/images/products/wallets/ewb-40361/gallery-4.jpg",
+        "/images/products/wallets/ewb-40361/gallery-5.jpg",
+        "/images/products/wallets/ewb-40361/gallery-6.jpg",
+        "/images/products/wallets/ewb-40361/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 3672.6,
+      "failures": []
+    },
+    {
+      "id": "ewb-40162",
+      "originalId": "ewb-40162",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40162/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40162/gallery-1.jpg",
+        "/images/products/wallets/ewb-40162/gallery-2.jpg",
+        "/images/products/wallets/ewb-40162/gallery-3.jpg",
+        "/images/products/wallets/ewb-40162/gallery-4.jpg",
+        "/images/products/wallets/ewb-40162/gallery-5.jpg",
+        "/images/products/wallets/ewb-40162/gallery-6.jpg",
+        "/images/products/wallets/ewb-40162/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 3456.1,
+      "failures": []
+    },
+    {
+      "id": "ewb-40161",
+      "originalId": "ewb-40161",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40161/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40161/gallery-1.jpg",
+        "/images/products/wallets/ewb-40161/gallery-2.jpg",
+        "/images/products/wallets/ewb-40161/gallery-3.jpg",
+        "/images/products/wallets/ewb-40161/gallery-4.jpg",
+        "/images/products/wallets/ewb-40161/gallery-5.jpg",
+        "/images/products/wallets/ewb-40161/gallery-6.jpg",
+        "/images/products/wallets/ewb-40161/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 3244.6000000000004,
+      "failures": []
+    },
+    {
+      "id": "ewb-40357-40358",
+      "originalId": "ewb-40357-40358",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40357-40358/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40357-40358/gallery-1.jpg",
+        "/images/products/wallets/ewb-40357-40358/gallery-2.jpg",
+        "/images/products/wallets/ewb-40357-40358/gallery-3.jpg",
+        "/images/products/wallets/ewb-40357-40358/gallery-4.jpg",
+        "/images/products/wallets/ewb-40357-40358/gallery-5.jpg",
+        "/images/products/wallets/ewb-40357-40358/gallery-6.jpg",
+        "/images/products/wallets/ewb-40357-40358/gallery-7.jpg",
+        "/images/products/wallets/ewb-40357-40358/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 4859.4,
+      "failures": []
+    },
+    {
+      "id": "ebl-1501",
+      "originalId": "ebl-1501",
+      "category": "belts",
+      "coverPath": "/images/products/belts/ebl-1501/cover.jpg",
+      "galleryPaths": [
+        "/images/products/belts/ebl-1501/gallery-1.jpg",
+        "/images/products/belts/ebl-1501/gallery-2.jpg",
+        "/images/products/belts/ebl-1501/gallery-3.jpg",
+        "/images/products/belts/ebl-1501/gallery-4.jpg",
+        "/images/products/belts/ebl-1501/gallery-5.jpg",
+        "/images/products/belts/ebl-1501/gallery-6.jpg",
+        "/images/products/belts/ebl-1501/gallery-7.jpg",
+        "/images/products/belts/ebl-1501/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 5813.9,
+      "failures": []
+    },
+    {
+      "id": "ewb-40362",
+      "originalId": "ewb-40362",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40362/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40362/gallery-1.jpg",
+        "/images/products/wallets/ewb-40362/gallery-2.jpg",
+        "/images/products/wallets/ewb-40362/gallery-3.jpg",
+        "/images/products/wallets/ewb-40362/gallery-4.jpg",
+        "/images/products/wallets/ewb-40362/gallery-5.jpg",
+        "/images/products/wallets/ewb-40362/gallery-6.jpg",
+        "/images/products/wallets/ewb-40362/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 3645.7000000000007,
+      "failures": []
+    },
+    {
+      "id": "ewb-40360",
+      "originalId": "ewb-40360",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40360/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40360/gallery-1.jpg",
+        "/images/products/wallets/ewb-40360/gallery-2.jpg",
+        "/images/products/wallets/ewb-40360/gallery-3.jpg",
+        "/images/products/wallets/ewb-40360/gallery-4.jpg",
+        "/images/products/wallets/ewb-40360/gallery-5.jpg",
+        "/images/products/wallets/ewb-40360/gallery-6.jpg",
+        "/images/products/wallets/ewb-40360/gallery-7.jpg",
+        "/images/products/wallets/ewb-40360/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 4172.5,
+      "failures": []
+    },
+    {
+      "id": "ewa-40170-40171",
+      "originalId": "ewa-40170-40171",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewa-40170-40171/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewa-40170-40171/gallery-1.jpg",
+        "/images/products/wallets/ewa-40170-40171/gallery-2.jpg",
+        "/images/products/wallets/ewa-40170-40171/gallery-3.jpg",
+        "/images/products/wallets/ewa-40170-40171/gallery-4.jpg",
+        "/images/products/wallets/ewa-40170-40171/gallery-5.jpg",
+        "/images/products/wallets/ewa-40170-40171/gallery-6.jpg",
+        "/images/products/wallets/ewa-40170-40171/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 2236.6000000000004,
+      "failures": []
+    },
+    {
+      "id": "ewb-40363",
+      "originalId": "ewb-40363",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40363/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40363/gallery-1.jpg",
+        "/images/products/wallets/ewb-40363/gallery-2.jpg",
+        "/images/products/wallets/ewb-40363/gallery-3.jpg",
+        "/images/products/wallets/ewb-40363/gallery-4.jpg",
+        "/images/products/wallets/ewb-40363/gallery-5.jpg",
+        "/images/products/wallets/ewb-40363/gallery-6.jpg",
+        "/images/products/wallets/ewb-40363/gallery-7.jpg",
+        "/images/products/wallets/ewb-40363/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3899.1999999999994,
+      "failures": []
+    },
+    {
+      "id": "ebk50111b",
+      "originalId": "ebk50111b",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk50111b/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk50111b/gallery-1.jpg",
+        "/images/products/bags/ebk50111b/gallery-2.jpg",
+        "/images/products/bags/ebk50111b/gallery-3.jpg",
+        "/images/products/bags/ebk50111b/gallery-4.jpg",
+        "/images/products/bags/ebk50111b/gallery-5.jpg",
+        "/images/products/bags/ebk50111b/gallery-6.jpg",
+        "/images/products/bags/ebk50111b/gallery-7.jpg",
+        "/images/products/bags/ebk50111b/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3752.8,
+      "failures": []
+    },
+    {
+      "id": "ewb-40359",
+      "originalId": "ewb-40359",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40359/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40359/gallery-1.jpg",
+        "/images/products/wallets/ewb-40359/gallery-2.jpg",
+        "/images/products/wallets/ewb-40359/gallery-3.jpg",
+        "/images/products/wallets/ewb-40359/gallery-4.jpg",
+        "/images/products/wallets/ewb-40359/gallery-5.jpg",
+        "/images/products/wallets/ewb-40359/gallery-6.jpg",
+        "/images/products/wallets/ewb-40359/gallery-7.jpg",
+        "/images/products/wallets/ewb-40359/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 4537.8,
+      "failures": []
+    },
+    {
+      "id": "ewb-30561-ewb-30562",
+      "originalId": "ewb-30561-ewb-30562",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-30561-ewb-30562/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-30561-ewb-30562/gallery-1.jpg",
+        "/images/products/wallets/ewb-30561-ewb-30562/gallery-2.jpg",
+        "/images/products/wallets/ewb-30561-ewb-30562/gallery-3.jpg",
+        "/images/products/wallets/ewb-30561-ewb-30562/gallery-4.jpg",
+        "/images/products/wallets/ewb-30561-ewb-30562/gallery-5.jpg",
+        "/images/products/wallets/ewb-30561-ewb-30562/gallery-6.jpg",
+        "/images/products/wallets/ewb-30561-ewb-30562/gallery-7.jpg",
+        "/images/products/wallets/ewb-30561-ewb-30562/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 6267.7,
+      "failures": []
+    },
+    {
+      "id": "ewb-30354-30355-30356",
+      "originalId": "ewb-30354-30355-30356",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-30354-30355-30356/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-30354-30355-30356/gallery-1.jpg",
+        "/images/products/wallets/ewb-30354-30355-30356/gallery-2.jpg",
+        "/images/products/wallets/ewb-30354-30355-30356/gallery-3.jpg",
+        "/images/products/wallets/ewb-30354-30355-30356/gallery-4.jpg",
+        "/images/products/wallets/ewb-30354-30355-30356/gallery-5.jpg",
+        "/images/products/wallets/ewb-30354-30355-30356/gallery-6.jpg",
+        "/images/products/wallets/ewb-30354-30355-30356/gallery-7.jpg",
+        "/images/products/wallets/ewb-30354-30355-30356/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 5722.0,
+      "failures": []
+    },
+    {
+      "id": "ebl-001-1",
+      "originalId": "ebl-001-1",
+      "category": "belts",
+      "coverPath": "/images/products/belts/ebl-001-1/cover.jpg",
+      "galleryPaths": [
+        "/images/products/belts/ebl-001-1/gallery-1.jpg",
+        "/images/products/belts/ebl-001-1/gallery-2.jpg",
+        "/images/products/belts/ebl-001-1/gallery-3.jpg",
+        "/images/products/belts/ebl-001-1/gallery-4.jpg",
+        "/images/products/belts/ebl-001-1/gallery-5.jpg",
+        "/images/products/belts/ebl-001-1/gallery-6.jpg",
+        "/images/products/belts/ebl-001-1/gallery-7.jpg",
+        "/images/products/belts/ebl-001-1/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 1304.5,
+      "failures": []
+    },
+    {
+      "id": "ewb-30199",
+      "originalId": "ewb-30199",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-30199/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-30199/gallery-1.jpg",
+        "/images/products/wallets/ewb-30199/gallery-2.jpg",
+        "/images/products/wallets/ewb-30199/gallery-3.jpg",
+        "/images/products/wallets/ewb-30199/gallery-4.jpg",
+        "/images/products/wallets/ewb-30199/gallery-5.jpg",
+        "/images/products/wallets/ewb-30199/gallery-6.jpg",
+        "/images/products/wallets/ewb-30199/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 4051.2999999999997,
+      "failures": []
+    },
+    {
+      "id": "ewb-40168",
+      "originalId": "ewb-40168",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-40168/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-40168/gallery-1.jpg",
+        "/images/products/wallets/ewb-40168/gallery-2.jpg",
+        "/images/products/wallets/ewb-40168/gallery-3.jpg",
+        "/images/products/wallets/ewb-40168/gallery-4.jpg",
+        "/images/products/wallets/ewb-40168/gallery-5.jpg",
+        "/images/products/wallets/ewb-40168/gallery-6.jpg",
+        "/images/products/wallets/ewb-40168/gallery-7.jpg",
+        "/images/products/wallets/ewb-40168/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 5134.1,
+      "failures": []
+    },
+    {
+      "id": "ewb-20964",
+      "originalId": "ewb-20964",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-20964/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-20964/gallery-1.jpg",
+        "/images/products/wallets/ewb-20964/gallery-2.jpg",
+        "/images/products/wallets/ewb-20964/gallery-3.jpg",
+        "/images/products/wallets/ewb-20964/gallery-4.jpg",
+        "/images/products/wallets/ewb-20964/gallery-5.jpg",
+        "/images/products/wallets/ewb-20964/gallery-6.jpg"
+      ],
+      "imageCount": 7,
+      "sizeKB": 1469.4,
+      "failures": []
+    },
+    {
+      "id": "ewb-30551-ewb-30552-ewb-30553",
+      "originalId": "ewb-30551-ewb-30552-ewb-30553",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-30551-ewb-30552-ewb-30553/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-30551-ewb-30552-ewb-30553/gallery-1.jpg",
+        "/images/products/wallets/ewb-30551-ewb-30552-ewb-30553/gallery-2.jpg",
+        "/images/products/wallets/ewb-30551-ewb-30552-ewb-30553/gallery-3.jpg",
+        "/images/products/wallets/ewb-30551-ewb-30552-ewb-30553/gallery-4.jpg",
+        "/images/products/wallets/ewb-30551-ewb-30552-ewb-30553/gallery-5.jpg",
+        "/images/products/wallets/ewb-30551-ewb-30552-ewb-30553/gallery-6.jpg",
+        "/images/products/wallets/ewb-30551-ewb-30552-ewb-30553/gallery-7.jpg",
+        "/images/products/wallets/ewb-30551-ewb-30552-ewb-30553/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 7621.6,
+      "failures": []
+    },
+    {
+      "id": "ewb-30567",
+      "originalId": "ewb-30567",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-30567/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-30567/gallery-1.jpg",
+        "/images/products/wallets/ewb-30567/gallery-2.jpg",
+        "/images/products/wallets/ewb-30567/gallery-3.jpg",
+        "/images/products/wallets/ewb-30567/gallery-4.jpg",
+        "/images/products/wallets/ewb-30567/gallery-5.jpg",
+        "/images/products/wallets/ewb-30567/gallery-6.jpg",
+        "/images/products/wallets/ewb-30567/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 6819.0,
+      "failures": []
+    },
+    {
+      "id": "ewb-20967-209668",
+      "originalId": "ewb-20967-209668",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-20967-209668/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-20967-209668/gallery-1.jpg",
+        "/images/products/wallets/ewb-20967-209668/gallery-2.jpg",
+        "/images/products/wallets/ewb-20967-209668/gallery-3.jpg",
+        "/images/products/wallets/ewb-20967-209668/gallery-4.jpg",
+        "/images/products/wallets/ewb-20967-209668/gallery-5.jpg",
+        "/images/products/wallets/ewb-20967-209668/gallery-6.jpg",
+        "/images/products/wallets/ewb-20967-209668/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 4759.099999999999,
+      "failures": []
+    },
+    {
+      "id": "ewb-30563-ewb-30564",
+      "originalId": "ewb-30563-ewb-30564",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-30563-ewb-30564/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-30563-ewb-30564/gallery-1.jpg",
+        "/images/products/wallets/ewb-30563-ewb-30564/gallery-2.jpg",
+        "/images/products/wallets/ewb-30563-ewb-30564/gallery-3.jpg",
+        "/images/products/wallets/ewb-30563-ewb-30564/gallery-4.jpg",
+        "/images/products/wallets/ewb-30563-ewb-30564/gallery-5.jpg",
+        "/images/products/wallets/ewb-30563-ewb-30564/gallery-6.jpg",
+        "/images/products/wallets/ewb-30563-ewb-30564/gallery-7.jpg",
+        "/images/products/wallets/ewb-30563-ewb-30564/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 6833.2,
+      "failures": []
+    },
+    {
+      "id": "ebl-1506",
+      "originalId": "ebl-1506",
+      "category": "belts",
+      "coverPath": "/images/products/belts/ebl-1506/cover.jpg",
+      "galleryPaths": [
+        "/images/products/belts/ebl-1506/gallery-1.jpg",
+        "/images/products/belts/ebl-1506/gallery-2.jpg",
+        "/images/products/belts/ebl-1506/gallery-3.jpg",
+        "/images/products/belts/ebl-1506/gallery-4.jpg",
+        "/images/products/belts/ebl-1506/gallery-5.jpg",
+        "/images/products/belts/ebl-1506/gallery-6.jpg",
+        "/images/products/belts/ebl-1506/gallery-7.jpg",
+        "/images/products/belts/ebl-1506/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 2728.9,
+      "failures": []
+    },
+    {
+      "id": "ewb-20960",
+      "originalId": "ewb-20960",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-20960/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-20960/gallery-1.jpg",
+        "/images/products/wallets/ewb-20960/gallery-2.jpg",
+        "/images/products/wallets/ewb-20960/gallery-3.jpg",
+        "/images/products/wallets/ewb-20960/gallery-4.jpg",
+        "/images/products/wallets/ewb-20960/gallery-5.jpg",
+        "/images/products/wallets/ewb-20960/gallery-6.jpg",
+        "/images/products/wallets/ewb-20960/gallery-7.jpg",
+        "/images/products/wallets/ewb-20960/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 1752.3,
+      "failures": []
+    },
+    {
+      "id": "ewb-20961-20962",
+      "originalId": "ewb-20961-20962",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-20961-20962/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-20961-20962/gallery-1.jpg",
+        "/images/products/wallets/ewb-20961-20962/gallery-2.jpg",
+        "/images/products/wallets/ewb-20961-20962/gallery-3.jpg",
+        "/images/products/wallets/ewb-20961-20962/gallery-4.jpg",
+        "/images/products/wallets/ewb-20961-20962/gallery-5.jpg",
+        "/images/products/wallets/ewb-20961-20962/gallery-6.jpg",
+        "/images/products/wallets/ewb-20961-20962/gallery-7.jpg",
+        "/images/products/wallets/ewb-20961-20962/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 5799.7,
+      "failures": []
+    },
+    {
+      "id": "ebl-001-2",
+      "originalId": "ebl-001-2",
+      "category": "belts",
+      "coverPath": "/images/products/belts/ebl-001-2/cover.jpg",
+      "galleryPaths": [
+        "/images/products/belts/ebl-001-2/gallery-1.jpg",
+        "/images/products/belts/ebl-001-2/gallery-2.jpg",
+        "/images/products/belts/ebl-001-2/gallery-3.jpg",
+        "/images/products/belts/ebl-001-2/gallery-4.jpg",
+        "/images/products/belts/ebl-001-2/gallery-5.jpg",
+        "/images/products/belts/ebl-001-2/gallery-6.jpg",
+        "/images/products/belts/ebl-001-2/gallery-7.jpg",
+        "/images/products/belts/ebl-001-2/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 1343.2,
+      "failures": []
+    },
+    {
+      "id": "ebk-40309",
+      "originalId": "ebk-40309",
+      "category": "bags",
+      "coverPath": "/images/products/bags/ebk-40309/cover.jpg",
+      "galleryPaths": [
+        "/images/products/bags/ebk-40309/gallery-1.jpg",
+        "/images/products/bags/ebk-40309/gallery-2.jpg",
+        "/images/products/bags/ebk-40309/gallery-3.jpg",
+        "/images/products/bags/ebk-40309/gallery-4.jpg",
+        "/images/products/bags/ebk-40309/gallery-5.jpg",
+        "/images/products/bags/ebk-40309/gallery-6.jpg",
+        "/images/products/bags/ebk-40309/gallery-7.jpg",
+        "/images/products/bags/ebk-40309/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3833.3,
+      "failures": []
+    },
+    {
+      "id": "ewb-50159l-60l-20969-70",
+      "originalId": "ewb-50159l-60l-&-20969-70",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-50159l-60l-20969-70/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-50159l-60l-20969-70/gallery-1.jpg",
+        "/images/products/wallets/ewb-50159l-60l-20969-70/gallery-2.jpg",
+        "/images/products/wallets/ewb-50159l-60l-20969-70/gallery-3.jpg",
+        "/images/products/wallets/ewb-50159l-60l-20969-70/gallery-4.jpg",
+        "/images/products/wallets/ewb-50159l-60l-20969-70/gallery-5.jpg",
+        "/images/products/wallets/ewb-50159l-60l-20969-70/gallery-6.jpg",
+        "/images/products/wallets/ewb-50159l-60l-20969-70/gallery-7.jpg",
+        "/images/products/wallets/ewb-50159l-60l-20969-70/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 1960.9999999999998,
+      "failures": []
+    },
+    {
+      "id": "ewb-30554-ewb-30555-ewb-30556",
+      "originalId": "ewb-30554-ewb-30555-ewb-30556",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-30554-ewb-30555-ewb-30556/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-30554-ewb-30555-ewb-30556/gallery-1.jpg",
+        "/images/products/wallets/ewb-30554-ewb-30555-ewb-30556/gallery-2.jpg",
+        "/images/products/wallets/ewb-30554-ewb-30555-ewb-30556/gallery-3.jpg",
+        "/images/products/wallets/ewb-30554-ewb-30555-ewb-30556/gallery-4.jpg",
+        "/images/products/wallets/ewb-30554-ewb-30555-ewb-30556/gallery-5.jpg",
+        "/images/products/wallets/ewb-30554-ewb-30555-ewb-30556/gallery-6.jpg",
+        "/images/products/wallets/ewb-30554-ewb-30555-ewb-30556/gallery-7.jpg",
+        "/images/products/wallets/ewb-30554-ewb-30555-ewb-30556/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 7385.099999999999,
+      "failures": []
+    },
+    {
+      "id": "ewb-30351-30352-30353",
+      "originalId": "ewb-30351-30352-30353",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-30351-30352-30353/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-30351-30352-30353/gallery-1.jpg",
+        "/images/products/wallets/ewb-30351-30352-30353/gallery-2.jpg",
+        "/images/products/wallets/ewb-30351-30352-30353/gallery-3.jpg",
+        "/images/products/wallets/ewb-30351-30352-30353/gallery-4.jpg",
+        "/images/products/wallets/ewb-30351-30352-30353/gallery-5.jpg",
+        "/images/products/wallets/ewb-30351-30352-30353/gallery-6.jpg",
+        "/images/products/wallets/ewb-30351-30352-30353/gallery-7.jpg",
+        "/images/products/wallets/ewb-30351-30352-30353/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 6487.6,
+      "failures": []
+    },
+    {
+      "id": "ewb-20951-20952-20953",
+      "originalId": "ewb-20951-20952-20953",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-20951-20952-20953/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-20951-20952-20953/gallery-1.jpg",
+        "/images/products/wallets/ewb-20951-20952-20953/gallery-2.jpg",
+        "/images/products/wallets/ewb-20951-20952-20953/gallery-3.jpg",
+        "/images/products/wallets/ewb-20951-20952-20953/gallery-4.jpg",
+        "/images/products/wallets/ewb-20951-20952-20953/gallery-5.jpg",
+        "/images/products/wallets/ewb-20951-20952-20953/gallery-6.jpg",
+        "/images/products/wallets/ewb-20951-20952-20953/gallery-7.jpg",
+        "/images/products/wallets/ewb-20951-20952-20953/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 1464.8999999999999,
+      "failures": []
+    },
+    {
+      "id": "ewb-30565-ewb-30566",
+      "originalId": "ewb-30565-ewb-30566",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-30565-ewb-30566/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-30565-ewb-30566/gallery-1.jpg",
+        "/images/products/wallets/ewb-30565-ewb-30566/gallery-2.jpg",
+        "/images/products/wallets/ewb-30565-ewb-30566/gallery-3.jpg",
+        "/images/products/wallets/ewb-30565-ewb-30566/gallery-4.jpg",
+        "/images/products/wallets/ewb-30565-ewb-30566/gallery-5.jpg",
+        "/images/products/wallets/ewb-30565-ewb-30566/gallery-6.jpg",
+        "/images/products/wallets/ewb-30565-ewb-30566/gallery-7.jpg",
+        "/images/products/wallets/ewb-30565-ewb-30566/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 6838.7,
+      "failures": []
+    },
+    {
+      "id": "ep-set",
+      "originalId": "ep-set",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ep-set/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ep-set/gallery-1.jpg",
+        "/images/products/wallets/ep-set/gallery-2.jpg",
+        "/images/products/wallets/ep-set/gallery-3.jpg",
+        "/images/products/wallets/ep-set/gallery-4.jpg",
+        "/images/products/wallets/ep-set/gallery-5.jpg",
+        "/images/products/wallets/ep-set/gallery-6.jpg",
+        "/images/products/wallets/ep-set/gallery-7.jpg",
+        "/images/products/wallets/ep-set/gallery-8.jpg"
+      ],
+      "imageCount": 9,
+      "sizeKB": 3113.7999999999993,
+      "failures": []
+    },
+    {
+      "id": "ewb-20965",
+      "originalId": "ewb-20965",
+      "category": "wallets",
+      "coverPath": "/images/products/wallets/ewb-20965/cover.jpg",
+      "galleryPaths": [
+        "/images/products/wallets/ewb-20965/gallery-1.jpg",
+        "/images/products/wallets/ewb-20965/gallery-2.jpg",
+        "/images/products/wallets/ewb-20965/gallery-3.jpg",
+        "/images/products/wallets/ewb-20965/gallery-4.jpg",
+        "/images/products/wallets/ewb-20965/gallery-5.jpg",
+        "/images/products/wallets/ewb-20965/gallery-6.jpg",
+        "/images/products/wallets/ewb-20965/gallery-7.jpg"
+      ],
+      "imageCount": 8,
+      "sizeKB": 1860.6999999999998,
+      "failures": []
+    }
+  ]
+}

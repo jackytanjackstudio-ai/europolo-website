@@ -209,7 +209,10 @@ function renderSummary() {
       '</div>' +
       '<div class="sum-info">' +
         '<div class="sum-name">' + item.name + '</div>' +
-        (item.sku ? '<div class="sum-sku">' + item.sku + '</div>' : '') +
+        (item.option1 ? '<div class="sum-sku">' + (item.option1Name || 'Colour') + ': ' + item.option1 + '</div>' :
+         item.colour  ? '<div class="sum-sku">Colour: ' + item.colour + '</div>' : '') +
+        (item.option2 ? '<div class="sum-sku">' + (item.option2Name || 'Size') + ': ' + item.option2 + '</div>' : '') +
+        (item.sku ? '<div class="sum-sku" style="color:var(--muted);font-size:.62rem">SKU: ' + item.sku + '</div>' : '') +
       '</div>' +
       '<div class="sum-price">RM ' + (parseFloat(item.price) * item.qty).toLocaleString('en-MY', { minimumFractionDigits: 0 }) + '</div>' +
     '</div>';
