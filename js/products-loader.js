@@ -154,7 +154,7 @@
     var cover     = p.images && p.images.cover ? p.images.cover : '';
     var sizeClass = cardSizeClass ? ' ' + cardSizeClass : '';
     var imgStyle  = cover
-      ? 'background-color:#111;background-image:url(\'' + cover + '\');background-size:cover;background-position:center center'
+      ? 'background-color:#f7f6f4;background-image:url(\'' + cover + '\');background-size:contain;background-position:center center'
       : 'background:linear-gradient(145deg,#0c1c0f,#163320)';
     var desc     = esc(shortDesc(p.description));
     var price    = esc(p.priceDisplay || '');

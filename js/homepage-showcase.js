@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════
    EURO POLO · homepage-showcase.js
-   "Trending This Month" — 4 independently cycling cards.
+   "Editor's Selection" — 3 independently cycling cards.
    Requires product-data-embed.js loaded before this.
 ═══════════════════════════════════════════════════ */
 (function () {
@@ -106,9 +106,14 @@
     priceEl.className = 'trending__price';
     priceEl.textContent = catProds[0].priceDisplay || '';
 
+    var ctaEl = document.createElement('span');
+    ctaEl.className = 'trending__cta';
+    ctaEl.textContent = 'View Product →';
+
     body.appendChild(lbl);
     body.appendChild(nameEl);
     body.appendChild(priceEl);
+    body.appendChild(ctaEl);
     bodyLink.appendChild(body);
     card.appendChild(bodyLink);
 
@@ -157,7 +162,7 @@
     if (state.products.length < 2) return;
     state.timer = setInterval(function () {
       if (!state.paused) goTo(state, state.current + 1);
-    }, 9000);
+    }, 5000);
   }
 
   /* ── Wire up controls ── */

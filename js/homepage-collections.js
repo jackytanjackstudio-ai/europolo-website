@@ -41,9 +41,10 @@
     var p = pick(cfg);
     if (!p) return;
 
-    el.style.backgroundImage   = "url('" + p.images.cover.replace(/'/g, "\\'") + "')";
-    el.style.backgroundSize    = 'cover';
-    el.style.backgroundPosition = 'center top';
+    el.style.backgroundImage    = "url('" + p.images.cover.replace(/'/g, "\\'") + "')";
+    el.style.backgroundSize     = 'contain';
+    el.style.backgroundPosition = 'center center';
+    el.style.backgroundColor   = '#0c0c0c';
     el.classList.add('has-img');
 
     var card = el.closest('.collection-card');

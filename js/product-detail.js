@@ -288,7 +288,7 @@
     var sc       = CARD_SIZE[p.category] || '';
     var cover    = p.images && p.images.cover ? p.images.cover : '';
     var imgStyle = cover
-      ? 'background-color:#111;background-image:url(\'' + esc(cover) + '\');background-size:cover;background-position:center center'
+      ? 'background-color:#f7f6f4;background-image:url(\'' + esc(cover) + '\');background-size:contain;background-position:center center'
       : 'background:linear-gradient(145deg,#0c1c0f,#163320)';
     var cl       = SUBCAT_LABEL[p.subcategory] || SUBCAT_LABEL[p.category] || '';
     var fc       = p.category === 'belts' ? 'belt' : (p.subcategory || p.category);
@@ -582,20 +582,59 @@
      VARIANT PICKER LOGIC
    ──────────────────────────────────────────────── */
 
-  /* Switch main image to first image of the selected colour/opt1 */
+  /* Switch main image when a colour/opt1 variant is selected */
   function switchVariantImage(opt1Val) {
+    var isColour = /colou?r|warna/i.test(option1Name || '');
+
+    /* Find this variant's registered image */
+    var variantImg = null;
     for (var j = 0; j < variants.length; j++) {
       if (variants[j].option1 === opt1Val && variants[j].image) {
-        var url = variants[j].image;
-        if (imgEl) imgEl.src = url;
-        if (lbImg) lbImg.src = url;
-        if (thumbsEl) {
-          thumbsEl.querySelectorAll('.pd-thumb').forEach(function (t) {
-            t.classList.remove('pd-thumb--active');
-          });
-        }
-        return;
+        variantImg = variants[j].image;
+        break;
       }
+    }
+
+    var url = variantImg || (product.images && product.images.cover) || '';
+
+    /* For colour options: when all variants share the same cover image,
+       map colour position → gallery image so switching gives visual feedback */
+    if (isColour) {
+      var coverUrl = (product.images && product.images.cover) || '';
+      var allShared = variants.every(function (v) {
+        return !v.image || v.image === coverUrl;
+      });
+      if (allShared && allImages.length > 1) {
+        var opt1Vals  = getOpt1Values();
+        var colorIdx  = opt1Vals.indexOf(opt1Val);
+        if (colorIdx > 0 && colorIdx < allImages.length) {
+          url = allImages[colorIdx];
+        } else {
+          url = allImages[0] || coverUrl;
+        }
+      }
+    }
+
+    if (!url) return;
+
+    if (imgEl) imgEl.src = url;
+    if (lbImg) lbImg.src = url;
+
+    /* Sync currentIdx + thumbnail strip + arrows + counter */
+    var newIdx = allImages.indexOf(url);
+    if (newIdx < 0) newIdx = 0;
+    currentIdx = newIdx;
+
+    if (counterEl) counterEl.textContent = (currentIdx + 1) + ' / ' + allImages.length;
+    if (prevBtn)   prevBtn.classList.toggle('pd-arrow--disabled', currentIdx === 0);
+    if (nextBtn)   nextBtn.classList.toggle('pd-arrow--disabled', currentIdx === allImages.length - 1);
+
+    if (thumbsEl) {
+      thumbsEl.querySelectorAll('.pd-thumb').forEach(function (t) {
+        t.classList.toggle('pd-thumb--active', parseInt(t.dataset.idx, 10) === currentIdx);
+      });
+      var active = thumbsEl.querySelector('.pd-thumb--active');
+      if (active) active.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
     }
   }
 
