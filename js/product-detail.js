@@ -16,6 +16,23 @@
       .replace(/"/g, '&quot;');
   }
 
+  /* ── gallery[0] is cleaner than the composite cover for these 23 products ── */
+  var GALLERY_PREFERRED = {
+    'eba51207h':1,'eba51208s':1,'eba60301s':1,'eba60302m':1,'ebc-40322':1,
+    'ebk-40310':1,'ebk50110b':1,'ebk50111b':1,'ebk50112b':1,'ebk50113b':1,
+    'ep-classic-set':1,'ep-set':1,'ewa-40172-40175':1,'ewb-30199':1,
+    'ewb-30551-ewb-30552-ewb-30553':1,'ewb-40162':1,'ewb-40168':1,
+    'ewb-40359':1,'ewb-40361':1,'ewb-50156-50157-l':1,
+    'ewb-50159l-60l-20969-70':1,'ebl-001-2':1,'ry003f':1
+  };
+  function bestCover(p) {
+    if (p.images && p.images.gallery && p.images.gallery.length > 0) {
+      var m = (p.images.cover || '').match(/\/([^/]+)\/cover\.jpg$/i);
+      if (m && GALLERY_PREFERRED[m[1]]) return p.images.gallery[0];
+    }
+    return p.images && p.images.cover ? p.images.cover : '';
+  }
+
   /* ── WhatsApp link ── */
   function waLink(name, price) {
     return 'https://wa.me/601160601277?text=' +
@@ -185,12 +202,13 @@
     if (navLink) navLink.setAttribute('aria-current', 'page');
   }
 
-  /* ── Build image list: cover first, then gallery ── */
+  /* ── Build image list: clean cover first, then remaining gallery ── */
   var allImages = [];
   if (product.images) {
-    if (product.images.cover) allImages.push(product.images.cover);
+    var displayCover = bestCover(product);
+    if (displayCover) allImages.push(displayCover);
     if (Array.isArray(product.images.gallery)) {
-      product.images.gallery.forEach(function (img) { if (img) allImages.push(img); });
+      product.images.gallery.forEach(function (img) { if (img && img !== displayCover) allImages.push(img); });
     }
   }
 
@@ -199,7 +217,7 @@
   var catLabel    = CAT_LABEL[product.category]  || esc(product.category);
   var subcatLabel = SUBCAT_LABEL[product.subcategory] ||
                     SUBCAT_LABEL[product.category]    || catLabel;
-  var coverImg    = (product.images && product.images.cover) ? product.images.cover : '';
+  var coverImg    = bestCover(product);
 
   /* ── Extract size chart ── */
   var scData = extractSizeChart(product.description);
@@ -286,7 +304,7 @@
   /* ── Related product card ── */
   function renderRelatedCard(p) {
     var sc       = CARD_SIZE[p.category] || '';
-    var cover    = p.images && p.images.cover ? p.images.cover : '';
+    var cover    = bestCover(p);
     var imgStyle = cover
       ? 'background-color:#f7f6f4;background-image:url(\'' + esc(cover) + '\');background-size:130%;background-position:center center'
       : 'background:linear-gradient(145deg,#0c1c0f,#163320)';
