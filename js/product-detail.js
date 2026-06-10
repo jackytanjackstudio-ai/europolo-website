@@ -288,7 +288,7 @@
     var sc       = CARD_SIZE[p.category] || '';
     var cover    = p.images && p.images.cover ? p.images.cover : '';
     var imgStyle = cover
-      ? 'background-color:#f7f6f4;background-image:url(\'' + esc(cover) + '\');background-size:contain;background-position:center center'
+      ? 'background-color:#f7f6f4;background-image:url(\'' + esc(cover) + '\');background-size:130%;background-position:center center'
       : 'background:linear-gradient(145deg,#0c1c0f,#163320)';
     var cl       = SUBCAT_LABEL[p.subcategory] || SUBCAT_LABEL[p.category] || '';
     var fc       = p.category === 'belts' ? 'belt' : (p.subcategory || p.category);
@@ -605,12 +605,14 @@
         return !v.image || v.image === coverUrl;
       });
       if (allShared && allImages.length > 1) {
-        var opt1Vals  = getOpt1Values();
-        var colorIdx  = opt1Vals.indexOf(opt1Val);
-        if (colorIdx > 0 && colorIdx < allImages.length) {
-          url = allImages[colorIdx];
-        } else {
+        var opt1Vals = getOpt1Values();
+        var colorIdx = opt1Vals.indexOf(opt1Val);
+        var galLen   = allImages.length - 1; /* number of gallery images */
+        if (colorIdx <= 0) {
           url = allImages[0] || coverUrl;
+        } else {
+          /* Cycle through gallery images so every colour click shows a different image */
+          url = allImages[((colorIdx - 1) % galLen) + 1];
         }
       }
     }

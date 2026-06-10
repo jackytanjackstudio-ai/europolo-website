@@ -481,7 +481,7 @@ ul { list-style: none; }
   position: relative;
   height: 260px;
   overflow: hidden;
-  background-size: contain;
+  background-size: cover;
   background-position: center center;
   background-color: #0c0c0c;
 }

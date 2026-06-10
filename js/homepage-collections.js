@@ -32,7 +32,8 @@
   var CONFIG = [
     { imgId: 'collImgBags',    category: 'bags',    prefer: 'EP0001',  skipName: 'gift',   page: 'bags.html'    },
     { imgId: 'collImgWallets', category: 'wallets', prefer: null,       skipType: 'gift',   page: 'wallets.html', skipName: 'gift' },
-    { imgId: 'collImgLuggage', category: 'luggage', prefer: 'EP0008',                       page: 'luggage.html' },
+    /* Luggage: use gallery-1 (different angle, cleaner than cover 3-piece composite) */
+    { imgId: 'collImgLuggage', category: 'luggage', prefer: 'EP0008',  page: 'luggage.html', galleryIdx: 1 },
   ];
 
   CONFIG.forEach(function (cfg) {
@@ -41,8 +42,11 @@
     var p = pick(cfg);
     if (!p) return;
 
-    el.style.backgroundImage    = "url('" + p.images.cover.replace(/'/g, "\\'") + "')";
-    el.style.backgroundSize     = 'contain';
+    var imgSrc = (cfg.galleryIdx !== undefined && p.images.gallery && p.images.gallery[cfg.galleryIdx])
+      ? p.images.gallery[cfg.galleryIdx]
+      : p.images.cover;
+    el.style.backgroundImage    = "url('" + imgSrc.replace(/'/g, "\\'") + "')";
+    el.style.backgroundSize     = 'cover';
     el.style.backgroundPosition = 'center center';
     el.style.backgroundColor   = '#0c0c0c';
     el.classList.add('has-img');
