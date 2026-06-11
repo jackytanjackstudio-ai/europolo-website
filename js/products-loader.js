@@ -185,7 +185,7 @@
       ' data-product-price="'+ pMin           + '"' +
       ' data-product-sku="'  + esc(firstSku)  + '"' +
       ' data-product-cat="'  + esc(catLabel)  + '">' +
-        '<div class="product-card__img' + sizeClass + '" style="' + imgStyle + '" data-label="' + esc(p.id) + '">' +
+        '<div class="product-card__img' + sizeClass + '" style="' + imgStyle + '">' +
           '<div class="product-card__hover-tag">In Stock</div>' +
           '<div class="product-card__wishlist">&#9671;</div>' +
         '</div>' +
