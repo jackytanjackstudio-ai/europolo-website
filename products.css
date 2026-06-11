@@ -185,7 +185,7 @@
   transform: translateY(-4px);
 }
 .product-card--page .product-card__img {
-  height: 280px;
+  height: 320px;
   flex-shrink: 0;
 }
 
@@ -226,10 +226,10 @@
   gap: 0.6rem;
 }
 .product-card--luggage-img {
-  height: 340px !important;
+  height: 470px !important;
 }
 .product-card--wallet-img {
-  height: 260px !important;
+  height: 295px !important;
 }
 
 /* Product gradient swatches for page cards */
