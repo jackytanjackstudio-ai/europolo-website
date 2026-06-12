@@ -603,6 +603,12 @@ ul { list-style: none; }
   color: var(--gold-light);
   border-bottom-color: var(--gold-light);
 }
+@media (max-width: 768px) {
+  .coll-lux-card__cta {
+    opacity: 1;
+    transform: none;
+  }
+}
 
 /* ════════════════════════════════════
    FEATURED PRODUCTS
