@@ -10,11 +10,12 @@ Usage:
 import openpyxl, json, re, os, sys, hashlib, time
 from collections import defaultdict, Counter
 
-XLSX      = r'C:\Users\User\Desktop\euro polo.web\europolo-website\finaliseddd.xlsx'
-JSON_OUT  = r'C:\Users\User\Desktop\euro polo.web\europolo-website\data\product-data.json'
-JS_OUT    = r'C:\Users\User\Desktop\euro polo.web\europolo-website\js\product-data-embed.js'
-CACHE_OUT = r'C:\Users\User\Desktop\euro polo.web\europolo-website\data\cloudinary-cache.json'
-ENV_FILE  = r'C:\Users\User\Desktop\euro polo.web\europolo-website\.env'
+XLSX          = r'C:\Users\User\Desktop\euro polo.web\europolo-website\finaliseddd.xlsx'
+COLOUR_XLSX   = r'C:\Users\User\Desktop\euro polo.web\europolo-website\Euro_Polo_Colour_Images.xlsx'
+JSON_OUT      = r'C:\Users\User\Desktop\euro polo.web\europolo-website\data\product-data.json'
+JS_OUT        = r'C:\Users\User\Desktop\euro polo.web\europolo-website\js\product-data-embed.js'
+CACHE_OUT     = r'C:\Users\User\Desktop\euro polo.web\europolo-website\data\cloudinary-cache.json'
+ENV_FILE      = r'C:\Users\User\Desktop\euro polo.web\europolo-website\.env'
 
 UPLOAD_MODE = '--upload' in sys.argv
 
@@ -191,6 +192,28 @@ for row in variants_rows:
     pid = str(row['product_id']).strip()
     variants_by_pid[pid].append(row)
 
+# ── Load colour-image map from Euro_Polo_Colour_Images.xlsx ───────────────────
+colour_map = defaultdict(dict)   # colour_map[product_id][colour] = image_url
+colour_map_total = 0
+try:
+    wb_c  = openpyxl.load_workbook(COLOUR_XLSX, read_only=True)
+    ws_c  = wb_c['Colour Images']
+    _rows = list(ws_c.iter_rows(values_only=True))
+    for _row in _rows[1:]:                          # skip header
+        _pid, _name, _colour, _filename, _url = _row
+        if _pid and _colour and _url:
+            colour_map[str(_pid).strip()][str(_colour).strip()] = str(_url).strip()
+            colour_map_total += 1
+    wb_c.close()
+    print(f'Colour map loaded: {colour_map_total} entries across {len(colour_map)} products')
+except FileNotFoundError:
+    print(f'  [WARN] Euro_Polo_Colour_Images.xlsx not found — variant images will use fallback only')
+except Exception as _e:
+    print(f'  [WARN] Could not load colour map: {_e}')
+
+colour_map_hits    = 0
+colour_map_misses  = []
+
 # ── Build output ───────────────────────────────────────────────────────────────
 output  = []
 skipped = []
@@ -228,6 +251,14 @@ for p_row in products_rows:
         opt1 = clean(v.get('option1_value'))
         opt2 = clean(v.get('option2_value'))
         img  = clean(v.get('variant_image'))
+
+        # Inject colour-specific image from Euro_Polo_Colour_Images.xlsx
+        if opt1 and pid in colour_map and opt1 in colour_map[pid]:
+            img = colour_map[pid][opt1]
+            colour_map_hits += 1
+        elif opt1:
+            colour_map_misses.append((pid, opt1))
+            print(f'  [WARN] No colour image mapping found for {pid} / {opt1}')
 
         variant_list.append({
             'sku':     sku,
@@ -298,6 +329,14 @@ print('=' * 56)
 cat_counts = Counter(p['category'] for p in output)
 for cat, n in sorted(cat_counts.items()):
     print(f'  {cat:<10} {n} products')
+print()
+print('-- Colour image mapping --------------------------------------')
+print(f'  Mappings loaded    : {colour_map_total}')
+print(f'  Variants mapped    : {colour_map_hits}')
+print(f'  Missing mappings   : {len(colour_map_misses)}')
+if colour_map_misses:
+    for _pid, _col in colour_map_misses:
+        print(f'    MISSING: {_pid} / {_col}')
 print()
 
 # ── Cloudinary image migration (--upload only) ─────────────────────────────────
