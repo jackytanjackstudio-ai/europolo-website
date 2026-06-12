@@ -449,10 +449,7 @@ ul { list-style: none; }
 }
 
 /* ════════════════════════════════════
-   COLLECTIONS
-════════════════════════════════════ */
-/* ════════════════════════════════════
-   LUXURY COLLECTION SHOWCASE
+   TEXT-ONLY LUXURY COLLECTION CARDS
 ════════════════════════════════════ */
 .collections {
   padding: var(--section-py) 0 0;
@@ -462,7 +459,6 @@ ul { list-style: none; }
   padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
 }
 
-/* Asymmetric grid: hero (60%) + companion (40%), then full-width strip */
 .collections__grid {
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -473,73 +469,47 @@ ul { list-style: none; }
 /* ── Card base ── */
 .coll-lux-card {
   position: relative;
-  display: block;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: clamp(300px, 28vw, 400px);
+  padding: clamp(2.5rem, 4.5vw, 4.5rem) clamp(2.25rem, 3.5vw, 3.75rem);
+  background: var(--prestige);
   text-decoration: none;
-  cursor: pointer;
+  overflow: hidden;
 }
 
-/* ── Image layer (owns the scale transform) ── */
-.coll-lux-card__img {
-  position: relative;
-  width: 100%;
-  height: 560px;
-  background-size: cover;
-  background-position: center center;
-  background-color: transparent;
-  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
-}
-.coll-lux-card:hover .coll-lux-card__img {
-  transform: scale(1.048);
-}
+/* Per-collection dark tones */
+#bags    { background: var(--prestige); }
+#wallets { background: #1b1208; }
+#luggage { background: var(--charcoal); }
 
-/* Luggage: panoramic strip */
-.coll-lux-card--wide {
-  grid-column: 1 / -1;
-}
-.coll-lux-card--wide .coll-lux-card__img {
-  height: 340px;
-}
-
-/* ── Gradient vignette ── */
-.coll-lux-card::after {
+/* Subtle gold glow that blooms on hover */
+.coll-lux-card::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.84) 0%,
-    rgba(0,0,0,0.30) 42%,
-    rgba(0,0,0,0.06) 68%,
-    transparent 100%
-  );
-  z-index: 1;
+  inset: -10%;
+  background: radial-gradient(ellipse at 20% 80%, rgba(192,154,66,0.09) 0%, transparent 55%);
+  transform: scale(1);
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
   pointer-events: none;
 }
-
-/* ── Fallback gradient (before product image loads) ── */
-.coll-lux-card__fallback {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.coll-lux-card:hover::before {
+  transform: scale(1.18);
 }
-.coll-lux-card__fallback--bags    { background: linear-gradient(160deg, #0c1c0f 0%, #1f4229 100%); }
-.coll-lux-card__fallback--wallets { background: linear-gradient(160deg, #1a1208 0%, #2e2010 100%); }
-.coll-lux-card__fallback--luggage { background: linear-gradient(160deg, #0a0e0a 0%, #1f4229 100%); }
-.coll-lux-card__img.has-img .coll-lux-card__fallback { display: none; }
 
-/* ── Text body — pinned inside the image ── */
+/* Luggage: full-width, shorter */
+.coll-lux-card--wide {
+  grid-column: 1 / -1;
+  min-height: clamp(190px, 14vw, 240px);
+  justify-content: center;
+}
+
+/* ── Text body ── */
 .coll-lux-card__body {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2.5rem 2.75rem 2.75rem;
-  z-index: 2;
-}
-.coll-lux-card--wide .coll-lux-card__body {
-  padding: 1.75rem 3rem 2.25rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* Gold rule — extends on hover */
@@ -548,50 +518,41 @@ ul { list-style: none; }
   width: 28px;
   height: 1px;
   background: var(--gold);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   transition: width 0.55s var(--ease-out);
 }
 .coll-lux-card:hover .coll-lux-card__rule {
   width: 56px;
 }
 
-/* Eyebrow */
-.coll-lux-card__eyebrow {
-  font-family: var(--font-sans);
-  font-size: 0.6rem;
-  font-weight: 500;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  margin-bottom: 0.55rem;
-}
-
 /* Category title */
 .coll-lux-card__title {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  font-size: clamp(2.8rem, 5vw, 5rem);
   font-weight: 300;
-  line-height: 1.05;
+  line-height: 1;
   color: #fff;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
 }
 .coll-lux-card--wide .coll-lux-card__title {
-  font-size: clamp(1.7rem, 2.4vw, 2.2rem);
+  font-size: clamp(2rem, 3.2vw, 3rem);
 }
 
-/* Subcategory line */
+/* Subtitle */
 .coll-lux-card__sub {
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 400;
-  letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.52);
-  margin-bottom: 1.25rem;
-  line-height: 1.5;
+  letter-spacing: 0.05em;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 1.75rem;
+  max-width: 32ch;
   transition: color 0.4s;
 }
 .coll-lux-card:hover .coll-lux-card__sub {
-  color: rgba(255,255,255,0.82);
+  color: rgba(255,255,255,0.75);
 }
 
 /* CTA — slides up and fades in */
@@ -601,14 +562,14 @@ ul { list-style: none; }
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--gold-light);
   border-bottom: 1px solid var(--gold);
   padding-bottom: 3px;
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(8px);
   transition:
-    opacity   0.42s var(--ease-out) 0.04s,
-    transform 0.42s var(--ease-out) 0.04s,
+    opacity   0.38s var(--ease-out) 0.05s,
+    transform 0.38s var(--ease-out) 0.05s,
     color     0.3s,
     border-color 0.3s;
 }
@@ -1168,11 +1129,11 @@ ul { list-style: none; }
   .style-codes__grid { grid-template-columns: repeat(2, 1fr); }
   .footer__top { grid-template-columns: 1fr; gap: 3rem; }
 
-  /* Collections: equalise the two-column layout on tablet */
+  /* Collections */
   .collections__grid { grid-template-columns: 1fr 1fr; }
-  .coll-lux-card__img { height: 440px; }
-  .coll-lux-card--wide .coll-lux-card__img { height: 300px; }
-  .coll-lux-card__title { font-size: clamp(1.75rem, 2.8vw, 2.2rem); }
+  .coll-lux-card { min-height: 300px; }
+  .coll-lux-card--wide { min-height: 200px; }
+  .coll-lux-card__title { font-size: clamp(2rem, 4vw, 3rem); }
 }
 
 @media (max-width: 768px) {
@@ -1185,10 +1146,9 @@ ul { list-style: none; }
   .hero__actions .btn { text-align: center; justify-content: center; }
 
   .collections__grid { grid-template-columns: 1fr; gap: 2px; }
-  .coll-lux-card--wide { grid-column: auto; }
-  .coll-lux-card__img { height: 400px !important; }
-  .coll-lux-card__body { padding: 2rem 1.75rem 2.25rem; }
-  .coll-lux-card__title { font-size: clamp(1.9rem, 8vw, 2.4rem) !important; }
+  .coll-lux-card--wide { grid-column: auto; justify-content: flex-end; }
+  .coll-lux-card, .coll-lux-card--wide { min-height: 400px; }
+  .coll-lux-card__title { font-size: clamp(3rem, 13vw, 4.5rem) !important; }
 
   .about__grid { grid-template-columns: 1fr; }
   .about__visual {
