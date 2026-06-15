@@ -393,6 +393,23 @@
           '<span>Encrypted Payment</span>' +
         '</div>' +
       '</div>' +
+      '<div class="pd-shipping">' +
+        '<span class="pd-label">Shipping &amp; Returns</span>' +
+        '<ul class="pd-shipping__list">' +
+          '<li>' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>' +
+            '<span>Free Shipping within Malaysia</span>' +
+          '</li>' +
+          '<li>' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' +
+            '<span>Ships in 1–3 Working Days</span>' +
+          '</li>' +
+          '<li>' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>' +
+            '<span>7-Day Return Policy</span>' +
+          '</li>' +
+        '</ul>' +
+      '</div>' +
     '</div>';
 
   var related = window.EP_PRODUCTS.filter(function (p) {

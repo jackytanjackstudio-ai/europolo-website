@@ -295,6 +295,31 @@
   line-height: 1.4;
 }
 
+/* Shipping & returns */
+.pd-shipping {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.pd-shipping__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.55rem;
+}
+.pd-shipping__list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--mid);
+  line-height: 1.5;
+}
+.pd-shipping__list li svg {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
 /* Make product cards in related grid clickable */
 .related-section .product-card--page {
   cursor: pointer;
