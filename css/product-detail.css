@@ -263,6 +263,16 @@
   margin-top: 1.5rem;
   border-top: 1px solid var(--border);
 }
+.pd-btn-secondary {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--mid);
+}
+.pd-btn-secondary:hover {
+  background: transparent;
+  border-color: var(--gold);
+  color: var(--gold);
+}
 
 /* Trust badges */
 .pd-trust {

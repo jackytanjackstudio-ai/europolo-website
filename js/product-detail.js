@@ -233,7 +233,7 @@
       h += '</ul></div>';
     }
     if (specLines.length) {
-      h += '<details class="pd-details-block"><summary class="pd-label">Full Description</summary><div class="pd-spec-lines">';
+      h += '<details class="pd-details-block" open><summary class="pd-label">Full Description</summary><div class="pd-spec-lines">';
       specLines.forEach(function (l) { h += '<p>' + esc(l) + '</p>'; });
       h += '</div></details>';
     }
@@ -377,8 +377,8 @@
       '</div>' +
       '<div class="pd-actions">' +
         '<p class="pd-stock-msg" id="pdStockMsg"></p>' +
-        '<a href="' + waLink() + '" id="pdWaLink" class="btn btn--gold btn--full" target="_blank" rel="noopener">Enquire via WhatsApp</a>' +
         '<button class="btn btn--cart btn--full pd-cart-btn" id="pdCartBtn">Add to Cart</button>' +
+        '<a href="' + waLink() + '" id="pdWaLink" class="btn btn--full pd-btn-secondary" target="_blank" rel="noopener">Enquire via WhatsApp</a>' +
       '</div>' +
       '<div class="pd-trust">' +
         '<div class="pd-trust__item">' +
