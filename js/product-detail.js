@@ -464,6 +464,18 @@
     scLightboxHtml;
 
   /* ────────────────────────────────────────────────
+     MOBILE STICKY BUY BAR
+   ──────────────────────────────────────────────── */
+  var stickyBar = document.createElement('div');
+  stickyBar.id        = 'pdStickyBar';
+  stickyBar.className = 'pd-sticky-bar';
+  stickyBar.setAttribute('aria-hidden', 'true');
+  stickyBar.innerHTML =
+    '<span class="pd-sticky-bar__price" id="pdStickyPrice"></span>' +
+    '<button class="btn btn--cart pd-sticky-bar__btn" id="pdStickyBtn" disabled>Add to Cart</button>';
+  document.body.appendChild(stickyBar);
+
+  /* ────────────────────────────────────────────────
      GALLERY INTERACTIONS
    ──────────────────────────────────────────────── */
   var currentIdx = 0;
@@ -752,6 +764,17 @@
       qtyInp.setAttribute('max', String(v.stock));
       if (qty > v.stock) { qty = v.stock; qtyInp.value = qty; }
     }
+
+    /* Sync sticky buy bar */
+    var stickyBtn   = document.getElementById('pdStickyBtn');
+    var stickyPrice = document.getElementById('pdStickyPrice');
+    if (stickyBtn && cartBtn) {
+      stickyBtn.textContent = cartBtn.textContent;
+      stickyBtn.disabled    = cartBtn.disabled;
+    }
+    if (stickyPrice && priceEl) {
+      stickyPrice.textContent = priceEl.textContent;
+    }
   }
 
   function bindVariantButtons() {
@@ -833,6 +856,27 @@
       if (card && card.dataset.productId) {
         window.location.href = 'product.html?id=' + encodeURIComponent(card.dataset.productId);
       }
+    });
+  }
+
+  /* ────────────────────────────────────────────────
+     STICKY BAR — visibility + click proxy
+   ──────────────────────────────────────────────── */
+  var pdActionsEl = root.querySelector('.pd-actions');
+  if (pdActionsEl && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      var visible = !entries[0].isIntersecting;
+      stickyBar.classList.toggle('is-visible', visible);
+      stickyBar.setAttribute('aria-hidden', visible ? 'false' : 'true');
+      document.body.classList.toggle('pd-sticky--active', visible);
+    }, { threshold: 0 }).observe(pdActionsEl);
+  }
+
+  var pdStickyBtn = document.getElementById('pdStickyBtn');
+  if (pdStickyBtn) {
+    pdStickyBtn.addEventListener('click', function () {
+      var mainBtn = document.getElementById('pdCartBtn');
+      if (mainBtn && !mainBtn.disabled) mainBtn.click();
     });
   }
 
