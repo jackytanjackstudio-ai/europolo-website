@@ -367,6 +367,7 @@
       '<h1 class="pd-name">' + esc(product.name) + '</h1>' +
       '<div class="pd-price" id="pdPrice">' + esc(product.priceDisplay || '') + '</div>' +
       '<div id="pdVariantSection"></div>' +
+      '<p class="pd-variant-hint" id="pdVariantHint"></p>' +
       renderDesc(scData.clean) +
       (scData.url
         ? '<button class="pd-sizechart-btn" id="pdSizeChart">Size Chart ›</button>'
@@ -730,6 +731,19 @@
         cartBtn.textContent = 'Unavailable';
         cartBtn.disabled = true;
       }
+    }
+
+    /* Variant selection hint */
+    var hintEl = document.getElementById('pdVariantHint');
+    if (hintEl) {
+      var hintText = '';
+      if (!selectedOpt1 && variants.length > 0) {
+        hintText = 'Please select a ' + (option1Name || 'option').toLowerCase() + ' to continue.';
+      } else if (option2Name && !selectedOpt2) {
+        hintText = 'Please select a ' + option2Name.toLowerCase() + ' to continue.';
+      }
+      hintEl.textContent = hintText;
+      hintEl.classList.toggle('is-visible', !!hintText);
     }
 
     /* Low-stock message */
