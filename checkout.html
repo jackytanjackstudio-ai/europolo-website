@@ -15,7 +15,8 @@
     .checkout-header a { font-family: var(--font-serif); font-size: 1.5rem; color: var(--white); letter-spacing: .18em; text-decoration: none; }
     .checkout-header span { color: var(--gold); font-size: .7rem; font-family: var(--font-sans); letter-spacing: .28em; display: block; margin-top: .15rem; }
     .checkout-wrap { max-width: 1080px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; display: grid; grid-template-columns: 1fr 400px; gap: 2.5rem; align-items: start; }
-    @media (max-width: 820px) { .checkout-wrap { grid-template-columns: 1fr; } .co-summary { order: -1; } }
+    @media (max-width: 820px) { .checkout-wrap { grid-template-columns: 1fr; } .co-summary { order: -1; position: static; } }
+    @media (max-width: 580px) { .co-grid { grid-template-columns: 1fr; } .checkout-wrap { padding: 1.5rem 1rem 3rem; } }
 
     /* Form Column */
     .co-form h2 { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; color: var(--charcoal); margin-bottom: 1.5rem; }

@@ -41,7 +41,7 @@
     if (!tc) {
       tc = document.createElement('div');
       tc.id = 'ep-cart-toasts';
-      tc.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);z-index:10000;display:flex;flex-direction:column;gap:.5rem;align-items:center;pointer-events:none';
+      tc.style.cssText = 'position:fixed;bottom:6.5rem;left:50%;transform:translateX(-50%);z-index:10000;display:flex;flex-direction:column;gap:.5rem;align-items:center;pointer-events:none';
       document.body.appendChild(tc);
     }
     const colors = { success: '#163320', error: '#a81c1c', warn: '#C09A42', info: '#1a1a18' };

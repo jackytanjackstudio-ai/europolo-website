@@ -418,7 +418,11 @@
   .products-grid--small  { grid-template-columns: repeat(2, 1fr); }
   .products-grid--luggage { grid-template-columns: 1fr; }
   .cta-strip__inner { flex-direction: column; text-align: center; }
+  .cta-strip .btn { width: 100%; justify-content: center; }
   .whatsapp-float { bottom: 1.25rem; right: 1.25rem; }
+  .product-card--page .product-card__img { height: 260px; }
+  .product-card--luggage-img { height: 320px !important; }
+  .breadcrumb__inner { flex-wrap: wrap; }
 }
 @media (max-width: 480px) {
   .products-grid--small { grid-template-columns: 1fr; }

@@ -1174,7 +1174,7 @@ ul { list-style: none; }
   .br-desktop { display: none; }
 
   .hero__content { padding: 0 1.5rem; padding-top: var(--nav-h); }
-  .hero__actions { flex-direction: column; }
+  .hero__actions { flex-direction: column; align-items: stretch; }
   .hero__actions .btn { text-align: center; justify-content: center; }
 
   .collections__grid { grid-template-columns: 1fr; gap: 2px; }
