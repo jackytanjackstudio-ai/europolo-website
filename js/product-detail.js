@@ -289,7 +289,7 @@
     var sc       = CARD_SIZE[p.category] || '';
     var cover    = p.images && p.images.cover ? p.images.cover : '';
     var imgStyle = cover
-      ? 'background-color:#f7f6f4;background-image:url(\'' + esc(cover) + '\');background-size:contain;background-position:center center;background-repeat:no-repeat'
+      ? 'background-color:#f7f6f4;background-image:url(\'' + esc(cover) + '\');background-size:cover;background-position:center center;background-repeat:no-repeat'
       : 'background:linear-gradient(145deg,#0c1c0f,#163320)';
     var cl       = SUBCAT_LABEL[p.subcategory] || SUBCAT_LABEL[p.category] || '';
     var fc       = p.category === 'belts' ? 'belt' : (p.subcategory || p.category);
@@ -378,6 +378,20 @@
         '<p class="pd-stock-msg" id="pdStockMsg"></p>' +
         '<a href="' + waLink(product.name, product.priceDisplay || '') + '" id="pdWaLink" class="btn btn--gold btn--full" target="_blank" rel="noopener">Enquire via WhatsApp</a>' +
         '<button class="btn btn--cart btn--full pd-cart-btn" id="pdCartBtn">Add to Cart</button>' +
+      '</div>' +
+      '<div class="pd-trust">' +
+        '<div class="pd-trust__item">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>' +
+          '<span>Secure Checkout</span>' +
+        '</div>' +
+        '<div class="pd-trust__item">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7.4 12 8 12s8-6.6 8-12a8 8 0 0 0-8-8z"/></svg>' +
+          '<span>Malaysian Seller</span>' +
+        '</div>' +
+        '<div class="pd-trust__item">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' +
+          '<span>Encrypted Payment</span>' +
+        '</div>' +
       '</div>' +
     '</div>';
 

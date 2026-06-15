@@ -264,6 +264,37 @@
   border-top: 1px solid var(--border);
 }
 
+/* Trust badges */
+.pd-trust {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.pd-trust__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+}
+.pd-trust__item svg {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.pd-trust__item span {
+  font-size: 0.58rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.4;
+}
+
 /* Make product cards in related grid clickable */
 .related-section .product-card--page {
   cursor: pointer;
