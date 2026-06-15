@@ -17,14 +17,9 @@
   }
 
   /* ── WhatsApp link ── */
-  function waLink(name, color, qty) {
-    var msg = 'Hi Euro Polo Malaysia,' +
-      '\n\nI\'d like to place an order for:' +
-      '\n\nProduct: ' + name +
-      '\nColor: '    + (color || '') +
-      '\nQuantity: ' + (qty   || '') +
-      '\n\nCould you assist me with the order process?';
-    return 'https://wa.me/601160601277?text=' + encodeURIComponent(msg);
+  function waLink() {
+    return 'https://wa.me/601160601277?text=' +
+      encodeURIComponent("Hi, I'd like to ask about this product.");
   }
 
   /* ── Category / label maps ── */
@@ -318,7 +313,7 @@
                  '<div class="product-card__footer">' +
                    '<span class="product-card__price">' + esc(p.priceDisplay || '') + '</span>' +
                    '<div style="display:flex;gap:.7rem">' +
-                     '<a href="' + waLink(p.name, '', '') + '" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>' +
+                     '<a href="' + waLink() + '" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>' +
                      '<button class="btn btn--cart add-to-cart-btn">Add to Cart</button>' +
                    '</div>' +
                  '</div>' +
@@ -382,7 +377,7 @@
       '</div>' +
       '<div class="pd-actions">' +
         '<p class="pd-stock-msg" id="pdStockMsg"></p>' +
-        '<a href="' + waLink(product.name, selectedOpt1 || '', qty) + '" id="pdWaLink" class="btn btn--gold btn--full" target="_blank" rel="noopener">Order via WhatsApp</a>' +
+        '<a href="' + waLink() + '" id="pdWaLink" class="btn btn--gold btn--full" target="_blank" rel="noopener">Enquire via WhatsApp</a>' +
         '<button class="btn btn--cart btn--full pd-cart-btn" id="pdCartBtn">Add to Cart</button>' +
       '</div>' +
       '<div class="pd-trust">' +
@@ -710,7 +705,7 @@
 
     /* WhatsApp link */
     if (waLinkEl) {
-      waLinkEl.href = waLink(product.name, selectedOpt1 || '', qty);
+      waLinkEl.href = waLink();
     }
 
     /* Cart button */

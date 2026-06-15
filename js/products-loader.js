@@ -137,9 +137,9 @@
   }
 
   /* ── WhatsApp enquiry link ── */
-  function waLink(name, price) {
+  function waLink() {
     return 'https://wa.me/601160601277?text=' +
-      encodeURIComponent("Hello Euro Polo, I'm interested in the " + name + ' (' + price + ')');
+      encodeURIComponent("Hi, I'd like to ask about this product.");
   }
 
   /* ── Format price ── */
@@ -154,7 +154,7 @@
     var cover     = p.images && p.images.cover ? p.images.cover : '';
     var sizeClass = cardSizeClass ? ' ' + cardSizeClass : '';
     var imgStyle  = cover
-      ? 'background-color:#f7f6f4;background-image:url(\'' + cover + '\');background-size:contain;background-position:center center;background-repeat:no-repeat'
+      ? 'background-color:#f7f6f4;background-image:url(\'' + cover + '\');background-size:cover;background-position:center center;background-repeat:no-repeat'
       : 'background:linear-gradient(145deg,#0c1c0f,#163320)';
     var desc     = esc(shortDesc(p.description));
     var price    = esc(p.priceDisplay || '');
@@ -180,7 +180,7 @@
           '<div class="product-card__footer">' +
             '<span class="product-card__price">' + price + '</span>' +
             '<div style="display:flex;gap:.7rem">' +
-              '<a href="' + waLink(p.name, p.priceDisplay || '') + '" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>' +
+              '<a href="' + waLink() + '" class="btn btn--sm" target="_blank" rel="noopener">Enquire</a>' +
               '<button class="btn btn--cart add-to-cart-btn">Add to Cart</button>' +
             '</div>' +
           '</div>' +
