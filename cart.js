@@ -119,6 +119,7 @@
         fbq('track', 'AddToCart', {
           content_name: name,
           content_ids:  [id],
+          content_type: 'product',
           value:        Math.round(parseFloat(price) * addQty * 100) / 100,
           currency:     'MYR',
           quantity:     addQty

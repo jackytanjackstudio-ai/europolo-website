@@ -96,9 +96,11 @@ window.addEventListener('DOMContentLoaded', function () {
     if (!sessionStorage.getItem('ep_purchase_fired') && typeof fbq === 'function') {
       sessionStorage.setItem('ep_purchase_fired', '1');
       fbq('track', 'Purchase', {
-        value:    Math.round(total * 100) / 100,
-        currency: 'MYR',
-        order_id: orderId
+        value:        Math.round(total * 100) / 100,
+        currency:     'MYR',
+        content_ids:  pending.items.map(function (i) { return i.id; }),
+        content_type: 'product',
+        order_id:     orderId
       });
     }
 
