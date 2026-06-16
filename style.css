@@ -1147,6 +1147,21 @@ ul { list-style: none; }
   color: rgba(255,255,255,0.25);
   letter-spacing: 0.06em;
 }
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  flex-basis: 100%;
+  margin-top: 0.5rem;
+}
+.footer__legal a {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer__legal a:hover { color: var(--gold); }
 
 /* ════════════════════════════════════
    RESPONSIVE
