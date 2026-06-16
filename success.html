@@ -93,15 +93,29 @@ window.addEventListener('DOMContentLoaded', function () {
     var subtotal = pending.items.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
     var total = Math.max(0, subtotal - (pending.discount || 0));
 
-    if (!sessionStorage.getItem('ep_purchase_fired') && typeof fbq === 'function') {
+    if (!sessionStorage.getItem('ep_purchase_fired')) {
       sessionStorage.setItem('ep_purchase_fired', '1');
-      fbq('track', 'Purchase', {
-        value:        Math.round(total * 100) / 100,
-        currency:     'MYR',
-        content_ids:  pending.items.map(function (i) { return i.id; }),
-        content_type: 'product',
-        order_id:     orderId
+      var _pVal   = Math.round(total * 100) / 100;
+      var _pItems = pending.items.map(function (i) {
+        return { item_id: i.id, item_name: i.name, price: parseFloat(i.price), quantity: i.qty };
       });
+      if (typeof fbq === 'function') {
+        fbq('track', 'Purchase', {
+          value:        _pVal,
+          currency:     'MYR',
+          content_ids:  pending.items.map(function (i) { return i.id; }),
+          content_type: 'product',
+          order_id:     orderId
+        });
+      }
+      if (typeof gtag === 'function') {
+        gtag('event', 'purchase', {
+          transaction_id: orderId,
+          currency:       'MYR',
+          value:          _pVal,
+          items:          _pItems
+        });
+      }
     }
 
     // Show order items

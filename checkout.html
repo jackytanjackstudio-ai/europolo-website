@@ -204,14 +204,20 @@ window.addEventListener('DOMContentLoaded', function () {
   }
   renderSummary();
 
-  if (!sessionStorage.getItem('ep_ic_fired') && typeof fbq === 'function') {
+  if (!sessionStorage.getItem('ep_ic_fired')) {
     sessionStorage.setItem('ep_ic_fired', '1');
-    var icValue = cartItems.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
-    fbq('track', 'InitiateCheckout', {
-      value:     Math.round(icValue * 100) / 100,
-      currency:  'MYR',
-      num_items: cartItems.reduce(function (s, i) { return s + i.qty; }, 0)
+    var icValue    = cartItems.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
+    var icRounded  = Math.round(icValue * 100) / 100;
+    var icNumItems = cartItems.reduce(function (s, i) { return s + i.qty; }, 0);
+    var icItems    = cartItems.map(function (i) {
+      return { item_id: i.id, item_name: i.name, price: parseFloat(i.price), quantity: i.qty };
     });
+    if (typeof fbq === 'function') {
+      fbq('track', 'InitiateCheckout', { value: icRounded, currency: 'MYR', num_items: icNumItems });
+    }
+    if (typeof gtag === 'function') {
+      gtag('event', 'begin_checkout', { currency: 'MYR', value: icRounded, items: icItems });
+    }
   }
 });
 

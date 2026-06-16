@@ -115,14 +115,28 @@
       renderCartBody();
       openCart();
       showToast('Added to cart!', 'success');
+      var _atcVal = Math.round(parseFloat(price) * addQty * 100) / 100;
       if (typeof fbq === 'function') {
         fbq('track', 'AddToCart', {
           content_name: name,
           content_ids:  [id],
           content_type: 'product',
-          value:        Math.round(parseFloat(price) * addQty * 100) / 100,
+          value:        _atcVal,
           currency:     'MYR',
           quantity:     addQty
+        });
+      }
+      if (typeof gtag === 'function') {
+        gtag('event', 'add_to_cart', {
+          currency: 'MYR',
+          value:    _atcVal,
+          items: [{
+            item_id:       id,
+            item_name:     name,
+            item_category: cat || '',
+            price:         parseFloat(price),
+            quantity:      addQty
+          }]
         });
       }
       return true;

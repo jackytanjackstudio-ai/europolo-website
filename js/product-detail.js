@@ -827,17 +827,33 @@
     updateVariantUI();
   }());
 
-  /* ── Meta Pixel: ViewContent ── */
-  if (typeof fbq === 'function') {
-    var _vcV = findSelectedVariant();
-    fbq('track', 'ViewContent', {
-      content_name: product.name,
-      content_ids:  [product.id],
-      content_type: 'product',
-      value:        _vcV ? parseFloat(_vcV.price) : (product.priceMin != null ? parseFloat(product.priceMin) : 0),
-      currency:     'MYR'
-    });
-  }
+  /* ── Pixel: ViewContent · GA4: view_item ── */
+  (function () {
+    var _v     = findSelectedVariant();
+    var _price = _v ? parseFloat(_v.price) : (product.priceMin != null ? parseFloat(product.priceMin) : 0);
+    if (typeof fbq === 'function') {
+      fbq('track', 'ViewContent', {
+        content_name: product.name,
+        content_ids:  [product.id],
+        content_type: 'product',
+        value:        _price,
+        currency:     'MYR'
+      });
+    }
+    if (typeof gtag === 'function') {
+      gtag('event', 'view_item', {
+        currency: 'MYR',
+        value:    _price,
+        items: [{
+          item_id:       product.id,
+          item_name:     product.name,
+          item_category: product.category || '',
+          price:         _price,
+          quantity:      1
+        }]
+      });
+    }
+  }());
 
   /* ── Add to Cart — detail page only ── */
   var pdCartBtn = document.getElementById('pdCartBtn');
