@@ -827,6 +827,18 @@
     updateVariantUI();
   }());
 
+  /* ── Meta Pixel: ViewContent ── */
+  if (typeof fbq === 'function') {
+    var _vcV = findSelectedVariant();
+    fbq('track', 'ViewContent', {
+      content_name: product.name,
+      content_ids:  [product.id],
+      content_type: 'product',
+      value:        _vcV ? parseFloat(_vcV.price) : (product.priceMin != null ? parseFloat(product.priceMin) : 0),
+      currency:     'MYR'
+    });
+  }
+
   /* ── Add to Cart — detail page only ── */
   var pdCartBtn = document.getElementById('pdCartBtn');
   if (pdCartBtn) {

@@ -115,6 +115,15 @@
       renderCartBody();
       openCart();
       showToast('Added to cart!', 'success');
+      if (typeof fbq === 'function') {
+        fbq('track', 'AddToCart', {
+          content_name: name,
+          content_ids:  [id],
+          value:        Math.round(parseFloat(price) * addQty * 100) / 100,
+          currency:     'MYR',
+          quantity:     addQty
+        });
+      }
       return true;
     },
 

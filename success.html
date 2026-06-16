@@ -93,6 +93,15 @@ window.addEventListener('DOMContentLoaded', function () {
     var subtotal = pending.items.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
     var total = Math.max(0, subtotal - (pending.discount || 0));
 
+    if (!sessionStorage.getItem('ep_purchase_fired') && typeof fbq === 'function') {
+      sessionStorage.setItem('ep_purchase_fired', '1');
+      fbq('track', 'Purchase', {
+        value:    Math.round(total * 100) / 100,
+        currency: 'MYR',
+        order_id: orderId
+      });
+    }
+
     // Show order items
     var itemsEl = document.getElementById('orderItemsList');
     itemsEl.innerHTML = pending.items.map(function (item) {

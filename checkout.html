@@ -203,6 +203,16 @@ window.addEventListener('DOMContentLoaded', function () {
     return;
   }
   renderSummary();
+
+  if (!sessionStorage.getItem('ep_ic_fired') && typeof fbq === 'function') {
+    sessionStorage.setItem('ep_ic_fired', '1');
+    var icValue = cartItems.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
+    fbq('track', 'InitiateCheckout', {
+      value:     Math.round(icValue * 100) / 100,
+      currency:  'MYR',
+      num_items: cartItems.reduce(function (s, i) { return s + i.qty; }, 0)
+    });
+  }
 });
 
 // ── Render order summary ───────────────────────────
