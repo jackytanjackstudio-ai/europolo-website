@@ -195,20 +195,10 @@
   </a>
 
   <!-- ═══════════════════ SCRIPTS ═══════════════════ -->
-  <!--
-    Load order (all synchronous except GA4):
-    1. product-data-embed.js  → sets window.EP_PRODUCTS
-    2. product-detail.js      → renders #pd-root synchronously (before DOMContentLoaded)
-    3. script.js              → nav, reveal observer, stagger observer (finds rendered cards)
-    4. content-injector.js    → localStorage admin overrides
-    5. products.js            → binds colour swatches on info panel + related cards
-    6. cart.js                → binds add-to-cart buttons; reads data-product-* from .pd-info
-  -->
   <script src="js/product-data-embed.js"></script>
   <script src="js/product-detail.js"></script>
   <script src="script.js"></script>
   <script src="content-injector.js"></script>
-  <script src="products.js"></script>
   <script src="cart.js"></script>
 </body>
 </html>
