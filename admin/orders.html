@@ -54,6 +54,7 @@
               <option>Delivered</option>
               <option>Cancelled</option>
             </select>
+            <button class="btn btn--outline btn--sm" onclick="loadOrders()">↻ Refresh</button>
             <button class="btn btn--outline btn--sm" onclick="exportCSV()">Export CSV</button>
           </div>
         </div>
@@ -107,17 +108,75 @@ Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar();
 
 var currentOrderId = null;
 
-function getOrders() {
-  try { return JSON.parse(localStorage.getItem('ep_orders') || '[]'); } catch(e) { return []; }
+/* Orders come from Postgres via /api/admin-orders, which re-verifies the
+   admin session server-side. They used to be read from this browser's
+   localStorage, which only ever held orders placed in this same browser —
+   so a real customer's order was never visible here. */
+var ORDERS = [];
+
+function getOrders() { return ORDERS; }
+
+/* Order fields are customer-supplied now, not admin-authored, so anything
+   interpolated into innerHTML below must be escaped. */
+function esc(v) {
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+/* Map a DB row onto the shape the existing renderers expect.
+   Money is stored as integer sen and converted once, here. */
+function adaptOrder(r) {
+  return {
+    id:            r.orderRef,
+    gatewayRef:    r.gatewayRef || '',
+    paymentStatus: r.status,               // pending | paid | failed
+    status:        r.fulfilmentStatus,     // Processing | Shipped | Delivered | Cancelled
+    total:         (r.amountCents   || 0) / 100,
+    subtotal:      (r.subtotalCents || 0) / 100,
+    discount:      (r.discountCents || 0) / 100,
+    promoCode:     r.promoCode || '',
+    date:          r.paidAt || r.createdAt,
+    paidAt:        r.paidAt || '',
+    stockDeductedAt: r.stockDeductedAt || '',
+    customer:      r.customer || {},
+    items:         (r.items || []).map(function (i) {
+      return { name: i.name, qty: i.qty, sku: i.sku, price: (i.unitPriceCents || 0) / 100 };
+    }),
+  };
+}
+
+async function loadOrders() {
+  var tbody = document.getElementById('ordersTbody');
+  tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><p>Loading orders…</p></div></td></tr>';
+
+  try {
+    var res = await fetch('/api/admin-orders', { credentials: 'same-origin' });
+    if (res.status === 401 || res.status === 403) { window.location.href = 'index.html'; return; }
+
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Could not load orders.');
+
+    ORDERS = (data.orders || []).map(adaptOrder);
+    renderStats();
+    renderOrders();
+  } catch (err) {
+    ORDERS = [];
+    renderStats();
+    tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="empty-state-icon">⚠</div><p>' +
+      (err.message || 'Could not load orders.') + '</p></div></td></tr>';
+  }
 }
 
 function renderStats() {
-  var orders = getOrders();
+  // Revenue and counts are paid-only: a 'pending' row is a checkout that
+  // was started and never paid for, not money received.
+  var orders = getOrders().filter(function(o){ return o.paymentStatus === 'paid'; });
   var total = orders.reduce(function(s,o){ return s + (o.total||0); }, 0);
   var processing = orders.filter(function(o){ return o.status === 'Processing'; }).length;
   var shipped = orders.filter(function(o){ return o.status === 'Shipped'; }).length;
   document.getElementById('orderStats').innerHTML =
-    '<div class="stat-card"><span class="stat-num">' + orders.length + '</span><span class="stat-label">Total Orders</span></div>' +
+    '<div class="stat-card"><span class="stat-num">' + orders.length + '</span><span class="stat-label">Paid Orders</span></div>' +
     '<div class="stat-card stat-card--green"><span class="stat-num">RM ' + total.toLocaleString('en-MY',{minimumFractionDigits:0}) + '</span><span class="stat-label">Revenue</span></div>' +
     '<div class="stat-card stat-card--blue"><span class="stat-num">' + processing + '</span><span class="stat-label">Processing</span></div>' +
     '<div class="stat-card stat-card--red"><span class="stat-num">' + shipped + '</span><span class="stat-label">Shipped</span></div>';
@@ -129,23 +188,27 @@ function renderOrders() {
   if (filter) orders = orders.filter(function(o){ return o.status === filter; });
 
   var sMap = { Processing:'badge--blue', Shipped:'badge--gold', Delivered:'badge--green', Cancelled:'badge--red' };
+  var pMap = { paid:'badge--green', pending:'badge--grey', failed:'badge--red' };
 
   document.getElementById('ordersTbody').innerHTML = orders.length ? orders.map(function(o) {
     var itemCount = (o.items||[]).reduce(function(s,i){ return s+i.qty; }, 0);
     var dateStr = o.date ? new Date(o.date).toLocaleDateString('en-MY', {day:'2-digit',month:'short',year:'numeric'}) : '—';
     return '<tr>' +
-      '<td><strong style="font-size:.78rem">' + o.id + '</strong></td>' +
       '<td>' +
-        '<div style="font-size:.82rem;font-weight:600">' + (o.customer&&o.customer.name||'—') + '</div>' +
-        '<div style="font-size:.7rem;color:var(--muted)">' + (o.customer&&o.customer.email||'') + '</div>' +
+        '<strong style="font-size:.78rem">' + esc(o.id) + '</strong>' +
+        '<div style="margin-top:.25rem"><span class="badge ' + (pMap[o.paymentStatus]||'badge--grey') + '">' + esc(o.paymentStatus) + '</span></div>' +
+      '</td>' +
+      '<td>' +
+        '<div style="font-size:.82rem;font-weight:600">' + (esc(o.customer&&o.customer.name)||'—') + '</div>' +
+        '<div style="font-size:.7rem;color:var(--muted)">' + esc(o.customer&&o.customer.email) + '</div>' +
       '</td>' +
       '<td><span class="badge badge--grey">' + itemCount + ' item' + (itemCount!==1?'s':'') + '</span></td>' +
       '<td><strong>RM ' + (o.total||0).toLocaleString('en-MY',{minimumFractionDigits:2}) + '</strong></td>' +
       '<td style="font-size:.78rem;color:var(--muted)">' + dateStr + '</td>' +
-      '<td><span class="badge ' + (sMap[o.status]||'badge--grey') + '">' + o.status + '</span></td>' +
+      '<td><span class="badge ' + (sMap[o.status]||'badge--grey') + '">' + esc(o.status) + '</span></td>' +
       '<td class="td-actions">' +
-        '<button class="btn btn--outline btn--icon" onclick="viewOrder(\'' + o.id + '\')">View</button>' +
-        '<button class="btn btn--danger btn--icon" onclick="deleteOrder(\'' + o.id + '\')">✕</button>' +
+        '<button class="btn btn--outline btn--icon" onclick="viewOrder(\'' + esc(o.id) + '\')">View</button>' +
+        '<button class="btn btn--danger btn--icon" onclick="deleteOrder(\'' + esc(o.id) + '\')">✕</button>' +
       '</td>' +
     '</tr>';
   }).join('') :
@@ -165,7 +228,7 @@ function viewOrder(id) {
   var items = o.items || [];
   var itemsHtml = items.map(function(item) {
     return '<div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.82rem">' +
-      '<span>' + item.name + ' &times;' + item.qty + (item.sku?' <em style="color:var(--muted)">'+item.sku+'</em>':'') + '</span>' +
+      '<span>' + esc(item.name) + ' &times;' + item.qty + (item.sku?' <em style="color:var(--muted)">'+esc(item.sku)+'</em>':'') + '</span>' +
       '<span>RM ' + (parseFloat(item.price)*item.qty).toLocaleString('en-MY',{minimumFractionDigits:0}) + '</span>' +
     '</div>';
   }).join('');
@@ -174,24 +237,30 @@ function viewOrder(id) {
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem">' +
       '<div>' +
         '<div style="font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Customer</div>' +
-        '<div style="font-size:.85rem;font-weight:600">' + (c.name||'—') + '</div>' +
-        '<div style="font-size:.78rem;color:var(--muted)">' + (c.email||'') + '</div>' +
-        '<div style="font-size:.78rem;color:var(--muted)">' + (c.phone||'') + '</div>' +
+        '<div style="font-size:.85rem;font-weight:600">' + (esc(c.name)||'—') + '</div>' +
+        '<div style="font-size:.78rem;color:var(--muted)">' + esc(c.email) + '</div>' +
+        '<div style="font-size:.78rem;color:var(--muted)">' + esc(c.phone) + '</div>' +
       '</div>' +
       '<div>' +
         '<div style="font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Delivery Address</div>' +
-        '<div style="font-size:.78rem;color:var(--muted);line-height:1.6">' +
-          [c.address, c.city, c.postcode, c.state].filter(Boolean).join(', ') ||
-          '—' +
-        '</div>' +
+        // The server stores address, city, postcode and state as one field.
+        '<div style="font-size:.78rem;color:var(--muted);line-height:1.6">' + (esc(c.address)||'—') + '</div>' +
       '</div>' +
     '</div>' +
     '<div style="font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem">Items</div>' +
     itemsHtml +
     '<div style="margin-top:.75rem;padding-top:.5rem;display:flex;flex-direction:column;gap:.25rem">' +
       '<div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--mid)"><span>Subtotal</span><span>RM ' + (o.subtotal||0).toLocaleString('en-MY',{minimumFractionDigits:2}) + '</span></div>' +
-      (o.discount>0 ? '<div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--green)"><span>Discount' + (o.promoCode?' ('+o.promoCode+')':'') + '</span><span>−RM ' + (o.discount||0).toLocaleString('en-MY',{minimumFractionDigits:2}) + '</span></div>' : '') +
+      (o.discount>0 ? '<div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--green)"><span>Discount' + (o.promoCode?' ('+esc(o.promoCode)+')':'') + '</span><span>−RM ' + (o.discount||0).toLocaleString('en-MY',{minimumFractionDigits:2}) + '</span></div>' : '') +
       '<div style="display:flex;justify-content:space-between;font-size:.9rem;font-weight:600;color:var(--text);border-top:1px solid var(--border);padding-top:.5rem;margin-top:.25rem"><span>Total</span><span>RM ' + (o.total||0).toLocaleString('en-MY',{minimumFractionDigits:2}) + '</span></div>' +
+    '</div>' +
+    // Payment and stock facts, so a paid order is distinguishable from an
+    // abandoned checkout without leaving the page.
+    '<div style="margin-top:1rem;font-size:.7rem;color:var(--muted);line-height:1.7">' +
+      'Payment: ' + esc(o.paymentStatus) +
+        (o.paidAt ? ' · paid ' + new Date(o.paidAt).toLocaleString('en-MY') : '') + '<br/>' +
+      'Gateway bill: ' + (esc(o.gatewayRef) || '—') + '<br/>' +
+      'Stock deducted: ' + (o.stockDeductedAt ? new Date(o.stockDeductedAt).toLocaleString('en-MY') : 'no') +
     '</div>';
 
   document.getElementById('orderModalBg').classList.add('open');
@@ -202,39 +271,51 @@ function closeModal() {
   currentOrderId = null;
 }
 
-function updateOrderStatus() {
-  if (!currentOrderId) return;
-  var newStatus = document.getElementById('modalStatus').value;
-  var orders = getOrders();
-  var idx = orders.findIndex(function(o){ return o.id === currentOrderId; });
-  if (idx !== -1) {
-    orders[idx].status = newStatus;
-    localStorage.setItem('ep_orders', JSON.stringify(orders));
-    Store.log('Updated order ' + currentOrderId + ' → ' + newStatus);
-    renderOrders(); renderStats();
-    UI.toast('Order status updated to ' + newStatus, 'success');
-    closeModal();
-  }
+async function setFulfilment(orderRef, newStatus) {
+  var res = await fetch('/api/admin-orders', {
+    method:      'PATCH',
+    headers:     { 'Content-Type': 'application/json' },
+    credentials: 'same-origin',
+    body:        JSON.stringify({ orderRef: orderRef, fulfilmentStatus: newStatus }),
+  });
+  if (res.status === 401 || res.status === 403) { window.location.href = 'index.html'; return false; }
+  var data = await res.json().catch(function(){ return {}; });
+  if (!res.ok) { UI.toast(data.error || 'Could not update order', 'error'); return false; }
+  return true;
 }
 
+async function updateOrderStatus() {
+  if (!currentOrderId) return;
+  var newStatus = document.getElementById('modalStatus').value;
+  if (!await setFulfilment(currentOrderId, newStatus)) return;
+
+  Store.log('Updated order ' + currentOrderId + ' → ' + newStatus);
+  UI.toast('Order status updated to ' + newStatus, 'success');
+  closeModal();
+  await loadOrders();
+}
+
+/* Orders are financial records and are never deleted — cancelling is the
+   supported way to close one out. */
 async function deleteOrder(id) {
-  if (!await UI.confirm('Delete order ' + id + '? This cannot be undone.')) return;
-  var orders = getOrders().filter(function(o){ return o.id !== id; });
-  localStorage.setItem('ep_orders', JSON.stringify(orders));
-  renderOrders(); renderStats();
-  UI.toast('Order deleted');
+  if (!await UI.confirm('Cancel order ' + id + '? The record is kept for your accounts.')) return;
+  if (!await setFulfilment(id, 'Cancelled')) return;
+  UI.toast('Order cancelled');
+  await loadOrders();
 }
 
 function exportCSV() {
   var orders = getOrders();
   if (!orders.length) { UI.toast('No orders to export', 'info'); return; }
-  var rows = [['Order ID','Customer Name','Email','Phone','State','Items','Subtotal','Discount','Total','Date','Status','Promo']];
+  var rows = [['Order ID','Gateway Bill','Customer Name','Email','Phone','Address','Items',
+               'Subtotal','Discount','Total','Date','Payment','Fulfilment','Promo']];
   orders.forEach(function(o) {
     var c = o.customer || {};
     var itemStr = (o.items||[]).map(function(i){ return i.name + ' x' + i.qty; }).join('; ');
-    rows.push([o.id, c.name||'', c.email||'', c.phone||'', c.state||'', itemStr,
+    rows.push([o.id, o.gatewayRef||'', c.name||'', c.email||'', c.phone||'', c.address||'', itemStr,
       (o.subtotal||0).toFixed(2), (o.discount||0).toFixed(2), (o.total||0).toFixed(2),
-      o.date ? new Date(o.date).toLocaleDateString('en-MY') : '', o.status||'', o.promoCode||'']);
+      o.date ? new Date(o.date).toLocaleDateString('en-MY') : '',
+      o.paymentStatus||'', o.status||'', o.promoCode||'']);
   });
   var csv = rows.map(function(r){ return r.map(function(v){ return '"'+String(v).replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
   var blob = new Blob([csv], { type: 'text/csv' });
@@ -249,8 +330,7 @@ document.getElementById('orderModalBg').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
 
-renderStats();
-renderOrders();
+loadOrders();
 </script>
 </body>
 </html>

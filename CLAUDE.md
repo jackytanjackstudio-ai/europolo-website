@@ -9,7 +9,7 @@ Deployed on Vercel. No build step — `vercel.json` sets `"outputDirectory": "."
 - `index.html` — homepage
 - `bags.html`, `wallets.html`, `luggage.html` — collection pages
 - `product.html` — product detail page (rendered from `?id=EP0001` etc.)
-- `checkout.html`, `success.html` — order flow (Stripe, not yet live)
+- `checkout.html`, `success.html` — order flow (Billplz; see api/checkout.js)
 
 ---
 
@@ -81,11 +81,19 @@ Outputs:
 - Dev server: `py -m http.server 3000` from the project root
 
 ### What is NOT done yet
-1. **Images** — all variant/product images are Shopee CDN URLs. These may be blocked in production. Need to download and host on Cloudinary (Task 2 — awaiting credentials from user).
-2. **EP0050 blank SKU** — one variant (Green, stock=0) has a generated placeholder SKU `EP0050-FlipI-Gree`. Awaiting user decision: assign `EWB30564G` or remove the variant.
-3. **11 products with `option2Name = "Option 2"`** — placeholder label. Awaiting user's preferred label (likely "Model" or "Size"). Products: EP0012, EP0020, EP0026, EP0027, EP0028, EP0033, EP0037, EP0049, EP0050, EP0053, EP0056.
-4. **Forms** — contact form and newsletter form are placeholder UI only (no backend, no data stored). Need Formspree / Mailchimp / similar before launch.
-5. **Stripe** — checkout calls `/api/checkout` which does not exist yet as a Vercel function.
+1. **Images** — covers and galleries are served locally from
+   `images/products/<slug>/`. 542 of 910 refs are local; **368 still point at
+   the Shopee CDN** — 368 variant swatch images that were never downloaded.
+   Worklist with expected filenames: `docs/missing-images.md`.
+   Drop files at the paths listed there, then run
+   `node scripts/migrate-images.js --apply` to wire them up.
+
+   IMPORTANT: `py data/build_variants.py` rewrites image URLs back to Shopee.
+   Always re-run `node scripts/migrate-images.js --apply` after regenerating.
+
+2. **Forms** — contact form and newsletter form are placeholder UI only (no backend, no data stored). Need Formspree / Mailchimp / similar before launch.
+3. **Live payment verification** — the Billplz integration is code-complete but has not been
+   run end-to-end against the Billplz sandbox. See `docs/PAYMENT_SETUP.md`.
 
 ---
 
@@ -100,7 +108,11 @@ Outputs:
 | `cart.js` | Cart drawer, localStorage, badge, Cart.add() |
 | `css/product-detail.css` | Product detail + variant button styles |
 | `products.css` | Collection pages + quick-add popup styles |
-| `checkout.html` | Checkout page (Stripe-connected, not live) |
+| `checkout.html` | Checkout page (Billplz; totals come from `/api/checkout`) |
+| `api/_lib/billplz.js` | The ONLY gateway-aware module — endpoints, auth, X-Signature |
+| `api/_lib/orders.js` | The ONLY module that talks SQL (Neon order persistence) |
+| `scripts/migrate-images.js` | Repoints Shopee CDN image refs to local files (re-runnable) |
+| `scripts/gen-missing-images.js` | Regenerates `docs/missing-images.md` worklist |
 | `success.html` | Order confirmation page |
 
 ---
@@ -109,8 +121,8 @@ Outputs:
 
 - `product_id` (EP0001–EP0063) is the unique product key, not SKU
 - Variant SKU is unique per variant and is used as cart line identity
-- Images will move to Cloudinary; `build_variants.py` will need a `--upload` flag
-- `option2Name = "Option 2"` in the spreadsheet = placeholder, needs real label
+- Product images are served from local `images/products/<sku>/`; any variant with no
+  local file still points at the Shopee CDN (see the migration report)
 - Path convention: `images/...` (relative, not `/images/...`) for local + Vercel compatibility
 
 ---

@@ -1,0 +1,37 @@
+# Internal spreadsheets — must never be publicly downloadable
+*.xlsx
+
+# Data pipeline internals.
+# NOTE: data/product-data.json is deliberately NOT excluded — api/checkout.js
+# requires it at runtime as the server-side price source of truth.
+data/*.py
+data/previews/
+data/crop_report.html
+data/fill_comparison.html
+data/method_comparison.html
+data/_image-check.json
+data/download-report.json
+data/duplicates-report.json
+data/image-migration-report.json
+
+# Old backups
+_backup/
+
+# Local tooling
+scripts/
+.claude/
+__pycache__/
+*.pyc
+
+# Local secrets — belt and braces. Real config lives in Vercel env vars.
+.env
+.env.*
+
+# DB schema. Applied from a workstation via scripts/db-migrate.js, never
+# needed at runtime — and outputDirectory is ".", so anything left here
+# would be downloadable from the live site.
+migration.sql
+
+# Docs / session state — internal, and outputDirectory "." would publish them
+CLAUDE.md
+docs/
