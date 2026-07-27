@@ -74,24 +74,31 @@
 </div>
 
 <script>
+/* This page is a RECEIPT VIEW ONLY.
+   It does not create orders, mark anything paid, or adjust stock — the
+   toyyibPay server-to-server callback (api/payment-response.js) is the only
+   thing that may do that. Anything shown here is cosmetic and is rebuilt
+   from the pending summary this browser saved before redirecting to pay. */
 window.addEventListener('DOMContentLoaded', function () {
-  // Get iPay88 response from URL (redirected via api/payment-response)
-  var params    = new URLSearchParams(window.location.search);
-  var status    = params.get('status');
-  var refNo     = params.get('refno')   || '';
-  var transId   = params.get('transid') || '';
+  // toyyibPay response, forwarded by api/payment-response
+  var params  = new URLSearchParams(window.location.search);
+  var status  = params.get('status');   // 1 = success, 2 = pending
+  var refNo   = params.get('refno') || '';
 
-  // Use iPay88 RefNo as order ID, or generate fallback
-  var orderId = refNo || ('EP-' + Date.now().toString(36).toUpperCase().slice(-6));
-  document.getElementById('orderRef').textContent = orderId;
-
-  // Retrieve pending order from sessionStorage
   var pending = null;
   try { pending = JSON.parse(sessionStorage.getItem('ep_pending') || 'null'); } catch(e) {}
 
+  var orderId = refNo || (pending && pending.refNo) || '—';
+  document.getElementById('orderRef').textContent = orderId;
+
+  if (status === '2') {
+    document.getElementById('successMsg').textContent =
+      'Your payment is pending confirmation. We will email you as soon as it clears.';
+  }
+
   if (pending && pending.items && pending.items.length) {
-    var subtotal = pending.items.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
-    var total = Math.max(0, subtotal - (pending.discount || 0));
+    // Totals were computed by the server at checkout time — never recomputed here.
+    var total = Number(pending.total) || 0;
 
     if (!sessionStorage.getItem('ep_purchase_fired')) {
       sessionStorage.setItem('ep_purchase_fired', '1');
@@ -127,51 +134,26 @@ window.addEventListener('DOMContentLoaded', function () {
          item.colour  ? '<div style="font-size:.68rem;color:var(--muted);margin-top:.15rem">Colour: ' + item.colour + '</div>' : '') +
         (item.option2 ? '<div style="font-size:.68rem;color:var(--muted);margin-top:.1rem">' + (item.option2Name || 'Size') + ': ' + item.option2 + '</div>' : '') +
         '</div>' +
-        '<span>RM ' + (parseFloat(item.price) * item.qty).toLocaleString('en-MY', { minimumFractionDigits: 0 }) + '</span>' +
         '</div>';
     }).join('');
     document.getElementById('orderTotal').textContent = 'RM ' + total.toLocaleString('en-MY', { minimumFractionDigits: 2 });
     document.getElementById('orderSummary').style.display = 'block';
 
-    if (pending.customer && pending.customer.email) {
+    if (status !== '2' && pending.customer && pending.customer.email) {
       document.getElementById('successMsg').textContent = 'Your payment was successful. A confirmation has been sent to ' + pending.customer.email + '.';
     }
-
-    // Save order to localStorage for admin
-    var order = {
-      id: orderId,
-      sessionId: sessionId,
-      items: pending.items,
-      customer: pending.customer || {},
-      subtotal: subtotal,
-      discount: pending.discount || 0,
-      promoCode: pending.promoCode || '',
-      total: total,
-      date: new Date().toISOString(),
-      status: 'Processing',
-    };
-    var orders = [];
-    try { orders = JSON.parse(localStorage.getItem('ep_orders') || '[]'); } catch(e) {}
-    orders.unshift(order);
-    localStorage.setItem('ep_orders', JSON.stringify(orders));
-
-    // Deduct stock for each item
-    var products = [];
-    try { products = JSON.parse(localStorage.getItem('ep_products') || '[]'); } catch(e) {}
-    pending.items.forEach(function (item) {
-      var prod = products.find(function (p) { return p.id === item.id; });
-      if (prod && prod.stock !== undefined) {
-        var newStock = Math.max(0, parseInt(prod.stock) - item.qty);
-        prod.stock = newStock;
-        if (newStock === 0) prod.status = 'Out of Stock';
-      }
-    });
-    localStorage.setItem('ep_products', JSON.stringify(products));
   }
 
-  // Clear cart and pending order
-  localStorage.removeItem('ep_cart');
-  sessionStorage.removeItem('ep_pending');
+  /* No order is written and no stock is deducted here.
+     That is the callback's job — see api/payment-response.js.
+     (The previous version referenced an undefined `sessionId`, which threw
+     before the cart was cleared and left paid items sitting in the cart.) */
+
+  // Clear the cart only on a settled payment.
+  if (status === '1' || status === '2') {
+    localStorage.removeItem('ep_cart');
+    sessionStorage.removeItem('ep_pending');
+  }
 });
 </script>
 </body>
