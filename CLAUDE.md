@@ -81,7 +81,15 @@ Outputs:
 - Dev server: `py -m http.server 3000` from the project root
 
 ### What is NOT done yet
-1. **Images** — all variant/product images are Shopee CDN URLs. These may be blocked in production. Need to download and host on Cloudinary (Task 2 — awaiting credentials from user).
+1. **Images** — covers and galleries are served locally from
+   `images/products/<slug>/`. Still on the Shopee CDN: all 372 variant swatch
+   images (separate photographs that were never downloaded) and EP0063's 7
+   cover/gallery images (never downloaded). Supply those files and re-run
+   `node scripts/migrate-images.js --apply` to finish. Full breakdown in
+   `data/image-migration-report.json`.
+
+   IMPORTANT: `py data/build_variants.py` rewrites image URLs back to Shopee.
+   Always re-run `node scripts/migrate-images.js --apply` after regenerating.
 2. **Forms** — contact form and newsletter form are placeholder UI only (no backend, no data stored). Need Formspree / Mailchimp / similar before launch.
 3. **Live payment verification** — the Billplz integration is code-complete but has not been
    run end-to-end against the Billplz sandbox. See `docs/PAYMENT_SETUP.md`.
@@ -102,6 +110,7 @@ Outputs:
 | `checkout.html` | Checkout page (Billplz; totals come from `/api/checkout`) |
 | `api/_lib/billplz.js` | The ONLY gateway-aware module — endpoints, auth, X-Signature |
 | `api/_lib/orders.js` | The ONLY module that talks SQL (Neon order persistence) |
+| `scripts/migrate-images.js` | Repoints Shopee CDN image refs to local files (re-runnable) |
 | `success.html` | Order confirmation page |
 
 ---

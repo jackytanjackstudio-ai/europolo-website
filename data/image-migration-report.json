@@ -1,0 +1,2720 @@
+{
+  "generated": "2026-07-27",
+  "mode": "applied",
+  "totalRefs": 910,
+  "migratedToLocal": 531,
+  "leftOnShopee": 379,
+  "localFilesMapped": 530,
+  "localFilesUnused": 52,
+  "checkRowsSkipped": 0,
+  "remaining": [
+    {
+      "product": "EP0001",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA51208SB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820l8-mi48ui1yptl43d"
+    },
+    {
+      "product": "EP0001",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA51208SA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820la-mi48ue9lasjl2a"
+    },
+    {
+      "product": "EP0002",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA60302MF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820le-mlcx7ksmzfno9d"
+    },
+    {
+      "product": "EP0002",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA60302ML",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820l6-mlcx7mwzy8012b"
+    },
+    {
+      "product": "EP0002",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA60302MA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820la-mlcx7ibgfh1c71"
+    },
+    {
+      "product": "EP0003",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA60301SF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820l9-ml63q4widaf77c"
+    },
+    {
+      "product": "EP0003",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA60301SL",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820lc-ml63q7od261949"
+    },
+    {
+      "product": "EP0003",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA60301SA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820l9-ml63pnzk8wsj83"
+    },
+    {
+      "product": "EP0003",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA60301SE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820la-ml63q159c360e6"
+    },
+    {
+      "product": "EP0004",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA51207HC",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820lf-mi47qspco6pzc4"
+    },
+    {
+      "product": "EP0004",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA51207HA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820la-mi47qd1cvncy07"
+    },
+    {
+      "product": "EP0004",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBA51207HB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-820l9-mi47qi4hfny8ad"
+    },
+    {
+      "product": "EP0005",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK41002BA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasd-m9s5eom3qs4l4e"
+    },
+    {
+      "product": "EP0005",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK41002BB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasd-m9s5erkxefxwd0"
+    },
+    {
+      "product": "EP0005",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK41002BF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m9s5evn5ggmsac"
+    },
+    {
+      "product": "EP0005",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK41002BE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7ras9-m9s5ey2jwk6s80"
+    },
+    {
+      "product": "EP0006",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50113BI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasl-ma0y5hgzg25cd4"
+    },
+    {
+      "product": "EP0006",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50113BA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rase-ma0y4uhv2g9s4d"
+    },
+    {
+      "product": "EP0006",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50113BE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasd-ma0y4zolh6uqa8"
+    },
+    {
+      "product": "EP0006",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50113BF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rask-ma0y55q4muw006"
+    },
+    {
+      "product": "EP0007",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40802BE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lzu8o9xs7zog35"
+    },
+    {
+      "product": "EP0007",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40802BF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasa-m9s3tnqlvlk5fc"
+    },
+    {
+      "product": "EP0007",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40802BI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasf-m9s3vwbry38l6d"
+    },
+    {
+      "product": "EP0007",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40802BA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7ras9-m9s3ti1k7nqd27"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FI3IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rask-m4u0nb8a7a3v17"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FI2IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rask-m4u0nb8a7a3v17"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FI20",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rask-m4u0nb8a7a3v17"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FE12IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m4u0myn6mc4r6f"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FV28",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasl-m4u0nehxf49f0c"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FF3IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rash-m4u0n1n48e0bad"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FW24",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasg-m4u0niova8krc5"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FA20",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m4u0o0ukpm4z37"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FV24",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasl-m4u0nehxf49f0c"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FF24",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rash-m4u0n1n48e0bad"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FI28",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rask-m4u0nb8a7a3v17"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FW3IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasg-m4u0niova8krc5"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FE120",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m4u0myn6mc4r6f"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FV3IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasl-m4u0nehxf49f0c"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FE124",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m4u0myn6mc4r6f"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FW20",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasg-m4u0niova8krc5"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FE128",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m4u0myn6mc4r6f"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FA2IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m4u0o0ukpm4z37"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FF20",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rash-m4u0n1n48e0bad"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FF2IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rash-m4u0n1n48e0bad"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FA3IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m4u0o0ukpm4z37"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FI24",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rask-m4u0nb8a7a3v17"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FV20",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasl-m4u0nehxf49f0c"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FW28",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasg-m4u0niova8krc5"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FW2IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasg-m4u0niova8krc5"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FF28",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rash-m4u0n1n48e0bad"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FA24",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m4u0o0ukpm4z37"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FA28",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m4u0o0ukpm4z37"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FV2IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasl-m4u0nehxf49f0c"
+    },
+    {
+      "product": "EP0008",
+      "category": "luggage",
+      "slot": "variant",
+      "sku": "RY003FE13IN1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m4u0myn6mc4r6f"
+    },
+    {
+      "product": "EP0009",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB41052CA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rase-mb4se5b63cbv0e"
+    },
+    {
+      "product": "EP0009",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB410531A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasj-mb4sl3ce76i26c"
+    },
+    {
+      "product": "EP0009",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB410541A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasg-mb4sl95bpfoq5f"
+    },
+    {
+      "product": "EP0009",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB4105312A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasd-mb4snp72uuiecb"
+    },
+    {
+      "product": "EP0009",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB4105412A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasg-mb4so05ctvcmcf"
+    },
+    {
+      "product": "EP0009",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWK41051KA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasg-mb4sdwdl5xx2b7"
+    },
+    {
+      "product": "EP0010",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50102CA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasa-ma0ux37vdgxed9"
+    },
+    {
+      "product": "EP0010",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50102CE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasi-ma0ux6w7zsheef"
+    },
+    {
+      "product": "EP0010",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50102CF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rase-ma0uxad2x2ow25"
+    },
+    {
+      "product": "EP0011",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50112BI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasj-m6xngawjl115c0"
+    },
+    {
+      "product": "EP0011",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50112BA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7ras9-m6xnfyd3xn4p21"
+    },
+    {
+      "product": "EP0011",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50112BE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasc-m6xng36svgpl3e"
+    },
+    {
+      "product": "EP0011",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50112BF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rask-m6xng6xdejjt45"
+    },
+    {
+      "product": "EP0012",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB50156LA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasl-m6xev58yhit52e"
+    },
+    {
+      "product": "EP0012",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB50157LA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasl-m6xev58yhit52e"
+    },
+    {
+      "product": "EP0012",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB50156LB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7ras8-m6xevaaz35nd00"
+    },
+    {
+      "product": "EP0012",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB50157LB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7ras8-m6xevaaz35nd00"
+    },
+    {
+      "product": "EP0013",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40801BI",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-8261b-mj5ntl67sd1df4"
+    },
+    {
+      "product": "EP0013",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40801BA",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-82618-mj5ntk6k8kxse3"
+    },
+    {
+      "product": "EP0013",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40801BE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98x-lzu869b7eqg0a2"
+    },
+    {
+      "product": "EP0013",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40801BF",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-82616-mj5ntkplk1z801"
+    },
+    {
+      "product": "EP0014",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50110BF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasd-ma0v2f96cooie0"
+    },
+    {
+      "product": "EP0014",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50110BI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasf-ma0uyybr648ia5"
+    },
+    {
+      "product": "EP0014",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50110BA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7ras9-ma0v3s4auf3mcd"
+    },
+    {
+      "product": "EP0014",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50110BE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rash-ma0uynd77i0i5d"
+    },
+    {
+      "product": "EP0015",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBC 40322 E",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lxajo2vnzw4w27"
+    },
+    {
+      "product": "EP0015",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBC 40322 W",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lxairnauyhd6cb"
+    },
+    {
+      "product": "EP0015",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBC 40322 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r990-ls6gdf105vl099"
+    },
+    {
+      "product": "EP0015",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBC 40322 F",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r992-ls6gdf107a5g08"
+    },
+    {
+      "product": "EP0015",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBC 40322 P",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lxairnaux2sq07"
+    },
+    {
+      "product": "EP0016",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL2512AE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rash-mb6cgqol9lajf9"
+    },
+    {
+      "product": "EP0016",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL2512AR",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasl-mb6cgckk8aeif8"
+    },
+    {
+      "product": "EP0016",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL2512AB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasl-mb6cggd2da5m57"
+    },
+    {
+      "product": "EP0016",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL2512AW",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasc-mb6cgmk5atjfcf"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501A8",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-lr3wm333olpzb0"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501A13",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lyw1i8yhbza8e4"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501A5",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98u-lr3wm333yfqce4"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501EXA6",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasf-m63j2v95osx5b6"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501A12",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98x-lyw1i31nzey13b"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501EXA5",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasb-m63izmbgt7pv0f"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501EXA13",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasd-m63j1liemnv7b7"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501A6",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-lr3wm333zuas5c"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501EXA12",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasg-m63j1aigq2ujf4"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501A7",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98o-lr3wm33418v8c4"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501EXA7",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasf-m63j0w0k0n3f22"
+    },
+    {
+      "product": "EP0017",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL1501EXA8",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasi-m63j131vn49fcc"
+    },
+    {
+      "product": "EP0018",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40116BB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-m9s65kzkn6qo8b"
+    },
+    {
+      "product": "EP0018",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40116BE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7ras9-ma0uvtecfco076"
+    },
+    {
+      "product": "EP0018",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40116BF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rash-ma0uvwvrbtnk1f"
+    },
+    {
+      "product": "EP0018",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK40116BA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasd-ma0uvpnrwa2ae5"
+    },
+    {
+      "product": "EP0019",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50101BE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7ras9-ma0uvtecfco076"
+    },
+    {
+      "product": "EP0019",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50101BA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasd-ma0uvpnrwa2ae5"
+    },
+    {
+      "product": "EP0019",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50101BF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rash-ma0uvwvrbtnk1f"
+    },
+    {
+      "product": "EP0020",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40355 AB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lt6f1r4sp59z72"
+    },
+    {
+      "product": "EP0020",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40355 BC",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt6f1r4sqjuf6f"
+    },
+    {
+      "product": "EP0020",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40354 AI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt6f1r4snqpj09"
+    },
+    {
+      "product": "EP0020",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40355 AI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt6f1r4snqpj09"
+    },
+    {
+      "product": "EP0020",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40354 BC",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt6f1r4sqjuf6f"
+    },
+    {
+      "product": "EP0020",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40356 AB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lt6f1r4sp59z72"
+    },
+    {
+      "product": "EP0020",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40354 AB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lt6f1r4sp59z72"
+    },
+    {
+      "product": "EP0020",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40356 BC",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt6f1r4sqjuf6f"
+    },
+    {
+      "product": "EP0020",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40356 AI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt6f1r4snqpj09"
+    },
+    {
+      "product": "EP0021",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40163 A",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-0lcfhvrop4kv02"
+    },
+    {
+      "product": "EP0021",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40163 B",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-odffvkuop4kvd8"
+    },
+    {
+      "product": "EP0021",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40163 C",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-lshy9c1op4kv62"
+    },
+    {
+      "product": "EP0021",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40163 D",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lq8r2cjk8fge78"
+    },
+    {
+      "product": "EP0021",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40163 M",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98x-lq8r2cjk70vy22"
+    },
+    {
+      "product": "EP0022",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40157 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98u-ltkmuwk5lu8ead"
+    },
+    {
+      "product": "EP0022",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40157 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98u-ltkmuwk5lu8ead"
+    },
+    {
+      "product": "EP0022",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40158 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-ltkmuwk5n8sub0"
+    },
+    {
+      "product": "EP0022",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40158 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-ltkmuwk5n8sub0"
+    },
+    {
+      "product": "EP0022",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40159 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r992-ltkmuwk5ondaea"
+    },
+    {
+      "product": "EP0022",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40159 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r992-ltkmuwk5ondaea"
+    },
+    {
+      "product": "EP0022",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40160 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98x-ltkmuwk66wr238"
+    },
+    {
+      "product": "EP0022",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40160 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98x-ltkmuwk66wr238"
+    },
+    {
+      "product": "EP0023",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40312 AK",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lxw8h1pfh6y851"
+    },
+    {
+      "product": "EP0023",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40312 AP",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r991-lxw8gvri68vk24"
+    },
+    {
+      "product": "EP0023",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40312 AE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lxw8ga0rzo8g73"
+    },
+    {
+      "product": "EP0023",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40312 AF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98w-lxw8gkzbyaui91"
+    },
+    {
+      "product": "EP0023",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40312 AI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r992-lxw8hi2hj6ggf2"
+    },
+    {
+      "product": "EP0024",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40310 F",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r992-lt50itye8l4nc7"
+    },
+    {
+      "product": "EP0024",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40310 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lt4rio45zjlj87"
+    },
+    {
+      "product": "EP0024",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40310 E",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lt4rio460y5zbe"
+    },
+    {
+      "product": "EP0025",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40166 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-ls6htopglbsnfa"
+    },
+    {
+      "product": "EP0025",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40167 A",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-l9dej33ds6iv2b"
+    },
+    {
+      "product": "EP0025",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40167 B",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-l9dej33ds6iv2b"
+    },
+    {
+      "product": "EP0025",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40165 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-ls6htopgjx87ea"
+    },
+    {
+      "product": "EP0025",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40165 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-ls6htopgjx87ea"
+    },
+    {
+      "product": "EP0025",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40166 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-ls6htopglbsnfa"
+    },
+    {
+      "product": "EP0026",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40172 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt4mlotbgizo38"
+    },
+    {
+      "product": "EP0026",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40172 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt4mlotbgizo38"
+    },
+    {
+      "product": "EP0026",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40175 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt4mlotbhxk4b9"
+    },
+    {
+      "product": "EP0026",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40175 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt4mlotbhxk4b9"
+    },
+    {
+      "product": "EP0027",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40173 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-lt4mlotlzsbo11"
+    },
+    {
+      "product": "EP0027",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40173 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-lt4mlotlzsbo11"
+    },
+    {
+      "product": "EP0027",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40174 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98q-lt4mlotm16w461"
+    },
+    {
+      "product": "EP0027",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40174 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98q-lt4mlotm16w461"
+    },
+    {
+      "product": "EP0028",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40351 AI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt6f1r4snqpj09"
+    },
+    {
+      "product": "EP0028",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40351 AB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lt6f1r4sp59z72"
+    },
+    {
+      "product": "EP0028",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40353 AI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt6f1r4snqpj09"
+    },
+    {
+      "product": "EP0028",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40353 BC",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt6f1r4sqjuf6f"
+    },
+    {
+      "product": "EP0028",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40352 AB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lt6f1r4sp59z72"
+    },
+    {
+      "product": "EP0028",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40352 BC",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt6f1r4sqjuf6f"
+    },
+    {
+      "product": "EP0028",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40353 AB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lt6f1r4sp59z72"
+    },
+    {
+      "product": "EP0028",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40351 BC",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt6f1r4sqjuf6f"
+    },
+    {
+      "product": "EP0028",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40352 AI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt6f1r4snqpj09"
+    },
+    {
+      "product": "EP0029",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40164 M",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98o-lq8r2cju9fx112"
+    },
+    {
+      "product": "EP0029",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40164 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98w-lq8r2cju2ekefb"
+    },
+    {
+      "product": "EP0029",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40164 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lq8r2cju3t4ub6"
+    },
+    {
+      "product": "EP0029",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40164 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98x-lq8r2cju6ms553"
+    },
+    {
+      "product": "EP0029",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40164 D",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98s-lq8r2cju81cl65"
+    },
+    {
+      "product": "EP0030",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40361 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt639qa2ahwkdf"
+    },
+    {
+      "product": "EP0030",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40361 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt639qa2bwh035"
+    },
+    {
+      "product": "EP0030",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40361 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lt639qa2db1g91"
+    },
+    {
+      "product": "EP0031",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40162 D",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lq8r2cjknvpa2d"
+    },
+    {
+      "product": "EP0031",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40162 M",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r991-lq8r2cjkpa9q9f"
+    },
+    {
+      "product": "EP0031",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40162 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lq8r2cjkwbmd79"
+    },
+    {
+      "product": "EP0031",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40162 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lq8r2cjkxq6t19"
+    },
+    {
+      "product": "EP0031",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40162 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-lq8r2cjkz4r9b5"
+    },
+    {
+      "product": "EP0032",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40161 D",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98w-lq8r2cjk1em68f"
+    },
+    {
+      "product": "EP0032",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40161 M",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-lq8r2cjk2t6m76"
+    },
+    {
+      "product": "EP0032",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40161 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98x-lq8r2cjjx6wu4b"
+    },
+    {
+      "product": "EP0032",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40161 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r992-lq8r2cjjylha96"
+    },
+    {
+      "product": "EP0032",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40161 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lq8r2cjk001q81"
+    },
+    {
+      "product": "EP0033",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40357 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lt639qa2db1g91"
+    },
+    {
+      "product": "EP0033",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40358 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lt639qa2db1g91"
+    },
+    {
+      "product": "EP0033",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40357 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt639qa2ahwkdf"
+    },
+    {
+      "product": "EP0033",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40358 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt639qa2ahwkdf"
+    },
+    {
+      "product": "EP0033",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40357 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt639qa2bwh035"
+    },
+    {
+      "product": "EP0033",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40358 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt639qa2bwh035"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 B D11",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98w-lr45nfbobhtj71"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 A D9",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lr45nfbo8oonb2"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 I D10",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98w-lr45nfboa3935f"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 F D10",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98w-lr45nfboa3935f"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 B D10",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98w-lr45nfboa3935f"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 F D9",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lr45nfbo8oonb2"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 I D11",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98w-lr45nfbobhtj71"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 I D9",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lr45nfbo8oonb2"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 B D9",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lr45nfbo8oonb2"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 A D10",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98w-lr45nfboa3935f"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 A D11",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98w-lr45nfbobhtj71"
+    },
+    {
+      "product": "EP0034",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1501 F D11",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98w-lr45nfbobhtj71"
+    },
+    {
+      "product": "EP0035",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40362 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98s-lt4rio2sh0xj6e"
+    },
+    {
+      "product": "EP0035",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40362 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98q-lt4rio2sifhz5a"
+    },
+    {
+      "product": "EP0035",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40362 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r991-lt4rio2rqc53b7"
+    },
+    {
+      "product": "EP0036",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40360 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lt639qa2db1g91"
+    },
+    {
+      "product": "EP0036",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40360 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt639qa2ahwkdf"
+    },
+    {
+      "product": "EP0036",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40360 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt639qa2bwh035"
+    },
+    {
+      "product": "EP0037",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40170 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98o-lt4mlotlhixw5e"
+    },
+    {
+      "product": "EP0037",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40170 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98o-lt4mlotlhixw5e"
+    },
+    {
+      "product": "EP0037",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40171 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-lt4mlotlixicdb"
+    },
+    {
+      "product": "EP0037",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWA 40171 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-lt4mlotlixicdb"
+    },
+    {
+      "product": "EP0038",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40363 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lt4rio2t3i0n8b"
+    },
+    {
+      "product": "EP0038",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40363 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r992-lt4rio2t4wl3b6"
+    },
+    {
+      "product": "EP0038",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40363 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r990-lt4rio2t23g77c"
+    },
+    {
+      "product": "EP0039",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50111BF",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasb-ma0v5erj0w6qbf"
+    },
+    {
+      "product": "EP0039",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50111BB",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasd-ma0v5jmvwa2a62"
+    },
+    {
+      "product": "EP0039",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50111BA",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasm-ma0v56ix2y1s74"
+    },
+    {
+      "product": "EP0039",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK50111BE",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasi-ma0v5ak16l7ka0"
+    },
+    {
+      "product": "EP0040",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40359 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt639qa2bwh035"
+    },
+    {
+      "product": "EP0040",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40359 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lt639qa2db1g91"
+    },
+    {
+      "product": "EP0040",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40359 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt639qa2ahwkdf"
+    },
+    {
+      "product": "EP0041",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30562 I",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul4-ljgtjc5ozevudc"
+    },
+    {
+      "product": "EP0041",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30561 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul7-ljgtjc5oy0bebd"
+    },
+    {
+      "product": "EP0041",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30561 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul7-ljgtjc5oy0bebd"
+    },
+    {
+      "product": "EP0041",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30561 F",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul7-ljgtjc5oy0bebd"
+    },
+    {
+      "product": "EP0041",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30561 I",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul7-ljgtjc5oy0bebd"
+    },
+    {
+      "product": "EP0041",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30562 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul4-ljgtjc5ozevudc"
+    },
+    {
+      "product": "EP0041",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30562 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul4-ljgtjc5ozevudc"
+    },
+    {
+      "product": "EP0041",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30562 F",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul4-ljgtjc5ozevudc"
+    },
+    {
+      "product": "EP0042",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30354 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul5-lfhnkno5uyvte8"
+    },
+    {
+      "product": "EP0042",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30354 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul5-lfhnkno5uyvte8"
+    },
+    {
+      "product": "EP0042",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30354 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul5-lfhnkno5uyvte8"
+    },
+    {
+      "product": "EP0042",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30356 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukx-lfhnkno5xs0pc7"
+    },
+    {
+      "product": "EP0042",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30355 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul2-lfhnkno5wdg91f"
+    },
+    {
+      "product": "EP0042",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30355 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul2-lfhnkno5wdg91f"
+    },
+    {
+      "product": "EP0042",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30355 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul2-lfhnkno5wdg91f"
+    },
+    {
+      "product": "EP0042",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30356 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukx-lfhnkno5xs0pc7"
+    },
+    {
+      "product": "EP0042",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30356 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukx-lfhnkno5xs0pc7"
+    },
+    {
+      "product": "EP0043",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 001 D9",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-uqpl0un4objv58"
+    },
+    {
+      "product": "EP0043",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 001 D10",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-rmm1f7w4objva7"
+    },
+    {
+      "product": "EP0043",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 001 D11",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-7j135b44objvd1"
+    },
+    {
+      "product": "EP0044",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30199 M",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r992-ls15dfzjwy0497"
+    },
+    {
+      "product": "EP0044",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30199 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lmeg0jv4d9xydc"
+    },
+    {
+      "product": "EP0044",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30199 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lmeg0jv4eoiefe"
+    },
+    {
+      "product": "EP0044",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30199 E",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-ls15dfzjrbqc79"
+    },
+    {
+      "product": "EP0044",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30199 F",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98q-ls15dfzjsqas26"
+    },
+    {
+      "product": "EP0044",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30199 L",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98o-ls15dfzju4v8c2"
+    },
+    {
+      "product": "EP0044",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30199 P",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r991-ls15dfzjvjfo54"
+    },
+    {
+      "product": "EP0044",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30199 FI",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7rasj-m2t1zma1yw4m13"
+    },
+    {
+      "product": "EP0045",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40168 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98q-ls6htoph0s1jeb"
+    },
+    {
+      "product": "EP0045",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 40168 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r991-ls6htoph26lzee"
+    },
+    {
+      "product": "EP0046",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20964 I",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-t0rxqhegjmlvb2"
+    },
+    {
+      "product": "EP0046",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20964 P",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-3h5gqwigjmlvda"
+    },
+    {
+      "product": "EP0046",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20964 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul9-ljmecbz1h8gqcc"
+    },
+    {
+      "product": "EP0046",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20964 B",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-uxhy9s1fjmlve3"
+    },
+    {
+      "product": "EP0046",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20964 E",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljmecbz1lg6208"
+    },
+    {
+      "product": "EP0046",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20964 F",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-7rslanagjmlve7"
+    },
+    {
+      "product": "EP0047",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30551 A2",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljmdzmr0yja263"
+    },
+    {
+      "product": "EP0047",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30551 A3",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljmdzmr0yja263"
+    },
+    {
+      "product": "EP0047",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30552 A1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukw-ljmdzmr0zxui2a"
+    },
+    {
+      "product": "EP0047",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30553 A3",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul1-ljmdzmr11ceyf8"
+    },
+    {
+      "product": "EP0047",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30552 A3",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukw-ljmdzmr0zxui2a"
+    },
+    {
+      "product": "EP0047",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30552 A2",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukw-ljmdzmr0zxui2a"
+    },
+    {
+      "product": "EP0047",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30553 A2",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul1-ljmdzmr11ceyf8"
+    },
+    {
+      "product": "EP0047",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30553 A1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul1-ljmdzmr11ceyf8"
+    },
+    {
+      "product": "EP0047",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30551 A1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljmdzmr0yja263"
+    },
+    {
+      "product": "EP0048",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30567 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul6-ljgtjc5p515mde"
+    },
+    {
+      "product": "EP0048",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30567 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul8-ljgtjc5p3ml695"
+    },
+    {
+      "product": "EP0049",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20968 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-23010-5surmjx2f7lvcd"
+    },
+    {
+      "product": "EP0049",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20967 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-23010-5wdheif3f7lv42"
+    },
+    {
+      "product": "EP0049",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20968 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-23010-5wdheif3f7lv42"
+    },
+    {
+      "product": "EP0049",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20967 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-23010-mjgkihu3f7lv2c"
+    },
+    {
+      "product": "EP0049",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20968 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-23010-mjgkihu3f7lv2c"
+    },
+    {
+      "product": "EP0049",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20967 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-23010-5surmjx2f7lvcd"
+    },
+    {
+      "product": "EP0050",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30564 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul9-ljl4f8jlad5m1f"
+    },
+    {
+      "product": "EP0050",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30564 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul9-ljl4f8jlad5m1f"
+    },
+    {
+      "product": "EP0050",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30564 F",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul9-ljl4f8jlad5m1f"
+    },
+    {
+      "product": "EP0050",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB30564G",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul9-ljl4f8jlad5m1f"
+    },
+    {
+      "product": "EP0050",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30563 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukz-ljl4f8jl8yl6b0"
+    },
+    {
+      "product": "EP0050",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30563 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukz-ljl4f8jl8yl6b0"
+    },
+    {
+      "product": "EP0050",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30563 F",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukz-ljl4f8jl8yl6b0"
+    },
+    {
+      "product": "EP0050",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30563 I",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukz-ljl4f8jl8yl6b0"
+    },
+    {
+      "product": "EP0051",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1506 F",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-ixmimk5fixiv76"
+    },
+    {
+      "product": "EP0051",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1506 L",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-qvykl3bgixiv4a"
+    },
+    {
+      "product": "EP0051",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1506 R",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-lcx8tiigixiva7"
+    },
+    {
+      "product": "EP0051",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1506 W",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-hxesshngixiv77"
+    },
+    {
+      "product": "EP0051",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1506 A",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-yd71vh0eixivb5"
+    },
+    {
+      "product": "EP0051",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1506 B",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-e38u5exfixiv14"
+    },
+    {
+      "product": "EP0051",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 1506 E",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-39gd7yqfixivef"
+    },
+    {
+      "product": "EP0052",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20960 A",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-5nnj9sl2qpkv6b"
+    },
+    {
+      "product": "EP0052",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20960 B",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-v41n86o2qpkv1c"
+    },
+    {
+      "product": "EP0052",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20960 E",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-fbg929t2qpkv5e"
+    },
+    {
+      "product": "EP0052",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20960 F",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-scliq6x2qpkvc6"
+    },
+    {
+      "product": "EP0052",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20960 I",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-o2lky822qpkv24"
+    },
+    {
+      "product": "EP0052",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20960 P",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-j1viwq82qpkvd3"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20962 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul5-ljmecbz1r2fu5e"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20961 M",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r992-ls15dfzjoilgab"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20962 F",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljmecbz1tvkq3f"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20961 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul5-ljmecbz1r2fu5e"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20961 P",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul4-ljmjl9jc7p06b7"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20961 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljmecbz1pnve8e"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20961 F",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljmecbz1tvkq3f"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20962 M",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r992-ls15dfzjoilgab"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20962 E",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul7-ljmecbz1sh0aa7"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20962 P",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul4-ljmjl9jc7p06b7"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20961 E",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul7-ljmecbz1sh0aa7"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20962 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljmecbz1pnve8e"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20961 I",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukw-ljmjl9jc6afq04"
+    },
+    {
+      "product": "EP0053",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20962 I",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukw-ljmjl9jc6afq04"
+    },
+    {
+      "product": "EP0054",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 001 D4",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-s3q7z7tolbjv98"
+    },
+    {
+      "product": "EP0054",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 001 D5",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-p8rfuo8olbjv27"
+    },
+    {
+      "product": "EP0054",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 001 D1",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-8yqk6bdnlbjvad"
+    },
+    {
+      "product": "EP0054",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 001 D2",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-am41dlmnlbjv98"
+    },
+    {
+      "product": "EP0054",
+      "category": "belts",
+      "slot": "variant",
+      "sku": "EBL 001 D3",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-11anv6dolbjvd3"
+    },
+    {
+      "product": "EP0055",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40309 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lt4rio45zjlj87"
+    },
+    {
+      "product": "EP0055",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40309 E",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lt4rio460y5zbe"
+    },
+    {
+      "product": "EP0055",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40309 F",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r992-lt50itye8l4nc7"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 50159 L A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul9-ljmecbz1h8gqcc"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20969 M",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukx-ljmecbz1o9ay6f"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 50160 L C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul9-ljmecbz1k1lm37"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20969 I",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukz-ljmecbz1muqi52"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 50160 L A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul9-ljmecbz1h8gqcc"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20970 I",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukz-ljmecbz1muqi52"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20969 E",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljmecbz1lg6208"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 50159 L B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul3-ljmecbz1in168c"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20970 M",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukx-ljmecbz1o9ay6f"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 50160 L B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul3-ljmecbz1in168c"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 50159 L C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul9-ljmecbz1k1lm37"
+    },
+    {
+      "product": "EP0056",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20970 E",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljmecbz1lg6208"
+    },
+    {
+      "product": "EP0057",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30556 A2",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul3-ljmdzmr15k4af6"
+    },
+    {
+      "product": "EP0057",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30554 A2",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukz-ljmdzmr12qzedb"
+    },
+    {
+      "product": "EP0057",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30555 A3",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul2-ljmdzmr145judc"
+    },
+    {
+      "product": "EP0057",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30554 A1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukz-ljmdzmr12qzedb"
+    },
+    {
+      "product": "EP0057",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30554 A3",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukz-ljmdzmr12qzedb"
+    },
+    {
+      "product": "EP0057",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30556 A1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul3-ljmdzmr15k4af6"
+    },
+    {
+      "product": "EP0057",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30556 A3",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul3-ljmdzmr15k4af6"
+    },
+    {
+      "product": "EP0057",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30555 A2",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul2-ljmdzmr145judc"
+    },
+    {
+      "product": "EP0057",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30555 A1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul2-ljmdzmr145judc"
+    },
+    {
+      "product": "EP0058",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30353 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukx-lfhnkno5xs0pc7"
+    },
+    {
+      "product": "EP0058",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30351 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul5-lfhnkno5uyvte8"
+    },
+    {
+      "product": "EP0058",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30352 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul2-lfhnkno5wdg91f"
+    },
+    {
+      "product": "EP0058",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30352 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul2-lfhnkno5wdg91f"
+    },
+    {
+      "product": "EP0058",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30351 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul5-lfhnkno5uyvte8"
+    },
+    {
+      "product": "EP0058",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30351 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul5-lfhnkno5uyvte8"
+    },
+    {
+      "product": "EP0058",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30353 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukx-lfhnkno5xs0pc7"
+    },
+    {
+      "product": "EP0058",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30353 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qukx-lfhnkno5xs0pc7"
+    },
+    {
+      "product": "EP0058",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30352 C",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul2-lfhnkno5wdg91f"
+    },
+    {
+      "product": "EP0059",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20951 A",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-68mg0tjds6iv27"
+    },
+    {
+      "product": "EP0059",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20953 C",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-l9dej33ds6iv2b"
+    },
+    {
+      "product": "EP0059",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20951 C",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-68mg0tjds6iv27"
+    },
+    {
+      "product": "EP0059",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20952 B",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-smy0e0les6ivd6"
+    },
+    {
+      "product": "EP0059",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20951 B",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-68mg0tjds6iv27"
+    },
+    {
+      "product": "EP0059",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20952 A",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-smy0e0les6ivd6"
+    },
+    {
+      "product": "EP0059",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20953 A",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-l9dej33ds6iv2b"
+    },
+    {
+      "product": "EP0059",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20953 B",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-l9dej33ds6iv2b"
+    },
+    {
+      "product": "EP0059",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20952 C",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22100-smy0e0les6ivd6"
+    },
+    {
+      "product": "EP0060",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30566 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljgtjc5p280q3f"
+    },
+    {
+      "product": "EP0060",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30566 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljgtjc5p280q3f"
+    },
+    {
+      "product": "EP0060",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30565 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul1-ljgtjc5p0tga34"
+    },
+    {
+      "product": "EP0060",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 30565 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7qul1-ljgtjc5p0tga34"
+    },
+    {
+      "product": "EP0061",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EP 21083 A 2",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lx1xp4k45v1s3e"
+    },
+    {
+      "product": "EP0061",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EP 21083 A 1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98x-lx1xp4k44ghcd2"
+    },
+    {
+      "product": "EP0061",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EP 21081 A 1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98x-lx1xp4k44ghcd2"
+    },
+    {
+      "product": "EP0061",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EP 21081 A 3",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lx1xp4k479m84f"
+    },
+    {
+      "product": "EP0061",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EP 21083 A 3",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lx1xp4k479m84f"
+    },
+    {
+      "product": "EP0061",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EP 21082 A 2",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lx1xp4k45v1s3e"
+    },
+    {
+      "product": "EP0061",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EP 21082 A 1",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98x-lx1xp4k44ghcd2"
+    },
+    {
+      "product": "EP0061",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EP 21081 A 2",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lx1xp4k45v1s3e"
+    },
+    {
+      "product": "EP0061",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EP 21082 A 3",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lx1xp4k479m84f"
+    },
+    {
+      "product": "EP0062",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20965 C",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-w5di44l05klv32"
+    },
+    {
+      "product": "EP0062",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20965 M",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-oz6ym8o05klv4b"
+    },
+    {
+      "product": "EP0062",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20965 A",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-0l5vg4g05klv6f"
+    },
+    {
+      "product": "EP0062",
+      "category": "wallets",
+      "slot": "variant",
+      "sku": "EWB 20965 B",
+      "url": "https://cf.shopee.com.my/file/sg-11134201-22120-9xph6dj05klvf0"
+    },
+    {
+      "product": "EP0063",
+      "category": "bags",
+      "slot": "cover",
+      "sku": null,
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-ltlriitzhz4k4c"
+    },
+    {
+      "product": "EP0063",
+      "category": "bags",
+      "slot": "gallery[0]",
+      "sku": null,
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lxtjdh6lx7qice"
+    },
+    {
+      "product": "EP0063",
+      "category": "bags",
+      "slot": "gallery[1]",
+      "sku": null,
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lxtjdh6luelm05"
+    },
+    {
+      "product": "EP0063",
+      "category": "bags",
+      "slot": "gallery[2]",
+      "sku": null,
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98s-lxtjdh6lue7kd1"
+    },
+    {
+      "product": "EP0063",
+      "category": "bags",
+      "slot": "gallery[3]",
+      "sku": null,
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r991-lxtjdh6lvss0cf"
+    },
+    {
+      "product": "EP0063",
+      "category": "bags",
+      "slot": "gallery[4]",
+      "sku": null,
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-lxtjdh6lx7cg9a"
+    },
+    {
+      "product": "EP0063",
+      "category": "bags",
+      "slot": "gallery[5]",
+      "sku": null,
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98z-lxtjdh6lvt6239"
+    },
+    {
+      "product": "EP0063",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40115 B",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lsc30bvqe7ef25"
+    },
+    {
+      "product": "EP0063",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40115 E",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98p-lsc30bvqflyv37"
+    },
+    {
+      "product": "EP0063",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40115 F",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98r-lsc30bvqh0jbf1"
+    },
+    {
+      "product": "EP0063",
+      "category": "bags",
+      "slot": "variant",
+      "sku": "EBK 40115 A",
+      "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lsc30bvqcstz08"
+    }
+  ],
+  "unusedLocalFiles": [
+    "images/products/bags/eba51208s/gallery-2.jpg",
+    "images/products/bags/ebk-40115/cover.jpg",
+    "images/products/bags/ebk-40115/cover_orig.jpg",
+    "images/products/bags/ebk-40115/ebk-40115-a.jpg",
+    "images/products/bags/ebk-40115/ebk-40115-b.jpg",
+    "images/products/bags/ebk-40115/ebk-40115-e.jpg",
+    "images/products/bags/ebk-40115/ebk-40115-f.jpg",
+    "images/products/bags/ebk-40115/gallery-1.jpg",
+    "images/products/bags/ebk-40115/gallery-2.jpg",
+    "images/products/bags/ebk-40115/gallery-3.jpg",
+    "images/products/bags/ebk-40115/gallery-4.jpg",
+    "images/products/bags/ebk-40115/gallery-5.jpg",
+    "images/products/bags/ebk-40115/gallery-6.jpg",
+    "images/products/bags/ebk-40116/cover_orig.jpg",
+    "images/products/bags/ebk-40309/cover_orig.jpg",
+    "images/products/bags/ebk-40312/cover_orig.jpg",
+    "images/products/bags/ebk40801b/cover_orig.jpg",
+    "images/products/bags/ebk40802b/cover_orig.jpg",
+    "images/products/bags/ebk41002b/cover_orig.jpg",
+    "images/products/bags/ebk50101b/cover_orig.jpg",
+    "images/products/bags/ebk50102c/cover_orig.jpg",
+    "images/products/belts/ebl-001-1/cover_orig.jpg",
+    "images/products/belts/ebl-1501/cover_orig.jpg",
+    "images/products/belts/ebl-1501-a/cover_orig.jpg",
+    "images/products/belts/ebl-1506/cover_orig.jpg",
+    "images/products/belts/ebl2512/cover_orig.jpg",
+    "images/products/wallets/ewa-40170-40171/cover_orig.jpg",
+    "images/products/wallets/ewa-40173-40174/cover_orig.jpg",
+    "images/products/wallets/ewb-20951-20952-20953/cover_orig.jpg",
+    "images/products/wallets/ewb-20960/cover_orig.jpg",
+    "images/products/wallets/ewb-20961-20962/cover_orig.jpg",
+    "images/products/wallets/ewb-20964/cover_orig.jpg",
+    "images/products/wallets/ewb-20965/cover_orig.jpg",
+    "images/products/wallets/ewb-20967-209668/cover_orig.jpg",
+    "images/products/wallets/ewb-30351-30352-30353/cover_orig.jpg",
+    "images/products/wallets/ewb-30354-30355-30356/cover_orig.jpg",
+    "images/products/wallets/ewb-30554-ewb-30555-ewb-30556/cover_orig.jpg",
+    "images/products/wallets/ewb-30561-ewb-30562/cover_orig.jpg",
+    "images/products/wallets/ewb-30563-ewb-30564/cover_orig.jpg",
+    "images/products/wallets/ewb-30565-ewb-30566/cover_orig.jpg",
+    "images/products/wallets/ewb-30567/cover_orig.jpg",
+    "images/products/wallets/ewb-40157-40158-40159-40160/cover_orig.jpg",
+    "images/products/wallets/ewb-40161/cover_orig.jpg",
+    "images/products/wallets/ewb-40163/cover_orig.jpg",
+    "images/products/wallets/ewb-40164/cover_orig.jpg",
+    "images/products/wallets/ewb-40165-40166-40167/cover_orig.jpg",
+    "images/products/wallets/ewb-40351-40352-40353/cover_orig.jpg",
+    "images/products/wallets/ewb-40354-40355-40356/cover_orig.jpg",
+    "images/products/wallets/ewb-40357-40358/cover_orig.jpg",
+    "images/products/wallets/ewb-40360/cover_orig.jpg",
+    "images/products/wallets/ewb-40362/cover_orig.jpg",
+    "images/products/wallets/ewb-40363/cover_orig.jpg"
+  ],
+  "skipped": []
+}

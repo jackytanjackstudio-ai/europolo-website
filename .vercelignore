@@ -12,6 +12,7 @@ data/method_comparison.html
 data/_image-check.json
 data/download-report.json
 data/duplicates-report.json
+data/image-migration-report.json
 
 # Old backups
 _backup/
