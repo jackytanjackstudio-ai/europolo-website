@@ -56,9 +56,11 @@ function buildUrlMap() {
   const catOf = new Map(report.products.map(p => [p.id, p.category]));
 
   const map = new Map();          // url -> relative local path
+  const skuSlug = new Map();      // SKU -> recorded slug
   const skipped = [];             // recorded but file missing on disk
 
   for (const e of check) {
+    if (e.sku) skuSlug.set(String(e.sku).toUpperCase(), e.id);
     if (!e.ok) { skipped.push({ url: e.url, reason: 'download not ok' }); continue; }
 
     const slug = normaliseSlug(e.id);
@@ -79,39 +81,112 @@ function buildUrlMap() {
       skipped.push({ url: e.url, reason: 'file absent: ' + rel });
     }
   }
-  return { map, skipped };
+  return { map, skuSlug, skipped };
 }
 
 function main() {
-  const { map, skipped } = buildUrlMap();
+  const { map, skuSlug, skipped } = buildUrlMap();
   const data = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
 
-  let migrated = 0, left = 0;
+  let alreadyLocal = 0, migrated = 0, wiredByConvention = 0, left = 0;
   const remaining = [];
+  const usedPaths = new Set();   // every local file the catalogue ends up pointing at
+
+  /* Resolve a product's image directory, e.g. "images/products/bags/ebk-40115".
+     Preference order, each verified against the filesystem:
+       1. the directory of a path this product already points at
+       2. the slug recorded for one of its skus in _image-check.json
+       3. slug candidates derived from the sku, kept only if the directory exists
+     Returns null rather than guessing. */
+  function resolveDir(p) {
+    const existing = [p.images && p.images.cover, ...((p.images && p.images.gallery) || []),
+                     ...((p.variants || []).map(v => v.image))]
+      .find(u => u && !/^https?:/i.test(u));
+    if (existing) return path.posix.dirname(existing);
+
+    for (const v of (p.variants || [])) {
+      const slug = skuSlug.get(String(v.sku).toUpperCase());
+      if (slug) {
+        const dir = path.posix.join('images/products', p.category, normaliseSlug(slug));
+        if (fs.existsSync(path.join(ROOT, dir))) return dir;
+      }
+    }
+
+    // "EBK 40115 A" -> base "EBK 40115" -> ebk-40115 / ebk40115
+    for (const v of (p.variants || [])) {
+      const parts = String(v.sku).trim().split(/\s+/);
+      const base = (parts.length > 1 ? parts.slice(0, -1) : parts).join(' ').toLowerCase();
+      for (const cand of [base.replace(/\s+/g, '-'), base.replace(/\s+/g, '')]) {
+        const dir = path.posix.join('images/products', p.category, cand);
+        if (fs.existsSync(path.join(ROOT, dir))) return dir;
+      }
+    }
+    return null;
+  }
+
+  /* Filename this slot is expected to use, following the existing convention.
+
+     Variant files are "<folder>-<variant suffix>.jpg". The suffix is whatever
+     the sku adds on top of the folder name once both are reduced to bare
+     alphanumerics, so "EBK 40115 B" in folder "ebk-40115" and "EBA51208SB" in
+     folder "eba51208s" both yield "-b". Falls back to the sku's last
+     whitespace-separated token when it does not extend the folder name. */
+  function expectedName(slot, index, sku, dir) {
+    if (slot === 'cover')   return 'cover.jpg';
+    if (slot === 'gallery') return `gallery-${index + 1}.jpg`;
+
+    const folder = path.posix.basename(dir || '');
+    const bare   = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+    const skuBare = bare(sku);
+    const dirBare = bare(folder);
+
+    let suffix = skuBare.startsWith(dirBare) && skuBare.length > dirBare.length
+      ? skuBare.slice(dirBare.length)
+      : String(sku).trim().split(/\s+/).pop().toLowerCase();
+
+    return `${folder}-${suffix}.jpg`;
+  }
 
   for (const p of data.products) {
     const im = p.images || {};
+    const dir = resolveDir(p);
 
-    if (im.cover) {
-      const hit = map.get(im.cover);
-      if (hit) { if (APPLY) im.cover = hit; migrated++; }
-      else { left++; remaining.push({ product: p.id, category: p.category, slot: 'cover', sku: null, url: im.cover }); }
-    }
+    // One ref: already local, mapped by recorded URL, wired by convention, or left.
+    const handle = (url, slot, index, sku, assign) => {
+      if (url && !/^https?:/i.test(url)) { alreadyLocal++; usedPaths.add(url); return url; }
+
+      const byUrl = map.get(url);
+      if (byUrl) { migrated++; usedPaths.add(byUrl); if (APPLY) assign(byUrl); return APPLY ? byUrl : url; }
+
+      const name = expectedName(slot, index, sku, dir);
+      const rel  = dir ? path.posix.join(dir, name) : null;
+      if (rel && fs.existsSync(path.join(ROOT, rel))) {
+        wiredByConvention++;
+        usedPaths.add(rel);
+        if (APPLY) assign(rel);
+        return APPLY ? rel : url;
+      }
+
+      left++;
+      remaining.push({
+        product: p.id, category: p.category, name: p.name,
+        slot: slot === 'gallery' ? `gallery[${index}]` : slot,
+        sku: sku || null,
+        expectedPath: rel || `images/products/${p.category}/<unknown-dir>/${name}`,
+        url,
+      });
+      return url;
+    };
+
+    if (im.cover) im.cover = handle(im.cover, 'cover', 0, null, v => { im.cover = v; });
 
     if (Array.isArray(im.gallery)) {
-      im.gallery = im.gallery.map((u, i) => {
-        const hit = map.get(u);
-        if (hit) { migrated++; return APPLY ? hit : u; }
-        left++; remaining.push({ product: p.id, category: p.category, slot: `gallery[${i}]`, sku: null, url: u });
-        return u;
-      });
+      im.gallery = im.gallery.map((u, i) => handle(u, 'gallery', i, null, () => {}));
     }
 
     for (const v of (p.variants || [])) {
       if (!v.image) continue;
-      const hit = map.get(v.image);
-      if (hit) { if (APPLY) v.image = hit; migrated++; }
-      else { left++; remaining.push({ product: p.id, category: p.category, slot: 'variant', sku: v.sku, url: v.image }); }
+      v.image = handle(v.image, 'variant', 0, v.sku, x => { v.image = x; });
     }
   }
 
@@ -132,8 +207,8 @@ function main() {
     }
   })(path.join(ROOT, 'images', 'products'));
 
-  const mappedPaths = new Set(map.values());
-  const unused = allLocal.filter(f => !mappedPaths.has(f));
+  // Unused = on disk but nothing in the catalogue points at it.
+  const unused = allLocal.filter(f => !usedPaths.has(f));
 
   if (APPLY) {
     // Match the pipeline's existing formatting: 2-space indent, no trailing newline.
@@ -145,10 +220,13 @@ function main() {
   const summary = {
     generated:        new Date().toISOString().slice(0, 10),
     mode:             APPLY ? 'applied' : 'dry-run',
-    totalRefs:        migrated + left,
-    migratedToLocal:  migrated,
+    totalRefs:        alreadyLocal + migrated + wiredByConvention + left,
+    alreadyLocal:     alreadyLocal,
+    migratedByUrl:    migrated,
+    wiredByConvention: wiredByConvention,
+    localTotal:       alreadyLocal + migrated + wiredByConvention,
     leftOnShopee:     left,
-    localFilesMapped: mappedPaths.size,
+    localFilesUsed:   usedPaths.size,
     localFilesUnused: unused.length,
     checkRowsSkipped: skipped.length,
     remaining,
@@ -159,9 +237,12 @@ function main() {
 
   console.log(`mode              : ${summary.mode}`);
   console.log(`total image refs  : ${summary.totalRefs}`);
-  console.log(`  -> local        : ${summary.migratedToLocal}`);
+  console.log(`  already local   : ${summary.alreadyLocal}`);
+  console.log(`  mapped by URL   : ${summary.migratedByUrl}`);
+  console.log(`  wired by name   : ${summary.wiredByConvention}`);
+  console.log(`  -> local total  : ${summary.localTotal}`);
   console.log(`  -> left remote  : ${summary.leftOnShopee}`);
-  console.log(`local files mapped: ${summary.localFilesMapped}`);
+  console.log(`local files used  : ${summary.localFilesUsed}`);
   console.log(`local files unused: ${summary.localFilesUnused}`);
   console.log(`report            : data/image-migration-report.json`);
 }

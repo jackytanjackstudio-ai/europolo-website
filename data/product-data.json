@@ -4725,14 +4725,14 @@
       "option2Name": null,
       "description": "https://cf.shopee.com.my/file/my-11134208-7r98x-lxtjeh9525bkbe\n\n⚫EBK 40115 A - BLACK\n🟤EBK 40115 B - BROWN\n🔘EBK 40115 E - GREY\n🔵EBK 40115 F - BLUE\n\n👍Large Capacity and Multi Compartment\n👍Protective laptop pocket with soft interior lining\n👍Modern & Stylish – Perfect for traveling\n👍Quick-access front zipper pocket\n\n🔸 Product Details:\n✅3 front zipper pocket\n✅One Main Zipper Compartment with:\n   ✔One Padded Laptop Pocket (H 30cm x L 32.5cm)\n✅One Top Grab Handle\n✅Padded Cushion at back\n✅2 Zipper Bottle Compartment\n✅Luggage Strap at Back\n✅Adjustable shoulder strap\n◾ Dimension: L 33cm X H 46.5cm X W 19cm\n\n❗Dimension May Different Due to Manual Measure❗\n\nhttps://cf.shopee.com.my/file/my-11134208-7r992-lxtjeh953jw040\nhttps://cf.shopee.com.my/file/my-11134208-7r98t-lxtjeh954ygg05\nhttps://cf.shopee.com.my/file/my-11134208-7r991-lxtjeh956d0w12",
       "images": {
-        "cover": "https://cf.shopee.com.my/file/my-11134207-7r98t-ltlriitzhz4k4c",
+        "cover": "images/products/bags/ebk-40115/cover.jpg",
         "gallery": [
-          "https://cf.shopee.com.my/file/my-11134207-7r98r-lxtjdh6lx7qice",
-          "https://cf.shopee.com.my/file/my-11134207-7r98z-lxtjdh6luelm05",
-          "https://cf.shopee.com.my/file/my-11134207-7r98s-lxtjdh6lue7kd1",
-          "https://cf.shopee.com.my/file/my-11134207-7r991-lxtjdh6lvss0cf",
-          "https://cf.shopee.com.my/file/my-11134207-7r98t-lxtjdh6lx7cg9a",
-          "https://cf.shopee.com.my/file/my-11134207-7r98z-lxtjdh6lvt6239"
+          "images/products/bags/ebk-40115/gallery-1.jpg",
+          "images/products/bags/ebk-40115/gallery-2.jpg",
+          "images/products/bags/ebk-40115/gallery-3.jpg",
+          "images/products/bags/ebk-40115/gallery-4.jpg",
+          "images/products/bags/ebk-40115/gallery-5.jpg",
+          "images/products/bags/ebk-40115/gallery-6.jpg"
         ]
       },
       "variants": [
@@ -4742,7 +4742,7 @@
           "option2": null,
           "price": 279.9,
           "stock": 0,
-          "image": "https://cf.shopee.com.my/file/my-11134207-7r98y-lsc30bvqe7ef25"
+          "image": "images/products/bags/ebk-40115/ebk-40115-b.jpg"
         },
         {
           "sku": "EBK 40115 E",
@@ -4750,7 +4750,7 @@
           "option2": null,
           "price": 279.9,
           "stock": 0,
-          "image": "https://cf.shopee.com.my/file/my-11134207-7r98p-lsc30bvqflyv37"
+          "image": "images/products/bags/ebk-40115/ebk-40115-e.jpg"
         },
         {
           "sku": "EBK 40115 F",
@@ -4758,7 +4758,7 @@
           "option2": null,
           "price": 279.9,
           "stock": 0,
-          "image": "https://cf.shopee.com.my/file/my-11134207-7r98r-lsc30bvqh0jbf1"
+          "image": "images/products/bags/ebk-40115/ebk-40115-f.jpg"
         },
         {
           "sku": "EBK 40115 A",
@@ -4766,7 +4766,7 @@
           "option2": null,
           "price": 279.9,
           "stock": 0,
-          "image": "https://cf.shopee.com.my/file/my-11134207-7r98y-lsc30bvqcstz08"
+          "image": "images/products/bags/ebk-40115/ebk-40115-a.jpg"
         }
       ],
       "priceMin": 279.9,
