@@ -82,10 +82,8 @@ Outputs:
 
 ### What is NOT done yet
 1. **Images** — all variant/product images are Shopee CDN URLs. These may be blocked in production. Need to download and host on Cloudinary (Task 2 — awaiting credentials from user).
-2. **EP0050 blank SKU** — one variant (Green, stock=0) has a generated placeholder SKU `EP0050-FlipI-Gree`. Awaiting user decision: assign `EWB30564G` or remove the variant.
-3. **11 products with `option2Name = "Option 2"`** — placeholder label. Awaiting user's preferred label (likely "Model" or "Size"). Products: EP0012, EP0020, EP0026, EP0027, EP0028, EP0033, EP0037, EP0049, EP0050, EP0053, EP0056.
-4. **Forms** — contact form and newsletter form are placeholder UI only (no backend, no data stored). Need Formspree / Mailchimp / similar before launch.
-5. **Live payment verification** — the Billplz integration is code-complete but has not been
+2. **Forms** — contact form and newsletter form are placeholder UI only (no backend, no data stored). Need Formspree / Mailchimp / similar before launch.
+3. **Live payment verification** — the Billplz integration is code-complete but has not been
    run end-to-end against the Billplz sandbox. See `docs/PAYMENT_SETUP.md`.
 
 ---
@@ -112,8 +110,8 @@ Outputs:
 
 - `product_id` (EP0001–EP0063) is the unique product key, not SKU
 - Variant SKU is unique per variant and is used as cart line identity
-- Images will move to Cloudinary; `build_variants.py` will need a `--upload` flag
-- `option2Name = "Option 2"` in the spreadsheet = placeholder, needs real label
+- Product images are served from local `images/products/<sku>/`; any variant with no
+  local file still points at the Shopee CDN (see the migration report)
 - Path convention: `images/...` (relative, not `/images/...`) for local + Vercel compatibility
 
 ---

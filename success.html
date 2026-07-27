@@ -79,6 +79,14 @@
    Billplz server-to-server callback (api/payment-response.js) is the only
    thing that may do that. Anything shown here is cosmetic and is rebuilt
    from the pending summary this browser saved before redirecting to pay. */
+/* The pending receipt comes from sessionStorage, which the browser fully
+   controls, and is interpolated into innerHTML below — so escape everything. */
+function esc(v) {
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 window.addEventListener('DOMContentLoaded', function () {
   // Gateway response, forwarded by api/payment-response
   var params  = new URLSearchParams(window.location.search);
@@ -129,10 +137,10 @@ window.addEventListener('DOMContentLoaded', function () {
     var itemsEl = document.getElementById('orderItemsList');
     itemsEl.innerHTML = pending.items.map(function (item) {
       return '<div class="success-item">' +
-        '<div><strong>' + item.name + ' ×' + item.qty + '</strong>' +
-        (item.option1 ? '<div style="font-size:.68rem;color:var(--muted);margin-top:.15rem">' + (item.option1Name || 'Colour') + ': ' + item.option1 + '</div>' :
-         item.colour  ? '<div style="font-size:.68rem;color:var(--muted);margin-top:.15rem">Colour: ' + item.colour + '</div>' : '') +
-        (item.option2 ? '<div style="font-size:.68rem;color:var(--muted);margin-top:.1rem">' + (item.option2Name || 'Size') + ': ' + item.option2 + '</div>' : '') +
+        '<div><strong>' + esc(item.name) + ' ×' + esc(item.qty) + '</strong>' +
+        (item.option1 ? '<div style="font-size:.68rem;color:var(--muted);margin-top:.15rem">' + esc(item.option1Name || 'Colour') + ': ' + esc(item.option1) + '</div>' :
+         item.colour  ? '<div style="font-size:.68rem;color:var(--muted);margin-top:.15rem">Colour: ' + esc(item.colour) + '</div>' : '') +
+        (item.option2 ? '<div style="font-size:.68rem;color:var(--muted);margin-top:.1rem">' + esc(item.option2Name || 'Size') + ': ' + esc(item.option2) + '</div>' : '') +
         '</div>' +
         '</div>';
     }).join('');
