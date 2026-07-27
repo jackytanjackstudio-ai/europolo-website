@@ -22,7 +22,12 @@ module.exports = async function (req, res) {
 
   // Guard first: never disclose whether the store is configured to an
   // unauthenticated caller.
-  const session = requireAdmin(req, res);
+  //
+  // Restricted to the two roles that ROLE_ACCESS (admin/auth.js) lets reach
+  // orders.html. This endpoint returns customer names, emails, phone numbers
+  // and addresses, so marketing/content/host must not be able to read it by
+  // calling the API directly.
+  const session = requireAdmin(req, res, ['admin', 'cs']);
   if (!session) return;
 
   if (!orders.isConfigured()) {
