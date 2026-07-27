@@ -42,21 +42,31 @@
 <script src="auth.js?v=2"></script>
 <script>
   // Redirect if already logged in
-  if (Auth.user()) window.location.href = EP_USERS[sessionStorage.getItem('ep_user')].path;
+  (function () {
+    const existing = Auth.user();
+    if (existing) window.location.href = existing.path;
+  })();
 
-  document.getElementById('loginForm').addEventListener('submit', e => {
+  document.getElementById('loginForm').addEventListener('submit', async e => {
     e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    const err = document.getElementById('loginError');
     const u = document.getElementById('loginUser').value.trim();
     const p = document.getElementById('loginPass').value;
-    const user = Auth.login(u, p);
-    if (user) {
+
+    btn.disabled = true;
+    err.classList.remove('show');
+
+    try {
+      const user = await Auth.login(u, p);
       seedIfEmpty();
       window.location.href = user.path;
-    } else {
-      const err = document.getElementById('loginError');
+    } catch (ex) {
+      err.textContent = ex.message || 'Invalid username or password. Please try again.';
       err.classList.add('show');
       document.getElementById('loginPass').value = '';
       document.getElementById('loginPass').focus();
+      btn.disabled = false;
       setTimeout(() => err.classList.remove('show'), 4000);
     }
   });

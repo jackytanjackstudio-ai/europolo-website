@@ -3,13 +3,17 @@
    Shared across all admin pages
 ═══════════════════════════════════════════════════ */
 
-const EP_USERS = {
-  admin:     { password:'europolo2026', role:'admin',     name:'Admin',           path:'dashboard.html' },
-  marketing: { password:'mkt@polo',     role:'marketing', name:'Marketing Team',  path:'marketing.html' },
-  lovart:    { password:'lovart2026',   role:'marketing', name:'Lovart · Nanobanana', path:'marketing.html' },
-  content:   { password:'cnt@polo',     role:'content',   name:'Content Team',    path:'content.html' },
-  cs:        { password:'cs@polo',      role:'cs',        name:'Customer Service',path:'customer-service.html' },
-  host:      { password:'host@polo',    role:'host',      name:'Live Host',       path:'live-host.html' },
+/* Credentials live ONLY in the ADMIN_USERS environment variable and are
+   verified server-side by /api/admin-login. Nothing secret may appear in
+   this file — it is served publicly.
+
+   This map is display metadata only: landing page + label per role. */
+const EP_ROLE_META = {
+  admin:     { name:'Admin',            path:'dashboard.html' },
+  marketing: { name:'Marketing Team',   path:'marketing.html' },
+  content:   { name:'Content Team',     path:'content.html' },
+  cs:        { name:'Customer Service', path:'customer-service.html' },
+  host:      { name:'Live Host',        path:'live-host.html' },
 };
 
 const ROLE_ACCESS = {
@@ -48,37 +52,95 @@ const Store = {
   }
 };
 
-/* ── Auth helper ── */
+/* ── Auth helper ──
+   The browser holds NO credentials. /api/admin-login verifies the password
+   server-side and issues an HttpOnly session cookie that JS cannot read.
+
+   What is kept in sessionStorage is display metadata only (username + role)
+   so the sidebar can render synchronously. It is NOT the security boundary:
+   forging it grants no data access, because every admin API endpoint
+   independently re-verifies the signed cookie server-side. */
 const Auth = {
-  login(username, password) {
-    const key = username.toLowerCase().trim();
-    const u = EP_USERS[key];
-    if (!u || u.password !== password) return null;
-    sessionStorage.setItem('ep_user', key);
-    sessionStorage.setItem('ep_role', u.role);
-    return u;
+  async login(username, password) {
+    let res;
+    try {
+      res = await fetch('/api/admin-login', {
+        method:      'POST',
+        headers:     { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body:        JSON.stringify({ username, password }),
+      });
+    } catch {
+      throw new Error('Could not reach the server. Please try again.');
+    }
+
+    let data = {};
+    try { data = await res.json(); } catch {}
+
+    if (!res.ok) throw new Error(data.error || 'Invalid username or password.');
+
+    const meta = EP_ROLE_META[data.role] || { name: data.username, path: 'dashboard.html' };
+    sessionStorage.setItem('ep_user', data.username);
+    sessionStorage.setItem('ep_role', data.role);
+    return { ...meta, username: data.username, role: data.role };
   },
-  logout() {
+
+  async logout() {
+    try {
+      await fetch('/api/admin-logout', { method: 'POST', credentials: 'same-origin' });
+    } catch {}
     sessionStorage.removeItem('ep_user');
     sessionStorage.removeItem('ep_role');
     window.location.href = 'index.html';
   },
+
+  /* Synchronous display metadata for the current session. */
   user() {
     const username = sessionStorage.getItem('ep_user');
-    if (!username) return null;
-    const u = EP_USERS[username];
-    return u ? { ...u, username } : null;
+    const role     = sessionStorage.getItem('ep_role');
+    if (!username || !role) return null;
+    const meta = EP_ROLE_META[role] || { name: username, path: 'dashboard.html' };
+    return { ...meta, username, role };
   },
+
+  /* Client-side guard = UX only (fast redirect + role routing).
+     Server-side re-verification runs immediately after and wins. */
   guard() {
     const user = this.user();
     if (!user) { window.location.href = 'index.html'; return false; }
+
     const page = window.location.pathname.split('/').pop();
     const allowed = ROLE_ACCESS[user.role] || [];
     if (page !== 'index.html' && !allowed.includes(page)) {
       window.location.href = user.path;
       return false;
     }
+
+    this.verifyWithServer();
     return true;
+  },
+
+  /* Authoritative check — the cookie is validated by the server. */
+  async verifyWithServer() {
+    let res;
+    try {
+      res = await fetch('/api/admin-session', { credentials: 'same-origin' });
+    } catch {
+      return; // network blip — do not lock the user out of an open page
+    }
+    if (res.ok) {
+      const data = await res.json().catch(() => null);
+      // Keep local metadata in step with the server's view.
+      if (data && data.role && data.role !== sessionStorage.getItem('ep_role')) {
+        sessionStorage.setItem('ep_user', data.username);
+        sessionStorage.setItem('ep_role', data.role);
+        window.location.reload();
+      }
+      return;
+    }
+    sessionStorage.removeItem('ep_user');
+    sessionStorage.removeItem('ep_role');
+    window.location.href = 'index.html';
   },
 };
 
