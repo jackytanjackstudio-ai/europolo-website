@@ -19,6 +19,7 @@
    Merchant panel: https://toyyibpay.com/index.php/dashboard
 ═══════════════════════════════════════════════════ */
 
+const crypto = require('crypto');
 const { priceCart, round2 } = require('./_lib/catalog');
 const { applyPromo } = require('./_lib/promos');
 const { siteUrl, applyCors, gatewayBaseUrl } = require('./_lib/config');
@@ -86,7 +87,12 @@ module.exports = async function (req, res) {
     }
 
     const amountInSen = Math.round(total * 100); // toyyibPay bills in sen
-    const refNo       = 'EP-' + Date.now().toString(36).toUpperCase();
+
+    // Random suffix, not just the clock: two checkouts in the same
+    // millisecond would otherwise share a reference, and the second
+    // customer's bill would be attached to the first customer's order.
+    const refNo = 'EP-' + Date.now().toString(36).toUpperCase()
+                + '-' + crypto.randomBytes(2).toString('hex').toUpperCase();
     const origin      = siteUrl();               // canonical, never req.headers.origin
     const billDesc    = lines.map(l => `${l.name} x${l.qty}`).join(', ').substring(0, 99)
                         || 'Euro Polo Order';
@@ -95,7 +101,7 @@ module.exports = async function (req, res) {
     // Deliberately ahead of createBill: if this write fails we throw and
     // never create the bill, so a customer is never charged for an order
     // we could not record.
-    await orders.createPendingOrder({
+    const pending = await orders.createPendingOrder({
       orderRef:    refNo,
       lines,                                       // server-priced lines
       customer:    { ...(customer || {}), name, email, phone },
@@ -104,6 +110,14 @@ module.exports = async function (req, res) {
       discountMyr: discount,
       promoCode:   promo.code,
     });
+
+    // created:false means that reference already existed. Refuse rather than
+    // bill against somebody else's order row.
+    if (!pending.created) {
+      console.error('checkout: order reference collision on ' + refNo + ' — no bill created.');
+      res.status(500).json({ error: 'Could not start your order. Please try again.' });
+      return;
+    }
 
     // ── 5. Create the bill ──
     const params = new URLSearchParams({

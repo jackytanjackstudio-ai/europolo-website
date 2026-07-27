@@ -22,3 +22,6 @@ data/__pycache__/
 
 # Node
 node_modules/
+
+.vercel
+.env*
