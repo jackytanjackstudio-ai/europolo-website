@@ -2,5 +2,7 @@
   "name": "europolo-web",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0"
+  }
 }

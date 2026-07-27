@@ -19,3 +19,6 @@ _backup/
 __pycache__/
 *.pyc
 data/__pycache__/
+
+# Node
+node_modules/

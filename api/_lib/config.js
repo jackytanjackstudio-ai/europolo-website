@@ -20,6 +20,17 @@ function siteUrl() {
   return raw.replace(/\/+$/, '');
 }
 
+/**
+ * toyyibPay API base. Set TOYYIBPAY_BASE_URL to
+ * https://dev.toyyibpay.com for sandbox testing.
+ *
+ * Kept here so the gateway host is swappable in one place.
+ */
+function gatewayBaseUrl() {
+  const raw = (process.env.TOYYIBPAY_BASE_URL || 'https://toyyibpay.com').trim();
+  return raw.replace(/\/+$/, '');
+}
+
 /** Origins permitted to call the payment endpoints. */
 function allowedOrigins() {
   const extra = (process.env.EXTRA_ALLOWED_ORIGINS || '')
@@ -44,4 +55,4 @@ function applyCors(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }
 
-module.exports = { siteUrl, allowedOrigins, applyCors, DEFAULT_SITE_URL };
+module.exports = { siteUrl, gatewayBaseUrl, allowedOrigins, applyCors, DEFAULT_SITE_URL };

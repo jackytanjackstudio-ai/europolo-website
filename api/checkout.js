@@ -13,6 +13,7 @@
    TOYYIBPAY_SECRET_KEY    = your Secret Key  (from toyyibPay merchant panel)
    TOYYIBPAY_CATEGORY_CODE = your Category Code (from toyyibPay merchant panel)
    SITE_URL                = https://europolo.my   (optional, defaults to this)
+   DATABASE_URL            = Neon pooled connection string (see api/_lib/orders.js)
 
    Register at: https://toyyibpay.com/
    Merchant panel: https://toyyibpay.com/index.php/dashboard
@@ -20,7 +21,8 @@
 
 const { priceCart, round2 } = require('./_lib/catalog');
 const { applyPromo } = require('./_lib/promos');
-const { siteUrl, applyCors } = require('./_lib/config');
+const { siteUrl, applyCors, gatewayBaseUrl } = require('./_lib/config');
+const orders = require('./_lib/orders');
 
 // toyyibPay will not accept a bill below RM 1.00.
 const MIN_CHARGE_MYR = 1;
@@ -36,6 +38,13 @@ module.exports = async function (req, res) {
 
   if (!secretKey || !categoryCode) {
     res.status(500).json({ error: 'Payment gateway not configured. Please contact support.' });
+    return;
+  }
+
+  // An order we cannot record is an order we must not charge for.
+  if (!orders.isConfigured()) {
+    console.error('checkout: DATABASE_URL is not set — refusing to create a bill.');
+    res.status(500).json({ error: 'Order system not configured. Please contact support.' });
     return;
   }
 
@@ -82,7 +91,21 @@ module.exports = async function (req, res) {
     const billDesc    = lines.map(l => `${l.name} x${l.qty}`).join(', ').substring(0, 99)
                         || 'Euro Polo Order';
 
-    // ── 4. Create the bill ──
+    // ── 4. Record the order as pending, before any money moves ──
+    // Deliberately ahead of createBill: if this write fails we throw and
+    // never create the bill, so a customer is never charged for an order
+    // we could not record.
+    await orders.createPendingOrder({
+      orderRef:    refNo,
+      lines,                                       // server-priced lines
+      customer:    { ...(customer || {}), name, email, phone },
+      totalMyr:    total,
+      subtotalMyr: subtotal,
+      discountMyr: discount,
+      promoCode:   promo.code,
+    });
+
+    // ── 5. Create the bill ──
     const params = new URLSearchParams({
       userSecretKey:           secretKey,
       categoryCode:            categoryCode,
@@ -105,7 +128,7 @@ module.exports = async function (req, res) {
       billExpiryDays:          1,
     });
 
-    const apiResponse = await fetch('https://toyyibpay.com/index.php/api/createBill', {
+    const apiResponse = await fetch(gatewayBaseUrl() + '/index.php/api/createBill', {
       method:  'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body:    params.toString(),
@@ -120,11 +143,20 @@ module.exports = async function (req, res) {
 
     const billCode = result[0].BillCode;
 
-    // ── 5. Respond ──
+    // Link the bill to the order so the callback can be matched on either
+    // reference. Best-effort — markPaidByCallback() also back-fills
+    // gateway_ref, so a failure here does not lose the payment.
+    try {
+      await orders.attachGatewayRef(refNo, billCode);
+    } catch (err) {
+      console.error('checkout: could not attach gateway ref to ' + refNo + ':', err.message);
+    }
+
+    // ── 6. Respond ──
     // The amounts below are echoed for display only. The customer is charged
     // `amountInSen`, which was computed entirely server-side.
     res.status(200).json({
-      url:      'https://toyyibpay.com/' + billCode,
+      url:      gatewayBaseUrl() + '/' + billCode,
       refNo:    refNo,
       billCode: billCode,
       subtotal: subtotal,
