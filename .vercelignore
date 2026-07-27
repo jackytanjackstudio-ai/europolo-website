@@ -22,5 +22,15 @@ scripts/
 __pycache__/
 *.pyc
 
-# Docs / session state
+# Local secrets — belt and braces. Real config lives in Vercel env vars.
+.env
+.env.*
+
+# DB schema. Applied from a workstation via scripts/db-migrate.js, never
+# needed at runtime — and outputDirectory is ".", so anything left here
+# would be downloadable from the live site.
+migration.sql
+
+# Docs / session state — internal, and outputDirectory "." would publish them
 CLAUDE.md
+docs/
