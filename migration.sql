@@ -8,11 +8,11 @@
 -- IDEMPOTENCY DESIGN
 -- ------------------
 -- A payment gateway may deliver the same callback more than once, and
--- toyyibPay explicitly retries. Three uniqueness rules make a duplicate
+-- Billplz explicitly retries. Three uniqueness rules make a duplicate
 -- write impossible rather than merely unlikely:
 --
 --   1. orders.order_ref      UNIQUE  — one row per checkout attempt.
---   2. orders.gateway_ref    UNIQUE  — one row per toyyibPay bill.
+--   2. orders.gateway_ref    UNIQUE  — one row per gateway bill.
 --   3. order_items(order_id, sku) UNIQUE — an item cannot be added twice.
 --
 -- Stock deduction is guarded separately by orders.stock_deducted_at, which
@@ -25,10 +25,12 @@ CREATE TABLE IF NOT EXISTS orders (
   id                bigserial   PRIMARY KEY,
 
   -- Our reference, generated in api/checkout.js ("EP-XXXXXXX").
-  -- Sent to toyyibPay as billExternalReferenceNo and returned in the callback.
+  -- Sent to the gateway as our own reference. Billplz surfaces it as
+  -- reference_1, but does NOT echo it in the callback, so the callback
+  -- is matched on gateway_ref below.
   order_ref         text        NOT NULL UNIQUE,
 
-  -- toyyibPay BillCode. NULL until the bill is created.
+  -- Gateway bill id (Billplz bill id). NULL until the bill is created.
   -- Postgres allows many NULLs under a UNIQUE constraint, so pending rows
   -- do not collide with each other.
   gateway_ref       text        UNIQUE,

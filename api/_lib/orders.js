@@ -87,7 +87,7 @@ function itemLabel(line) {
  *
  * @param {object}  o
  * @param {string}  o.orderRef       our reference, e.g. "EP-M2X8QK1"
- * @param {string} [o.gatewayRef]    toyyibPay BillCode, if already known
+ * @param {string} [o.gatewayRef]    gateway bill id, if already known
  * @param {Array}   o.lines          priced lines from catalog.priceCart()
  * @param {object}  o.customer       { name, email, phone, address, city, postcode, state }
  * @param {number}  o.totalMyr       amount charged, in ringgit
@@ -183,6 +183,11 @@ async function attachGatewayRef(orderRef, gatewayRef) {
 /**
  * Mark an order paid from a VERIFIED gateway callback. Idempotent.
  *
+ * The order is located by `orderRef`, or by `gatewayRef`, or by either.
+ * Both columns are UNIQUE, so at most one row can match. Matching on
+ * gatewayRef is the important path: Billplz callbacks identify the payment
+ * only by bill id and do not echo our own reference back.
+ *
  * The flip is a single conditional UPDATE, so two callbacks racing in
  * separate function invocations cannot both succeed — Postgres serialises
  * them on the row and the loser sees status already 'paid'.
@@ -191,13 +196,16 @@ async function attachGatewayRef(orderRef, gatewayRef) {
  * the order is left untouched and reported as an amount mismatch.
  *
  * @returns {Promise<{ outcome:'paid'|'already_paid'|'not_found'|'amount_mismatch'|'refused',
- *                     orderRef:string, id:number|null, amountCents:number|null,
+ *                     orderRef:string|null, id:number|null, amountCents:number|null,
  *                     previousStatus:string|null }>}
  */
-async function markPaidByCallback({ orderRef, gatewayRef = null, amountCents = null }) {
+async function markPaidByCallback({ orderRef = null, gatewayRef = null, amountCents = null }) {
   const sql = db();
-  const ref = String(orderRef || '').trim();
-  if (!ref) throw new Error('markPaidByCallback: orderRef is required.');
+  const ref = orderRef ? String(orderRef).trim() : null;
+  const gw  = gatewayRef ? String(gatewayRef).trim() : null;
+  if (!ref && !gw) {
+    throw new Error('markPaidByCallback: orderRef or gatewayRef is required.');
+  }
 
   const expected = (amountCents === null || amountCents === undefined)
     ? null
@@ -209,18 +217,21 @@ async function markPaidByCallback({ orderRef, gatewayRef = null, amountCents = n
           SET status      = 'paid',
               paid_at     = COALESCE(paid_at, now()),
               gateway_ref = COALESCE(gateway_ref, $2)
-        WHERE order_ref = $1
+        WHERE (($1::text IS NOT NULL AND order_ref   = $1)
+            OR ($2::text IS NOT NULL AND gateway_ref = $2))
           AND status <> 'paid'
           AND ($3::int IS NULL OR amount_cents = $3)
         RETURNING id
      )
      SELECT o.id,
+            o.order_ref,
             o.status       AS previous_status,
             o.amount_cents,
             EXISTS (SELECT 1 FROM upd) AS flipped
        FROM orders o
-      WHERE o.order_ref = $1`,
-    [ref, gatewayRef ? String(gatewayRef) : null, expected]
+      WHERE (($1::text IS NOT NULL AND o.order_ref   = $1)
+          OR ($2::text IS NOT NULL AND o.gateway_ref = $2))`,
+    [ref, gw, expected]
   );
 
   if (!rows.length) {
@@ -231,7 +242,9 @@ async function markPaidByCallback({ orderRef, gatewayRef = null, amountCents = n
   // The outer SELECT reads the pre-UPDATE snapshot, so previous_status is
   // the status as it stood when the callback arrived.
   const result = {
-    orderRef:       ref,
+    // Always the row's real reference, so a gatewayRef-matched callback can
+    // still pass an orderRef on to decrementStock().
+    orderRef:       row.order_ref,
     id:             Number(row.id),
     amountCents:    Number(row.amount_cents),
     previousStatus: row.previous_status,

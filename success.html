@@ -76,11 +76,11 @@
 <script>
 /* This page is a RECEIPT VIEW ONLY.
    It does not create orders, mark anything paid, or adjust stock — the
-   toyyibPay server-to-server callback (api/payment-response.js) is the only
+   Billplz server-to-server callback (api/payment-response.js) is the only
    thing that may do that. Anything shown here is cosmetic and is rebuilt
    from the pending summary this browser saved before redirecting to pay. */
 window.addEventListener('DOMContentLoaded', function () {
-  // toyyibPay response, forwarded by api/payment-response
+  // Gateway response, forwarded by api/payment-response
   var params  = new URLSearchParams(window.location.search);
   var status  = params.get('status');   // 1 = success, 2 = pending
   var refNo   = params.get('refno') || '';

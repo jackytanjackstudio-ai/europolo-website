@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════
    EURO POLO · api/checkout.js
-   Vercel Serverless Function — toyyibPay Bill Creation
+   Vercel Serverless Function — payment bill creation
 
    MONEY RULE: the server is the only source of truth.
    The browser proposes which sku and how many. Everything else —
@@ -8,24 +8,25 @@
    data/product-data.json and api/_lib/promos.js. Any price, total or
    discount sent by the client is discarded.
 
+   The gateway itself lives entirely behind api/_lib/billplz.js. This file
+   knows only "create a bill for this many sen and give me a payment URL".
+
    SETUP: Add these to Vercel Environment Variables
    ─────────────────────────────────────────────────
-   TOYYIBPAY_SECRET_KEY    = your Secret Key  (from toyyibPay merchant panel)
-   TOYYIBPAY_CATEGORY_CODE = your Category Code (from toyyibPay merchant panel)
-   SITE_URL                = https://europolo.my   (optional, defaults to this)
-   DATABASE_URL            = Neon pooled connection string (see api/_lib/orders.js)
-
-   Register at: https://toyyibpay.com/
-   Merchant panel: https://toyyibpay.com/index.php/dashboard
+   BILLPLZ_API_KEY       = API Secret Key       (see api/_lib/billplz.js)
+   BILLPLZ_COLLECTION_ID = collection for bills (see api/_lib/billplz.js)
+   SITE_URL              = https://europolo.my  (optional, defaults to this)
+   DATABASE_URL          = Neon pooled connection string (see api/_lib/orders.js)
 ═══════════════════════════════════════════════════ */
 
 const crypto = require('crypto');
 const { priceCart, round2 } = require('./_lib/catalog');
 const { applyPromo } = require('./_lib/promos');
-const { siteUrl, applyCors, gatewayBaseUrl } = require('./_lib/config');
-const orders = require('./_lib/orders');
+const { siteUrl, applyCors } = require('./_lib/config');
+const orders  = require('./_lib/orders');
+const gateway = require('./_lib/billplz');
 
-// toyyibPay will not accept a bill below RM 1.00.
+// Billplz rejects a bill below RM 1.00.
 const MIN_CHARGE_MYR = 1;
 
 module.exports = async function (req, res) {
@@ -34,10 +35,16 @@ module.exports = async function (req, res) {
   if (req.method === 'OPTIONS') { res.status(200).end(); return; }
   if (req.method !== 'POST')    { res.status(405).json({ error: 'Method not allowed' }); return; }
 
-  const secretKey    = process.env.TOYYIBPAY_SECRET_KEY;
-  const categoryCode = process.env.TOYYIBPAY_CATEGORY_CODE;
+  if (!gateway.isConfigured()) {
+    console.error('checkout: Billplz is not configured — refusing to create a bill.');
+    res.status(500).json({ error: 'Payment gateway not configured. Please contact support.' });
+    return;
+  }
 
-  if (!secretKey || !categoryCode) {
+  // Without the X-Signature key the callback cannot be verified, so a payment
+  // taken now could never be safely recorded. Refuse before charging anyone.
+  if (!gateway.canVerify()) {
+    console.error('checkout: BILLPLZ_XSIGNATURE_KEY is not set — refusing to create a bill.');
     res.status(500).json({ error: 'Payment gateway not configured. Please contact support.' });
     return;
   }
@@ -86,16 +93,16 @@ module.exports = async function (req, res) {
       return;
     }
 
-    const amountInSen = Math.round(total * 100); // toyyibPay bills in sen
+    const amountInSen = Math.round(total * 100); // Billplz bills in sen
 
     // Random suffix, not just the clock: two checkouts in the same
     // millisecond would otherwise share a reference, and the second
     // customer's bill would be attached to the first customer's order.
     const refNo = 'EP-' + Date.now().toString(36).toUpperCase()
                 + '-' + crypto.randomBytes(2).toString('hex').toUpperCase();
-    const origin      = siteUrl();               // canonical, never req.headers.origin
-    const billDesc    = lines.map(l => `${l.name} x${l.qty}`).join(', ').substring(0, 99)
-                        || 'Euro Polo Order';
+    const origin   = siteUrl();               // canonical, never req.headers.origin
+    const billDesc = lines.map(l => `${l.name} x${l.qty}`).join(', ').substring(0, 200)
+                     || 'Euro Polo Order';
 
     // ── 4. Record the order as pending, before any money moves ──
     // Deliberately ahead of createBill: if this write fails we throw and
@@ -120,59 +127,46 @@ module.exports = async function (req, res) {
     }
 
     // ── 5. Create the bill ──
-    const params = new URLSearchParams({
-      userSecretKey:           secretKey,
-      categoryCode:            categoryCode,
-      billName:                'Euro Polo Order',
-      billDescription:         billDesc,
-      billPriceSetting:        1,          // 1 = fixed price
-      billPayorInfo:           1,          // 1 = collect payor info
-      billAmount:              amountInSen,
-      billReturnUrl:           origin + '/api/payment-response',
-      billCallbackUrl:         origin + '/api/payment-response',
-      billExternalReferenceNo: refNo,
-      billTo:                  name,
-      billEmail:               email,
-      billPhone:               phone,
-      billSplitPayment:        0,
-      billSplitPaymentArgs:    '',
-      billPaymentChannel:      0,          // 0 = all (FPX + credit/debit card)
-      billContentEmail:        'Thank you for your Euro Polo order! We will process it shortly.',
-      billChargeToCustomer:    1,          // 1 = transaction fee charged to customer
-      billExpiryDays:          1,
+    // `ref` on the callback URL is a fallback only. Billplz does not echo
+    // reference_1 in the callback, so the order is normally found via the
+    // bill id stored below as gateway_ref. The query string is NOT covered
+    // by the X-Signature, so it is used only to locate a row after the
+    // signature has already proved the payload came from Billplz.
+    const bill = await gateway.createBill({
+      amountCents:  amountInSen,
+      name:         name,
+      email:        email,
+      // mobile is deliberately omitted: Billplz wants a country-code number
+      // with no spaces or dashes, and our field holds local formats like
+      // "012-3456789", which would get the whole bill rejected. email alone
+      // satisfies Billplz's email-or-mobile requirement, and we keep the
+      // phone number in our own orders table regardless.
+      description:  billDesc,
+      callbackUrl:  origin + '/api/payment-response?ref=' + encodeURIComponent(refNo),
+      // Same hint on the redirect, so the confirmation page can show the
+      // order reference even if this browser lost its sessionStorage.
+      redirectUrl:  origin + '/api/payment-response?ref=' + encodeURIComponent(refNo),
+      orderRef:     refNo,
     });
 
-    const apiResponse = await fetch(gatewayBaseUrl() + '/index.php/api/createBill', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body:    params.toString(),
-    });
-
-    const result = await apiResponse.json();
-
-    if (!result || !result[0] || !result[0].BillCode) {
-      const msg = result?.[0]?.Message || 'Failed to create payment bill.';
-      throw new Error(msg);
-    }
-
-    const billCode = result[0].BillCode;
-
-    // Link the bill to the order so the callback can be matched on either
-    // reference. Best-effort — markPaidByCallback() also back-fills
-    // gateway_ref, so a failure here does not lose the payment.
+    // Link the bill to the order. This is the ONLY reference Billplz sends
+    // back in the callback, so if it fails the payment can still be taken but
+    // will need reconciling by hand from the Billplz dashboard (where refNo
+    // appears as reference_1).
     try {
-      await orders.attachGatewayRef(refNo, billCode);
+      await orders.attachGatewayRef(refNo, bill.billId);
     } catch (err) {
-      console.error('checkout: could not attach gateway ref to ' + refNo + ':', err.message);
+      console.error('checkout: FAILED to attach bill ' + bill.billId + ' to order ' +
+        refNo + ' — callback may not find it: ' + err.message);
     }
 
     // ── 6. Respond ──
     // The amounts below are echoed for display only. The customer is charged
     // `amountInSen`, which was computed entirely server-side.
     res.status(200).json({
-      url:      gatewayBaseUrl() + '/' + billCode,
+      url:      bill.paymentUrl,
       refNo:    refNo,
-      billCode: billCode,
+      billCode: bill.billId,
       subtotal: subtotal,
       discount: discount,
       total:    total,
@@ -180,7 +174,7 @@ module.exports = async function (req, res) {
     });
 
   } catch (err) {
-    console.error('toyyibPay error:', err.message);
+    console.error('checkout error:', err.message);
     res.status(500).json({ error: err.message || 'Payment could not be started.' });
   }
 };

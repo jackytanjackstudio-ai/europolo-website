@@ -9,7 +9,7 @@ Deployed on Vercel. No build step — `vercel.json` sets `"outputDirectory": "."
 - `index.html` — homepage
 - `bags.html`, `wallets.html`, `luggage.html` — collection pages
 - `product.html` — product detail page (rendered from `?id=EP0001` etc.)
-- `checkout.html`, `success.html` — order flow (toyyibPay; see api/checkout.js)
+- `checkout.html`, `success.html` — order flow (Billplz; see api/checkout.js)
 
 ---
 
@@ -85,8 +85,8 @@ Outputs:
 2. **EP0050 blank SKU** — one variant (Green, stock=0) has a generated placeholder SKU `EP0050-FlipI-Gree`. Awaiting user decision: assign `EWB30564G` or remove the variant.
 3. **11 products with `option2Name = "Option 2"`** — placeholder label. Awaiting user's preferred label (likely "Model" or "Size"). Products: EP0012, EP0020, EP0026, EP0027, EP0028, EP0033, EP0037, EP0049, EP0050, EP0053, EP0056.
 4. **Forms** — contact form and newsletter form are placeholder UI only (no backend, no data stored). Need Formspree / Mailchimp / similar before launch.
-5. **Live payment verification** — the toyyibPay integration is code-complete but has not been
-   run end-to-end against the sandbox. See `docs/PAYMENT_SETUP.md`.
+5. **Live payment verification** — the Billplz integration is code-complete but has not been
+   run end-to-end against the Billplz sandbox. See `docs/PAYMENT_SETUP.md`.
 
 ---
 
@@ -101,7 +101,9 @@ Outputs:
 | `cart.js` | Cart drawer, localStorage, badge, Cart.add() |
 | `css/product-detail.css` | Product detail + variant button styles |
 | `products.css` | Collection pages + quick-add popup styles |
-| `checkout.html` | Checkout page (toyyibPay; totals come from `/api/quote`) |
+| `checkout.html` | Checkout page (Billplz; totals come from `/api/checkout`) |
+| `api/_lib/billplz.js` | The ONLY gateway-aware module — endpoints, auth, X-Signature |
+| `api/_lib/orders.js` | The ONLY module that talks SQL (Neon order persistence) |
 | `success.html` | Order confirmation page |
 
 ---

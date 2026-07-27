@@ -159,7 +159,7 @@
         Pay Now — FPX / Credit Card
       </button>
       <div id="coError"></div>
-      <p class="co-secure">&#x1F512; Secured by Toyyibpay · SSL Encrypted · We never store your card details</p>
+      <p class="co-secure">&#x1F512; Secured by Billplz · SSL Encrypted · We never store your card details</p>
     </div>
 
     <!-- ── Order Summary ── -->
@@ -323,7 +323,7 @@ function renderTotalsFromQuote(q) {
   }
 }
 
-// ── Submit to toyyibPay ───────────────────────────
+// ── Submit to the payment gateway ───────────────────────────
 async function submitCheckout() {
   var name  = document.getElementById('coName').value.trim();
   var email = document.getElementById('coEmail').value.trim();
@@ -387,7 +387,7 @@ async function submitCheckout() {
       promoCode: data.promoCode || '',
     }));
 
-    // Redirect to toyyibPay payment page
+    // Redirect to the gateway's hosted payment page
     if (data.url) {
       window.location.href = data.url;
     } else {
