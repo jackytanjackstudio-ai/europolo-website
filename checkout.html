@@ -181,8 +181,8 @@
 <script>
 // ── Cart & Promo state ─────────────────────────────
 var cartItems = [];
-var discount = 0;
-var promoData = null;
+var discount = 0;          // display mirror of the server's figure
+var serverQuote = null;    // authoritative totals from /api/quote
 var promoCode = '';
 
 try { cartItems = JSON.parse(localStorage.getItem('ep_cart') || '[]'); } catch(e) {}
@@ -203,6 +203,7 @@ window.addEventListener('DOMContentLoaded', function () {
     return;
   }
   renderSummary();
+  refreshQuote();   // authoritative totals
 
   if (!sessionStorage.getItem('ep_ic_fired')) {
     sessionStorage.setItem('ep_ic_fired', '1');
@@ -222,9 +223,9 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 // ── Render order summary ───────────────────────────
+// Line items are rendered from the local cart for layout only.
+// Every monetary total comes from /api/quote — see renderTotalsFromQuote().
 function renderSummary() {
-  var subtotal = cartItems.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
-
   document.getElementById('sumItems').innerHTML = cartItems.map(function (item) {
     return '<div class="sum-item">' +
       '<div class="sum-img">' +
@@ -238,82 +239,91 @@ function renderSummary() {
         (item.option2 ? '<div class="sum-sku">' + (item.option2Name || 'Size') + ': ' + item.option2 + '</div>' : '') +
         (item.sku ? '<div class="sum-sku" style="color:var(--muted);font-size:.62rem">SKU: ' + item.sku + '</div>' : '') +
       '</div>' +
-      '<div class="sum-price">RM ' + (parseFloat(item.price) * item.qty).toLocaleString('en-MY', { minimumFractionDigits: 0 }) + '</div>' +
+      '<div class="sum-price" data-sku="' + (item.sku || '') + '">—</div>' +
     '</div>';
   }).join('');
-
-  var total = subtotal - discount;
-  document.getElementById('sumSubtotal').textContent = 'RM ' + subtotal.toLocaleString('en-MY', { minimumFractionDigits: 2 });
-  document.getElementById('sumTotal').textContent = 'RM ' + Math.max(0, total).toLocaleString('en-MY', { minimumFractionDigits: 2 });
 }
 
-// ── Promo code ─────────────────────────────────────
-function applyPromo() {
+// Fill in per-line prices from the server quote.
+function renderLinePrices(q) {
+  (q.lines || []).forEach(function (line) {
+    var el = document.querySelector('.sum-price[data-sku="' + line.sku + '"]');
+    if (el) el.textContent = 'RM ' + line.lineTotal.toLocaleString('en-MY', { minimumFractionDigits: 2 });
+  });
+}
+
+// ── Cart payload — only sku + qty are sent; the server prices it ──
+function cartPayload() {
+  return cartItems.map(function (i) { return { sku: i.sku, qty: i.qty }; });
+}
+
+// ── Promo code — validated and priced SERVER-side ──
+// The old version read localStorage['ep_promos'], which the customer
+// controlled (and which no real customer ever had populated).
+async function applyPromo() {
   var code = document.getElementById('coPromo').value.trim().toUpperCase();
-  var msg = document.getElementById('promoMsg');
-  if (!code) { msg.textContent = ''; return; }
+  var msg  = document.getElementById('promoMsg');
 
-  var promos = [];
-  try { promos = JSON.parse(localStorage.getItem('ep_promos') || '[]'); } catch(e) {}
-  var promo = promos.find(function (p) { return p.code.toUpperCase() === code && p.active; });
+  if (!code) { msg.textContent = ''; promoCode = ''; await refreshQuote(); return; }
 
-  if (!promo) {
-    msg.className = 'promo-msg promo-msg--err';
-    msg.textContent = 'Invalid or expired promo code.';
-    discount = 0; promoData = null; promoCode = '';
-    updateTotals();
-    return;
-  }
-
-  var subtotal = cartItems.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
-  var minPurchase = parseFloat(promo.min) || 0;
-  if (subtotal < minPurchase) {
-    msg.className = 'promo-msg promo-msg--err';
-    msg.textContent = 'Minimum purchase of RM ' + minPurchase.toLocaleString('en-MY', { minimumFractionDigits: 0 }) + ' required.';
-    discount = 0; promoData = null; promoCode = '';
-    updateTotals();
-    return;
-  }
-
-  if (promo.expiry && new Date(promo.expiry) < new Date()) {
-    msg.className = 'promo-msg promo-msg--err';
-    msg.textContent = 'This promo code has expired.';
-    discount = 0; promoData = null; promoCode = '';
-    updateTotals();
-    return;
-  }
-
-  promoData = promo;
+  msg.className = 'promo-msg';
+  msg.textContent = 'Checking…';
   promoCode = code;
-  if (promo.type === 'Percent') {
-    discount = subtotal * (parseFloat(promo.value) / 100);
-  } else {
-    discount = parseFloat(promo.value) || 0;
+
+  var quote = await refreshQuote();
+  if (!quote) { msg.className = 'promo-msg promo-msg--err'; msg.textContent = 'Could not check that code. Please try again.'; return; }
+
+  if (quote.promoError) {
+    promoCode = '';
+    msg.className = 'promo-msg promo-msg--err';
+    msg.textContent = quote.promoError;
+    return;
   }
-  discount = Math.min(discount, subtotal);
 
   msg.className = 'promo-msg promo-msg--ok';
-  msg.textContent = 'Code applied! You save RM ' + discount.toLocaleString('en-MY', { minimumFractionDigits: 2 });
-  updateTotals();
+  msg.textContent = 'Code applied! You save RM ' + quote.discount.toLocaleString('en-MY', { minimumFractionDigits: 2 });
 }
 
-function updateTotals() {
-  var subtotal = cartItems.reduce(function (s, i) { return s + parseFloat(i.price) * i.qty; }, 0);
-  var total = Math.max(0, subtotal - discount);
-  document.getElementById('sumSubtotal').textContent = 'RM ' + subtotal.toLocaleString('en-MY', { minimumFractionDigits: 2 });
-  document.getElementById('sumTotal').textContent = 'RM ' + total.toLocaleString('en-MY', { minimumFractionDigits: 2 });
+// ── Ask the server for authoritative totals ──
+async function refreshQuote() {
+  try {
+    var res = await fetch('/api/quote', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ items: cartPayload(), promoCode: promoCode }),
+    });
+    var data = await res.json();
+    if (!res.ok) {
+      var errEl = document.getElementById('coError');
+      errEl.textContent = data.error || 'There is a problem with your cart.';
+      errEl.style.display = 'block';
+      return null;
+    }
+    serverQuote = data;
+    discount = data.discount || 0;
+    renderTotalsFromQuote(data);
+    return data;
+  } catch (e) {
+    return null;
+  }
+}
+
+function renderTotalsFromQuote(q) {
+  renderLinePrices(q);
+  document.getElementById('sumSubtotal').textContent = 'RM ' + q.subtotal.toLocaleString('en-MY', { minimumFractionDigits: 2 });
+  document.getElementById('sumTotal').textContent    = 'RM ' + q.total.toLocaleString('en-MY', { minimumFractionDigits: 2 });
 
   var discRow = document.getElementById('sumDiscountRow');
-  if (discount > 0) {
+  if (q.discount > 0) {
     discRow.style.display = 'flex';
-    document.getElementById('sumDiscountLabel').textContent = 'Discount' + (promoCode ? ' (' + promoCode + ')' : '');
-    document.getElementById('sumDiscount').textContent = '−RM ' + discount.toLocaleString('en-MY', { minimumFractionDigits: 2 });
+    document.getElementById('sumDiscountLabel').textContent = 'Discount' + (q.promoCode ? ' (' + q.promoCode + ')' : '');
+    document.getElementById('sumDiscount').textContent = '−RM ' + q.discount.toLocaleString('en-MY', { minimumFractionDigits: 2 });
   } else {
     discRow.style.display = 'none';
   }
 }
 
-// ── Submit to Toyyibpay ───────────────────────────
+// ── Submit to toyyibPay ───────────────────────────
 async function submitCheckout() {
   var name  = document.getElementById('coName').value.trim();
   var email = document.getElementById('coEmail').value.trim();
@@ -352,22 +362,32 @@ async function submitCheckout() {
     address:  document.getElementById('coAddr').value.trim(),
   };
 
-  // Save pending order to sessionStorage — success page reads this after payment
-  sessionStorage.setItem('ep_pending', JSON.stringify({
-    items: cartItems, customer: customer, discount: discount, promoCode: promoCode,
-  }));
-
   try {
+    // Only sku + qty + promo code are sent. The server prices the order;
+    // no price, discount or total from this page can affect the charge.
     var res  = await fetch('/api/checkout', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ items: cartItems, customer: customer, promoCode: promoCode, discountAmount: discount }),
+      body:    JSON.stringify({ items: cartPayload(), customer: customer, promoCode: promoCode }),
     });
     var data = await res.json();
 
     if (!res.ok || data.error) throw new Error(data.error || 'Payment could not be started.');
 
-    // Redirect to Toyyibpay payment page
+    // Cosmetic receipt for the success page, using the SERVER's figures.
+    // This is display only — it never marks an order paid and is not
+    // what the merchant's order record is built from.
+    sessionStorage.setItem('ep_pending', JSON.stringify({
+      refNo:     data.refNo,
+      items:     cartItems.map(function (i) { return { id: i.id, sku: i.sku, name: i.name, qty: i.qty, option1Name: i.option1Name, option1: i.option1, option2Name: i.option2Name, option2: i.option2 }; }),
+      customer:  { name: customer.name, email: customer.email },
+      subtotal:  data.subtotal,
+      discount:  data.discount,
+      total:     data.total,
+      promoCode: data.promoCode || '',
+    }));
+
+    // Redirect to toyyibPay payment page
     if (data.url) {
       window.location.href = data.url;
     } else {
