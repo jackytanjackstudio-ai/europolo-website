@@ -10,6 +10,7 @@ data/crop_report.html
 data/fill_comparison.html
 data/method_comparison.html
 data/_image-check.json
+data/_shopee-fetch-report.json
 data/download-report.json
 data/duplicates-report.json
 data/image-migration-report.json

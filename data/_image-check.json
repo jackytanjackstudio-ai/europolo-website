@@ -5308,5 +5308,305 @@
     "status": 200,
     "size": 162414,
     "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r98u-ltkmuwk5lu8ead",
+    "id": "ewb-40157-40158-40159-40160",
+    "sku": "EWB 40157 A",
+    "type": "variant",
+    "filename": "ewb-40157-a.jpg",
+    "status": 200,
+    "size": 184336,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-ltkmuwk5n8sub0",
+    "id": "ewb-40157-40158-40159-40160",
+    "sku": "EWB 40158 A",
+    "type": "variant",
+    "filename": "ewb-40158-a.jpg",
+    "status": 200,
+    "size": 276812,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r992-ltkmuwk5ondaea",
+    "id": "ewb-40157-40158-40159-40160",
+    "sku": "EWB 40159 A",
+    "type": "variant",
+    "filename": "ewb-40159-a.jpg",
+    "status": 200,
+    "size": 279254,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r98x-ltkmuwk66wr238",
+    "id": "ewb-40157-40158-40159-40160",
+    "sku": "EWB 40160 A",
+    "type": "variant",
+    "filename": "ewb-40160-a.jpg",
+    "status": 200,
+    "size": 279379,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-ls6htopglbsnfa",
+    "id": "ewb-40165-40166-40167",
+    "sku": "EWB 40166 B",
+    "type": "variant",
+    "filename": "ewb-40166-b.jpg",
+    "status": 200,
+    "size": 201974,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/sg-11134201-22100-l9dej33ds6iv2b",
+    "id": "ewb-40165-40166-40167",
+    "sku": "EWB 40167 A",
+    "type": "variant",
+    "filename": "ewb-40167-a.jpg",
+    "status": 200,
+    "size": 127746,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-ls6htopgjx87ea",
+    "id": "ewb-40165-40166-40167",
+    "sku": "EWB 40165 A",
+    "type": "variant",
+    "filename": "ewb-40165-a.jpg",
+    "status": 200,
+    "size": 191639,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r98y-lt4mlotbgizo38",
+    "id": "ewa-40172-40175",
+    "sku": "EWA 40172 A",
+    "type": "variant",
+    "filename": "ewa-40172-a.jpg",
+    "status": 200,
+    "size": 121137,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r98v-lt4mlotbhxk4b9",
+    "id": "ewa-40172-40175",
+    "sku": "EWA 40175 A",
+    "type": "variant",
+    "filename": "ewa-40175-a.jpg",
+    "status": 200,
+    "size": 120385,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-lt4mlotlzsbo11",
+    "id": "ewa-40173-40174",
+    "sku": "EWA 40173 A",
+    "type": "variant",
+    "filename": "ewa-40173-a.jpg",
+    "status": 200,
+    "size": 110373,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r98q-lt4mlotm16w461",
+    "id": "ewa-40173-40174",
+    "sku": "EWA 40174 A",
+    "type": "variant",
+    "filename": "ewa-40174-a.jpg",
+    "status": 200,
+    "size": 110050,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r98o-lt4mlotlhixw5e",
+    "id": "ewa-40170-40171",
+    "sku": "EWA 40170 A",
+    "type": "variant",
+    "filename": "ewa-40170-a.jpg",
+    "status": 200,
+    "size": 104663,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7r98t-lt4mlotlixicdb",
+    "id": "ewa-40170-40171",
+    "sku": "EWA 40171 A",
+    "type": "variant",
+    "filename": "ewa-40171-a.jpg",
+    "status": 200,
+    "size": 122170,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qul4-ljgtjc5ozevudc",
+    "id": "ewb-30561-ewb-30562",
+    "sku": "EWB 30562 I",
+    "type": "variant",
+    "filename": "ewb-30562-i.jpg",
+    "status": 200,
+    "size": 401703,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qul7-ljgtjc5oy0bebd",
+    "id": "ewb-30561-ewb-30562",
+    "sku": "EWB 30561 A",
+    "type": "variant",
+    "filename": "ewb-30561-a.jpg",
+    "status": 200,
+    "size": 388199,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qul5-lfhnkno5uyvte8",
+    "id": "ewb-30354-30355-30356",
+    "sku": "EWB 30354 B",
+    "type": "variant",
+    "filename": "ewb-30354-b.jpg",
+    "status": 200,
+    "size": 431488,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qukx-lfhnkno5xs0pc7",
+    "id": "ewb-30354-30355-30356",
+    "sku": "EWB 30356 B",
+    "type": "variant",
+    "filename": "ewb-30356-b.jpg",
+    "status": 200,
+    "size": 469946,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qul2-lfhnkno5wdg91f",
+    "id": "ewb-30354-30355-30356",
+    "sku": "EWB 30355 C",
+    "type": "variant",
+    "filename": "ewb-30355-c.jpg",
+    "status": 200,
+    "size": 441270,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljmdzmr0yja263",
+    "id": "ewb-30551-ewb-30552-ewb-30553",
+    "sku": "EWB 30551 A2",
+    "type": "variant",
+    "filename": "ewb-30551-a2.jpg",
+    "status": 200,
+    "size": 420582,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qukw-ljmdzmr0zxui2a",
+    "id": "ewb-30551-ewb-30552-ewb-30553",
+    "sku": "EWB 30552 A1",
+    "type": "variant",
+    "filename": "ewb-30552-a1.jpg",
+    "status": 200,
+    "size": 426187,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qul1-ljmdzmr11ceyf8",
+    "id": "ewb-30551-ewb-30552-ewb-30553",
+    "sku": "EWB 30553 A3",
+    "type": "variant",
+    "filename": "ewb-30553-a3.jpg",
+    "status": 200,
+    "size": 435884,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qul9-ljl4f8jlad5m1f",
+    "id": "ewb-30563-ewb-30564",
+    "sku": "EWB 30564 A",
+    "type": "variant",
+    "filename": "ewb-30564-a.jpg",
+    "status": 200,
+    "size": 253436,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qukz-ljl4f8jl8yl6b0",
+    "id": "ewb-30563-ewb-30564",
+    "sku": "EWB 30563 A",
+    "type": "variant",
+    "filename": "ewb-30563-a.jpg",
+    "status": 200,
+    "size": 345140,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qul3-ljmdzmr15k4af6",
+    "id": "ewb-30554-ewb-30555-ewb-30556",
+    "sku": "EWB 30556 A2",
+    "type": "variant",
+    "filename": "ewb-30556-a2.jpg",
+    "status": 200,
+    "size": 413221,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qukz-ljmdzmr12qzedb",
+    "id": "ewb-30554-ewb-30555-ewb-30556",
+    "sku": "EWB 30554 A2",
+    "type": "variant",
+    "filename": "ewb-30554-a2.jpg",
+    "status": 200,
+    "size": 415033,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qul2-ljmdzmr145judc",
+    "id": "ewb-30554-ewb-30555-ewb-30556",
+    "sku": "EWB 30555 A3",
+    "type": "variant",
+    "filename": "ewb-30555-a3.jpg",
+    "status": 200,
+    "size": 446427,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/sg-11134201-22100-68mg0tjds6iv27",
+    "id": "ewb-20951-20952-20953",
+    "sku": "EWB 20951 A",
+    "type": "variant",
+    "filename": "ewb-20951-a.jpg",
+    "status": 200,
+    "size": 120432,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/sg-11134201-22100-smy0e0les6ivd6",
+    "id": "ewb-20951-20952-20953",
+    "sku": "EWB 20952 B",
+    "type": "variant",
+    "filename": "ewb-20952-b.jpg",
+    "status": 200,
+    "size": 127759,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qul0-ljgtjc5p280q3f",
+    "id": "ewb-30565-ewb-30566",
+    "sku": "EWB 30566 A",
+    "type": "variant",
+    "filename": "ewb-30566-a.jpg",
+    "status": 200,
+    "size": 299337,
+    "ok": true
+  },
+  {
+    "url": "https://cf.shopee.com.my/file/my-11134207-7qul1-ljgtjc5p0tga34",
+    "id": "ewb-30565-ewb-30566",
+    "sku": "EWB 30565 A",
+    "type": "variant",
+    "filename": "ewb-30565-a.jpg",
+    "status": 200,
+    "size": 297967,
+    "ok": true
   }
 ]
