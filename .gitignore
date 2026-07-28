@@ -1,6 +1,13 @@
 # Secrets — never commit
 .env
 
+# Local admin auth scratch files produced while testing the admin API by hand.
+# body.json holds a plaintext admin username/password; ep.jar is a curl cookie
+# jar holding an ep_admin_session cookie. Neither has ever been committed —
+# keep it that way.
+body.json
+ep.jar
+
 # Claude memory (local only)
 .claude/
 
@@ -22,6 +29,20 @@ data/__pycache__/
 
 # Node
 node_modules/
+
+# Local image-tooling artifacts. The scripts are kept on disk because they are
+# reusable (crop_covers.py is what produced every cover.jpg/cover_orig.jpg);
+# the HTML reports and preview JPGs are their generated output. Ignored rather
+# than committed so re-running a script never dirties the tree.
+# NOTE: deliberately NOT "data/*.py" — data/build_variants.py and
+# data/_download_images.py are tracked pipeline files.
+data/crop_covers.py
+data/gen_comparison.py
+data/gen_method_comparison.py
+data/crop_report.html
+data/fill_comparison.html
+data/method_comparison.html
+data/previews/
 
 .vercel
 .env*
