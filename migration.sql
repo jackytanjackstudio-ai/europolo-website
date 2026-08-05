@@ -92,3 +92,57 @@ CREATE TABLE IF NOT EXISTS products_stock (
   stock      integer     NOT NULL DEFAULT 0 CHECK (stock >= 0),
   updated_at timestamptz NOT NULL DEFAULT now()
 );
+
+-- ── enquiries ──────────────────────────────────────
+-- Contact-form leads. Before this table the form wrote to the visitor's own
+-- localStorage, so a real customer's enquiry was invisible to the shop —
+-- the same defect admin-orders.js fixed for orders.
+--
+-- No uniqueness on email: a customer may legitimately ask twice, and
+-- silently swallowing the second enquiry loses a sale. Duplicate protection
+-- is the submitter's problem, not the database's.
+CREATE TABLE IF NOT EXISTS enquiries (
+  id         bigserial   PRIMARY KEY,
+
+  name       text        NOT NULL DEFAULT '',
+  email      text        NOT NULL DEFAULT '',
+  phone      text        NOT NULL DEFAULT '',   -- the web form has no phone field; kept for enquiries taken by hand
+  interest   text        NOT NULL DEFAULT '',
+  message    text        NOT NULL DEFAULT '',
+
+  -- Mirrors the states the admin drawer already offered when this list was
+  -- localStorage-backed, so the existing UI keeps working unchanged.
+  status     text        NOT NULL DEFAULT 'Unread'
+                         CHECK (status IN ('Unread', 'Pending', 'Replied', 'Closed')),
+  reply      text        NOT NULL DEFAULT '',
+  notes      text        NOT NULL DEFAULT '',
+
+  -- Kept for abuse triage only. Not shown in the admin UI.
+  source_ip  text        NOT NULL DEFAULT '',
+
+  created_at timestamptz NOT NULL DEFAULT now(),
+  replied_at timestamptz
+);
+
+CREATE INDEX IF NOT EXISTS enquiries_created_at_idx ON enquiries (created_at DESC);
+CREATE INDEX IF NOT EXISTS enquiries_status_idx     ON enquiries (status);
+
+-- ── newsletter_subscribers ─────────────────────────
+-- Separate from enquiries: a subscription is a standing consent, an enquiry
+-- is one conversation. Mixing them would make "how many subscribers" a query
+-- over a list that also contains people who only ever asked a question.
+--
+-- email IS unique here, and re-subscribing is an idempotent no-op — unlike an
+-- enquiry, a second identical subscription carries no new information.
+CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+  id            bigserial   PRIMARY KEY,
+  email         text        NOT NULL UNIQUE,
+  source        text        NOT NULL DEFAULT 'website',
+  source_ip     text        NOT NULL DEFAULT '',
+  subscribed_at timestamptz NOT NULL DEFAULT now(),
+  -- Set on unsubscribe rather than deleting the row, so a later re-subscribe
+  -- cannot be mistaken for a never-unsubscribed one.
+  unsubscribed_at timestamptz
+);
+
+CREATE INDEX IF NOT EXISTS newsletter_subscribed_at_idx ON newsletter_subscribers (subscribed_at DESC);

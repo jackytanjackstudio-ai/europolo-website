@@ -336,11 +336,9 @@ function seedIfEmpty() {
       {id:'p2',code:'WELCOME15',type:'Percent',value:'15',min:'150',expiry:'2026-12-31',uses:5,active:true},
       {id:'p3',code:'LUGGAGE50',type:'Flat',value:'50',min:'800',expiry:'2026-06-30',uses:3,active:true},
     ]);
-    Store.set('enquiries', [
-      {id:'e1',name:'Ahmad Faris',email:'faris@email.com',phone:'012-3456789',interest:'Milano Briefcase',message:'Hi, I would like to know if the Milano Briefcase is available in dark brown. Also what is the warranty?',date:'2026-03-29',status:'Unread',reply:'',notes:''},
-      {id:'e2',name:'Daniel Lim',email:'daniel@email.com',phone:'016-7654321',interest:'Luggage Set',message:'Interested in the Euro Journey Set. Do you have showroom in KL I can visit?',date:'2026-03-28',status:'Replied',reply:'Hi Daniel, thank you for your interest! Our showroom is at...', notes:'VIP potential'},
-      {id:'e3',name:'Reza Hakim',email:'reza@email.com',phone:'011-2345678',interest:'Wallets',message:'Looking for a slim wallet for daily use. Budget around RM200. Any recommendations?',date:'2026-03-27',status:'Pending',reply:'',notes:''},
-    ]);
+    /* No `enquiries` seed. customer-service.html now reads real leads from
+       /api/admin-enquiries, and three fake customers sitting in the list
+       would be answered as though they were real. */
     Store.set('faq', [
       {id:'f1',q:'Do you offer warranty on your products?',a:'All Euro Polo products come with a 12-month manufacturer warranty against defects in material and workmanship.',cat:'After-Sale',order:1,status:'Published'},
       {id:'f2',q:'How do I clean my leather bag?',a:'Use a soft dry cloth to wipe surface dust. For deeper cleaning, apply a small amount of leather conditioner on a cloth and buff gently.',cat:'Care',order:2,status:'Published'},

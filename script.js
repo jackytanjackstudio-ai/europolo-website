@@ -46,28 +46,91 @@ const revealObserver = new IntersectionObserver(
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-/* ── CONTACT FORM ── */
+/* ── CONTACT FORM ──
+   Posts to /api/contact, which writes to Postgres. It previously wrote to
+   this visitor's own localStorage and then said "Your enquiry has been
+   received" — so every lead was lost while the customer believed they had
+   reached us. Nothing here may claim success that the server did not
+   confirm. */
 const form = document.getElementById('contactForm');
 if (form) {
-  form.addEventListener('submit', (e) => {
+  /* Inline error line, created once and reused. */
+  function formError(message) {
+    let el = form.querySelector('.form-error');
+    if (!el) {
+      el = document.createElement('p');
+      el.className = 'form-error';
+      el.setAttribute('role', 'alert');
+      el.style.cssText = 'font-size:0.8rem;color:#c0392b;margin-top:0.75rem;line-height:1.6';
+      form.appendChild(el);
+    }
+    el.textContent = message;
+  }
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    const nameEl    = form.querySelector('#name');
+    const emailEl   = form.querySelector('#email');
+    const messageEl = form.querySelector('#message');
+    const name      = nameEl.value.trim();
+    const email     = emailEl.value.trim();
+    const message   = messageEl.value.trim();
+    const interest  = (form.querySelector('#interest') || {}).value || '';
+
+    if (!name)    { formError('Please enter your name.');    nameEl.focus();    return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      formError('Please enter a valid email address.'); emailEl.focus(); return;
+    }
+    if (!message) { formError('Please enter a message.'); messageEl.focus(); return; }
+
     const btn = form.querySelector('[type="submit"]');
+    const originalLabel = btn.textContent;
+    formError('');
     btn.textContent = 'Sending...';
     btn.disabled = true;
 
-    setTimeout(() => {
-      form.innerHTML = `
-        <div class="form-success" style="display:block">
-          <p style="font-family:var(--font-serif);font-size:1.4rem;color:var(--gold);margin-bottom:0.75rem">
-            Thank You.
-          </p>
-          <p style="font-size:0.875rem;color:var(--mid);line-height:1.8">
-            Your enquiry has been received.<br/>
-            A Euro Polo representative will be in touch within 24 hours.
-          </p>
-        </div>
-      `;
-    }, 1200);
+    let res, data = {};
+    try {
+      res = await fetch('/api/contact', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        // `company` is the honeypot (see index.html) — always empty for a
+        // real submission, so it is sent as-is rather than validated here.
+        body:    JSON.stringify({
+          name, email, interest, message,
+          company: (form.querySelector('#company') || {}).value || '',
+        }),
+      });
+      try { data = await res.json(); } catch (_) {}
+    } catch (_) {
+      // Network failure. Re-enable the form: the customer's words are still
+      // in it, and a retry is the only thing that can still capture them.
+      btn.textContent = originalLabel;
+      btn.disabled = false;
+      formError('Could not reach the server. Please check your connection and try again, or WhatsApp us.');
+      return;
+    }
+
+    if (!res.ok) {
+      btn.textContent = originalLabel;
+      btn.disabled = false;
+      formError(data.error || 'Could not send your message. Please try again, or WhatsApp us.');
+      return;
+    }
+
+    // Only now — the server has the enquiry.
+    form.innerHTML = `
+      <div class="form-success" style="display:block">
+        <p style="font-family:var(--font-serif);font-size:1.4rem;color:var(--gold);margin-bottom:0.75rem">
+          Thank You.
+        </p>
+        <p style="font-size:0.875rem;color:var(--mid);line-height:1.8">
+          Your enquiry has been received.<br/>
+          A Euro Polo representative will be in touch within 24 hours.
+        </p>
+      </div>
+    `;
   });
 }
 
@@ -83,16 +146,45 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-/* ── NEWSLETTER FORM ── */
+/* ── NEWSLETTER FORM ──
+   Same rule as the contact form: "Subscribed ✓" is only shown once the
+   server has actually stored the address. */
 const nlForm = document.getElementById('newsletterForm');
 if (nlForm) {
-  nlForm.addEventListener('submit', (e) => {
+  nlForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = nlForm.querySelector('button');
+    const input = nlForm.querySelector('input[type="email"]');
+    const btn   = nlForm.querySelector('button');
+    const email = input.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+
+    const originalLabel = btn.textContent;
+    btn.textContent = 'Subscribing...';
+    btn.disabled = true;
+
+    let ok = false;
+    try {
+      const res = await fetch('/api/contact', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ kind: 'newsletter', email }),
+      });
+      ok = res.ok;
+    } catch (_) { ok = false; }
+
+    if (!ok) {
+      btn.textContent = originalLabel;
+      btn.disabled = false;
+      input.setAttribute('aria-invalid', 'true');
+      input.placeholder = 'Could not subscribe — please try again';
+      input.value = '';
+      return;
+    }
+
     btn.textContent = 'Subscribed ✓';
     btn.style.background = '#163320';
     btn.disabled = true;
-    nlForm.querySelector('input').value = '';
+    input.value = '';
   });
 }
 

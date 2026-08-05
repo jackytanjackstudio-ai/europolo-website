@@ -484,6 +484,14 @@
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="4" placeholder="Tell us what you're looking for..."></textarea>
           </div>
+          <!-- Honeypot: no sighted user and no screen reader reaches this
+               (aria-hidden + tabindex -1), so anything that fills it is a bot.
+               api/contact.js answers those with the same 200 a real
+               submission gets, so a bot cannot learn it was caught. -->
+          <div class="form-hp" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
+          </div>
           <button type="submit" class="btn btn--gold btn--full">Send Enquiry</button>
           <p class="form-note">We typically respond within 24 hours.</p>
         </form>

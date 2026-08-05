@@ -158,9 +158,61 @@ function closeDrawer(id,bgId){document.getElementById(id).classList.remove('open
 document.querySelectorAll('.drawer-close').forEach(b=>b.addEventListener('click',()=>{b.closest('.drawer').classList.remove('open');document.querySelectorAll('.drawer-bg').forEach(bg=>bg.classList.remove('open'));}));
 document.querySelectorAll('.drawer-bg').forEach(bg=>bg.addEventListener('click',()=>{bg.classList.remove('open');document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));}));
 
+/* Enquiries come from Postgres via /api/admin-enquiries, not localStorage.
+   The old Store.get('enquiries') only ever held the three seeded demo rows,
+   so a real customer's enquiry never appeared here at all.
+
+   EP_ENQUIRIES is a render cache, never the source of truth: every mutation
+   goes to the server first and then reloads, so two staff on two machines
+   cannot diverge. FAQ and templates below are still localStorage — separate
+   concern, unchanged. */
+let EP_ENQUIRIES = [];
+
+async function loadEnquiries(){
+  try{
+    const res = await fetch('/api/admin-enquiries', { credentials:'same-origin' });
+    if(res.status===401||res.status===403){ Auth.logout(); return; }
+    if(!res.ok){
+      const d = await res.json().catch(()=>({}));
+      // Do not fall back to demo data: an empty list the staff know is
+      // broken beats a list of fake customers they might answer.
+      EP_ENQUIRIES = [];
+      UI.toast(d.error||'Could not load enquiries','error');
+    } else {
+      EP_ENQUIRIES = (await res.json()).enquiries || [];
+    }
+  }catch{
+    EP_ENQUIRIES = [];
+    UI.toast('Could not reach the server','error');
+  }
+  renderStats(); renderEnquiries();
+}
+
+/* Send one change to the server, then reload. Returns true on success. */
+async function patchEnquiry(id, changes){
+  try{
+    const res = await fetch('/api/admin-enquiries', {
+      method:'PATCH',
+      headers:{'Content-Type':'application/json'},
+      credentials:'same-origin',
+      body:JSON.stringify({ id, ...changes }),
+    });
+    if(res.status===401||res.status===403){ Auth.logout(); return false; }
+    if(!res.ok){
+      const d = await res.json().catch(()=>({}));
+      UI.toast(d.error||'Could not save','error');
+      return false;
+    }
+    return true;
+  }catch{
+    UI.toast('Could not reach the server','error');
+    return false;
+  }
+}
+
 // Stats
 function renderStats(){
-  const e=Store.get('enquiries',[]),f=Store.get('faq',[]);
+  const e=EP_ENQUIRIES,f=Store.get('faq',[]);
   document.getElementById('csStats').innerHTML=`
     <div class="stat-card stat-card--red"><span class="stat-num">${e.filter(x=>x.status==='Unread').length}</span><span class="stat-label">Unread</span></div>
     <div class="stat-card stat-card--amber"><span class="stat-num">${e.filter(x=>x.status==='Pending').length}</span><span class="stat-label">Pending</span></div>
@@ -171,7 +223,7 @@ function renderStats(){
 // Enquiries
 function renderEnquiries(){
   const filter=document.getElementById('enquiryFilter').value;
-  let data=Store.get('enquiries',[]);
+  let data=EP_ENQUIRIES;
   if(filter)data=data.filter(e=>e.status===filter);
   const bMap={Unread:'badge--red',Pending:'badge--amber',Replied:'badge--green'};
   document.getElementById('enquiryList').innerHTML=data.length?data.map(e=>`
@@ -196,31 +248,36 @@ function renderEnquiries(){
     `<div class="empty-state"><div class="empty-state-icon">◉</div><p>No enquiries${filter?' with status '+filter:''}.</p></div>`;
 }
 
-function openReplyDrawer(id){
-  const e=Store.get('enquiries',[]).find(x=>x.id===id);
+async function openReplyDrawer(id){
+  const e=EP_ENQUIRIES.find(x=>x.id===id);
   if(!e)return;
   document.getElementById('rdId').value=id;
   document.getElementById('rdReply').value=e.reply||'';
   document.getElementById('rdNotes').value=e.notes||'';
   document.getElementById('rdStatus').value=e.status==='Unread'?'Pending':e.status;
   document.getElementById('rdInfo').innerHTML=`<strong>${e.name}</strong> &middot; ${e.email}<br><span style="color:var(--muted)">${e.message}</span>`;
-  // Mark as read
-  if(e.status==='Unread')Store.update('enquiries',id,{status:'Pending'});
   document.getElementById('replyDrawer').classList.add('open');
   document.getElementById('replyDrawerBg').classList.add('open');
-  renderStats();renderEnquiries();
+  // Mark as read. Opened first and awaited after, so a slow network delays
+  // the badge, never the drawer the staff member is waiting on.
+  if(e.status==='Unread'&&await patchEnquiry(id,{status:'Pending'}))await loadEnquiries();
 }
-function saveReply(){
+async function saveReply(){
   const id=document.getElementById('rdId').value;
   const reply=document.getElementById('rdReply').value.trim();
   if(!reply){UI.toast('Please write a reply','error');return;}
-  Store.update('enquiries',id,{reply,notes:document.getElementById('rdNotes').value,status:document.getElementById('rdStatus').value});
+  const ok=await patchEnquiry(id,{
+    reply,
+    notes:document.getElementById('rdNotes').value,
+    status:document.getElementById('rdStatus').value,
+  });
+  if(!ok)return;               // drawer stays open, so the reply is not lost
   Store.log('Replied to enquiry #'+id);
   closeDrawer('replyDrawer','replyDrawerBg');
-  renderEnquiries();renderStats();UI.toast('Reply saved','success');
+  await loadEnquiries();UI.toast('Reply saved','success');
 }
 function copyWA(id){
-  const e=Store.get('enquiries',[]).find(x=>x.id===id);
+  const e=EP_ENQUIRIES.find(x=>x.id===id);
   if(!e)return;
   const cfg=Store.get('site_config',{});
   const msg=encodeURIComponent(`Hi ${e.name}, thank you for contacting Euro Polo! `);
@@ -229,7 +286,12 @@ function copyWA(id){
 }
 async function deleteEnquiry(id){
   if(!await UI.confirm('Delete this enquiry?'))return;
-  Store.remove('enquiries',id);renderEnquiries();renderStats();UI.toast('Enquiry deleted');
+  try{
+    const res=await fetch('/api/admin-enquiries?id='+encodeURIComponent(id),{method:'DELETE',credentials:'same-origin'});
+    if(res.status===401||res.status===403){Auth.logout();return;}
+    if(!res.ok){const d=await res.json().catch(()=>({}));UI.toast(d.error||'Could not delete','error');return;}
+  }catch{UI.toast('Could not reach the server','error');return;}
+  await loadEnquiries();UI.toast('Enquiry deleted');
 }
 
 // FAQ
@@ -307,7 +369,10 @@ function copyTemplate(id){const t=Store.get('templates',[]).find(x=>x.id===id);i
 async function deleteTemplate(id){if(!await UI.confirm('Delete this template?'))return;Store.remove('templates',id);renderTemplates();UI.toast('Template deleted');}
 
 // Init
-renderStats();renderEnquiries();renderFAQ();renderTemplates();
+renderStats();renderFAQ();renderTemplates();
+// Enquiries render after the fetch resolves; loadEnquiries() calls
+// renderStats()/renderEnquiries() itself once the real rows are in.
+loadEnquiries();
 </script>
 </body>
 </html>
