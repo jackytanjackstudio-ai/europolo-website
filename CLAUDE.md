@@ -81,15 +81,49 @@ Outputs:
 - Dev server: `py -m http.server 3000` from the project root
 
 ### What is NOT done yet
-1. **Images** — covers and galleries are served locally from
-   `images/products/<slug>/`. 542 of 910 refs are local; **368 still point at
-   the Shopee CDN** — 368 variant swatch images that were never downloaded.
-   Worklist with expected filenames: `docs/missing-images.md`.
-   Drop files at the paths listed there, then run
-   `node scripts/migrate-images.js --apply` to wire them up.
+1. ~~**Images**~~ — **DONE.** `024e97b` downloaded the last 368 refs, so as of
+   2026-08-05 the catalogue is **910 of 910 local, 0 on the Shopee CDN**
+   (verify with a count over `data/product-data.json`). The old
+   "542 local / 368 remote" figure below this line was true on 2026-06-09 and
+   is now wrong — do not plan against it.
 
-   IMPORTANT: `py data/build_variants.py` rewrites image URLs back to Shopee.
-   Always re-run `node scripts/migrate-images.js --apply` after regenerating.
+   🚨 **DO NOT re-run the full pipeline until `resolveDir` is fixed.**
+
+   The old advice — "`build_variants.py` rewrites URLs back to Shopee, so
+   always re-run `migrate-images.js --apply` afterwards" — **no longer
+   restores the catalogue.** It was written when the URL map in
+   `data/_image-check.json` (561 entries) covered every local ref. It no
+   longer does: many refs were wired by filename convention or placed by hand,
+   and `data/product-data.json` is now the only record of those paths.
+
+   The mechanism: `resolveDir()` in `scripts/migrate-images.js` prefers "the
+   directory of a path this product already points at". That preference is
+   what carries most products today — and regenerating destroys it, because
+   every ref becomes an `https://` URL again. The fallback derives a directory
+   by stripping the SKU's last **whitespace-separated** token, so a no-space
+   SKU yields nothing usable: `EBA51208SB` gives candidate `eba51208sb`, while
+   the real directory is `eba51208s`.
+
+   Measured 2026-08-05 by simulating the post-regeneration run:
+
+   | | |
+   |---|---|
+   | refs recoverable by convention | 382 of 910 |
+   | refs that would stay on Shopee | **528** |
+   | products with no resolvable directory | **29 of 63** (covers included) |
+
+   `migrate-images.js` would still exit 0 and print a normal report, so this
+   failure is silent. Fix `resolveDir` (strip a trailing colour suffix from
+   no-space SKUs) and re-run the simulation before trusting the pipeline again.
+
+   To change a few images in the meantime, overwrite the files in place at the
+   paths the catalogue already points at, and leave the pipeline alone.
+
+   Note on the spreadsheet's Shopee URLs: they rotate. On 2026-08-05, 78
+   `variant_image` URLs in `finaliseddd.xlsx` changed (`10a0e6c`), and all 62
+   distinct files they map to fetched **byte-identical** to what was already on
+   disk. A changed URL there means a new CDN file id, not necessarily a new
+   photograph — always diff the bytes before replacing anything.
 
 2. ~~**Forms**~~ — **DONE 2026-08-05.** Both forms now POST to `/api/contact`,
    which writes to Neon (`enquiries` and `newsletter_subscribers`, see
