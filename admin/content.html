@@ -68,20 +68,28 @@
       <div class="tab-panel active" data-group="cnt" id="tabProducts">
         <div class="card">
           <div class="card-header">
-            <span class="card-title">Product Catalogue</span>
+            <span class="card-title">Product Catalogue <span id="prodCount" style="color:var(--muted);font-weight:400;font-size:.8rem"></span></span>
             <div class="flex gap-1">
               <select class="form-select" id="catFilter" style="font-size:.78rem;padding:.3rem .6rem" onchange="renderProducts()">
                 <option value="">All Categories</option>
-                <option value="Bags">Bags</option>
-                <option value="Wallets">Wallets</option>
-                <option value="Belts">Belts</option>
-                <option value="Luggage">Luggage</option>
+                <option value="bags">Bags</option>
+                <option value="wallets">Wallets</option>
+                <option value="belts">Belts</option>
+                <option value="luggage">Luggage</option>
               </select>
-              <button class="btn btn--primary btn--sm" onclick="openProductDrawer()">+ Add Product</button>
             </div>
           </div>
+          <div style="padding:.7rem .9rem;margin:0 0 .2rem;background:rgba(212,175,55,.07);border-left:3px solid var(--gold,#d4af37);border-radius:4px;font-size:.75rem;line-height:1.55;color:var(--muted)">
+            <strong style="color:var(--text)">Read-only.</strong>
+            This mirrors the live catalogue the storefront renders from, so the two always match.
+            Products are not edited here — change the master spreadsheet, run
+            <code style="font-size:.72rem">py data/build_variants.py</code>, then redeploy.
+            <br>
+            <strong style="color:var(--text)">Stock is a spreadsheet snapshot — not live.</strong>
+            Live stock sits in the orders database and is what checkout deducts from; it will drift from the figure shown here.
+          </div>
           <div class="table-wrap">
-            <table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead>
+            <table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock <span style="font-weight:400;color:var(--muted);font-size:.7rem">(snapshot)</span></th><th>Status</th></tr></thead>
             <tbody id="productTbody"></tbody></table>
           </div>
         </div>
@@ -335,6 +343,9 @@
 </div>
 
 <div id="toast-container"></div>
+<!-- The same generated catalogue the public site reads (window.EP_PRODUCTS).
+     Read-only here; the Products tab mirrors it and never writes back. -->
+<script src="../js/product-data-embed.js"></script>
 <script src="auth.js?v=2"></script>
 <script>
 Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
@@ -369,31 +380,42 @@ function closeDrawer(id,bgId){document.getElementById(id).classList.remove('open
 document.querySelectorAll('.drawer-close').forEach(b=>b.addEventListener('click',()=>{b.closest('.drawer').classList.remove('open');document.querySelectorAll('.drawer-bg').forEach(bg=>bg.classList.remove('open'));}));
 document.querySelectorAll('.drawer-bg').forEach(bg=>bg.addEventListener('click',()=>{bg.classList.remove('open');document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));}));
 
-// Default products (catalogue)
-const DEFAULT_PRODUCTS = [
-  {id:'prod1',name:'Milano Executive Briefcase',cat:'Bags',price:'690',sku:'EP-BAG-001',desc:'Full-grain leather, fits 15" laptop',status:'Active'},
-  {id:'prod2',name:'Vienna Slim Backpack',cat:'Bags',price:'490',sku:'EP-BAG-002',desc:'Water-resistant, padded compartments',status:'Active'},
-  {id:'prod3',name:'Zürich Classic Tote',cat:'Bags',price:'420',sku:'EP-BAG-003',desc:'Canvas + leather trim',status:'Active'},
-  {id:'prod4',name:'Roma Crossbody',cat:'Bags',price:'320',sku:'EP-BAG-004',desc:'Compact everyday crossbody',status:'Active'},
-  {id:'prod5',name:'London Weekend Duffel',cat:'Bags',price:'580',sku:'EP-BAG-005',desc:'48hr travel bag',status:'Active'},
-  {id:'prod6',name:'Paris Messenger',cat:'Bags',price:'380',sku:'EP-BAG-006',desc:'Urban commuter bag',status:'Active'},
-  {id:'prod7',name:'Berlin Slim Bifold',cat:'Wallets',price:'220',sku:'EP-WAL-001',desc:'8-card slim bifold',status:'Active'},
-  {id:'prod8',name:'Monaco Card Holder',cat:'Wallets',price:'160',sku:'EP-WAL-002',desc:'Minimalist card holder',status:'Active'},
-  {id:'prod9',name:'Geneva Long Wallet',cat:'Wallets',price:'280',sku:'EP-WAL-003',desc:'Full-length zip wallet',status:'Active'},
-  {id:'prod10',name:'Florence Zip Wallet',cat:'Wallets',price:'240',sku:'EP-WAL-004',desc:'Zip-around compact wallet',status:'Active'},
-  {id:'prod11',name:'Madrid Classic Belt',cat:'Belts',price:'180',sku:'EP-BLT-001',desc:'Full-grain leather, single prong',status:'Active'},
-  {id:'prod12',name:'Copenhagen Reversible Belt',cat:'Belts',price:'210',sku:'EP-BLT-002',desc:'Reversible black/tan',status:'Active'},
-  {id:'prod13',name:'Oslo Woven Belt',cat:'Belts',price:'190',sku:'EP-BLT-003',desc:'Woven leather, casual style',status:'Active'},
-  {id:'prod14',name:'Monaco Cabin Trolley 20"',cat:'Luggage',price:'890',sku:'EP-LUG-001',desc:'Cabin-size, TSA lock',status:'Active'},
-  {id:'prod15',name:'Florence Check-in 24"',cat:'Luggage',price:'1090',sku:'EP-LUG-002',desc:'Check-in size, spinner wheels',status:'Active'},
-  {id:'prod16',name:'Grand Euro Traveller 28"',cat:'Luggage',price:'1290',sku:'EP-LUG-003',desc:'Large check-in, expandable',status:'Active'},
-  {id:'prod17',name:'Euro Journey Set 20"+24"',cat:'Luggage',price:'1790',sku:'EP-LUG-004',desc:'Matching cabin + check-in set',status:'Active'},
-];
+/* ── Product catalogue (READ-ONLY MIRROR) ─────────────────────────────
+   Rows come straight from window.EP_PRODUCTS — the same generated
+   catalogue (js/product-data-embed.js) that the public collection and
+   product pages render from, so the two can never disagree.
+
+   Deliberately NOT read from Store/localStorage. This page used to seed a
+   17-row demo fixture ("Milano Executive Briefcase", EP-BAG-001, …) into
+   localStorage['ep_products'] and read it back forever after. Those rows
+   were mockup data with zero overlap with the real catalogue, and because
+   the seed only ran when the key was absent, any browser that had opened
+   this page kept showing them. Reading EP_PRODUCTS directly is what makes
+   the stale key unreachable — do not reintroduce a Store.get here.
+
+   The master spreadsheet + `py data/build_variants.py` is the source of
+   truth. Nothing on this tab writes; edits happen in the spreadsheet.
+   ------------------------------------------------------------------- */
+const CAT_LABELS = {bags:'Bags', wallets:'Wallets', belts:'Belts', luggage:'Luggage'};
 
 function getProducts(){
-  let p=Store.get('products',null);
-  if(!p){Store.set('products',DEFAULT_PRODUCTS);p=DEFAULT_PRODUCTS;}
-  return p;
+  const src = (typeof window !== 'undefined' && window.EP_PRODUCTS) || [];
+  return src.map(p => {
+    const variants = p.variants || [];
+    return {
+      id:           p.id,
+      name:         p.name || '',
+      cat:          p.category || '',
+      catLabel:     CAT_LABELS[p.category] || p.category || '—',
+      priceText:    p.priceDisplay || '',
+      variantCount: variants.length,
+      // Spreadsheet snapshot, summed across variants. NOT live stock —
+      // live stock lives in Neon (products_stock) and is what checkout
+      // deducts from. Labelled as such in the UI.
+      stock:        variants.reduce((n, v) => n + (Number(v.stock) || 0), 0),
+      inStock:      p.inStock !== false,
+    };
+  });
 }
 
 function stockBadge(p){
@@ -407,22 +429,21 @@ function stockBadge(p){
 
 function renderProducts(){
   const filter=document.getElementById('catFilter').value;
-  let data=getProducts();
-  if(filter)data=data.filter(p=>p.cat===filter);
-  const sMap={Active:'badge--green','Out of Stock':'badge--red',Hidden:'badge--grey'};
+  const all=getProducts();
+  const data=filter?all.filter(p=>p.cat===filter):all;
+
+  const counter=document.getElementById('prodCount');
+  if(counter)counter.textContent=filter?`${data.length} of ${all.length}`:`${all.length}`;
+
   document.getElementById('productTbody').innerHTML=data.length?data.map(p=>`
     <tr>
-      <td><strong>${p.name}</strong>${p.sku?`<div style="font-size:.7rem;color:var(--muted)">${p.sku}</div>`:''}</td>
-      <td><span class="badge badge--gold">${p.cat}</span></td>
-      <td><strong>RM ${p.price}</strong></td>
+      <td><strong>${p.name}</strong><div style="font-size:.7rem;color:var(--muted)">${p.id} · ${p.variantCount} variant${p.variantCount===1?'':'s'}</div></td>
+      <td><span class="badge badge--gold">${p.catLabel}</span></td>
+      <td><strong>${p.priceText}</strong></td>
       <td>${stockBadge(p)}</td>
-      <td><span class="badge ${sMap[p.status]||'badge--grey'}">${p.status}</span></td>
-      <td class="td-actions">
-        <button class="btn btn--outline btn--icon" onclick="editProduct('${p.id}')">✎</button>
-        <button class="btn btn--danger btn--icon" onclick="deleteProduct('${p.id}')">✕</button>
-      </td>
+      <td><span class="badge ${p.inStock?'badge--green':'badge--red'}">${p.inStock?'Active':'Out of Stock'}</span></td>
     </tr>`).join(''):
-    `<tr><td colspan="6"><div class="empty-state"><p>No products found.</p></div></td></tr>`;
+    `<tr><td colspan="5"><div class="empty-state"><p>No products found.</p></div></td></tr>`;
 }
 
 function resetImgPreview(val){
@@ -431,55 +452,19 @@ function resetImgPreview(val){
   if(val){preview.src=val;preview.style.display='block';placeholder.style.display='none';}
   else{preview.src='';preview.style.display='none';placeholder.style.display='block';}
 }
-function openProductDrawer(){
-  ['prId','prName','prPrice','prSKU','prDesc','prImg','prStock','prLowStock'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('prCat').value='Bags';
-  document.getElementById('prStatus').value='Active';
-  resetImgPreview('');
-  document.getElementById('productDrawer').classList.add('open');document.getElementById('productDrawerBg').classList.add('open');
+/* The catalogue is read-only here (see getProducts above). The + Add and
+   row ✎/✕ controls are gone, so the product drawer is unreachable; these
+   remain only so any stale handler or bookmarked call is inert rather
+   than writing phantom rows nobody would ever see on the storefront. */
+function productsAreReadOnly(){
+  UI.toast('Products are read-only here — edit the master spreadsheet, then run build_variants.py','error');
 }
-function editProduct(id){
-  const p=getProducts().find(x=>x.id===id);if(!p)return;
-  document.getElementById('prId').value=p.id;
-  document.getElementById('prName').value=p.name;
-  document.getElementById('prCat').value=p.cat;
-  document.getElementById('prPrice').value=p.price;
-  document.getElementById('prSKU').value=p.sku||'';
-  document.getElementById('prDesc').value=p.desc||'';
-  document.getElementById('prImg').value=p.img||'';
-  document.getElementById('prStatus').value=p.status;
-  document.getElementById('prStock').value=p.stock!==undefined?p.stock:'';
-  document.getElementById('prLowStock').value=p.lowStock||'';
-  resetImgPreview(p.img||'');
-  document.getElementById('productDrawer').classList.add('open');document.getElementById('productDrawerBg').classList.add('open');
-}
-function saveProduct(){
-  const name=document.getElementById('prName').value.trim();const price=document.getElementById('prPrice').value;
-  if(!name||!price){UI.toast('Name and price required','error');return;}
-  const stockVal=document.getElementById('prStock').value;
-  const lowStockVal=document.getElementById('prLowStock').value;
-  const item={
-    name,cat:document.getElementById('prCat').value,price,
-    sku:document.getElementById('prSKU').value,
-    desc:document.getElementById('prDesc').value,
-    img:document.getElementById('prImg').value,
-    status:document.getElementById('prStatus').value,
-    stock:stockVal!==''?parseInt(stockVal):undefined,
-    lowStock:lowStockVal!==''?parseInt(lowStockVal):undefined,
-  };
-  // Auto-set status based on stock
-  if(item.stock===0)item.status='Out of Stock';
-  const id=document.getElementById('prId').value;
-  const prods=getProducts();
-  if(id){const idx=prods.findIndex(x=>x.id===id);if(idx!==-1)prods[idx]={...prods[idx],...item};Store.set('products',prods);}
-  else{item.id='pr'+Date.now().toString(36);prods.unshift(item);Store.set('products',prods);}
-  Store.log(`${id?'Updated':'Added'} product: ${name}`);
-  closeDrawer('productDrawer','productDrawerBg');renderProducts();UI.toast('Product saved','success');
-}
-async function deleteProduct(id){
-  if(!await UI.confirm('Delete this product?'))return;
-  const prods=getProducts().filter(x=>x.id!==id);Store.set('products',prods);renderProducts();UI.toast('Product deleted');
-}
+/* Function declarations, not const: these are named by inline onclick
+   attributes in the drawer markup, which resolve against window. */
+function openProductDrawer(){ productsAreReadOnly(); }
+function editProduct(){ productsAreReadOnly(); }
+function saveProduct(){ productsAreReadOnly(); }
+function deleteProduct(){ productsAreReadOnly(); }
 
 // Announcements
 function renderAnnouncements(){
