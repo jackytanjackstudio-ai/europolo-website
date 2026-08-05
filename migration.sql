@@ -106,7 +106,9 @@ CREATE TABLE IF NOT EXISTS enquiries (
 
   name       text        NOT NULL DEFAULT '',
   email      text        NOT NULL DEFAULT '',
-  phone      text        NOT NULL DEFAULT '',   -- the web form has no phone field; kept for enquiries taken by hand
+  -- Always empty for web submissions (the form has no phone field). Kept so
+  -- an enquiry taken by hand over the phone can be entered in the same list.
+  phone      text        NOT NULL DEFAULT '',
   interest   text        NOT NULL DEFAULT '',
   message    text        NOT NULL DEFAULT '',
 
