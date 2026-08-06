@@ -93,6 +93,44 @@ module.exports = async function (req, res) {
       return;
     }
 
+    // ── 3b. Require a complete delivery address ──
+    // AUTHORITATIVE. checkout.html blocks empty fields too, but that is UX
+    // only — this is what actually stops an unshippable order being billed.
+    // Until this existed the address fields were collected and then ignored
+    // at every layer, so an order could be paid for with nowhere to send it
+    // (EP-MSGWZRMT-8471 was created that way).
+    const address  = String(customer?.address  || '').trim();
+    const city     = String(customer?.city     || '').trim();
+    const postcode = String(customer?.postcode || '').trim();
+    const state    = String(customer?.state    || '').trim();
+
+    const missing = [];
+    if (!address)  missing.push('street address');
+    if (!city)     missing.push('city');
+    if (!postcode) missing.push('postcode');
+    if (!state)    missing.push('state');
+
+    if (missing.length) {
+      res.status(400).json({
+        error: 'A complete delivery address is required — please fill in your ' + missing.join(', ') + '.',
+      });
+      return;
+    }
+
+    // Malaysian postcodes are exactly five digits.
+    if (!/^\d{5}$/.test(postcode)) {
+      res.status(400).json({ error: 'Please enter a valid 5-digit postcode.' });
+      return;
+    }
+
+    // The address column is unbounded text, so cap here instead: an address
+    // longer than this is a paste accident, and it would break the admin list
+    // and any courier label printed from it.
+    if (address.length > 200 || city.length > 60 || state.length > 60) {
+      res.status(400).json({ error: 'That address is too long. Please shorten it and try again.' });
+      return;
+    }
+
     const amountInSen = Math.round(total * 100); // Billplz bills in sen
 
     // Random suffix, not just the clock: two checkouts in the same
@@ -111,7 +149,9 @@ module.exports = async function (req, res) {
     const pending = await orders.createPendingOrder({
       orderRef:    refNo,
       lines,                                       // server-priced lines
-      customer:    { ...(customer || {}), name, email, phone },
+      // Trimmed values, not the raw client ones — orders.formatAddress()
+      // joins these four into the single address column.
+      customer:    { ...(customer || {}), name, email, phone, address, city, postcode, state },
       totalMyr:    total,
       subtotalMyr: subtotal,
       discountMyr: discount,

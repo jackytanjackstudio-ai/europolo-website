@@ -121,20 +121,21 @@
         <div class="co-section-title">Delivery Address</div>
         <div class="co-grid">
           <div class="co-grid--full">
-            <label class="co-label" for="coAddr">Address</label>
-            <input class="co-input" id="coAddr" type="text" placeholder="Unit/No., Street Name" autocomplete="address-line1"/>
+            <label class="co-label" for="coAddr">Address *</label>
+            <input class="co-input" id="coAddr" type="text" placeholder="Unit/No., Street Name" autocomplete="address-line1" required/>
           </div>
           <div>
-            <label class="co-label" for="coCity">City</label>
-            <input class="co-input" id="coCity" type="text" placeholder="Kuala Lumpur" autocomplete="address-level2"/>
+            <label class="co-label" for="coCity">City *</label>
+            <input class="co-input" id="coCity" type="text" placeholder="Kuala Lumpur" autocomplete="address-level2" required/>
           </div>
           <div>
-            <label class="co-label" for="coPostcode">Postcode</label>
-            <input class="co-input" id="coPostcode" type="text" placeholder="50000" autocomplete="postal-code"/>
+            <label class="co-label" for="coPostcode">Postcode *</label>
+            <input class="co-input" id="coPostcode" type="text" placeholder="50000" autocomplete="postal-code"
+                   inputmode="numeric" pattern="\d{5}" maxlength="5" required/>
           </div>
           <div>
-            <label class="co-label" for="coState">State</label>
-            <select class="co-select" id="coState">
+            <label class="co-label" for="coState">State *</label>
+            <select class="co-select" id="coState" required>
               <option value="">Select State</option>
               <option>Kuala Lumpur</option><option>Selangor</option><option>Putrajaya</option>
               <option>Johor</option><option>Kedah</option><option>Kelantan</option><option>Melaka</option>
@@ -351,6 +352,32 @@ async function submitCheckout() {
     errEl.style.display = 'block';
     return;
   }
+  // Delivery address — every field is required. This is UX only; the
+  // authoritative check is in api/checkout.js, which refuses to create a
+  // bill without a complete address.
+  var addrFields = [
+    { id: 'coAddr',     label: 'address' },
+    { id: 'coCity',     label: 'city' },
+    { id: 'coPostcode', label: 'postcode' },
+    { id: 'coState',    label: 'state' }
+  ];
+  var missing = addrFields.filter(function (f) {
+    return !document.getElementById(f.id).value.trim();
+  });
+  if (missing.length) {
+    errEl.textContent = 'Please complete your delivery address — missing: ' +
+      missing.map(function (f) { return f.label; }).join(', ') + '.';
+    errEl.style.display = 'block';
+    document.getElementById(missing[0].id).focus();
+    return;
+  }
+  if (!/^\d{5}$/.test(document.getElementById('coPostcode').value.trim())) {
+    errEl.textContent = 'Please enter a valid 5-digit postcode.';
+    errEl.style.display = 'block';
+    document.getElementById('coPostcode').focus();
+    return;
+  }
+
   if (!cartItems.length) {
     errEl.textContent = 'Your cart is empty.';
     errEl.style.display = 'block';
