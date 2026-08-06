@@ -4773,6 +4773,34 @@
       "priceMax": 279.9,
       "priceDisplay": "RM 279.90",
       "inStock": false
+    },
+    {
+      "id": "EP0064",
+      "name": "TEST RM1 - DO NOT BUY",
+      "productType": "Test",
+      "category": "test",
+      "subcategory": "test",
+      "option1Name": "Colour",
+      "option2Name": null,
+      "description": "Internal payment-gateway test item. Not for sale. Remove after testing.",
+      "images": {
+        "cover": "images/products/bags/eba51208s/cover.jpg",
+        "gallery": []
+      },
+      "variants": [
+        {
+          "sku": "EP-TEST-RM1",
+          "option1": "Test",
+          "option2": null,
+          "price": 1.0,
+          "stock": 5,
+          "image": "images/products/bags/eba51208s/cover.jpg"
+        }
+      ],
+      "priceMin": 1.0,
+      "priceMax": 1.0,
+      "priceDisplay": "RM 1.00",
+      "inStock": true
     }
   ]
 }
