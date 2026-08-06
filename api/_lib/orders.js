@@ -387,6 +387,24 @@ async function getOrders(opts = {}) {
   }));
 }
 
+/**
+ * Live stock for every sku, one entry per products_stock row.
+ * Read-only — a SELECT and nothing else. Backs the admin catalogue view, which
+ * must show what checkout will actually deduct from rather than the
+ * spreadsheet snapshot baked into data/product-data.json.
+ *
+ * @returns {Promise<Array<{sku:string, stock:number, updatedAt:string}>>}
+ */
+async function getAllStock() {
+  const sql = db();
+  const rows = await sql`SELECT sku, stock, updated_at FROM products_stock`;
+  return rows.map(r => ({
+    sku:       r.sku,
+    stock:     Number(r.stock),
+    updatedAt: r.updated_at,
+  }));
+}
+
 /** Current stock for one sku, or null if unknown. Used by tests and diagnostics. */
 async function getStock(sku) {
   const sql = db();
@@ -406,5 +424,6 @@ module.exports = {
   setFulfilmentStatus,
   getOrders,
   getStock,
+  getAllStock,
   FULFILMENT_STATUSES,
 };

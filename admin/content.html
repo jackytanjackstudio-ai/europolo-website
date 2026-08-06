@@ -70,7 +70,9 @@
           <div class="card-header">
             <span class="card-title">Product Catalogue <span id="prodCount" style="color:var(--muted);font-weight:400;font-size:.8rem"></span></span>
             <div class="flex gap-1">
-              <select class="form-select" id="catFilter" style="font-size:.78rem;padding:.3rem .6rem" onchange="renderProducts()">
+              <input class="form-input" id="prodSearch" type="search" autocomplete="off" spellcheck="false"
+                     placeholder="Search name or SKU…" style="font-size:.78rem;padding:.3rem .6rem;min-width:200px"/>
+              <select class="form-select" id="catFilter" style="font-size:.78rem;padding:.3rem .6rem">
                 <option value="">All Categories</option>
                 <option value="bags">Bags</option>
                 <option value="wallets">Wallets</option>
@@ -81,15 +83,15 @@
           </div>
           <div style="padding:.7rem .9rem;margin:0 0 .2rem;background:rgba(212,175,55,.07);border-left:3px solid var(--gold,#d4af37);border-radius:4px;font-size:.75rem;line-height:1.55;color:var(--muted)">
             <strong style="color:var(--text)">Read-only.</strong>
-            This mirrors the live catalogue the storefront renders from, so the two always match.
-            Products are not edited here — change the master spreadsheet, run
+            One row per SKU. Product facts are not edited here — change the master spreadsheet, run
             <code style="font-size:.72rem">py data/build_variants.py</code>, then redeploy.
             <br>
-            <strong style="color:var(--text)">Stock is a spreadsheet snapshot — not live.</strong>
-            Live stock sits in the orders database and is what checkout deducts from; it will drift from the figure shown here.
+            <strong style="color:var(--text)">Stock is live.</strong>
+            The stock column is read from the orders database — the same figure checkout deducts from —
+            not from the spreadsheet snapshot. <span id="stockNote"></span>
           </div>
           <div class="table-wrap">
-            <table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock <span style="font-weight:400;color:var(--muted);font-size:.7rem">(snapshot)</span></th><th>Status</th></tr></thead>
+            <table><thead><tr><th>Product</th><th>Category</th><th>SKU</th><th>Colour / Options</th><th>Price</th><th>Live Stock</th></tr></thead>
             <tbody id="productTbody"></tbody></table>
           </div>
         </div>
@@ -275,48 +277,11 @@
   </div>
 </div>
 
-<!-- Product Drawer -->
-<div class="drawer-bg" id="productDrawerBg"></div>
-<div class="drawer" id="productDrawer">
-  <div class="drawer-header"><span class="drawer-title">Product</span><button class="drawer-close">✕</button></div>
-  <div class="drawer-body">
-    <input type="hidden" id="prId"/>
-    <div class="form-grid mb-2">
-      <div class="form-group"><label class="form-label">Product Name <span>*</span></label><input class="form-input" id="prName" placeholder="e.g. Milano Executive Briefcase"/></div>
-      <div class="form-group"><label class="form-label">Category</label>
-        <select class="form-select" id="prCat"><option>Bags</option><option>Wallets</option><option>Belts</option><option>Luggage</option></select>
-      </div>
-      <div class="form-group"><label class="form-label">Price (RM) <span>*</span></label><input class="form-input" id="prPrice" type="number" placeholder="690"/></div>
-      <div class="form-group"><label class="form-label">SKU</label><input class="form-input" id="prSKU" placeholder="e.g. EP-BAG-001"/></div>
-      <div class="form-group"><label class="form-label">Stock Quantity</label><input class="form-input" id="prStock" type="number" min="0" placeholder="e.g. 50"/></div>
-      <div class="form-group"><label class="form-label">Low Stock Alert at</label><input class="form-input" id="prLowStock" type="number" min="0" placeholder="e.g. 5"/></div>
-    </div>
-    <div class="form-group mb-2"><label class="form-label">Description</label><textarea class="form-textarea" id="prDesc" rows="3" placeholder="Short product description..."></textarea></div>
-    <div class="form-group mb-2">
-      <label class="form-label">Product Photo</label>
-      <div class="upload-zone" id="prImgZone" onclick="document.getElementById('prImgFile').click()"
-        ondragover="event.preventDefault();this.classList.add('drag-over')"
-        ondragleave="this.classList.remove('drag-over')"
-        ondrop="event.preventDefault();this.classList.remove('drag-over');handleProductImgDrop(event.dataTransfer.files)">
-        <img id="prImgPreview" style="display:none;max-height:140px;max-width:100%;border-radius:4px;margin:0 auto"/>
-        <div class="upload-zone-inner" id="prImgPlaceholder">
-          <div style="font-size:1.6rem;margin-bottom:.3rem">📷</div>
-          <div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.2rem">Upload Product Photo</div>
-          <div style="font-size:.72rem;color:var(--muted)">Click or drag &amp; drop · JPG, PNG, WebP · max 15MB</div>
-        </div>
-        <input type="file" id="prImgFile" accept="image/*" style="display:none"/>
-      </div>
-      <input class="form-input mt-1" id="prImg" placeholder="Or paste image URL (https://...)" style="font-size:.78rem"/>
-    </div>
-    <div class="form-group"><label class="form-label">Status</label>
-      <select class="form-select" id="prStatus"><option>Active</option><option>Hidden</option><option>Out of Stock</option></select>
-    </div>
-  </div>
-  <div class="drawer-footer">
-    <button class="btn btn--outline" onclick="closeDrawer('productDrawer','productDrawerBg')">Cancel</button>
-    <button class="btn btn--gold" onclick="saveProduct()">Save Product</button>
-  </div>
-</div>
+<!-- The Product drawer (name/price/SKU/stock/photo fields + Save) was removed:
+     the Products tab is a read-only view of the generated catalogue and live
+     stock, so an edit form here could only ever write phantom rows that the
+     storefront would never show. Product facts change in the master
+     spreadsheet; stock changes only via the payment callback. -->
 
 <!-- Announcement Drawer -->
 <div class="drawer-bg" id="announceDrawerBg"></div>
@@ -343,9 +308,10 @@
 </div>
 
 <div id="toast-container"></div>
-<!-- The same generated catalogue the public site reads (window.EP_PRODUCTS).
-     Read-only here; the Products tab mirrors it and never writes back. -->
-<script src="../js/product-data-embed.js"></script>
+<!-- js/product-data-embed.js is deliberately NOT loaded here. The Products tab
+     gets product facts AND live stock from GET /api/admin-products, so the
+     176KB embed would only add a second, staler copy of the catalogue for
+     someone to accidentally render stock from. -->
 <script src="auth.js?v=2"></script>
 <script>
 Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
@@ -355,116 +321,134 @@ Auth.guard(); seedIfEmpty(); UI.fillUser(); UI.initSidebar(); UI.initTabs();
   document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();document.querySelectorAll('.tab-btn[data-group="cnt"]')[i].click();});
 });
 
-// Product image upload
-Media.bindUploadBtn('prImgFile','prImgPreview','prImg');
-document.getElementById('prImgFile').addEventListener('change',()=>{
-  const preview=document.getElementById('prImgPreview');
-  if(preview.src)preview.style.display='block';
-  document.getElementById('prImgPlaceholder').style.display='none';
-});
-function handleProductImgDrop(files){
-  const dt=new DataTransfer();
-  if(files[0])dt.items.add(files[0]);
-  document.getElementById('prImgFile').files=dt.files;
-  document.getElementById('prImgFile').dispatchEvent(new Event('change'));
-}
-// Sync URL paste → preview
-document.getElementById('prImg').addEventListener('input',function(){
-  const preview=document.getElementById('prImgPreview');
-  const placeholder=document.getElementById('prImgPlaceholder');
-  if(this.value.trim()){preview.src=this.value.trim();preview.style.display='block';placeholder.style.display='none';}
-  else{preview.style.display='none';placeholder.style.display='block';}
-});
+// (Product image upload wiring removed with the product drawer — it bound
+// listeners to #prImgFile / #prImg, which no longer exist. Left in place it
+// would throw on null and kill every script below it, including the
+// catalogue fetch.)
 
 function closeDrawer(id,bgId){document.getElementById(id).classList.remove('open');document.getElementById(bgId).classList.remove('open');}
 document.querySelectorAll('.drawer-close').forEach(b=>b.addEventListener('click',()=>{b.closest('.drawer').classList.remove('open');document.querySelectorAll('.drawer-bg').forEach(bg=>bg.classList.remove('open'));}));
 document.querySelectorAll('.drawer-bg').forEach(bg=>bg.addEventListener('click',()=>{bg.classList.remove('open');document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));}));
 
-/* ── Product catalogue (READ-ONLY MIRROR) ─────────────────────────────
-   Rows come straight from window.EP_PRODUCTS — the same generated
-   catalogue (js/product-data-embed.js) that the public collection and
-   product pages render from, so the two can never disagree.
+/* ── Product catalogue (READ-ONLY, LIVE STOCK) ────────────────────────
+   One row per SKU. Everything comes from GET /api/admin-products on each
+   page load: product facts from the generated catalogue the storefront
+   renders from, and stock from the orders database — the same figure
+   checkout deducts from.
 
-   Deliberately NOT read from Store/localStorage. This page used to seed a
-   17-row demo fixture ("Milano Executive Briefcase", EP-BAG-001, …) into
-   localStorage['ep_products'] and read it back forever after. Those rows
-   were mockup data with zero overlap with the real catalogue, and because
-   the seed only ran when the key was absent, any browser that had opened
-   this page kept showing them. Reading EP_PRODUCTS directly is what makes
-   the stale key unreachable — do not reintroduce a Store.get here.
+   Two things this deliberately does NOT do:
 
-   The master spreadsheet + `py data/build_variants.py` is the source of
-   truth. Nothing on this tab writes; edits happen in the spreadsheet.
+   1. No localStorage. This page once seeded a 17-row demo fixture
+      ("Milano Executive Briefcase", EP-BAG-001, …) into
+      localStorage['ep_products'] and read it back forever after, because
+      the seed only ran when the key was absent — so any browser that had
+      opened this page kept showing mockup rows. EP_VARIANTS below is a
+      render cache for the search box and nothing else: it is filled from
+      the fetch on every load and never written to storage. Do not add a
+      Store.get/Store.set here.
+
+   2. No stock from window.EP_PRODUCTS. The stock baked into
+      js/product-data-embed.js is a snapshot frozen at the last
+      `py data/build_variants.py` run and drifts the moment anything sells.
+      Reading stock over the network is the whole point of this tab.
+
+   Nothing here writes. The endpoint is GET-only and rejects every other
+   method; product facts change in the master spreadsheet, stock changes
+   only through the payment callback.
    ------------------------------------------------------------------- */
 const CAT_LABELS = {bags:'Bags', wallets:'Wallets', belts:'Belts', luggage:'Luggage'};
+const LOW_STOCK_AT = 5;
 
-function getProducts(){
-  const src = (typeof window !== 'undefined' && window.EP_PRODUCTS) || [];
-  return src.map(p => {
-    const variants = p.variants || [];
-    return {
-      id:           p.id,
-      name:         p.name || '',
-      cat:          p.category || '',
-      catLabel:     CAT_LABELS[p.category] || p.category || '—',
-      priceText:    p.priceDisplay || '',
-      variantCount: variants.length,
-      // Spreadsheet snapshot, summed across variants. NOT live stock —
-      // live stock lives in Neon (products_stock) and is what checkout
-      // deducts from. Labelled as such in the UI.
-      stock:        variants.reduce((n, v) => n + (Number(v.stock) || 0), 0),
-      inStock:      p.inStock !== false,
-    };
-  });
+let EP_VARIANTS = [];   // render cache — never persisted
+
+function esc(s){
+  return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-function stockBadge(p){
-  const s=parseInt(p.stock);
-  if(p.stock===undefined||p.stock===''||isNaN(s))return`<span class="badge badge--grey">—</span>`;
+async function loadProducts(){
+  const tbody=document.getElementById('productTbody');
+  tbody.innerHTML=`<tr><td colspan="6"><div class="empty-state"><p>Loading catalogue…</p></div></td></tr>`;
+  try{
+    const res=await fetch('/api/admin-products',{credentials:'same-origin'});
+    if(res.status===401||res.status===403){ Auth.logout(); return; }
+    if(!res.ok){
+      const d=await res.json().catch(()=>({}));
+      // Do not fall back to the embedded snapshot: a stock number staff know
+      // is missing beats one they believe and act on while it is wrong.
+      EP_VARIANTS=[];
+      UI.toast(d.error||'Could not load the catalogue','error');
+    } else {
+      const data=await res.json();
+      EP_VARIANTS=data.variants||[];
+      const note=document.getElementById('stockNote');
+      if(note){
+        const bits=[];
+        if(data.totals?.missingStockRows)bits.push(`${data.totals.missingStockRows} SKU(s) have no stock row yet`);
+        if(data.totals?.orphanStockRows?.length)bits.push(`${data.totals.orphanStockRows.length} stock row(s) no longer in the catalogue`);
+        note.textContent=bits.length?'⚠ '+bits.join(' · ')+'.':'';
+      }
+    }
+  }catch{
+    EP_VARIANTS=[];
+    UI.toast('Could not reach the server','error');
+  }
+  renderProducts();
+}
+
+function stockBadge(v){
+  if(!v.stockKnown||v.stock===null||v.stock===undefined)
+    return `<span class="badge badge--grey" title="No products_stock row for this SKU">—</span>`;
+  const s=Number(v.stock);
   if(s===0)return`<span class="badge badge--red">Out</span>`;
-  const low=parseInt(p.lowStock)||5;
-  if(s<=low)return`<span class="badge badge--gold" title="Low stock">${s} ⚠</span>`;
+  if(s<=LOW_STOCK_AT)return`<span class="badge badge--gold" title="Low stock">${s} ⚠</span>`;
   return`<span class="badge badge--green">${s}</span>`;
 }
 
+/** Colour / options cell — option2 only when the product has one. */
+function optionText(v){
+  const parts=[];
+  if(v.option1)parts.push(v.option1);
+  if(v.option2)parts.push(v.option2);
+  if(!parts.length)return '<span style="color:var(--muted)">—</span>';
+  const labels=[v.option1Name,v.option2Name].filter(Boolean).join(' / ');
+  return `<strong style="font-size:.82rem">${esc(parts.join(' · '))}</strong>`+
+         (labels?`<div style="font-size:.68rem;color:var(--muted)">${esc(labels)}</div>`:'');
+}
+
 function renderProducts(){
-  const filter=document.getElementById('catFilter').value;
-  const all=getProducts();
-  const data=filter?all.filter(p=>p.cat===filter):all;
+  const cat=document.getElementById('catFilter').value;
+  const q=document.getElementById('prodSearch').value.trim().toLowerCase();
+
+  const data=EP_VARIANTS.filter(v=>{
+    if(cat&&v.category!==cat)return false;
+    if(!q)return true;
+    // Name OR SKU.
+    return v.name.toLowerCase().includes(q)||v.sku.toLowerCase().includes(q);
+  });
 
   const counter=document.getElementById('prodCount');
-  if(counter)counter.textContent=filter?`${data.length} of ${all.length}`:`${all.length}`;
+  if(counter){
+    const total=EP_VARIANTS.length;
+    const products=new Set(EP_VARIANTS.map(v=>v.productId)).size;
+    counter.textContent=(data.length===total)
+      ? `${total} SKUs · ${products} products`
+      : `${data.length} of ${total} SKUs`;
+  }
 
-  document.getElementById('productTbody').innerHTML=data.length?data.map(p=>`
+  document.getElementById('productTbody').innerHTML=data.length?data.map(v=>`
     <tr>
-      <td><strong>${p.name}</strong><div style="font-size:.7rem;color:var(--muted)">${p.id} · ${p.variantCount} variant${p.variantCount===1?'':'s'}</div></td>
-      <td><span class="badge badge--gold">${p.catLabel}</span></td>
-      <td><strong>${p.priceText}</strong></td>
-      <td>${stockBadge(p)}</td>
-      <td><span class="badge ${p.inStock?'badge--green':'badge--red'}">${p.inStock?'Active':'Out of Stock'}</span></td>
+      <td><strong>${esc(v.name)}</strong><div style="font-size:.7rem;color:var(--muted)">${esc(v.productId)}</div></td>
+      <td><span class="badge badge--gold">${esc(CAT_LABELS[v.category]||v.category||'—')}</span></td>
+      <td><code style="font-size:.74rem">${esc(v.sku)}</code></td>
+      <td>${optionText(v)}</td>
+      <td><strong>${esc(v.priceDisplay)}</strong></td>
+      <td>${stockBadge(v)}</td>
     </tr>`).join(''):
-    `<tr><td colspan="5"><div class="empty-state"><p>No products found.</p></div></td></tr>`;
+    `<tr><td colspan="6"><div class="empty-state"><p>No SKUs match.</p></div></td></tr>`;
 }
 
-function resetImgPreview(val){
-  const preview=document.getElementById('prImgPreview');
-  const placeholder=document.getElementById('prImgPlaceholder');
-  if(val){preview.src=val;preview.style.display='block';placeholder.style.display='none';}
-  else{preview.src='';preview.style.display='none';placeholder.style.display='block';}
-}
-/* The catalogue is read-only here (see getProducts above). The + Add and
-   row ✎/✕ controls are gone, so the product drawer is unreachable; these
-   remain only so any stale handler or bookmarked call is inert rather
-   than writing phantom rows nobody would ever see on the storefront. */
-function productsAreReadOnly(){
-  UI.toast('Products are read-only here — edit the master spreadsheet, then run build_variants.py','error');
-}
-/* Function declarations, not const: these are named by inline onclick
-   attributes in the drawer markup, which resolve against window. */
-function openProductDrawer(){ productsAreReadOnly(); }
-function editProduct(){ productsAreReadOnly(); }
-function saveProduct(){ productsAreReadOnly(); }
-function deleteProduct(){ productsAreReadOnly(); }
+document.getElementById('prodSearch').addEventListener('input',renderProducts);
+document.getElementById('catFilter').addEventListener('change',renderProducts);
 
 // Announcements
 function renderAnnouncements(){
@@ -587,8 +571,8 @@ function savePageSection(label,textKeys,htmlKeys){
   UI.toast('已儲存 — 重新整理前台即可看到更改','success');
 }
 
-// Init
-renderProducts();renderAnnouncements();renderMediaLibrary();renderSEO();loadPageFields();
+// Init — loadProducts() is async and fetches; the rest are local.
+loadProducts();renderAnnouncements();renderMediaLibrary();renderSEO();loadPageFields();
 </script>
 </body>
 </html>
