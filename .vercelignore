@@ -36,3 +36,9 @@ migration.sql
 # Docs / session state — internal, and outputDirectory "." would publish them
 CLAUDE.md
 docs/
+
+# Source text for returns.html / privacy.html / terms.html. Version-controlled
+# so the published wording has a traceable source, but never served: it carries
+# internal drafting notes and the unfilled-placeholder legend, and outputDirectory
+# "." would otherwise expose it at /euro-polo-policies.md.
+euro-polo-policies.md
