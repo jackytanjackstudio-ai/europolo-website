@@ -16,8 +16,8 @@
   <meta property="og:url" content="https://europolo.my/how-to-choose-wallet.html" />
   <meta property="og:title" content="How to Choose the Right Wallet: A Modern Gentleman&rsquo;s Guide" />
   <meta property="og:description" content="Bifold, cardholder, or long wallet? Here&rsquo;s how to pick the one that actually fits your life &mdash; and lasts." />
-  <meta property="og:image" content="https://europolo.my/images/products/wallets/ewa-40170-40171/cover.jpg" />
-  <meta property="og:image:width" content="1024" />
+  <meta property="og:image" content="https://europolo.my/images/journal/wallet-guide-hero.jpg" />
+  <meta property="og:image:width" content="1536" />
   <meta property="og:image:height" content="1024" />
   <meta property="og:site_name" content="Euro Polo" />
   <meta property="og:locale" content="en_MY" />
@@ -29,7 +29,7 @@
   <meta name="twitter:site" content="@europolomy" />
   <meta name="twitter:title" content="How to Choose the Right Wallet: A Modern Gentleman&rsquo;s Guide" />
   <meta name="twitter:description" content="Bifold, cardholder, or long wallet? Here&rsquo;s how to pick the one that actually fits your life &mdash; and lasts." />
-  <meta name="twitter:image" content="https://europolo.my/images/products/wallets/ewa-40170-40171/cover.jpg" />
+  <meta name="twitter:image" content="https://europolo.my/images/journal/wallet-guide-hero.jpg" />
 
   <!-- ── JSON-LD ── -->
   <script type="application/ld+json">
@@ -38,7 +38,7 @@
     "@type": "BlogPosting",
     "headline": "How to Choose the Right Wallet: A Modern Gentleman's Guide",
     "description": "A practical guide to choosing the right wallet style, the right leather, and the features that matter.",
-    "image": "https://europolo.my/images/products/wallets/ewa-40170-40171/cover.jpg",
+    "image": "https://europolo.my/images/journal/wallet-guide-hero.jpg",
     "datePublished": "2026-08-07",
     "dateModified": "2026-08-07",
     "author": { "@type": "Organization", "name": "Euro Polo" },
@@ -80,6 +80,23 @@
     .article-head__inner { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
     .article-head__eyebrow { font-family: var(--font-sans); font-size: .65rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
     .article-head__title { font-family: var(--font-serif); font-size: clamp(1.9rem,4.4vw,2.9rem); font-weight: 400; color: var(--white); line-height: 1.18; }
+
+    /* The hero banner has the title set into the artwork, so the <h1> would
+       render it twice. Hide it visually but keep it in the accessibility
+       tree and for crawlers — clipped, not display:none, which would drop
+       it from both. This is the standard clip-rect + clip-path pair. */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
     .article-head__sub { font-family: var(--font-serif); font-style: italic; font-size: clamp(1rem,2vw,1.2rem); color: rgba(255,255,255,.62); margin-top: 1rem; line-height: 1.6; }
     .article-meta { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; font-family: var(--font-sans); font-size: .68rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); }
     .article-meta__dot { color: var(--gold); }
@@ -191,7 +208,7 @@
     <header class="article-head">
       <div class="article-head__inner">
         <p class="article-head__eyebrow">Style Guide</p>
-        <h1 class="article-head__title">How to Choose the Right Wallet: A Modern Gentleman&rsquo;s Guide</h1>
+        <h1 class="article-head__title visually-hidden">How to Choose the Right Wallet: A Modern Gentleman&rsquo;s Guide</h1>
         <p class="article-head__sub">Bifold, cardholder, or long wallet? Here&rsquo;s how to pick the one that actually fits your life &mdash; and lasts.</p>
         <div class="article-meta">
           <time datetime="2026-08-07">7 August 2026</time>
@@ -205,10 +222,9 @@
 
     <!-- ═══════════════════ HERO IMAGE ═══════════════════ -->
     <figure class="article-hero-img">
-      <img src="images/products/wallets/ewa-40170-40171/cover.jpg"
-           alt="Euro Polo genuine cow leather short bi-fold men's wallet in black"
-           width="1024" height="1024" loading="eager" />
-      <figcaption>Euro Polo Genuine Cow Leather Short Bi-Fold Wallet &mdash; EWA 40170/40171</figcaption>
+      <img src="images/journal/wallet-guide-hero.jpg"
+           alt="How to Choose the Right Wallet: A Modern Gentleman&rsquo;s Guide &mdash; Euro Polo bifold, long and chain wallets in black, tan and burgundy leather"
+           width="1536" height="1024" loading="eager" />
     </figure>
 
     <!-- ═══════════════════ BREADCRUMB ═══════════════════ -->
