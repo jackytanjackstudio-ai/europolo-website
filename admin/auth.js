@@ -349,7 +349,7 @@ function seedIfEmpty() {
     Store.set('site_config', {
       whatsapp:'601160601277',
       wa_msg:'Hello Euro Polo, I\'m interested in your products',
-      email:'hello@europolo.my',
+      email:'sales.jackstudio@gmail.com',
       instagram:'europolomy',
       facebook:'europolomy',
       tiktok:'europolomy',

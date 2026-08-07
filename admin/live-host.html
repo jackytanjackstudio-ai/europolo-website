@@ -51,7 +51,7 @@
                 <div style="font-size:.7rem;color:var(--muted);margin-top:.25rem">Include country code, no + or dashes</div>
               </div>
               <div class="form-group mb-2"><label class="form-label">Default WA Message</label><input class="form-input" id="cfgWAMsg" placeholder="Hello Euro Polo, I'm interested in your products"/></div>
-              <div class="form-group mb-2"><label class="form-label">Email</label><input class="form-input" id="cfgEmail" placeholder="hello@europolo.my"/></div>
+              <div class="form-group mb-2"><label class="form-label">Email</label><input class="form-input" id="cfgEmail" placeholder="sales.jackstudio@gmail.com"/></div>
               <div class="form-group mb-2"><label class="form-label">Instagram Handle</label><input class="form-input" id="cfgIG" placeholder="europolomy"/></div>
               <div class="form-group mb-2"><label class="form-label">Facebook Handle</label><input class="form-input" id="cfgFB" placeholder="europolomy"/></div>
               <div class="form-group"><label class="form-label">TikTok Handle</label><input class="form-input" id="cfgTT" placeholder="europolomy"/></div>
@@ -115,7 +115,7 @@ function loadConfig(){
   const c=Store.get('site_config',{});
   document.getElementById('cfgWA').value=c.whatsapp||'601160601277';
   document.getElementById('cfgWAMsg').value=c.wa_msg||'Hello Euro Polo, I\'m interested in your products';
-  document.getElementById('cfgEmail').value=c.email||'hello@europolo.my';
+  document.getElementById('cfgEmail').value=c.email||'sales.jackstudio@gmail.com';
   document.getElementById('cfgIG').value=c.instagram||'europolomy';
   document.getElementById('cfgFB').value=c.facebook||'europolomy';
   document.getElementById('cfgTT').value=c.tiktok||'europolomy';

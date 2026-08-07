@@ -15,7 +15,7 @@
 
 - `[201801041181]` — Jack Studio Marketing Sdn Bhd 的 SSM 公司注册号
 - `[3060, Persiaran Raja Muda Musa, Kampung Raja Uda, 42000 Pelabuhan Klang, Selangor, Malaysia]` — 公司注册地址
-- `[sales.jackstudio@gmail.com]` — 客服邮箱（如 support@europolo.my）
+- `[sales.jackstudio@gmail.com]` — 客服邮箱（如 sales.jackstudio@gmail.com）
 - `[+60 11-6060 1277]` — 客服 WhatsApp（+60…）
 - `[1–3 working days]` — 备货/处理天数（如 1–3 working days）
 - `[2–4 working days (West Malaysia), 5–9 working days (East Malaysia)]` — 送达时间（如 2–5 working days 西马 / 5–9 东马）
@@ -58,7 +58,7 @@ will arrange a replacement or a full refund, including return postage, at no cos
 to you. This does not affect your rights under the Consumer Protection Act 1999.
 
 ### 1.5 How to request a return
-1. Contact us at [SUPPORT_EMAIL] or WhatsApp [WHATSAPP_NUMBER] with your order
+1. Contact us at sales.jackstudio@gmail.com or WhatsApp +60 11-6060 1277 with your order
    number and reason.
 2. We will confirm eligibility and provide return instructions.
 3. Ship the item back (for non-faulty returns, return postage is borne by the
@@ -78,7 +78,7 @@ order has been dispatched, the return process above applies.
 
 ### 1.8 Contact
 Jack Studio Marketing Sdn Bhd ([SSM_NUMBER])
-Email: [SUPPORT_EMAIL] ｜ WhatsApp: [WHATSAPP_NUMBER]
+Email: sales.jackstudio@gmail.com ｜ WhatsApp: +60 11-6060 1277
 
 ---
 
@@ -135,7 +135,7 @@ You have the right to:
 - Withdraw consent for marketing communications
 - Enquire about how your data is processed
 
-To exercise these rights, contact us at [SUPPORT_EMAIL].
+To exercise these rights, contact us at sales.jackstudio@gmail.com.
 
 ### 2.7 Marketing consent
 We will only send you promotional messages if you have opted in. Every marketing
@@ -148,7 +148,7 @@ required by Malaysian law (e.g. tax and accounting records).
 ### 2.9 Contact
 For any privacy questions or requests:
 Jack Studio Marketing Sdn Bhd ([SSM_NUMBER])
-Email: [SUPPORT_EMAIL] ｜ WhatsApp: [WHATSAPP_NUMBER]
+Email: sales.jackstudio@gmail.com ｜ WhatsApp: +60 11-6060 1277
 
 ---
 
@@ -208,7 +208,7 @@ the jurisdiction of the Malaysian courts.
 ### 3.9 Contact
 Jack Studio Marketing Sdn Bhd ([SSM_NUMBER])
 [REGISTERED_ADDRESS]
-Email: [SUPPORT_EMAIL] ｜ WhatsApp: [WHATSAPP_NUMBER]
+Email: sales.jackstudio@gmail.com ｜ WhatsApp: +60 11-6060 1277
 
 ---
 
