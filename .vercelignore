@@ -42,3 +42,10 @@ docs/
 # internal drafting notes and the unfilled-placeholder legend, and outputDirectory
 # "." would otherwise expose it at /euro-polo-policies.md.
 euro-polo-policies.md
+
+# Source text for how-to-choose-wallet.html. Same reasoning as above:
+# tracked so the published article has a traceable source, but not served —
+# outputDirectory "." would expose it at /blog-how-to-choose-wallet.md, which
+# is both a raw duplicate of the live article (duplicate content for search)
+# and a copy nothing keeps in sync with the HTML.
+blog-how-to-choose-wallet.md

@@ -19,41 +19,95 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="products.css" />
   <style>
-    .journal-coming-soon {
-      max-width: 640px;
+    /* ── Journal listing.
+         .journal-card is the repeatable unit: to publish the next post,
+         copy one <article class="journal-card"> block and change the
+         image, date, read time, title, excerpt and href. The grid fills
+         itself, so nothing else needs editing. ── */
+    .journal-list {
+      max-width: 1080px;
       margin: 0 auto;
-      min-height: 50vh;
       padding: var(--section-py) clamp(1.25rem, 4vw, 3rem);
+    }
+    .journal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: clamp(1.75rem, 3vw, 2.75rem);
+    }
+    .journal-card {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
     }
-    .journal-coming-soon__icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: var(--gold-pale);
+    .journal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.09);
+      border-color: var(--gold-pale);
+    }
+    .journal-card__media {
+      display: block;
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      background: var(--cream);
+    }
+    .journal-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .journal-card:hover .journal-card__media img { transform: scale(1.04); }
+    .journal-card__body { padding: 1.5rem 1.6rem 1.75rem; display: flex; flex-direction: column; flex: 1; }
+    .journal-card__meta {
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 1.75rem;
+      gap: .5rem;
+      font-family: var(--font-sans);
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .75rem;
     }
-    .journal-coming-soon__icon svg { width: 26px; height: 26px; fill: var(--gold); }
-    .journal-coming-soon h2 {
+    .journal-card__meta span.sep { color: var(--gold); }
+    .journal-card__tag { color: var(--gold); }
+    .journal-card__title {
       font-family: var(--font-serif);
-      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-size: 1.3rem;
       font-weight: 400;
       color: var(--charcoal);
-      margin-bottom: 1rem;
+      line-height: 1.35;
+      margin-bottom: .7rem;
     }
-    .journal-coming-soon p {
-      font-size: 0.95rem;
+    .journal-card:hover .journal-card__title { color: var(--gold); }
+    .journal-card__excerpt {
+      font-size: .88rem;
       color: var(--mid);
       line-height: 1.8;
-      max-width: 460px;
-      margin-bottom: 2.25rem;
+      margin-bottom: 1.35rem;
+      flex: 1;
+    }
+    .journal-card__more {
+      font-family: var(--font-sans);
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      align-self: flex-start;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color .2s ease;
+    }
+    .journal-card:hover .journal-card__more { color: var(--gold); }
+    @media (max-width: 600px) {
+      .journal-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -128,14 +182,37 @@
     </div>
   </nav>
 
-  <!-- ═══════════════════ COMING SOON ═══════════════════ -->
-  <section class="journal-coming-soon">
-    <div class="journal-coming-soon__icon">
-      <svg viewBox="0 0 24 24"><path d="M6.18 15.64a2.18 2.18 0 012.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 012.18-2.18M4 4.44A15.56 15.56 0 0119.56 20h-2.83A12.73 12.73 0 004 7.27V4.44m0 5.66a9.9 9.9 0 019.9 9.9h-2.83A7.07 7.07 0 004 12.93V10.1z"/></svg>
+  <!-- ═══════════════════ JOURNAL LISTING ═══════════════════ -->
+  <section class="journal-list">
+    <div class="journal-grid">
+
+      <!-- ── POST 1 ──
+           To add the next post, copy this whole <article> block and update
+           the six marked values: image, datetime + date label, read time,
+           title, excerpt, and the two hrefs. -->
+      <article class="journal-card">
+        <a href="how-to-choose-wallet.html" class="journal-card__media" aria-label="Read: How to Choose the Right Wallet">
+          <img src="images/products/wallets/ewa-40170-40171/cover.jpg"
+               alt="Euro Polo genuine cow leather short bi-fold men's wallet in black"
+               width="1024" height="1024" loading="lazy" />
+        </a>
+        <div class="journal-card__body">
+          <div class="journal-card__meta">
+            <span class="journal-card__tag">Style Guide</span>
+            <span class="sep">·</span>
+            <time datetime="2026-08-07">7 Aug 2026</time>
+            <span class="sep">·</span>
+            <span>4 min read</span>
+          </div>
+          <h2 class="journal-card__title">
+            <a href="how-to-choose-wallet.html">How to Choose the Right Wallet: A Modern Gentleman&rsquo;s Guide</a>
+          </h2>
+          <p class="journal-card__excerpt">Bifold, cardholder, or long wallet? Here&rsquo;s how to pick the one that actually fits your life &mdash; and lasts.</p>
+          <a href="how-to-choose-wallet.html" class="journal-card__more">Read more &rarr;</a>
+        </div>
+      </article>
+
     </div>
-    <h2>Coming Soon</h2>
-    <p>We're crafting travel stories, style guides and behind-the-scenes updates from Euro Polo. Check back soon — or explore our latest collection in the meantime.</p>
-    <a href="bags.html" class="btn btn--gold">Shop Men's Bags</a>
   </section>
 
   <!-- ═══════════════════ FOOTER ═══════════════════ -->

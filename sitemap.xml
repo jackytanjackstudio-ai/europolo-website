@@ -32,8 +32,14 @@
   </url>
   <url>
     <loc>https://europolo.my/blog.html</loc>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://europolo.my/how-to-choose-wallet.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
