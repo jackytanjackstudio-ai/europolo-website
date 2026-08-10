@@ -4,7 +4,8 @@
   <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Checkout — Euro Polo</title>
   <meta name="robots" content="noindex,nofollow"/>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZE73F11CZR"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZE73F11CZR');</script>
@@ -18,8 +19,9 @@
   <style>
     .checkout-page { min-height: 100vh; background: var(--white); padding-top: var(--nav-h); }
     .checkout-header { background: var(--prestige); padding: 1.5rem 0; text-align: center; }
-    .checkout-header a { font-family: var(--font-serif); font-size: 1.5rem; color: var(--white); letter-spacing: .18em; text-decoration: none; }
-    .checkout-header span { color: var(--gold); font-size: .7rem; font-family: var(--font-sans); letter-spacing: .28em; display: block; margin-top: .15rem; }
+    .checkout-header a { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+    .checkout-header a img { display: block; height: 68px; width: auto; }
+    .checkout-header__note { color: var(--gold); font-size: .7rem; font-family: var(--font-sans); letter-spacing: .28em; display: block; margin-top: .5rem; }
     .checkout-wrap { max-width: 1080px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; display: grid; grid-template-columns: 1fr 400px; gap: 2.5rem; align-items: start; }
 
     /* Form Column */
@@ -90,7 +92,8 @@
 
 <div class="checkout-page">
   <header class="checkout-header">
-    <a href="index.html">EURO POLO<span>.MY · SECURE CHECKOUT</span></a>
+    <a href="index.html"><img src="images/euro-polo-logo-gold-web.png" alt="Euro Polo Genuine Leather" width="259" height="240" /></a>
+    <span class="checkout-header__note">SECURE CHECKOUT</span>
   </header>
 
   <div id="emptyCart" class="co-empty" style="display:none">

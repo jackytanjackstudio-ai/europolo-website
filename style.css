@@ -176,10 +176,19 @@ ul { list-style: none; }
   align-items: center;
   justify-content: space-between;
 }
+/* Gold logo sits directly on the dark nav — no badge (8.5:1 contrast).
+   Height keeps it vertically centred inside the 72px nav bar. */
 .nav__logo {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   line-height: 1;
+  transition: opacity 0.25s ease;
+}
+.nav__logo:hover { opacity: 0.82; }
+.nav__logo img {
+  display: block;
+  height: 52px;
+  width: auto;
 }
 .nav__logo-main {
   font-family: var(--font-serif);
@@ -1065,12 +1074,12 @@ ul { list-style: none; }
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .footer__logo {
-  font-family: var(--font-serif);
-  font-size: 1.6rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  color: var(--white);
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+}
+.footer__logo img {
+  display: block;
+  height: 80px;
+  width: auto;
 }
 .footer__brand p {
   font-size: 0.85rem;
@@ -1348,8 +1357,11 @@ ul { list-style: none; }
   transform: translateY(-50%) translateX(0);
 }
 
-/* ── NAV LOGO SVG sizing ── */
-.nav__logo svg { display: block; }
+/* ── NAV / FOOTER LOGO sizing on small screens ── */
+@media (max-width: 480px) {
+  .nav__logo img { height: 44px; }
+  .footer__logo img { height: 66px; }
+}
 
 /* ── SOCIAL section responsive ── */
 @media (max-width: 1024px) {
