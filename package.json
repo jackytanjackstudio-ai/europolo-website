@@ -7,5 +7,10 @@
   },
   "engines": {
     "node": "24.x"
+  },
+  "scripts": {
+    "build:data": "py data/build_variants.py && npm run build:journal",
+    "build:journal": "node scripts/build-journal.js",
+    "check:journal": "node scripts/build-journal.js --check"
   }
 }

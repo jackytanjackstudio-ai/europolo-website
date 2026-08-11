@@ -1,0 +1,117 @@
+# ═══════════════════════════════════════════════════
+# EURO POLO · content/site.yml
+# Configuration for scripts/build-journal.js — the generator that writes
+# every journal page and sitemap.xml.
+#
+#   node scripts/build-journal.js          regenerate
+#   node scripts/build-journal.js --check  fail if the committed output is stale
+#
+# Nothing here is served: content/ is listed in .vercelignore.
+# ═══════════════════════════════════════════════════
+
+site:
+  origin: https://europolo.my
+  brand: Euro Polo
+  titleSuffix: Euro Polo Malaysia
+  twitter: "@europolomy"
+  logo: og-image.jpg
+  locale: en_MY
+
+# ── The Journal hub (blog.html) ──
+hub:
+  path: blog.html
+  pageTitle: The Euro Polo Journal | Leather Guides & Style Notes
+  description: >
+    Buying guides, leather care and travel notes from Euro Polo Malaysia —
+    practical advice on choosing bags, wallets, belts and luggage that last.
+  ogTitle: The Euro Polo Journal
+  ogDescription: >
+    Buying guides, leather care and travel notes for the modern Malaysian
+    gentleman.
+  ogImage: og-image.jpg
+  keywords: Euro Polo journal, leather guides Malaysia, men's wallet guide, leather care, men's accessories blog
+  heroEyebrow: Euro Polo Stories
+  heroTitle: Journal
+  heroDesc: Insights, travel stories, product guides, and updates from Euro Polo.
+  changefreq: monthly
+  priority: "0.6"
+
+# ── Categories.
+#    An article names one by `category: <slug>`; an unknown slug fails the
+#    build. `label` is the article eyebrow and the card tag, `section` heads
+#    the group on the hub, `blurb` sits under that heading. Order here is the
+#    order the hub renders in. Empty categories are skipped. ──
+categories:
+  - slug: style-guides
+    label: Style Guide
+    section: Style Guides
+    blurb: How to choose, carry and pair the pieces you reach for every day.
+  - slug: leather-care
+    label: Leather Care
+    section: Leather Care
+    blurb: Keeping full-grain and crazy-horse leather looking better with age.
+  - slug: travel
+    label: Travel
+    section: Travel
+    blurb: Packing, luggage and the practicalities of moving well.
+  - slug: gifting
+    label: Gifting
+    section: Gifting
+    blurb: Choosing a piece someone will actually use, and presenting it properly.
+
+# ── Defaults applied to every article ──
+article:
+  changefreq: yearly
+  priority: "0.6"
+  wordsPerMinute: 200
+  relatedCount: 3
+  # Warn during the build if a hero image is heavier than this (KB).
+  heroMaxKB: 300
+
+# ── sitemap.xml.
+#    `insert: journal` expands to the hub plus every published article,
+#    newest first. `insert: products` expands to one URL per product in
+#    data/product-data.json. lastmod comes from the file's last commit date
+#    (falling back to its modification time); articles use their own
+#    updated/published date. ──
+sitemap:
+  path: sitemap.xml
+  pages:
+    - loc: ""
+      file: index.html
+      changefreq: weekly
+      priority: "1.0"
+    - loc: bags.html
+      changefreq: weekly
+      priority: "0.9"
+    - loc: wallets.html
+      changefreq: weekly
+      priority: "0.9"
+    - loc: luggage.html
+      changefreq: weekly
+      priority: "0.8"
+    - loc: links.html
+      changefreq: weekly
+      priority: "0.7"
+    - insert: journal
+    - loc: size-guide.html
+      changefreq: monthly
+      priority: "0.6"
+    - loc: shipping.html
+      changefreq: yearly
+      priority: "0.4"
+    - loc: returns.html
+      changefreq: yearly
+      priority: "0.4"
+    - loc: terms.html
+      changefreq: yearly
+      priority: "0.3"
+    - loc: privacy.html
+      changefreq: yearly
+      priority: "0.3"
+    - insert: products
+  products:
+    source: data/product-data.json
+    pattern: "product.html?id={id}"
+    changefreq: weekly
+    priority: "0.7"

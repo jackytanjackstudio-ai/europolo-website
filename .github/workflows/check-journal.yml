@@ -1,0 +1,29 @@
+# Fails the push when the committed journal output (article pages, blog.html,
+# sitemap.xml) no longer matches content/ + data/product-data.json — the case
+# the "re-run the build after py data/build_variants.py" note used to leave to
+# memory. Runs on GitHub, never on Vercel: vercel.json sets buildCommand null
+# and .vercelignore excludes .github/.
+name: check-journal
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # build-journal.js reads each file's last commit date for sitemap
+          # lastmod. A shallow clone gives every file the same date and the
+          # check would fail for the wrong reason.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      # No npm install: the generator uses only Node core modules.
+      - run: npm run check:journal

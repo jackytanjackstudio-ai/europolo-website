@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{{generated}}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── SEO ── -->
+  <title>{{pageTitle}}</title>
+  <meta name="description" content="{{description}}" />
+{{keywordsMeta}}
+  <link rel="canonical" href="{{canonical}}" />
+  <link rel="icon" type="image/png" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{canonical}}" />
+  <meta property="og:title" content="{{ogTitle}}" />
+  <meta property="og:description" content="{{ogDescription}}" />
+  <meta property="og:image" content="{{ogImage}}" />
+  <meta property="og:image:width" content="{{ogImageWidth}}" />
+  <meta property="og:image:height" content="{{ogImageHeight}}" />
+  <meta property="og:image:alt" content="{{ogImageAlt}}" />
+  <meta property="og:site_name" content="Euro Polo" />
+  <meta property="og:locale" content="en_MY" />
+
+  <!-- ── Twitter Card ── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ogTitle}}" />
+  <meta name="twitter:description" content="{{ogDescription}}" />
+  <meta name="twitter:image" content="{{ogImage}}" />
+  <meta name="twitter:image:alt" content="{{ogImageAlt}}" />
+
+  <!-- ── JSON-LD ── -->
+  <script type="application/ld+json">
+{{jsonLd}}
+  </script>
+
+{{headCommon}}
+  <link rel="stylesheet" href="css/journal.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════ NAVIGATION ═══════════════════ -->
+{{nav}}
+
+  <!-- ═══════════════════ PAGE HERO ═══════════════════ -->
+  <section class="page-hero">
+    <div class="page-hero__bg"></div>
+    <div class="page-hero__watermark">JOURNAL</div>
+    <div class="page-hero__content">
+      <p class="section-eyebrow">{{heroEyebrow}}</p>
+      <h1 class="page-hero__title">{{heroTitle}}</h1>
+      <p class="page-hero__desc">{{heroDesc}}</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ BREADCRUMB ═══════════════════ -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb__inner">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb__sep">&middot;</span>
+      <span class="breadcrumb__current" aria-current="page">Journal</span>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════ JOURNAL LISTING ═══════════════════ -->
+  <section class="journal-list">
+{{chips}}
+{{sections}}
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+{{footer}}
+
+  <script src="script.js"></script>
+  <script src="cart.js"></script>
+  <script src="content-injector.js"></script>
+</body>
+</html>

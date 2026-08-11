@@ -21,6 +21,7 @@ _backup/
 # Local tooling
 scripts/
 .claude/
+.github/
 __pycache__/
 *.pyc
 
@@ -43,9 +44,9 @@ docs/
 # "." would otherwise expose it at /euro-polo-policies.md.
 euro-polo-policies.md
 
-# Source text for how-to-choose-wallet.html. Same reasoning as above:
-# tracked so the published article has a traceable source, but not served —
-# outputDirectory "." would expose it at /blog-how-to-choose-wallet.md, which
-# is both a raw duplicate of the live article (duplicate content for search)
-# and a copy nothing keeps in sync with the HTML.
-blog-how-to-choose-wallet.md
+# Journal sources. content/journal/*.md plus content/site.yml are the input to
+# scripts/build-journal.js, which writes the article pages, blog.html and
+# sitemap.xml. Tracked so every published article has a traceable source, but
+# never served: outputDirectory "." would otherwise expose each article twice —
+# once as HTML and once as raw Markdown, which is duplicate content for search.
+content/
